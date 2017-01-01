@@ -63,13 +63,14 @@ def download(name, verbose=True):
         downloaded = f.read().splitlines()
 
     if name not in downloaded:
-
         if name == "parliament-motifs":
             for url in DatasetURLs[name]:
-                motif_file_path = dataset_path + url[url.rfind('/'):]
-                if not os.path.exists(os.path.dirname(motif_file_path)):
-                    os.makedirs(os.path.dirname(motif_file_path))
-                download_helper(motif_file_path, url, verbose, name + url[url.rfind('/'):], downloadeds_path)
+                full_name = name + url[url.rfind('/'):]
+                if full_name not in downloaded:
+                    motif_file_path = dataset_path + url[url.rfind('/'):]
+                    if not os.path.exists(os.path.dirname(motif_file_path)):
+                        os.makedirs(os.path.dirname(motif_file_path))
+                    download_helper(motif_file_path, url, verbose, full_name, downloadeds_path)
         else:
             url = DatasetURLs[name]
             download_helper(dataset_path, url, verbose, name, downloadeds_path)
