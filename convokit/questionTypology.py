@@ -22,20 +22,6 @@ from spacy.tokens.doc import Doc
 
 NP_LABELS = set([nsubj, nsubjpass, dobj, iobj, pobj, attr])
 
-# For output:  the functions in this class should return a dictionary of dictionaries indexed by - 
-# Type number - for each type, you have the following sub-keys "question motifs", "answer fragments", "questions".  
-# The latter will contain either a list of (question_ids) of questions in the training data that are assigned to this type, 
-# or (preferably) a sorted list of (question_id, scores) of questions in the training data that are assigned to this type, 
-# together with a membership score (does Justine's code provide a membership score? i.e., some questions will be more clearly in type X than others.)
-# Basically the info that is now exemplified in table 1.  (Feel free to propose other options)
-
-# The class should also have a function that takes in a new question (possibly not in the training data), 
-# identifies question fragments and motifs that are present in the question,  and assigns scores for each of the types.
-
-# the Parliament script would create this dictionary and print samples of each contents (i.e., recreate Table 1, of course it does not need to
-# be the exact same examples).   It would also use the function to assign types to a few new and existing questions.
-
-
 class QuestionTypology:
     """Encapsulates computation of question types from a question-answer corpus.
 
@@ -74,7 +60,7 @@ class QuestionTypology:
         target = self.types_to_data[type_num]
         motifs = target["question motifs"]
         num_to_print = min(len(motifs), num_egs)
-        print('\t%s sample question motifs:'%(num_to_print))
+        print('\t%s sample question motifs for type %d:'%(num_to_print, type_num))
         for i in range(num_to_print):
             print('\t\t', motifs[i])
 
@@ -82,7 +68,7 @@ class QuestionTypology:
         target = self.types_to_data[type_num]
         answer_fragments = target["answer fragments"]
         num_to_print = min(len(answer_fragments), num_egs)
-        print('\t%s sample answer fragments:'%(num_to_print))
+        print('\t%s sample answer fragments for type %d:'%(num_to_print, type_num))
         for i in range(num_to_print):
             print('\t\t', answer_fragments[i])
 
@@ -160,8 +146,8 @@ class QuestionTypology:
 
         #build vec for this question
         superset_file = os.path.join(self.motifs_dir, 'question_supersets_arcset_to_super.json')
-        question_threshold = 50
-        answer_threshold = 50
+        question_threshold = 1
+        answer_threshold = 1
 
         question_to_fits = defaultdict(set)
         question_to_leaf_fits = defaultdict(set)
@@ -231,32 +217,52 @@ class QuestionTypology:
                 answer_doc_idxes.append(idx)
 
 
-        # q_mtx, a_mtx, mtx_obj = QuestionClusterer.run_simple_pipe(matrix_file)
-        # mtx_obj = QuestionClusterer.load_joint_mtx(rootname)
-        # q_mtx = QuestionClusterer.build_mtx(mtx_obj, 'q')
-        # N_terms = len(mtx_obj[data_type + '_terms'])
-        # N_docs = len(mtx_obj['docs'])
-        # if idf:
-        #     data = np.log(N_docs) - np.log(mtx_obj[data_type + '_term_counts'][mtx_obj[data_type + '_tidxes']])
-        # else:
-        #     data = np.ones_like(mtx_obj[data_type + '_tidxes'])
-        #     if leaves_only:
-        #         data[~mtx_obj[data_type + '_leaves']] = 0
-        # mtx = sparse.csr_matrix((data, (mtx_obj[data_type + '_tidxes'], mtx_obj[data_type + '_didxes'])), shape=(N_terms,N_docs))
+        # create mtx_obj
+        mtx_obj = {}
+        mtx_obj['q_tidxes'] = question_term_idxes
+        mtx_obj['q_leaves'] = question_leaves
+        mtx_obj['a_tidxes'] = answer_term_idxes
+        mtx_obj['q_didxes'] = question_doc_idxes
+        mtx_obj['a_didxes'] = answer_doc_idxes
+        mtx_obj['q_terms'] = question_term_list
+        mtx_obj['a_terms'] = answer_term_list
+        mtx_obj['q_term_counts'] = [motif_counts[term] for term in question_term_list]
+        mtx_obj['a_term_counts'] = [arc_counts[term] for term in answer_term_list]
+
+        print(mtx_obj)
+
+        #create q_mtx
+        # N_terms = len(mtx_obj['q_terms'])
+        # data = np.ones(len(mtx_obj['q_terms']))
+        #Assume not idf
+        # Assume leaves only
+        # data[~mtx_obj['q_leaves']] = 0
+        # q_mtx = sparse.csr_matrix((data, ([0], [0])), shape=(N_terms,1))
+        # norm = 'l2'
         # if norm:
-        #     mtx = Normalizer(norm=norm).fit_transform(mtx)
-        # print('supp')
-        # print(q_mtx.shape)
-        # a_mtx = QuestionClusterer.build_mtx(mtx_obj, 'a', idf=True)
-        # return q_mtx, a_mtx, mtx_obj
-        # lq, a_u, a_s, a_v = QuestionClusterer.run_lowdim_pipe(q_mtx,a_mtx,d)
-        # a_u, a_s, a_v = QuestionClusterer.do_sparse_svd(a_mtx,k + int(snip))
+        #     q_mtx = Normalizer(norm=norm).fit_transform(q_mtx)
+
+
+        # #create a_mtx
+        # N_terms = len(mtx_obj['a_terms'])
+        # data = np.ones(len(mtx_obj['a_terms']))
+        # #Assume not idf
+        # # Assume leaves only
+        # # data[~mtx_obj['a_leaves']] = 0
+        # print(data)
+        # a_mtx = sparse.csr_matrix((data, ([0], np.zeros_like(data))), shape=(N_terms,1))
+        # if norm:
+        #     a_mtx = Normalizer(norm=norm).fit_transform(a_mtx)
+
+
+
+        # #get lowdim mtx
+        # #what value of k? 51? Assume always snip
+        # a_u, a_s, a_v = QuestionClusterer.do_sparse_svd(a_mtx, 51)
         # lq = q_mtx * (a_v.T * a_s**-1)
-        # if snip:
-        #     return QuestionClusterer.snip_first_dim(lq, a_u, a_s, a_v)
-        # else:
-        #     return lq, a_u, a_s, a_v
-        # km = QuestionClusterer.inspect_kmeans_run(lq,a_u,d,k,mtx_obj['q_terms'], mtx_obj['a_terms'], num_egs=num_egs)
+        # print(lq, a_u, a_s, a_v)
+        # # km, _ = QuestionClusterer.inspect_kmeans_run(lq,a_u,d,k,mtx_obj['q_terms'], mtx_obj['a_terms'], num_egs=num_egs)
+
 
 
 
