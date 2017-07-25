@@ -8,7 +8,8 @@
 #     or vice versa?
 
 from convokit import Utterance, Corpus, Coordination, download
-
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
@@ -16,8 +17,8 @@ import numpy as np
 # load corpus; split users by case id and split the justices by whether they are
 #     favorable to the current presenting side
 # this treats the same person across two different cases as two different users
-corpus = Corpus(filename=download("supreme-corpus"), subdivide_users_by=["case",
-    "justice-is-favorable"])
+corpus = Corpus(filename=download("supreme-corpus"))
+corpus.subdivide_users_by_attribs(["case","justice-is-favorable"])
 
 # create coordination object
 coord = Coordination(corpus)
@@ -63,7 +64,7 @@ def make_chart(a_scores, b_scores, a_description, b_description, a_color="b", b_
                              str(len(b_scores)) + ")")
     plt.legend(handles=[b_patch, g_patch])
 
-    filename = str(a_description) + " vs " + str(b_description) + ".png"
+    filename = ''.join([x for x in a_description if x not in (":")]) + " vs " + ''.join([x for x in b_description if x not in (":")]) + ".png"
     plt.savefig(filename, bbox_inches="tight")
     print('Created chart "' + filename + '"')
 
@@ -84,8 +85,8 @@ make_chart(
 )
 # do lawyers coordinate more to unfavorable or favorable justices?
 make_chart(
-    coord.score(lawyers, unfav_justices, focus="targets", target_thresh=1),
-    coord.score(lawyers, fav_justices, focus="targets", target_thresh=1),
+    coord.score(lawyers, unfav_justices, target_thresh=1),
+    coord.score(lawyers, fav_justices, target_thresh=1),
     "Target: unfavorable justice", "Target: favorable justice"
 )
 # do unfavorable justices coordinate to lawyers more than favorable justices, or

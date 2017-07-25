@@ -6,7 +6,8 @@
 # - Do admins coordinate to other people more than nonadmins do?
 
 from convokit import Utterance, Corpus, Coordination, download
-
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
@@ -15,8 +16,8 @@ import numpy as np
 # this means that if a user has spoken in the corpus as both an admin and
 #   a non-admin, then we will split this user into two users, one for each of
 #   these roles
-corpus = Corpus(filename=download("wiki-corpus"),
-    subdivide_users_by=["is_admin"])
+corpus = Corpus(filename=download("wiki-corpus"))
+corpus.subdivide_users_by_attribs(["is_admin"])
 
 # create coordination object
 coord = Coordination(corpus)
@@ -62,7 +63,7 @@ def make_chart(a_scores, b_scores, a_description, b_description, a_color="b", b_
                              str(len(b_scores)) + ")")
     plt.legend(handles=[b_patch, g_patch])
 
-    filename = str(a_description) + " vs " + str(b_description) + ".png"
+    filename = ''.join([x for x in a_description if x not in (":")]) + " vs " + ''.join([x for x in b_description if x not in (":")]) + ".png"
     plt.savefig(filename, bbox_inches="tight")
     print('Created chart "' + filename + '"')
 
@@ -73,8 +74,8 @@ nonadmins = everyone - admins
 
 # do users on the whole coordinate more to admins or nonadmins?
 make_chart(
-    coord.score(everyone, admins, focus="targets", target_thresh=7),
-    coord.score(everyone, nonadmins, focus="targets", target_thresh=7),
+    coord.score(everyone, admins, speaker_thresh=7, target_thresh=7),
+    coord.score(everyone, nonadmins, speaker_thresh=7, target_thresh=7),
     "Target: admins", "Target: nonadmins"
 )
 # do admins coordinate to other people more than nonadmins do?

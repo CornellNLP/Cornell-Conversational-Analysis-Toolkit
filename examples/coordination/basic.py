@@ -23,7 +23,7 @@ print()
 
 # compute coordination from everyone to each justice
 print("Justices, ranked by how much others coordinate to them:")
-everyone_to_justices = coord.score(everyone, justices, focus="targets")
+everyone_to_justices = coord.score(everyone, justices)
 for justice, score in sorted(everyone_to_justices.averages_by_user().items(), 
     key=lambda x: x[1], reverse=True):
     print(justice.name, round(score, 5))
