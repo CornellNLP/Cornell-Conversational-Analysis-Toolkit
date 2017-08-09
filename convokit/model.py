@@ -115,8 +115,7 @@ class Corpus:
     :param filename: path of json or csv file to load
     :param utterances: list of utterances to load
     :param merge_lines: whether to merge adjacent
-        lines from same author if the two utterances have the same root.
-        Uses the older version of the other attribs.
+        lines from the same user if the two utterances have the same root.
     :param subdivide_users_by: collection of strings corresponding to attribute
         names defined in the "user-info" entry. Use this if you want to count
         the same user as being different depending on attributes other than
@@ -141,20 +140,29 @@ class Corpus:
         KeyUserInfo = "user-info"  # can store any extra data
 
         if filename is not None:
-            try:
-                utterances = json.load(open(filename, "r"))
-            except:
+            with open(filename, "r") as f:
                 try:
-                    utterances = self._load_csv(open(filename, "r"), delim,
-                        DefinedKeys)
+                    utterances = json.load(f)
                 except:
-                    raise ValueError("Couldn't load corpus: unknown file type")
+                    try:
+                        utterances = self._load_csv(f, delim, DefinedKeys)
+                    except:
+                        raise ValueError("Couldn't load corpus:" +
+                            " unknown file type")
 
             self.utterances = {}
             self.all_users = set()
-            for u in utterances:
+            users_cache = {}   # avoids creating duplicate user objects
+            #print(len(utterances))
+            for i, u in enumerate(utterances):
+                #if i % 100000 == 0: print(i, end=" ", flush=True)
                 u = defaultdict(lambda: None, u)
-                user = User(name=u[KeyUser], info=u[KeyUserInfo])
+                user_key = (u[KeyUser], str(sorted(u[KeyUserInfo].items())) if
+                    u[KeyUserInfo] is not None else None)
+                if user_key not in users_cache:
+                    users_cache[user_key] = User(name=u[KeyUser],
+                        info=u[KeyUserInfo])
+                user = users_cache[user_key]
                 self.all_users.add(user)
                 ut = Utterance(id=u[KeyId], user=user,
                         root=u[KeyConvoRoot],

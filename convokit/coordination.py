@@ -146,6 +146,20 @@ class Coordination:
         if not self.precomputed:
             self.compute_liwc_reverse_dict()
             self.annot_liwc_cats()
+            #self.compute_liwc_reverse_dict_old()
+            #self.annot_liwc_cats_old()
+            #for u in self.corpus.utterances.values():
+            #    if u.liwc_categories != u.liwc_categories_old:
+            #        print("TEXT:", u.text)
+            #        print("NEW:", u.liwc_categories)
+            #        print("OLD:", u.liwc_categories_old)
+            #        diff = (u.liwc_categories - u.liwc_categories_old) | \
+            #                (u.liwc_categories_old - u.liwc_categories)
+            #        print("DIFF:", diff)
+            #        for cat in diff:
+            #            print(self.liwc_patterns[cat])
+            #        #print(u.text, u.liwc_categories, u.liwc_categories_old)
+            #        input()
             self.precomputed = True
 
     def score(self, speakers, group, focus="speakers",
@@ -159,6 +173,12 @@ class Coordination:
             to the speakers we want to compute scores for.
         :param group: A collection of usernames or user objects corresponding to
             the group of targets.
+        :param focus: Either "speakers" or "targets". If "speakers", treat the
+            set of targets for a particular speaker as a single person (i.e.
+            concatenate all of their utterances); the returned dictionary will
+            have speakers as keys. If "targets", treat the set of
+            speakers for a particular target as a single person; the returned
+            dictionary will have targets as keys.
         :param speaker_thresh: Thresholds based on
             minimum number of times the speaker uses each coordination
             marker.
@@ -295,6 +315,62 @@ class Coordination:
 
     # helper functions
     def compute_liwc_reverse_dict(self):
+        with open(pkg_resources.resource_filename("convokit",
+            "data/coord-liwc-patterns.txt"), "r") as f:
+            all_words = []
+            for line in f:
+                cat, pat = line.strip().split("\t")
+                #if cat == "auxverb": print(cat, pat)
+                # use "#" to mark word boundary
+                words = pat.replace("\\b", "#").split("|")
+                all_words += [(w[1:], cat) for w in words]
+            self.liwc_trie = self.make_trie(all_words)
+    
+    def make_trie(self, words):
+        root = {}
+        for word, cat in words:
+            cur = root
+            for c in word:
+                cur = cur.setdefault(c, {})
+            if "$" not in cur:   # use "$" as end-of-word symbol
+                cur["$"] = {cat}
+            else:
+                cur["$"].add(cat)
+        return root
+
+    def annot_liwc_cats(self):
+        # add liwc_categories field to each utterance
+        word_chars = set("abcdefghijklmnopqrstuvwxyz0123456789_")
+        for k, u in self.corpus.utterances.items():
+            cats = set()
+            last = None
+            cur = None
+            text = u.text.lower() + " "
+            #if "'" in text: print(text)
+            for i, c in enumerate(text):
+                # slightly different from regex: won't match word after an
+                #   apostrophe unless the apostrophe starts the word
+                #   -- avoids false positives
+                if last not in word_chars and c in word_chars and (last != "'"
+                    or not cur):
+                    cur = self.liwc_trie
+                if cur:
+                    if c in cur and c != "#" and c != "$":
+                        if c not in word_chars:
+                            if "#" in cur and "$" in cur["#"]:
+                                cats |= cur["#"]["$"]  # finished current word
+                        cur = cur[c]
+                    elif c not in word_chars and last in word_chars and \
+                        "#" in cur:
+                        cur = cur["#"]
+                    else:
+                        cur = None
+                if cur and "$" in cur:
+                    cats |= cur["$"]
+                last = c
+            self.corpus.utterances[k].liwc_categories = cats
+
+    def compute_liwc_reverse_dict_old(self):
         self.liwc_patterns = {}
         with open(pkg_resources.resource_filename("convokit",
             "data/coord-liwc-patterns.txt"), "r") as f:
@@ -302,16 +378,16 @@ class Coordination:
                 cat, pat = line.strip().split("\t")
                 self.liwc_patterns[cat] = re.compile(pat, re.IGNORECASE)
 
-    def annot_liwc_cats(self):
+    def annot_liwc_cats_old(self):
         # add liwc_categories field to each utterance
         for k in self.corpus.utterances:
-            self.corpus.utterances[k].liwc_categories = set()
+            self.corpus.utterances[k].liwc_categories_old = set()
         for cat in CoordinationWordCategories:
             pattern = self.liwc_patterns[cat]
             for k, u in self.corpus.utterances.items():
                 s = re.search(pattern, u.text)
                 if s is not None:
-                    self.corpus.utterances[k].liwc_categories.add(cat)
+                    self.corpus.utterances[k].liwc_categories_old.add(cat)
 
     def scores_over_utterances(self, speakers, utterances,
             speaker_thresh, target_thresh, utterances_thresh,

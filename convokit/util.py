@@ -48,7 +48,7 @@ def download(name, verbose=True):
                         if l > 1e6 else \
                         str(round(l / 1e3, 1)) + "KB"
                 print("Downloading", name, "from", url,
-                        "(" + length + ")...", end=" ")
+                        "(" + length + ")...", end=" ", flush=True)
             shutil.copyfileobj(response, out_file)
             if verbose:
                 print("Done")

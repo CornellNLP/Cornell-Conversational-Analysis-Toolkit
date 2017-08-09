@@ -13,4 +13,4 @@ datasets/wiki-corpus/*.txt
 datasets/wiki-corpus/*.dat
 datasets/wiki-corpus/*.json
 examples/*.txt
-examples/*.png
+*.png
