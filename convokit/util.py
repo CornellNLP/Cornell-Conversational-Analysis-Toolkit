@@ -13,6 +13,8 @@ def download(name, verbose=True):
             http://www.cs.cornell.edu/~cristian/Echoes_of_power.html)
         - "supreme-corpus": Supreme Court Dialogs Corpus (see
             http://www.cs.cornell.edu/~cristian/Echoes_of_power.html)
+        - "parliament-corpus": UK Parliament Question-Answer Corpus (see
+            http://www.cs.cornell.edu/~cristian/Asking_too_much.html)
 
     :return: The path to the downloaded item.
     """
@@ -21,6 +23,8 @@ def download(name, verbose=True):
             "datasets/wiki-corpus/full.json",
         "supreme-corpus": "http://zissou.infosci.cornell.edu/socialkit/" + \
             "datasets/supreme-corpus/full.json"
+        "parliament-corpus": "http://zissou.infosci.cornell.edu/data/" + \
+            "askingtoomuch/parliament/"
     }
     name = name.lower()
     data_dir = pkg_resources.resource_filename("convokit", "")
