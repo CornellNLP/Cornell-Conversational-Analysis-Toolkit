@@ -16,3 +16,4 @@ examples/*.txt
 *.png
 datasets/parliament-corpus/metadata.tsv
 datasets/parliament-corpus/full.json
+build/*
