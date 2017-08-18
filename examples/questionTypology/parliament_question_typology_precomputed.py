@@ -13,7 +13,7 @@ import pkg_resources
 from convokit import Utterance, Corpus, QuestionTypology, download
 
 #Download precomputed motifs
-motifs_dir = '/Users/ishaanjhaveri/Library/Caches/Python-Eggs/convokit-0.0.1-py3.6.egg-tmp/convokit/downloads/parliament-motifs'#download('parliament-motifs')
+motifs_dir = download('parliament-motifs')
 
 #Initialize QuestionTypology class
 data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads')
