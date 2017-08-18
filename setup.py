@@ -7,7 +7,7 @@ setup(
     url = "https://github.com/CornellNLP/Cornell-Conversational-Analysis-Toolkit",
     description = "Cornell Conversational Analysis Toolkit",
     version = "0.0.1",
-    packages = ["convokit"],
+    packages = ["convokit", "convokit.questionTypologyHelpers"],
     package_data = {"convokit": ["data/*.txt"]},
     entry_points = {
         "console_scripts": ["convokit = convokit.command_line:command_line_main"]

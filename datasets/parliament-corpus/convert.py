@@ -1,110 +1,142 @@
 # convert into toolkit json format
 import json
+import pandas as pd
+import numpy as np
 
-MaxUtterances = -1
+# Keys in original metadata.tsv
+# question_text_idx
+# answer_text_idx
+# asker
+# answerer
+# question_text
+# answer_text
 
-KeyId = "id"
-KeyUser = "user"
-KeyConvoRoot = "root"
-KeyReplyTo = "reply-to"
-KeyUserInfo = "user-info"  # can store any extra data
-import time
-import datetime
+# date
+# govt
+# pair_idx (renamed to Index by pandas)
+# is_pmq
+# is_topical
+# asked_tbl
+# len_followups
+# official_name
+# major_name
+# minor_name
+# num_interjections
 
-KeyText = "text"
+# party_asker
+# party_answerer
+# is_incumbent_asker
+# is_incumbent_answerer
+# is_oppn_asker
+# is_oppn_answerer
 
-with open("supreme.gender.txt", "r", encoding="utf-8") as f:
-    genders = {}
-    for line in f:
-        line = line[:-1]
-        name, gender = line.split(" +++$+++ ")
-        genders[name.lower()] = gender
+# Keys in new full.json
+ID = "id" # equal to question_text_idx if current utterance is a question
+        # equal to answer_text_idx if current utterance is an answer
+ROOT = "root" # this will always be equal to question_text_idx
+REPLY_TO = "reply-to" # non existant if this utterance is a question,
+                    # equal to question_text_idx if this is an answer
+USER = "user" # equal to asker if current utterance is a question
+            # equal to answerer if current utterance is an answer
+TEXT = "text" # equal to question_text if current utterance is a question
+        # equal to answer_text if current utterance is an answer
 
-convo_id = 0
-last_utterance_id = None
-u = {}
-with open("supreme.conversations.dat", "r", encoding="utf-8") as f:
-    utterances = []
-    count = 0
-    for line in f:
-        if count % 1000 == 0: print(count)
-        line = line[:-1]
-        if line:
-            fields = line.split(" +++$+++ ")
-            if len(fields) == 8:
-                user = fields[3].strip().lower()
-                if user == "justice roberts": user = "chief " + user # fix typo
-                if user.endswith("kenned"): user += "y" # fix typo
+IS_QUESTION = "is_question" # for redundancy
+IS_ANSWER = "is_answer" # for redundancy
+DATE = "date"
+GOVT = "govt"
+PAIR_IDX = "pair_idx"
+IS_PMQ = "is_pmq"
+IS_TOPICAL = "is_topical"
+ASKED_TBL = "asked_tbl"
+LEN_FOLLOWUPS = "len_followups"
+OFFICIAL_NAME = "official_name"
+MAJOR_NAME = "major_name"
+MINOR_NAME = "minor_name"
+NUM_INTERJECTIONS = "num_interjections"
 
-                case = fields[0].strip() 
-                is_justice = fields[4].strip() == "JUSTICE"
+USER_INFO = "user-info" # container for extra information
 
-                #user += "(case:" + fields[0].strip() + ")"
-                #is_justice = fields[4].strip() == "JUSTICE"
-                #if is_justice:
-                #    if fields[5].strip() == fields[6].strip(): # favorable justice
-                #        user += "{justice-fav}"
-                #    else:
-                #        user += "{justice-unfav}"
+# Keys within user-info
+PARTY = "party" # to represent party_asker or party_answerer
+IS_INCUMBENT = "is_incumbent" # to represent is_incumbent_asker or is_incumbent_answerer
+IS_OPPN = "is_oppn" # to represent is_oppn_asker or is_oppn_answerer
 
-                is_reply = fields[2].strip() == "TRUE"
-                if not is_reply:
-                    convo_id += 1
-                
-                d = {
-                    KeyId: fields[1],
-                    KeyUser: user,
-                    KeyConvoRoot: convo_id,
-                    KeyText: fields[7],
-                    KeyUserInfo: {
-                        "case": case,
-                        "gender": genders[user],
-                        "is-justice": is_justice,
-                        "side": fields[6].lower(),
-                    }
-                }
-                if is_justice:
-                    d[KeyUserInfo]["justice-vote"] = fields[5].lower()
-                    d[KeyUserInfo]["justice-is-favorable"] = \
-                            fields[5] == fields[6]
+utterances = []
+question_df = pd.read_csv('metadata_10.tsv', index_col=0, sep='\t')
+i = 0
+for row in question_df.itertuples():
+    i += 1
+    question_utter = {}
+    answer_utter = {}
 
-                if is_reply:
-                    d[KeyReplyTo] = last_utterance_id
-                    d[KeyConvoRoot] = user # \
-                        #+ "->" + (
-                        #"[justices]" if \
-                        #u[last_utterance_id][KeyUser].endswith("fav}") else \
-                        #"[lawyers]")
-                u[fields[1]] = d
-                utterances.append(d)
+    question_utter[ID] = row.question_text_idx
+    answer_utter[ID] = row.answer_text_idx
 
-                last_utterance_id = fields[1]
-                
-                count += 1
-                #if MaxUtterances > 0 and count > MaxUtterances:
-                #    break
+    question_utter[ROOT] = row.question_text_idx
+    answer_utter[ROOT] = row.question_text_idx
 
-#udict = {ut["id"]: ut for ut in utterances}
-#for i, ut in enumerate(utterances):
-#    if KeyReplyTo in ut:
-#        target = udict[ut[KeyReplyTo]][KeyUser]
-#        if target.endswith("{justice-fav}"):
-#            ut[KeyConvoRoot] = ut[KeyUser] + "->{justice-fav}"
-#        elif target.endswith("{justice-unfav}"):
-#            ut[KeyConvoRoot] = ut[KeyUser] + "->{justice-unfav}"  # target groups
-#        #ut[KeyConvoRoot] = target  # target groups -- experimental
-#        #ut[KeyConvoRoot] = ut[KeyUser]  # speaker groups
-#        utterances[i] = ut
-#    else:
-#        del utterances[i][KeyConvoRoot]
-        
-if MaxUtterances > 0:
-    #import random
-    #random.shuffle(utterances)
-    utterances = utterances[-MaxUtterances:]
-json.dump(utterances, open("full.json", "w"), indent=2,
-          sort_keys=True)
+    answer_utter[REPLY_TO] = row.question_text_idx
 
-#print(len(usernames), len(usernames_cased))
-print("Done")
+    question_utter[USER] = row.asker
+    answer_utter[USER] = row.answerer
 
+    question_utter[TEXT] = row.question_text
+    answer_utter[TEXT] = row.answer_text
+
+    question_utter[IS_QUESTION] = True
+    answer_utter[IS_QUESTION] = False
+
+    question_utter[IS_ANSWER] = False
+    answer_utter[IS_ANSWER] = True
+
+    question_utter[DATE] = row.date
+    answer_utter[DATE] = row.date
+
+    question_utter[GOVT] = row.govt
+    answer_utter[GOVT] = row.govt
+
+    question_utter[PAIR_IDX] = row.Index
+    answer_utter[PAIR_IDX] = row.Index
+
+    question_utter[IS_PMQ] = bool(row.is_pmq)
+    answer_utter[IS_PMQ] = bool(row.is_pmq)
+
+    question_utter[IS_TOPICAL] = bool(row.is_topical)
+    answer_utter[IS_TOPICAL] = bool(row.is_topical)
+
+    question_utter[ASKED_TBL] = bool(row.asked_tbl)
+    answer_utter[ASKED_TBL] = bool(row.asked_tbl)
+
+    question_utter[LEN_FOLLOWUPS] = int(row.len_followups)
+    answer_utter[LEN_FOLLOWUPS] = int(row.len_followups)
+
+    question_utter[OFFICIAL_NAME] = row.official_name
+    answer_utter[OFFICIAL_NAME] = row.official_name
+
+    question_utter[MAJOR_NAME] = row.major_name
+    answer_utter[MAJOR_NAME] = row.major_name
+
+    question_utter[MINOR_NAME] = row.minor_name
+    answer_utter[MINOR_NAME] = row.minor_name
+
+    question_utter[NUM_INTERJECTIONS] = int(row.num_interjections)
+    answer_utter[NUM_INTERJECTIONS] = int(row.num_interjections)
+
+    question_utter[USER_INFO] = {
+        PARTY: row.party_asker,
+        IS_INCUMBENT: bool(row.is_incumbent_asker),
+        IS_OPPN: bool(row.is_oppn_asker)
+    }
+    answer_utter[USER_INFO] = {
+        PARTY: row.party_answerer,
+        IS_INCUMBENT: bool(row.is_incumbent_answerer),
+        IS_OPPN: bool(row.is_oppn_answerer)
+    }
+
+    utterances.append(question_utter)
+    utterances.append(answer_utter)
+
+json.dump(utterances, open("full.json", "w"), indent=2, sort_keys=True)
+
+print("Done", i, "pairs")
