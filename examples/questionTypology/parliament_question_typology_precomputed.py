@@ -13,7 +13,7 @@ import pkg_resources
 from convokit import Utterance, Corpus, QuestionTypology, download
 
 #Download precomputed motifs
-motifs_dir = download('parliament-motifs')
+motifs_dir = '/Users/ishaanjhaveri/Library/Caches/Python-Eggs/convokit-0.0.1-py3.6.egg-tmp/convokit/downloads/parliament-motifs'#download('parliament-motifs')
 
 #Initialize QuestionTypology class
 data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads')
@@ -21,3 +21,17 @@ corpus = Corpus(filename=download('parliament-corpus'))
 questionTypology = QuestionTypology(corpus, data_dir, motifs_dir)
 
 #Output required data representations
+
+# Need to fill in
+
+#Output Figure 1A
+
+# users_with_specific_affiliation = corpus.users(lambda u: u.info["is-admin"])
+# [where instead of admins you would select users with a specific the affiliation]
+
+# and
+ 
+# log odds ratio (http://dept.stat.lsa.umich.edu/~kshedden/Python-Workshop/stats_calculations.html) 
+
+# and of course they typology counts you would get using QuestionTypology
+# questionTypology.display_question_type_log_odds_graph()

@@ -63,7 +63,7 @@ IS_INCUMBENT = "is_incumbent" # to represent is_incumbent_asker or is_incumbent_
 IS_OPPN = "is_oppn" # to represent is_oppn_asker or is_oppn_answerer
 
 utterances = []
-question_df = pd.read_csv('metadata_10.tsv', index_col=0, sep='\t')
+question_df = pd.read_csv('metadata_3000.tsv', index_col=0, sep='\t')
 i = 0
 for row in question_df.itertuples():
     i += 1

@@ -4,6 +4,7 @@
 import itertools
 import json
 import os
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import spacy
@@ -64,11 +65,41 @@ class QuestionTypology:
         pass
 
     def display_question_type_log_odds_graph(self):
-        # admins = corpus.users(lambda u: u.info["is-admin"])
-        # [where instead of admins you would select users with a specific the affiliation]
-        pass
-        # log odds ratio (http://dept.stat.lsa.umich.edu/~kshedden/Python-Workshop/stats_calculations.html)
-        # and of course they typology counts you would get using QuestionTypology
+        # N = np.array([[35,23], [20,29]])
+        # LOR = np.log(N[0,0]) + np.log(N[1,1]) - np.log(np.log(N[0,1])) - np.log(N[1,0])
+        # print(LOR)
+
+        cluster_num = [1, 2, 3, 4, 5, 6, 7, 8]
+        
+        govt_log_odds = [0.1, 0.5, 0.6, 0.8, 0.2, 0.3, 0.15, 0.89]
+        opp_log_odds = [-0.1, -0.5, -0.6, -0.8, -0.2, -0.3, -0.15, -0.89]
+
+        govt_data_style = 'rs'
+        opp_data_style = 'bo'
+
+        line_x = np.linspace(-1.2, 1.2, 8) #for lines
+
+        labels = ['Cluster 0', 'Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4', 'Cluster 5', 'Cluster 6', 'Cluster 7']
+        #plot lines - probably a better way of doing this
+        for i in cluster_num:
+            y_i = np.full(8,i)
+            plt.plot(line_x, y_i, linestyle='dashed', linewidth=1, color='lightgrey')
+
+        #plot govt
+        plt.plot(govt_log_odds, cluster_num, govt_data_style)
+
+        #plot opposition
+        plt.plot(opp_log_odds, cluster_num, opp_data_style)
+
+        #add labels
+        plt.yticks(cluster_num, labels, rotation='horizontal')
+
+        # Pad margins so that markers don't get clipped by the axes
+        plt.margins(0.2)
+        # Tweak spacing to prevent clipping of tick-labels
+        plt.subplots_adjust(bottom=0.15)
+        plt.show() #This can be changed to show or write to file
+
 
     def display_mean_propensities_graph(self):
         pass
@@ -697,6 +728,17 @@ class QuestionClusterer:
         question_term_to_idx = {k:idx for idx,k in enumerate(question_term_list)}
         answer_term_to_idx = {k:idx for idx,k in enumerate(answer_term_list)}
 
+        # print('1')
+        # print(question_to_fits)
+        # print('2')
+        # print(question_to_leaf_fits)
+        # print('3')
+        # print(motif_counts)
+        # print('4')
+        # print(question_to_arcs)
+        # print('5')
+        # print(arc_counts)
+
         if verbose:
             print('\tbuilding matrices')
         question_term_idxes = []
@@ -873,6 +915,8 @@ class QuestionClusterer:
         if num_egs > 0:
             q_dists = q_km.transform(q_mtx)
             q_assigns = q_km.labels_
+            # print(len(q_mtx))
+            # print(len(q_assigns))
             a_dists = q_km.transform(a_mtx)
             a_assigns = q_km.predict(a_mtx)
             for cl in range(num_clusters):
@@ -978,6 +1022,10 @@ class QuestionClusterer:
         q_mtx, a_mtx, mtx_obj = QuestionClusterer.run_simple_pipe(matrix_file)
         lq, a_u, a_s, a_v = QuestionClusterer.run_lowdim_pipe(q_mtx,a_mtx,d)
         km = QuestionClusterer.inspect_kmeans_run(lq,a_u,d,k,mtx_obj['q_terms'], mtx_obj['a_terms'], num_egs=num_egs)
+        # print('extract_clusters')
+        # print(mtx_obj['q_leaves'])
+        # print(km.labels_)
+
         joblib.dump(km, km_file)
 
 class QuestionTypologyUtils:

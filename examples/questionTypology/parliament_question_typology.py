@@ -8,14 +8,27 @@ import os
 import pkg_resources
 # import matplotlib.pyplot as plt
 # import matplotlib.patches as mpatches
-# import numpy as np
+import numpy as np
 
 from convokit import Utterance, Corpus, QuestionTypology, download
 
 #Initialize QuestionTypology class
 data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads')
 corpus = Corpus(filename=download('parliament-corpus'))
-# corpus = Corpus(filename='/Users/comake/ish/Google_Drive/git/Cornell-Conversational-Analysis-Toolkit/datasets/parliament-corpus/full.json')
 questionTypology = QuestionTypology(corpus, data_dir)
 
 #Output required data representations
+
+# Need to fill in
+
+#Output Figure 1A
+
+# users_with_specific_affiliation = corpus.users(lambda u: u.info["is-admin"])
+# [where instead of admins you would select users with a specific the affiliation]
+
+# and
+ 
+# log odds ratio (http://dept.stat.lsa.umich.edu/~kshedden/Python-Workshop/stats_calculations.html) 
+
+# and of course they typology counts you would get using QuestionTypology
+questionTypology.display_question_type_log_odds_graph()
