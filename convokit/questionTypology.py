@@ -22,6 +22,20 @@ from spacy.tokens.doc import Doc
 
 NP_LABELS = set([nsubj, nsubjpass, dobj, iobj, pobj, attr])
 
+# For output:  the functions in this class should return a dictionary of dictionaries indexed by - 
+# Type number - for each type, you have the following sub-keys "question motifs", "answer fragments", "questions".  
+# The latter will contain either a list of (question_ids) of questions in the training data that are assigned to this type, 
+# or (preferably) a sorted list of (question_id, scores) of questions in the training data that are assigned to this type, 
+# together with a membership score (does Justine's code provide a membership score? i.e., some questions will be more clearly in type X than others.)
+# Basically the info that is now exemplified in table 1.  (Feel free to propose other options)
+
+# The class should also have a function that takes in a new question (possibly not in the training data), 
+# identifies question fragments and motifs that are present in the question,  and assigns scores for each of the types.
+
+# the Parliament script would create this dictionary and print samples of each contents (i.e., recreate Table 1, of course it does not need to
+# be the exact same examples).   It would also use the function to assign types to a few new and existing questions.
+
+
 class QuestionTypology:
     """Encapsulates computation of question types from a question-answer corpus.
 
@@ -48,21 +62,29 @@ class QuestionTypology:
 
         QuestionClusterer.build_matrix(self.motifs_dir, self.matrix_dir, question_threshold=50, answer_threshold=50)
         self.km_name = os.path.join(self.data_dir, 'demo_km.pkl')
-        QuestionClusterer.extract_clusters(self.matrix_dir, self.km_name, k=8,d=100,num_egs=10)
-        #check the dependency_parse field. if its there call load_pre, if not, do it manually.
-
+        self.mtx_obj, self.km, self.types_to_data = QuestionClusterer.extract_clusters(self.matrix_dir, self.km_name, k=8,d=100,num_egs=10)
 
     def display_question_types(self):
         pass
 
-    def display_questions_for_type(self, type):
+    def display_questions_for_type(self, type_num):
         pass
 
-    def display_motifs_for_type(self, type):
-        pass
+    def display_motifs_for_type(self, type_num, num_egs=5):
+        target = self.types_to_data[type_num]
+        motifs = target["question motifs"]
+        num_to_print = min(len(motifs), num_egs)
+        print('\t%s sample question motifs:'%(num_to_print))
+        for i in range(num_to_print):
+            print('\t\t', motifs[i])
 
-    def display_answer_fragments_for_type(self, type):
-        pass
+    def display_answer_fragments_for_type(self, type_num, num_egs=5):
+        target = self.types_to_data[type_num]
+        answer_fragments = target["answer fragments"]
+        num_to_print = min(len(answer_fragments), num_egs)
+        print('\t%s sample answer fragments:'%(num_to_print))
+        for i in range(num_to_print):
+            print('\t\t', answer_fragments[i])
 
     def display_question_type_log_odds_graph(self):
         # N = np.array([[35,23], [20,29]])
@@ -107,6 +129,135 @@ class QuestionTypology:
         #being in the opposition to being in the government (top) and vice-versa (bottom)
         #after an election. Stars indicate statistically significant differences at the
         #p < 0.05 (*), p < 0.01 (**) and p < 0.001 (***) levels (Wilcoxon test).
+
+    def classify_question(self, question_answer_pair):
+        #for now only takes in a question answer pair given as a list of 2 json dicts
+
+        #create spacy objects
+        spacy_NLP = spacy.load('en')
+        vocab = MotifsExtractor.load_vocab()
+        spacy_q_obj = Doc(vocab).from_bytes(spacy_NLP(question_answer_pair[0]['text']).to_bytes())
+        spacy_a_obj = Doc(vocab).from_bytes(spacy_NLP(question_answer_pair[1]['text']).to_bytes())
+
+        #extract question fragments
+        for span_idx, span in enumerate(spacy_q_obj.sents):
+            curr_arcset = MotifsExtractor.get_arcs(span.root, True)
+            fragments = list(curr_arcset)
+        print(fragments)
+
+        #extract answer fragments
+        for span_idx, span in enumerate(spacy_a_obj.sents):
+            curr_arcset = MotifsExtractor.get_arcs(span.root, True)
+            answer_fragments = list(curr_arcset)
+        print(answer_fragments)
+
+        #extract motifs
+        question_tree_outfile = os.path.join(self.motifs_dir, 'question_tree')
+        downlinks = MotifsExtractor.read_downlinks(question_tree_outfile + '_downlinks.json')
+        node_counts = MotifsExtractor.read_nodecounts(question_tree_outfile + '_arc_set_counts.tsv')
+        fit_nodes = MotifsExtractor.fit_question(set(fragments), downlinks, node_counts)
+        print(fit_nodes)
+
+        #build vec for this question
+        superset_file = os.path.join(self.motifs_dir, 'question_supersets_arcset_to_super.json')
+        question_threshold = 50
+        answer_threshold = 50
+
+        question_to_fits = defaultdict(set)
+        question_to_leaf_fits = defaultdict(set)
+        motif_counts = defaultdict(int)
+
+
+        super_mappings = {}
+        with open(superset_file) as f:
+            for line in f.readlines():
+                entry = json.loads(line)
+                super_mappings[tuple(entry['arcset'])] = tuple(entry['super'])
+
+        i = 0
+        for entry in fit_nodes.values():
+            motif = tuple(entry['arcset'])
+            super_motif = super_mappings[motif]
+            if entry['arcset_count'] < question_threshold: continue
+            if entry['max_valid_child_count'] < question_threshold:
+                question_to_leaf_fits[i].add(super_motif)
+                question_to_fits[i].add(super_motif)
+                motif_counts[super_motif] += 1
+            i += 1
+
+        question_to_fits = {k: [x for x in v if motif_counts[x] >= question_threshold] for k,v in question_to_fits.items()}
+        motif_counts = {k:v for k,v in motif_counts.items() if v >= question_threshold}
+        question_to_leaf_fits = {k: [x for x in v if motif_counts.get(x,0) >= question_threshold] for k,v in question_to_leaf_fits.items()}
+
+        question_to_arcs = defaultdict(set)
+        arc_counts = defaultdict(int)
+        
+        question_to_arcs[0].update(answer_fragments)
+        for arc in answer_fragments:
+            arc_counts[arc] += 1
+        question_to_arcs = {k: [x for x in v if arc_counts[x] >= answer_threshold] for k,v in question_to_arcs.items()}
+        arc_counts = {k:v for k,v in arc_counts.items() if v >= answer_threshold}
+
+
+        question_term_list = list(motif_counts.keys())
+        answer_term_list = list(arc_counts.keys())
+
+        question_term_to_idx = {k:idx for idx,k in enumerate(question_term_list)}
+        answer_term_to_idx = {k:idx for idx,k in enumerate(answer_term_list)}
+
+        question_term_idxes = []
+        question_leaves = []
+        question_doc_idxes = []
+        answer_term_idxes = []
+        answer_doc_idxes = []
+
+        pair_idxes = list(set(question_to_fits.keys()).intersection(set(question_to_arcs.keys())))
+
+        for idx, p_idx in enumerate(pair_idxes):
+            if verbose and (idx > 0) and (idx % verbose == 0):
+                print('\t%03d' % idx)
+
+            question_terms = question_to_fits[p_idx]
+            answer_terms = question_to_arcs[p_idx]
+
+            for term in question_terms:
+                term_idx = question_term_to_idx[term]
+                question_term_idxes.append(term_idx)
+                question_doc_idxes.append(idx)
+                question_leaves.append(term in question_to_leaf_fits.get(p_idx,[]))
+            for term in answer_terms:
+                term_idx = answer_term_to_idx[term]
+                answer_term_idxes.append(term_idx)
+                answer_doc_idxes.append(idx)
+
+
+        # q_mtx, a_mtx, mtx_obj = QuestionClusterer.run_simple_pipe(matrix_file)
+        # mtx_obj = QuestionClusterer.load_joint_mtx(rootname)
+        # q_mtx = QuestionClusterer.build_mtx(mtx_obj, 'q')
+        # N_terms = len(mtx_obj[data_type + '_terms'])
+        # N_docs = len(mtx_obj['docs'])
+        # if idf:
+        #     data = np.log(N_docs) - np.log(mtx_obj[data_type + '_term_counts'][mtx_obj[data_type + '_tidxes']])
+        # else:
+        #     data = np.ones_like(mtx_obj[data_type + '_tidxes'])
+        #     if leaves_only:
+        #         data[~mtx_obj[data_type + '_leaves']] = 0
+        # mtx = sparse.csr_matrix((data, (mtx_obj[data_type + '_tidxes'], mtx_obj[data_type + '_didxes'])), shape=(N_terms,N_docs))
+        # if norm:
+        #     mtx = Normalizer(norm=norm).fit_transform(mtx)
+        # print('supp')
+        # print(q_mtx.shape)
+        # a_mtx = QuestionClusterer.build_mtx(mtx_obj, 'a', idf=True)
+        # return q_mtx, a_mtx, mtx_obj
+        # lq, a_u, a_s, a_v = QuestionClusterer.run_lowdim_pipe(q_mtx,a_mtx,d)
+        # a_u, a_s, a_v = QuestionClusterer.do_sparse_svd(a_mtx,k + int(snip))
+        # lq = q_mtx * (a_v.T * a_s**-1)
+        # if snip:
+        #     return QuestionClusterer.snip_first_dim(lq, a_u, a_s, a_v)
+        # else:
+        #     return lq, a_u, a_s, a_v
+        # km = QuestionClusterer.inspect_kmeans_run(lq,a_u,d,k,mtx_obj['q_terms'], mtx_obj['a_terms'], num_egs=num_egs)
+
 
 
 class MotifsExtractor:
@@ -728,17 +879,6 @@ class QuestionClusterer:
         question_term_to_idx = {k:idx for idx,k in enumerate(question_term_list)}
         answer_term_to_idx = {k:idx for idx,k in enumerate(answer_term_list)}
 
-        # print('1')
-        # print(question_to_fits)
-        # print('2')
-        # print(question_to_leaf_fits)
-        # print('3')
-        # print(motif_counts)
-        # print('4')
-        # print(question_to_arcs)
-        # print('5')
-        # print(arc_counts)
-
         if verbose:
             print('\tbuilding matrices')
         question_term_idxes = []
@@ -862,7 +1002,7 @@ class QuestionClusterer:
         return q_mtx, a_mtx, mtx_obj
 
     def do_sparse_svd(mtx, k=50):
-        u,s,v = sparse.linalg.svds(mtx, k=k) # ugh, right order dammit
+        u,s,v = sparse.linalg.svds(mtx, k=5) # ugh, right order dammit
         return u[:,::-1],s[::-1],v[::-1,:]
 
     def run_lowdim_pipe(q_mtx, a_mtx, k=50, snip=True):
@@ -908,6 +1048,7 @@ class QuestionClusterer:
             a_mtx = a_mtx[:,:num_svd_dims]
         q_mtx = Normalizer().fit_transform(q_mtx)
         a_mtx = Normalizer().fit_transform(a_mtx)
+        types_to_data = {}
         if km:
             q_km = km
         else:
@@ -915,41 +1056,50 @@ class QuestionClusterer:
         if num_egs > 0:
             q_dists = q_km.transform(q_mtx)
             q_assigns = q_km.labels_
-            # print(len(q_mtx))
-            # print(len(q_assigns))
             a_dists = q_km.transform(a_mtx)
             a_assigns = q_km.predict(a_mtx)
             for cl in range(num_clusters):
-                print('cluster',cl)
+                types_to_data[cl] = {
+                    "question motifs": [],
+                    "question dists": [],
+                    "answer fragments": [],
+                    "answer dists": [],
+                    "questions": []
+                } 
+                # print('cluster',cl)
                 q_assigned = q_assigns == cl
                 median_qdist = np.median(q_dists[:,cl][q_assigned])
-                print('\tq assigns:',q_assigned.sum(),  'median dist:', '%.4f' % median_qdist)
+                # print('\tq assigns:',q_assigned.sum(),  'median dist:', '%.4f' % median_qdist)
                 a_assigned = a_assigns == cl
                 median_adist = np.median(a_dists[:,cl][a_assigned])
-                print('\ta assigns:',a_assigned.sum(),  'median dist:', '%.4f' % median_adist)
+                # print('\ta assigns:',a_assigned.sum(),  'median dist:', '%.4f' % median_adist)
                 if num_egs == 0: continue
                 argsorted_qdists = np.argsort(q_dists[:,cl])
                 argsorted_qdists = argsorted_qdists[np.in1d(argsorted_qdists, np.where(q_assigned)[0])]
-                print('\tqs:')
-                for i in range(min(num_egs,q_assigned.sum())):
+                # print('\tqs:')
+                for i in range(q_assigned.sum()):
                     curr_qdist = q_dists[:,cl][argsorted_qdists[i]]
                     if curr_qdist > median_qdist:
                         diststr = '%.4f ~~' %  curr_qdist
                     else:
                         diststr = '%.4f' % curr_qdist
-                    print('\t\t', q_terms[argsorted_qdists[i]], diststr)
+                    # print('\t\t', q_terms[argsorted_qdists[i]], diststr)
+                    types_to_data[cl]["question motifs"].append(q_terms[argsorted_qdists[i]])
+                    types_to_data[cl]["question dists"].append(diststr)
                 argsorted_adists = np.argsort(a_dists[:,cl])
                 argsorted_adists = argsorted_adists[np.in1d(argsorted_adists, np.where(a_assigned)[0])]
-                print('\tas:')
-                for i in range(min(num_egs,a_assigned.sum())):
+                # print('\tas:')
+                for i in range(a_assigned.sum()):
                     curr_adist = a_dists[:,cl][argsorted_adists[i]]
                     if curr_adist > median_adist:
                         diststr = '%.4f ~~' %  curr_adist
                     else:
                         diststr = '%.4f' % curr_adist
-                    print('\t\t', a_terms[argsorted_adists[i]], diststr)
-                print('========================')
-        return q_km
+                    # print('\t\t', a_terms[argsorted_adists[i]], diststr)
+                    types_to_data[cl]["answer fragments"].append(a_terms[argsorted_adists[i]])
+                    types_to_data[cl]["answer dists"].append(diststr)
+                # print('========================')
+        return q_km, types_to_data
 
     def snip_first_dim(lq, a_u, a_s, a_v):
         return lq[:,1:], a_u[:,1:], a_s[1:], a_v[1:]
@@ -1021,12 +1171,10 @@ class QuestionClusterer:
         matrix_file = os.path.join(matrix_dir, 'qa_mtx')
         q_mtx, a_mtx, mtx_obj = QuestionClusterer.run_simple_pipe(matrix_file)
         lq, a_u, a_s, a_v = QuestionClusterer.run_lowdim_pipe(q_mtx,a_mtx,d)
-        km = QuestionClusterer.inspect_kmeans_run(lq,a_u,d,k,mtx_obj['q_terms'], mtx_obj['a_terms'], num_egs=num_egs)
-        # print('extract_clusters')
-        # print(mtx_obj['q_leaves'])
-        # print(km.labels_)
+        km, types_to_data = QuestionClusterer.inspect_kmeans_run(lq,a_u,d,k,mtx_obj['q_terms'], mtx_obj['a_terms'], num_egs=num_egs)
 
         joblib.dump(km, km_file)
+        return mtx_obj, km, types_to_data
 
 class QuestionTypologyUtils:
     def read_arcs(arc_file, verbose=5000):
