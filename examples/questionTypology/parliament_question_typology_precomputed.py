@@ -13,7 +13,7 @@ import pkg_resources
 from convokit import Utterance, Corpus, QuestionTypology, download
 
 DEBUG = True
-DEBUG_DIR = '/Users/ishaanjhaveri/Google_Drive/git/Cornell-Conversational-Analysis-Toolkit/datasets/parliament-corpus/downloads'
+DEBUG_DIR = '/Users/ishaanjhaveri/Google_Drive/git/Cornell-Conversational-Analysis-Toolkit/datasets/parliament-corpus/downloads_p'
 
 #Download precomputed motifs
 motifs_dir = download('parliament-motifs') if not DEBUG else DEBUG_DIR + '/parliament-motifs'
@@ -92,9 +92,11 @@ question_answer_pair = [
   }
 ]
 
-print('5 examples for type 1-8:')
+# print('5 examples for type 1-8:')
 questionTypology.display_motifs_for_type(1)
-questionTypology.display_answer_fragments_for_type(4)
+questionTypology.display_answer_fragments_for_type(1)
+questionTypology.display_questions_for_type(1)
+questionTypology.display_question_type_log_odds_graph()
 
 # questionTypology.classify_question(question_answer_pair)
 

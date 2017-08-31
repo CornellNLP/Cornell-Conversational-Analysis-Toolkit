@@ -32,59 +32,94 @@ class QuestionTypology:
     :ivar data_dir
     """
 
-    def __init__(self, corpus, data_dir, motifs_dir=None, num_clusters=8):
+    def __init__(self, corpus, data_dir, motifs_dir=None, num_clusters=8, dataset_name="parliament"):
         self.corpus = corpus
         self.data_dir = data_dir
         self.motifs_dir = motifs_dir
         self.num_clusters = num_clusters
 
         if not self.motifs_dir:
-            self.motifs_dir = os.path.join(self.data_dir, 'parliament-motifs')
+            self.motifs_dir = os.path.join(self.data_dir, dataset_name+'-motifs')
             spacy_file = os.path.join(self.data_dir, 'spacy')
             MotifsExtractor.spacify(self.corpus.iterate_by('both'), spacy_file)
             MotifsExtractor.extract_question_motifs(self.corpus.iterate_by('questions'), spacy_file, self.motifs_dir)
             MotifsExtractor.extract_answer_arcs(self.corpus.iterate_by('answers'), spacy_file, self.motifs_dir)
 
-        self.matrix_dir = os.path.join(self.data_dir, 'parliament-matrix')
+        self.matrix_dir = os.path.join(self.data_dir, dataset_name+'-matrix')
 
         QuestionClusterer.build_matrix(self.motifs_dir, self.matrix_dir, question_threshold=50, answer_threshold=50)
         self.km_name = os.path.join(self.data_dir, 'demo_km.pkl')
-        self.mtx_obj, self.km, self.types_to_data = QuestionClusterer.extract_clusters(self.matrix_dir, self.km_name, k=num_clusters,d=100,num_egs=10)
+        self.mtx_obj, self.km, self.types_to_data, self.lq, self.a_u = QuestionClusterer.extract_clusters(self.matrix_dir, self.km_name, k=num_clusters,d=100,num_egs=10)
 
-        print(self.mtx_obj.keys())
-        print(len(self.mtx_obj['q_didxes']))
-        print(len(self.mtx_obj['q_tidxes']))
-        print(self.mtx_obj['q_tidxes'])
+        self.motif_df, self.aarc_df, self.qdoc_df = QuestionClusterer.assign_clusters(self.km, self.lq, self.a_u, self.mtx_obj, 25)
+        for index, row in self.qdoc_df.iterrows():
+            cluster = row["cluster"]
+            cluster_dist = row["cluster_dist"]
+            q_idx = row["q_idx"]
+            self.types_to_data[cluster]["questions"].append(q_idx)
+            self.types_to_data[cluster]["question_dists"].append(cluster_dist)
+
+    def _get_question_text_from_pair_idx(self, pair_idx):
+        for q in self.corpus.utterances.values():
+            # print(pair_idx, q.other["pair_idx"], q.other["is_question"])
+            if q.other["pair_idx"] == pair_idx and q.other["is_question"]:
+                return q.text
+        return "No question found"
+
 
     def display_question_types(self):
         pass
 
-    def display_questions_for_type(self, type_num):
-        pass
+    def display_questions_for_type(self, type_num, num_egs=5):
+        target = self.types_to_data[type_num]
+        questions = target["questions"]
+        questions_len = len(questions)
+        num_to_print = min(questions_len, num_egs)
+        print('\t%d sample questions that were assigned type %d (%d total questions with this type) :'%(num_to_print, type_num, questions_len))
+        for i in range(num_to_print):
+            print('\t\t%d.'%(i+1), self._get_question_text_from_pair_idx(questions[i]))
 
     def display_motifs_for_type(self, type_num, num_egs=5):
         target = self.types_to_data[type_num]
-        motifs = target["question motifs"]
-        num_to_print = min(len(motifs), num_egs)
-        print('\t%s sample question motifs for type %d:'%(num_to_print, type_num))
+        motifs = target["motifs"]
+        motifs_len = len(motifs)
+        num_to_print = min(motifs_len, num_egs)
+        print('\t%d sample question motifs for type %d (%d total motifs):'%(num_to_print, type_num, motifs_len))
         for i in range(num_to_print):
-            print('\t\t', motifs[i])
+            print('\t\t%d.'%(i+1), motifs[i])
 
     def display_answer_fragments_for_type(self, type_num, num_egs=5):
         target = self.types_to_data[type_num]
-        answer_fragments = target["answer fragments"]
-        num_to_print = min(len(answer_fragments), num_egs)
-        print('\t%s sample answer fragments for type %d:'%(num_to_print, type_num))
+        answer_fragments = target["fragments"]
+        fragment_len = len(answer_fragments)
+        num_to_print = min(fragment_len, num_egs)
+        print('\t%d sample answer fragments for type %d (%d total fragments) :'%(num_to_print, type_num, fragment_len))
         for i in range(num_to_print):
-            print('\t\t', answer_fragments[i])
+            print('\t\t%d.'%(i+1), answer_fragments[i])
+
 
     def display_question_type_log_odds_graph(self):
         # N = np.array([[35,23], [20,29]])
         # LOR = np.log(N[0,0]) + np.log(N[1,1]) - np.log(np.log(N[0,1])) - np.log(N[1,0])
         # print(LOR)
 
+        #EVERYTHING HARDCODED to 8 RIGHT NOW 
+
         cluster_num = [1, 2, 3, 4, 5, 6, 7, 8]
-        
+
+        num_questions_govt = [0,0,0,0,0,0,0,0]
+        num_questions_opp = [0,0,0,0,0,0,0,0]
+
+        for q in self.corpus.utterances.values():
+            if q.other["is_question"]:
+                pair_idx = q.other["pair_idx"]
+                for i in range(8):
+                    if pair_idx in self.types_to_data[i]["questions"]:
+                        if q.user._get_info()["is_oppn"]:
+                            num_questions_opp[i] += 1
+                        else:
+                            num_questions_govt[i] += 1
+
         govt_log_odds = [0.1, 0.5, 0.6, 0.8, 0.2, 0.3, 0.15, 0.89]
         opp_log_odds = [-0.1, -0.5, -0.6, -0.8, -0.2, -0.3, -0.15, -0.89]
 
@@ -112,7 +147,10 @@ class QuestionTypology:
         plt.margins(0.2)
         # Tweak spacing to prevent clipping of tick-labels
         plt.subplots_adjust(bottom=0.15)
-        plt.show() #This can be changed to show or write to file
+        # plt.show() #This can be changed to show or write to file
+        print(num_questions_govt)
+        print(num_questions_opp)
+
 
 
     def display_mean_propensities_graph(self):
@@ -148,7 +186,6 @@ class QuestionTypology:
         downlinks = MotifsExtractor.read_downlinks(question_tree_outfile + '_downlinks.json')
         node_counts = MotifsExtractor.read_nodecounts(question_tree_outfile + '_arc_set_counts.tsv')
         fit_nodes = MotifsExtractor.fit_question(set(fragments), downlinks, node_counts)
-        print(fit_nodes)
 
         #build vec for this question
         superset_file = os.path.join(self.motifs_dir, 'question_supersets_arcset_to_super.json')
@@ -200,6 +237,7 @@ class QuestionTypology:
         question_term_idxes = []
         question_leaves = []
         question_doc_idxes = []
+        pair_idx_list = []
         answer_term_idxes = []
         answer_doc_idxes = []
 
@@ -211,6 +249,7 @@ class QuestionTypology:
 
             question_terms = question_to_fits[p_idx]
             answer_terms = question_to_arcs[p_idx]
+            pair_idx_list.append(p_idx)
 
             for term in question_terms:
                 term_idx = question_term_to_idx[term]
@@ -225,6 +264,7 @@ class QuestionTypology:
 
         # create mtx_obj
         mtx_obj = {}
+        mtx_obj['p_idxes'] = pair_idx_list
         mtx_obj['q_tidxes'] = question_term_idxes
         mtx_obj['q_leaves'] = question_leaves
         mtx_obj['a_tidxes'] = answer_term_idxes
@@ -235,7 +275,6 @@ class QuestionTypology:
         mtx_obj['q_term_counts'] = [motif_counts[term] for term in question_term_list]
         mtx_obj['a_term_counts'] = [arc_counts[term] for term in answer_term_list]
 
-        print(mtx_obj)
 
         #create q_mtx
         # N_terms = len(mtx_obj['q_terms'])
@@ -321,7 +360,7 @@ class MotifsExtractor:
             spacy_NLP = spacy.load('en')
         spacy_keys = []
         spacy_objs = []
-        for idx,(text_idx, text) in enumerate(text_iter):
+        for idx,(text_idx, text, pair_idx) in enumerate(text_iter):
             if verbose and (idx > 0) and (idx % verbose == 0):
                 print('\t%03d' % idx)
             spacy_keys.append(text_idx)
@@ -486,6 +525,7 @@ class MotifsExtractor:
             for fit_info in fit_nodes.values():
                 fit_info['span_idx'] = span_idx
                 fit_info['text_idx'] = text_idx
+                # fit_info['pair_idx'] = pair_idx
                 span_fit_entries.append(fit_info)
         if verbose:
             print('\twriting fits')
@@ -714,14 +754,15 @@ class MotifsExtractor:
         spacy_dict = MotifsExtractor.get_spacy_dict(spacy_filename, vocab)
 
         arc_entries = []
-        for idx, (text_idx,text) in enumerate(text_iter):
+        for idx, (text_idx,text, pair_idx) in enumerate(text_iter):
             if verbose and (idx > 0) and (idx % verbose == 0):
                 print('\t%03d' % idx)
             spacy_obj = spacy_dict[text_idx]
             for span_idx, span in enumerate(spacy_obj.sents):
                 if use_span(span):
                     curr_arcset = MotifsExtractor.get_arcs(span.root, follow_conj)
-                    arc_entries.append({'idx': '%s_%d' % (text_idx, span_idx), 'arcs': list(curr_arcset)})
+                    arc_entries.append({'idx': '%s_%d' % (text_idx, span_idx), 'arcs': list(curr_arcset),
+                        'pair_idx': '%s_%d' % (pair_idx, span_idx)})
         if verbose:
             print('\twriting arcs')
         with open(outfile, 'w') as f:
@@ -898,12 +939,9 @@ class QuestionClusterer:
         question_doc_idxes = []
         answer_term_idxes = []
         answer_doc_idxes = []
+        pair_idx_list = []
 
         pair_idxes = list(set(question_to_fits.keys()).intersection(set(question_to_arcs.keys())))
-        print('ls')
-        print(question_to_fits.keys())
-        print('***********************')
-        print(question_to_arcs.keys())
 
         for idx, p_idx in enumerate(pair_idxes):
             if verbose and (idx > 0) and (idx % verbose == 0):
@@ -911,13 +949,13 @@ class QuestionClusterer:
 
             question_terms = question_to_fits[p_idx]
             answer_terms = question_to_arcs[p_idx]
+            pair_idx_list.append(p_idx)
 
             for term in question_terms:
                 term_idx = question_term_to_idx[term]
                 question_term_idxes.append(term_idx)
                 question_doc_idxes.append(idx)
                 question_leaves.append(term in question_to_leaf_fits.get(p_idx,[]))
-                print(term, term_idx, idx)
             for term in answer_terms:
                 term_idx = answer_term_to_idx[term]
                 answer_term_idxes.append(term_idx)
@@ -936,6 +974,8 @@ class QuestionClusterer:
             f.write('\n'.join('%d\t%s' % (arc_counts[term],term) for term in answer_term_list))
         with open(outfile + '.docs.txt', 'w') as f:
             f.write('\n'.join(pair_idxes))
+        with open(outfile + '.pair_idxs.txt', 'w') as f:
+            f.write('\n'.join(pair_idx_list))
 
     def load_joint_mtx(rootname):
         mtx_obj = {}
@@ -950,7 +990,6 @@ class QuestionClusterer:
 
         print('reading question didxes')
         mtx_obj['q_didxes'] = np.load(rootname + '.q.didx.npy')
-        print(mtx_obj['q_didxes'])
         print('reading answer didxes')
         mtx_obj['a_didxes'] = np.load(rootname + '.a.didx.npy')
 
@@ -1078,11 +1117,12 @@ class QuestionClusterer:
             a_assigns = q_km.predict(a_mtx)
             for cl in range(num_clusters):
                 types_to_data[cl] = {
-                    "question motifs": [],
-                    "question dists": [],
-                    "answer fragments": [],
-                    "answer dists": [],
-                    "questions": []
+                    "motifs": [],
+                    "motif_dists": [],
+                    "fragments": [],
+                    "fragment_dists": [],
+                    "questions": [],
+                    "question_dists": [],
                 } 
                 # print('cluster',cl)
                 q_assigned = q_assigns == cl
@@ -1102,8 +1142,8 @@ class QuestionClusterer:
                     else:
                         diststr = '%.4f' % curr_qdist
                     # print('\t\t', q_terms[argsorted_qdists[i]], diststr)
-                    types_to_data[cl]["question motifs"].append(q_terms[argsorted_qdists[i]])
-                    types_to_data[cl]["question dists"].append(diststr)
+                    types_to_data[cl]["motifs"].append(q_terms[argsorted_qdists[i]])
+                    types_to_data[cl]["motif_dists"].append(diststr)
                 argsorted_adists = np.argsort(a_dists[:,cl])
                 argsorted_adists = argsorted_adists[np.in1d(argsorted_adists, np.where(a_assigned)[0])]
                 # print('\tas:')
@@ -1114,8 +1154,8 @@ class QuestionClusterer:
                     else:
                         diststr = '%.4f' % curr_adist
                     # print('\t\t', a_terms[argsorted_adists[i]], diststr)
-                    types_to_data[cl]["answer fragments"].append(a_terms[argsorted_adists[i]])
-                    types_to_data[cl]["answer dists"].append(diststr)
+                    types_to_data[cl]["fragments"].append(a_terms[argsorted_adists[i]])
+                    types_to_data[cl]["fragment_dists"].append(diststr)
                 # print('========================')
         return q_km, types_to_data
 
@@ -1145,7 +1185,7 @@ class QuestionClusterer:
         aarc_df = pd.DataFrame(aarc_df_entries).set_index('idx')
 
         q_leaves = QuestionClusterer.build_mtx(mtx_obj,'q',leaves_only=True)
-        qdoc_vects = q_leaves.T * Normalizer().fit_transform(parl_lq)
+        qdoc_vects = q_leaves.T * Normalizer().fit_transform(lq)
         km_qdoc_dists = km.transform(Normalizer().fit_transform(qdoc_vects[:,:n_dims]))
         km_qdoc_labels = km.predict(Normalizer().fit_transform(qdoc_vects[:,:n_dims]))
         qdoc_df_entries = []
@@ -1192,7 +1232,7 @@ class QuestionClusterer:
         km, types_to_data = QuestionClusterer.inspect_kmeans_run(lq,a_u,d,k,mtx_obj['q_terms'], mtx_obj['a_terms'], num_egs=num_egs)
 
         joblib.dump(km, km_file)
-        return mtx_obj, km, types_to_data
+        return mtx_obj, km, types_to_data, lq, a_u
 
 class QuestionTypologyUtils:
     def read_arcs(arc_file, verbose=5000):
@@ -1202,9 +1242,10 @@ class QuestionTypologyUtils:
                 if (idx > 0) and (idx % verbose == 0):
                     print('\t%03d' % idx)
                 entry = json.loads(line)
-                arc_sets[entry['idx']] = entry['arcs']
+                arc_sets[entry['pair_idx']] = entry['arcs']
         return arc_sets
 
     def get_text_idx(span_idx):
-        return '.'.join(span_idx.split('.')[:-1])
-        # return span_idx[:span_idx.rfind("_")]
+        # return '.'.join(span_idx.split('.')[:-1])
+        return span_idx[:span_idx.rfind("_")]
+        # return span_idx

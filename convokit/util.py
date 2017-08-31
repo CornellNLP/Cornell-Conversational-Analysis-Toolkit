@@ -47,7 +47,9 @@ def download(name, verbose=True):
             "http://zissou.infosci.cornell.edu/socialkit/" + \
             "datasets/parliament-corpus/motifs/question_tree_uplinks.json"
 
-        ]
+        ],
+        "tennis-corpus": "http://zissou.infosci.cornell.edu/socialkit/" + \
+            "datasets/tennis-corpus/full.json",
 
     }
     name = name.lower()
@@ -63,7 +65,7 @@ def download(name, verbose=True):
         downloaded = f.read().splitlines()
 
     if name not in downloaded:
-        if name == "parliament-motifs":
+        if name == "parliament-motifs" or name == "tennis-motifs":
             for url in DatasetURLs[name]:
                 full_name = name + url[url.rfind('/'):]
                 if full_name not in downloaded:

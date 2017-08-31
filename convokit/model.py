@@ -91,13 +91,14 @@ class Utterance:
     """
 
     def __init__(self, id=None, user=None, root=None, reply_to=None,
-            timestamp=None, text=None):
+            timestamp=None, text=None, other=None):
         self.id = id
         self.user = user
         self.root = root
         self.reply_to = reply_to
         self.timestamp = timestamp
         self.text = text
+        self.other = other
 
     def get(self, key):
         if key == "id":
@@ -169,6 +170,7 @@ class Corpus:
             users_cache = {}   # avoids creating duplicate user objects
             #print(len(utterances))
             for i, u in enumerate(utterances):
+                # print(u)
                 #if i % 100000 == 0: print(i, end=" ", flush=True)
                 u = defaultdict(lambda: None, u)
                 user_key = (u[KeyUser], str(sorted(u[KeyUserInfo].items())) if
@@ -178,10 +180,15 @@ class Corpus:
                         info=u[KeyUserInfo])
                 user = users_cache[user_key]
                 self.all_users.add(user)
+                other_keys = list(u.keys())
+                other_keys.remove(KeyText)
+                other = {}
+                for key in other_keys:
+                    other[key] = u[key]
                 ut = Utterance(id=u[KeyId], user=user,
                         root=u[KeyConvoRoot],
                         reply_to=u[KeyReplyTo], timestamp=u[KeyTimestamp],
-                        text=u[KeyText])
+                        text=u[KeyText], other=other)
                 self.utterances[ut.id] = ut
         elif utterances is not None:
             self.all_users = set([u.user for u in utterances])
@@ -237,7 +244,8 @@ class Corpus:
                 new_all_users.add(u.user)
         self.all_users = new_all_users
 
-    def filter_utterances_by(self, regular_kv_pairs={}, user_info_kv_pairs={}):
+    def filter_utterances_by(self, regular_kv_pairs={}, 
+        user_info_kv_pairs={}, other_kv_pairs={}):
         """
         Creates a subset of the utterances filtered by certain attributes. Irreversible. 
         If the method is run again, it will filter the already filtered subset.
@@ -246,11 +254,14 @@ class Corpus:
         new_utterances = {}
         regular_keys = list(regular_kv_pairs.keys())
         user_info_keys = list(user_info_kv_pairs.keys())
+        other_keys = list(other_kv_pairs.keys())
         for uid, utterance in self.utterances.items():
             user_info = utterance.user._get_info()
+            other_dict = utterance.other
             regular = all(utterance.get(key) == regular_kv_pairs[key] for key in regular_keys)
             user = all(user_info[key] == user_info_kv_pairs[key] for key in user_info_keys)
-            if regular and user:
+            other = all(other_dict[key] == other_kv_pairs[key] for key in other_keys)
+            if regular and user and other:
                 new_utterances[uid] = utterance
 
         self.utterances = new_utterances
@@ -343,9 +354,10 @@ class Corpus:
         for utterance in self.utterances.values():
             if utterance.reply_to is not None:
                 if iter_type == 'answers':
-                    yield utterance.id, utterance.text
+                    yield utterance.id, utterance.text, utterance.other['pair_idx']
                     continue
                 question = self.utterances[utterance.reply_to]
-                yield question.id, question.text
+                yield question.id, question.text, question.other['pair_idx']
+                # print(question)
                 if iter_type == 'both':
-                    yield utterance.id, utterance.text
+                    yield utterance.id, utterance.text, utterance.other['pair_idx']

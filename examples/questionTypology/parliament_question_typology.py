@@ -13,7 +13,7 @@ import numpy as np
 from convokit import Utterance, Corpus, QuestionTypology, download
 
 DEBUG = True
-DEBUG_DIR = '/Users/ishaanjhaveri/Google_Drive/git/Cornell-Conversational-Analysis-Toolkit/datasets/parliament-corpus/downloads'
+DEBUG_DIR = '/Users/ishaanjhaveri/Google_Drive/git/Cornell-Conversational-Analysis-Toolkit/datasets/parliament-corpus/downloads_p'
 
 #Initialize QuestionTypology class
 data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads') if not DEBUG else DEBUG_DIR
