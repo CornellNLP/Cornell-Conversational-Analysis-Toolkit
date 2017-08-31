@@ -9,8 +9,8 @@
 52	am_grateful
 406	am_*
 199	is_right
-69	of>*
 63	of>course
+69	of>*
 58	on>*
 51	has_*
 67	take_*

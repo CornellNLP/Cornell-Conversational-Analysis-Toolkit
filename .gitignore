@@ -17,3 +17,4 @@ examples/*.txt
 datasets/parliament-corpus/metadata.tsv
 datasets/parliament-corpus/full.json
 build/*
+datasets/parliament-corpus/downloads/*

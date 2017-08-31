@@ -1,7 +1,7 @@
 """The objects used to represent a dataset."""
 
 import json
-from functools import total_ordering
+from functools import total_ordering, reduce
 from collections import defaultdict
 
 @total_ordering
@@ -98,6 +98,20 @@ class Utterance:
         self.reply_to = reply_to
         self.timestamp = timestamp
         self.text = text
+
+    def get(self, key):
+        if key == "id":
+            return self.id
+        elif key == "user":
+            return self.user
+        elif key == "root":
+            return self.root
+        elif key == "reply_to":
+            return self.reply_to
+        elif key == "timestamp":
+            return self.timestamp
+        elif key == "text":
+            return text
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
@@ -222,6 +236,24 @@ class Corpus:
                 u.user.identify_by_attribs(attribs)
                 new_all_users.add(u.user)
         self.all_users = new_all_users
+
+    def filter_utterances_by(self, regular_kv_pairs={}, user_info_kv_pairs={}):
+        """
+        Creates a subset of the utterances filtered by certain attributes. Irreversible. 
+        If the method is run again, it will filter the already filtered subset.
+        Always takes the intersection of the specified key-pairs
+        """
+        new_utterances = {}
+        regular_keys = list(regular_kv_pairs.keys())
+        user_info_keys = list(user_info_kv_pairs.keys())
+        for uid, utterance in self.utterances.items():
+            user_info = utterance.user._get_info()
+            regular = all(utterance.get(key) == regular_kv_pairs[key] for key in regular_keys)
+            user = all(user_info[key] == user_info_kv_pairs[key] for key in user_info_keys)
+            if regular and user:
+                new_utterances[uid] = utterance
+
+        self.utterances = new_utterances
 
     def users(self, selector=None):
         """Get users in the dataset.

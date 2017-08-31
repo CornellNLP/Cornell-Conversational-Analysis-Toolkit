@@ -12,7 +12,7 @@ import numpy as np
 
 from convokit import Utterance, Corpus, QuestionTypology, download
 
-DEBUG = False
+DEBUG = True
 DEBUG_DIR = '/Users/ishaanjhaveri/Google_Drive/git/Cornell-Conversational-Analysis-Toolkit/datasets/parliament-corpus/downloads'
 
 #Initialize QuestionTypology class
@@ -90,8 +90,8 @@ question_answer_pair = [
 
 # questionTypology.classify_question(question_answer_pair)
 
-questionTypology.display_motifs_for_type(1)
-questionTypology.display_answer_fragments_for_type(4)
+# questionTypology.display_motifs_for_type(1)
+# questionTypology.display_answer_fragments_for_type(4)
 
 # the Parliament script would create this dictionary and print samples of each contents (i.e., recreate Table 1, of course it does not need to
 # be the exact same examples).   It would also use the function to assign types to a few new and existing questions.

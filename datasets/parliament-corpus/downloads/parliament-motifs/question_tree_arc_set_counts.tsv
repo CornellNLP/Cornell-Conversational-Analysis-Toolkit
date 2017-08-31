@@ -229,8 +229,8 @@
 17	1	what>are
 17	2	ask_*	may>*
 17	2	explain_*	explain_can
-17	2	have_*	what>*
 17	2	have_*	have_what
+17	2	have_*	what>*
 17	2	is_*	is_what
 17	2	what>*	what>are
 16	1	believe_does
@@ -331,13 +331,13 @@
 13	1	update_will
 13	1	was_*
 13	1	what>can
-13	2	accept_*	will>*
 13	2	accept_*	accept_will
+13	2	accept_*	will>*
 13	2	agree_*	agree_are
 13	2	agree_are	agree_does
 13	2	bear_*	bear_will
-13	2	can>*	confirm_*
 13	2	can>*	confirm_can
+13	2	can>*	confirm_*
 13	2	confirm_*	confirm_is
 13	2	does>*	understand_does
 13	2	does>*	have_*
@@ -370,11 +370,11 @@
 12	2	does>*	realise_does
 12	2	does>*	realise_*
 12	2	going_*	going_is
-12	2	have_does	what>*
 12	2	have_does	have_what
+12	2	have_does	what>*
 12	2	is_*	why>is
-12	2	is_why	why>*
 12	2	is_why	why>is
+12	2	is_why	why>*
 12	2	made_*	what>*
 12	2	made_what	what>*
 12	2	realise_*	realise_does
@@ -383,11 +383,11 @@
 12	3	agree_*	agree_are	does>*
 12	3	agree_are	agree_does	does>*
 12	3	does>*	realise_*	realise_does
-12	3	have_*	have_does	have_what
 12	3	have_*	have_does	what>*
+12	3	have_*	have_does	have_what
+12	3	is_*	why>*	why>is
 12	3	is_*	is_why	why>*
 12	3	is_*	is_why	why>is
-12	3	is_*	why>*	why>is
 12	3	is_why	why>*	why>is
 12	3	made_*	made_what	what>*
 12	3	update_*	update_will	will>*
@@ -414,11 +414,11 @@
 11	2	how>*	how>will
 11	2	made_*	what>what
 11	2	made_has	what>what
-11	2	made_has	what>*
 11	2	made_has	made_what
+11	2	made_has	what>*
 11	2	made_what	what>what
-11	2	meet_*	meet_will
 11	2	meet_*	will>*
+11	2	meet_*	meet_will
 11	2	undertake_*	will>*
 11	2	undertake_will	will>*
 11	2	use_*	use_will
@@ -427,19 +427,19 @@
 11	3	have_does	have_what	what>*
 11	3	made_*	what>*	what>what
 11	3	made_*	made_has	made_what
-11	3	made_*	made_what	what>what
 11	3	made_*	made_has	what>what
+11	3	made_*	made_what	what>what
 11	3	made_*	made_has	what>*
-11	3	made_has	made_what	what>what
 11	3	made_has	what>*	what>what
+11	3	made_has	made_what	what>what
 11	3	made_has	made_what	what>*
 11	3	made_what	what>*	what>what
 11	3	undertake_*	undertake_will	will>*
 11	4	have_*	have_does	have_what	what>*
-11	4	made_*	made_has	what>*	what>what
+11	4	made_*	made_has	made_what	what>what
 11	4	made_*	made_what	what>*	what>what
 11	4	made_*	made_has	made_what	what>*
-11	4	made_*	made_has	made_what	what>what
+11	4	made_*	made_has	what>*	what>what
 11	4	made_has	made_what	what>*	what>what
 11	5	made_*	made_has	made_what	what>*	what>what
 10	1	bear_in
@@ -462,17 +462,17 @@
 10	2	bear_in	bear_will
 10	2	confirm_is	confirm_will
 10	2	do_*	do_can
-10	2	does>*	recall_does
 10	2	does>*	recall_*
+10	2	does>*	recall_does
 10	2	does>*	have_does
 10	2	doing_*	doing_are
 10	2	doing_*	what>are
-10	2	doing_are	what>*
 10	2	doing_are	what>are
+10	2	doing_are	what>*
 10	2	doing_is	what>*
 10	2	ensure_is	ensure_will
-10	2	give_*	what>*
 10	2	give_*	give_what
+10	2	give_*	what>*
 10	2	give_to	will>*
 10	2	given_*	what>*
 10	2	intend_*	intend_does
@@ -490,18 +490,18 @@
 10	3	confirm_*	confirm_is	confirm_will
 10	3	does>*	recall_*	recall_does
 10	3	does>*	have_*	have_does
-10	3	doing_*	doing_are	what>are
 10	3	doing_*	doing_are	what>*
 10	3	doing_*	what>*	what>are
+10	3	doing_*	doing_are	what>are
 10	3	doing_*	doing_is	what>*
 10	3	doing_are	what>*	what>are
 10	3	ensure_*	ensure_is	ensure_will
 10	3	give_*	give_to	will>*
-10	3	is>*	is>there	is_there
 10	3	is>*	is>there	is_*
+10	3	is>*	is>there	is_there
 10	3	is>there	is_*	is_there
-10	3	is_*	what>*	what>is
 10	3	is_*	is_what	what>is
+10	3	is_*	what>*	what>is
 10	3	is_what	what>*	what>is
 10	3	meet_*	meet_will	will>*
 10	4	doing_*	doing_are	what>*	what>are
@@ -586,14 +586,14 @@
 8	2	answer_*	answer_will
 8	2	appreciate_*	appreciate_does
 8	2	are_*	are_there
-8	2	are_*	what>*
 8	2	are_*	are_what
+8	2	are_*	what>*
 8	2	are_what	what>*
 8	2	be_*	what>*
 8	2	be_*	would>not
 8	2	be_would	would>not
-8	2	commit_*	commit_to
 8	2	commit_*	will>*
+8	2	commit_*	commit_to
 8	2	commit_to	commit_will
 8	2	commit_will	will>*
 8	2	confirm_*	confirm_are
@@ -612,8 +612,8 @@
 8	2	is>*	is_satisfied
 8	2	is_*	is_are
 8	2	take_*	take_may
-8	2	update_on	update_will
 8	2	update_on	will>*
+8	2	update_on	update_will
 8	2	use_*	will>*
 8	2	use_will	will>*
 8	2	why>*	why>are
@@ -623,14 +623,14 @@
 8	3	be_*	be_would	would>not
 8	3	be_*	would>*	would>not
 8	3	be_would	would>*	would>not
-8	3	commit_*	commit_will	will>*
 8	3	commit_*	commit_to	commit_will
-8	3	do_*	do_will	what>*
-8	3	do_*	what>*	what>will
-8	3	do_*	do_what	what>will
+8	3	commit_*	commit_will	will>*
 8	3	do_*	do_will	what>will
-8	3	do_what	what>*	what>will
+8	3	do_*	what>*	what>will
+8	3	do_*	do_will	what>*
+8	3	do_*	do_what	what>will
 8	3	do_what	do_will	what>*
+8	3	do_what	what>*	what>will
 8	3	do_what	do_will	what>will
 8	3	do_will	what>*	what>will
 8	3	give_*	give_what	what>what
@@ -642,9 +642,9 @@
 8	3	update_on	update_will	will>*
 8	3	use_*	use_will	will>*
 8	4	be_*	be_would	would>*	would>not
-8	4	do_*	do_what	do_will	what>will
 8	4	do_*	do_what	do_will	what>*
 8	4	do_*	do_what	what>*	what>will
+8	4	do_*	do_what	do_will	what>will
 8	4	do_*	do_will	what>*	what>will
 8	4	do_what	do_will	what>*	what>will
 8	4	give_*	give_what	what>*	what>what
@@ -741,8 +741,8 @@
 7	3	agree_does	agree_have	does>*
 7	3	answer_*	answer_will	will>*
 7	3	be_*	be_able	be_will
-7	3	be_*	be_better	would>*
 7	3	be_*	be_better	be_would
+7	3	be_*	be_better	would>*
 7	3	be_better	be_would	would>*
 7	3	bear_*	bear_will	will>*
 7	3	commit_*	commit_to	will>*
@@ -756,8 +756,8 @@
 7	3	given_*	given_what	what>*
 7	3	going_*	going_do	what>*
 7	3	has>*	has_*	has_had
-7	3	have_*	have_what	what>what
 7	3	have_*	what>*	what>what
+7	3	have_*	have_what	what>what
 7	3	have_what	what>*	what>what
 7	3	look_*	look_again	look_at
 7	3	realise_*	realise_does	realise_not
@@ -842,24 +842,24 @@
 6	2	doing_what	what>*
 6	2	done_*	done_what
 6	2	encourage_*	encourage_will
-6	2	ensure>*	ensure>that
 6	2	ensure>*	ensure_*
+6	2	ensure>*	ensure>that
 6	2	ensure>that	ensure_*
 6	2	ensure_is	will>*
 6	2	explain_*	explain_is
 6	2	get_*	get_will
+6	2	give_can	what>*
 6	2	give_can	what>what
 6	2	give_can	give_what
-6	2	give_can	what>*
 6	2	given_*	given_to
 6	2	given_*	given_has
-6	2	given_to	what>*
 6	2	given_to	given_what
-6	2	going_*	going_when
+6	2	given_to	what>*
 6	2	going_*	when>*
+6	2	going_*	going_when
 6	2	going_*	what>is
-6	2	going_is	what>*
 6	2	going_is	what>is
+6	2	going_is	what>*
 6	2	going_when	when>*
 6	2	had_*	had_with
 6	2	had_*	had_what
@@ -876,8 +876,8 @@
 6	2	make_*	what>*
 6	2	may>*	tell_*
 6	2	may>*	tell_may
-6	2	may>*	take_may
 6	2	may>*	take_*
+6	2	may>*	take_may
 6	2	put_*	put_will
 6	2	reassure_*	reassure_will
 6	2	remind_*	remind_may
@@ -908,38 +908,38 @@
 6	3	agree_does	agree_need	does>*
 6	3	appreciate_*	appreciate_does	does>*
 6	3	be_*	be_better	be_not
-6	3	be_better	be_not	be_would
 6	3	be_better	be_not	would>*
+6	3	be_better	be_not	be_would
 6	3	confirm_*	confirm_be	confirm_will
 6	3	do_*	do_can	what>can
+6	3	do_*	what>*	what>can
 6	3	do_*	do_what	what>can
 6	3	do_*	do_can	what>*
-6	3	do_*	what>*	what>can
+6	3	do_can	what>*	what>can
 6	3	do_can	do_what	what>can
 6	3	do_can	do_what	what>*
-6	3	do_can	what>*	what>can
 6	3	do_what	what>*	what>can
 6	3	doing_*	doing_what	what>*
 6	3	ensure>*	ensure>that	ensure_*
 6	3	ensure_*	ensure_is	will>*
 6	3	ensure_is	ensure_will	will>*
-6	3	give_*	give_can	what>what
 6	3	give_*	give_can	what>*
 6	3	give_*	give_can	give_what
+6	3	give_*	give_can	what>what
 6	3	give_can	what>*	what>what
 6	3	given_*	given_to	given_what
 6	3	given_*	given_to	what>*
 6	3	given_to	given_what	what>*
 6	3	going_*	going_when	when>*
-6	3	going_*	going_is	what>*
 6	3	going_*	what>*	what>is
 6	3	going_*	going_is	what>is
+6	3	going_*	going_is	what>*
 6	3	going_is	what>*	what>is
-6	3	look_*	look_again	will>*
 6	3	look_*	look_again	look_will
+6	3	look_*	look_again	will>*
 6	3	look_again	look_at	look_will
-6	3	look_again	look_at	will>*
 6	3	look_again	look_will	will>*
+6	3	look_again	look_at	will>*
 6	3	made_*	made_be	made_will
 6	3	may>*	tell_*	tell_may
 6	3	may>*	take_*	take_may
@@ -947,25 +947,25 @@
 6	3	taken_*	taken_what	what>*
 6	3	taking_*	taking_what	what>*
 6	3	think_*	think_does	think_not
-6	3	what>*	what>what	what_*
 6	3	what>*	what>what	what_what
+6	3	what>*	what>what	what_*
 6	3	what>what	what_*	what_what
 6	4	agree_*	agree_does	agree_need	does>*
-6	4	be_*	be_better	be_not	be_would
 6	4	be_*	be_better	be_not	would>*
+6	4	be_*	be_better	be_not	be_would
 6	4	be_better	be_not	be_would	would>*
+6	4	do_*	do_can	what>*	what>can
+6	4	do_*	do_can	do_what	what>*
 6	4	do_*	do_can	do_what	what>can
 6	4	do_*	do_what	what>*	what>can
-6	4	do_*	do_can	do_what	what>*
-6	4	do_*	do_can	what>*	what>can
 6	4	do_can	do_what	what>*	what>can
 6	4	ensure_*	ensure_is	ensure_will	will>*
 6	4	give_*	give_can	what>*	what>what
 6	4	given_*	given_to	given_what	what>*
 6	4	going_*	going_is	what>*	what>is
-6	4	look_*	look_again	look_at	will>*
-6	4	look_*	look_again	look_at	look_will
 6	4	look_*	look_again	look_will	will>*
+6	4	look_*	look_again	look_at	look_will
+6	4	look_*	look_again	look_at	will>*
 6	4	look_again	look_at	look_will	will>*
 6	4	what>*	what>what	what_*	what_what
 6	5	be_*	be_better	be_not	be_would	would>*
@@ -1033,12 +1033,12 @@
 5	2	agree_*	in>*
 5	2	agree_*	agree_meet
 5	2	agree_*	agree_also
-5	2	agree_also	does>*
 5	2	agree_also	agree_does
+5	2	agree_also	does>*
 5	2	agree_does	although>*
 5	2	agree_does	agree_further
-5	2	agree_meet	agree_will
 5	2	agree_meet	will>*
+5	2	agree_meet	agree_will
 5	2	are>not	are_*
 5	2	are_*	are_in
 5	2	as>*	as>there
@@ -1063,13 +1063,13 @@
 5	2	consider_*	consider_would
 5	2	do>*	do>not
 5	2	do_ensure	do_will
-5	2	does>*	show_*
 5	2	does>*	show_does
+5	2	does>*	show_*
 5	2	does>*	show_not
 5	2	does>*	recognise_does
 5	2	does>*	recognise_*
-5	2	does>*	intend_*
 5	2	does>*	intend_does
+5	2	does>*	intend_*
 5	2	done_*	what>*
 5	2	done_what	what>*
 5	2	ensure_have	ensure_will
@@ -1079,25 +1079,25 @@
 5	2	given_to	what>what
 5	2	given_what	what>what
 5	2	going_*	going_are
-5	2	going_do	what>is
 5	2	going_do	going_is
-5	2	had_*	what>*
+5	2	going_do	what>is
 5	2	had_*	had_has
+5	2	had_*	what>*
 5	2	had_*	what>what
 5	2	had_what	had_with
-5	2	had_with	what>what
 5	2	had_with	what>*
+5	2	had_with	what>what
 5	2	have_*	have_say
 5	2	have_*	what>does
 5	2	have_*	how>*
-5	2	have_does	what>does
 5	2	have_does	have_say
+5	2	have_does	what>does
 5	2	have_say	what>does
-5	2	have_say	what>*
 5	2	have_say	have_what
+5	2	have_say	what>*
 5	2	have_what	what>does
-5	2	how>*	justify_how
 5	2	how>*	justify_*
+5	2	how>*	justify_how
 5	2	in>*	in>particular
 5	2	in>*	in_*
 5	2	instead>*	instead>of
@@ -1112,11 +1112,11 @@
 5	2	made_*	made_in
 5	2	made_been	made_what
 5	2	made_has	made_of
-5	2	made_of	made_what
 5	2	made_of	what>what
 5	2	made_of	what>*
-5	2	make_clear	will>*
+5	2	made_of	made_what
 5	2	make_clear	make_will
+5	2	make_clear	will>*
 5	2	pay_*	will>*
 5	2	put_*	will>*
 5	2	recognise_*	recognise_does
@@ -1125,8 +1125,8 @@
 5	2	remind_will	will>*
 5	2	say_*	what>*
 5	2	say_*	say_may
-5	2	say_*	will>*
 5	2	say_*	say_will
+5	2	say_*	will>*
 5	2	say_what	what>*
 5	2	see_*	see_will
 5	2	share_*	share_does
@@ -1144,8 +1144,8 @@
 5	3	accept_*	accept_is	accept_will
 5	3	acknowledge_*	acknowledge_will	will>*
 5	3	agree_*	agree_does	although>*
-5	3	agree_*	agree_meet	will>*
 5	3	agree_*	agree_meet	agree_will
+5	3	agree_*	agree_meet	will>*
 5	3	agree_*	agree_also	does>*
 5	3	agree_*	agree_also	agree_does
 5	3	agree_*	agree_does	agree_further
@@ -1158,49 +1158,49 @@
 5	3	be_*	be_what	what>*
 5	3	be_*	be_not	would>not
 5	3	be_*	be_how	how>*
-5	3	be_not	would>*	would>not
 5	3	be_not	be_would	would>not
+5	3	be_not	would>*	would>not
 5	3	bear_*	bear_in	will>*
 5	3	bear_in	bear_will	will>*
 5	3	clarify_*	clarify_will	will>*
 5	3	confirm_*	confirm_are	confirm_can
 5	3	do_*	do_ensure	do_will
+5	3	does>*	show_*	show_not
 5	3	does>*	show_does	show_not
 5	3	does>*	show_*	show_does
-5	3	does>*	show_*	show_not
 5	3	does>*	recognise_*	recognise_does
 5	3	does>*	intend_*	intend_does
 5	3	done_*	done_what	what>*
 5	3	ensure_*	ensure_have	ensure_will
-5	3	give_can	give_what	what>*
 5	3	give_can	give_what	what>what
-5	3	given_*	given_what	what>what
+5	3	give_can	give_what	what>*
 5	3	given_*	given_to	what>what
+5	3	given_*	given_what	what>what
 5	3	given_to	what>*	what>what
 5	3	given_to	given_what	what>what
 5	3	given_what	what>*	what>what
-5	3	going_*	going_do	going_is
 5	3	going_*	going_do	what>is
-5	3	going_do	going_is	what>is
-5	3	going_do	what>*	what>is
+5	3	going_*	going_do	going_is
 5	3	going_do	going_is	what>*
-5	3	had_*	had_with	what>what
+5	3	going_do	what>*	what>is
+5	3	going_do	going_is	what>is
 5	3	had_*	had_what	had_with
+5	3	had_*	had_with	what>what
 5	3	had_*	had_with	what>*
 5	3	had_*	what>*	what>what
 5	3	had_with	what>*	what>what
+5	3	have_*	what>*	what>does
 5	3	have_*	have_say	what>*
-5	3	have_*	have_does	have_say
+5	3	have_*	have_say	what>does
 5	3	have_*	have_say	have_what
+5	3	have_*	have_does	have_say
 5	3	have_*	have_does	what>does
 5	3	have_*	have_what	what>does
-5	3	have_*	have_say	what>does
-5	3	have_*	what>*	what>does
-5	3	have_does	what>*	what>does
-5	3	have_does	have_say	have_what
-5	3	have_does	have_say	what>does
 5	3	have_does	have_say	what>*
 5	3	have_does	have_what	what>does
+5	3	have_does	have_say	what>does
+5	3	have_does	have_say	have_what
+5	3	have_does	what>*	what>does
 5	3	have_say	have_what	what>*
 5	3	have_say	what>*	what>does
 5	3	have_say	have_what	what>does
@@ -1211,14 +1211,14 @@
 5	3	is>*	is_*	is_true
 5	3	is_*	is_aware	is_is
 5	3	is_*	what>*	what>what
-5	3	made_*	made_has	made_of
+5	3	made_*	made_of	what>what
 5	3	made_*	made_of	what>*
 5	3	made_*	made_of	made_what
-5	3	made_*	made_of	what>what
+5	3	made_*	made_has	made_of
 5	3	made_*	made_been	made_what
 5	3	made_has	made_of	what>what
-5	3	made_has	made_of	what>*
 5	3	made_has	made_of	made_what
+5	3	made_has	made_of	what>*
 5	3	made_of	what>*	what>what
 5	3	made_of	made_what	what>what
 5	3	made_of	made_what	what>*
@@ -1230,8 +1230,8 @@
 5	3	take_*	take_into	take_will
 5	3	taken_*	what>*	what>what
 5	3	taking_*	taking_is	what>*
-5	4	agree_*	agree_is	agree_with	does>*
 5	4	agree_*	agree_does	agree_is	agree_with
+5	4	agree_*	agree_is	agree_with	does>*
 5	4	agree_*	agree_meet	agree_will	will>*
 5	4	agree_*	agree_also	agree_does	does>*
 5	4	agree_does	agree_is	agree_with	does>*
@@ -1240,41 +1240,41 @@
 5	4	be_not	be_would	would>*	would>not
 5	4	bear_*	bear_in	bear_will	will>*
 5	4	does>*	show_*	show_does	show_not
-5	4	give_*	give_can	give_what	what>what
 5	4	give_*	give_can	give_what	what>*
+5	4	give_*	give_can	give_what	what>what
 5	4	give_can	give_what	what>*	what>what
-5	4	given_*	given_to	given_what	what>what
 5	4	given_*	given_what	what>*	what>what
+5	4	given_*	given_to	given_what	what>what
 5	4	given_*	given_to	what>*	what>what
 5	4	given_to	given_what	what>*	what>what
-5	4	going_*	going_do	going_is	what>is
 5	4	going_*	going_do	going_is	what>*
 5	4	going_*	going_do	what>*	what>is
+5	4	going_*	going_do	going_is	what>is
 5	4	going_do	going_is	what>*	what>is
 5	4	had_*	had_with	what>*	what>what
+5	4	have_*	have_say	what>*	what>does
+5	4	have_*	have_does	have_say	what>does
+5	4	have_*	have_say	have_what	what>does
 5	4	have_*	have_does	what>*	what>does
+5	4	have_*	have_say	have_what	what>*
+5	4	have_*	have_what	what>*	what>does
+5	4	have_*	have_does	have_say	have_what
 5	4	have_*	have_does	have_say	what>*
 5	4	have_*	have_does	have_what	what>does
-5	4	have_*	have_does	have_say	have_what
-5	4	have_*	have_say	have_what	what>*
-5	4	have_*	have_say	what>*	what>does
-5	4	have_*	have_say	have_what	what>does
-5	4	have_*	have_what	what>*	what>does
-5	4	have_*	have_does	have_say	what>does
+5	4	have_does	have_say	have_what	what>*
+5	4	have_does	have_say	have_what	what>does
 5	4	have_does	have_say	what>*	what>does
 5	4	have_does	have_what	what>*	what>does
-5	4	have_does	have_say	have_what	what>does
-5	4	have_does	have_say	have_what	what>*
 5	4	have_say	have_what	what>*	what>does
 5	4	is>*	is_*	is_aware	is_is
 5	4	made_*	made_of	made_what	what>what
 5	4	made_*	made_of	what>*	what>what
-5	4	made_*	made_has	made_of	what>what
 5	4	made_*	made_has	made_of	made_what
 5	4	made_*	made_has	made_of	what>*
+5	4	made_*	made_has	made_of	what>what
 5	4	made_*	made_of	made_what	what>*
-5	4	made_has	made_of	what>*	what>what
 5	4	made_has	made_of	made_what	what>*
+5	4	made_has	made_of	what>*	what>what
 5	4	made_has	made_of	made_what	what>what
 5	4	made_of	made_what	what>*	what>what
 5	5	agree_*	agree_does	agree_is	agree_with	does>*
@@ -1283,15 +1283,15 @@
 5	5	given_*	given_to	given_what	what>*	what>what
 5	5	going_*	going_do	going_is	what>*	what>is
 5	5	have_*	have_does	have_say	what>*	what>does
+5	5	have_*	have_say	have_what	what>*	what>does
 5	5	have_*	have_does	have_say	have_what	what>does
 5	5	have_*	have_does	have_what	what>*	what>does
-5	5	have_*	have_say	have_what	what>*	what>does
 5	5	have_*	have_does	have_say	have_what	what>*
 5	5	have_does	have_say	have_what	what>*	what>does
-5	5	made_*	made_has	made_of	what>*	what>what
-5	5	made_*	made_of	made_what	what>*	what>what
 5	5	made_*	made_has	made_of	made_what	what>what
 5	5	made_*	made_has	made_of	made_what	what>*
+5	5	made_*	made_of	made_what	what>*	what>what
+5	5	made_*	made_has	made_of	what>*	what>what
 5	5	made_has	made_of	made_what	what>*	what>what
 5	6	have_*	have_does	have_say	have_what	what>*	what>does
 5	6	made_*	made_has	made_of	made_what	what>*	what>what

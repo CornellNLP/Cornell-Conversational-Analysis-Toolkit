@@ -32,10 +32,11 @@ class QuestionTypology:
     :ivar data_dir
     """
 
-    def __init__(self, corpus, data_dir, motifs_dir=None):
+    def __init__(self, corpus, data_dir, motifs_dir=None, num_clusters=8):
         self.corpus = corpus
         self.data_dir = data_dir
         self.motifs_dir = motifs_dir
+        self.num_clusters = num_clusters
 
         if not self.motifs_dir:
             self.motifs_dir = os.path.join(self.data_dir, 'parliament-motifs')
@@ -48,7 +49,12 @@ class QuestionTypology:
 
         QuestionClusterer.build_matrix(self.motifs_dir, self.matrix_dir, question_threshold=50, answer_threshold=50)
         self.km_name = os.path.join(self.data_dir, 'demo_km.pkl')
-        self.mtx_obj, self.km, self.types_to_data = QuestionClusterer.extract_clusters(self.matrix_dir, self.km_name, k=8,d=100,num_egs=10)
+        self.mtx_obj, self.km, self.types_to_data = QuestionClusterer.extract_clusters(self.matrix_dir, self.km_name, k=num_clusters,d=100,num_egs=10)
+
+        print(self.mtx_obj.keys())
+        print(len(self.mtx_obj['q_didxes']))
+        print(len(self.mtx_obj['q_tidxes']))
+        print(self.mtx_obj['q_tidxes'])
 
     def display_question_types(self):
         pass
@@ -894,6 +900,10 @@ class QuestionClusterer:
         answer_doc_idxes = []
 
         pair_idxes = list(set(question_to_fits.keys()).intersection(set(question_to_arcs.keys())))
+        print('ls')
+        print(question_to_fits.keys())
+        print('***********************')
+        print(question_to_arcs.keys())
 
         for idx, p_idx in enumerate(pair_idxes):
             if verbose and (idx > 0) and (idx % verbose == 0):
@@ -907,6 +917,7 @@ class QuestionClusterer:
                 question_term_idxes.append(term_idx)
                 question_doc_idxes.append(idx)
                 question_leaves.append(term in question_to_leaf_fits.get(p_idx,[]))
+                print(term, term_idx, idx)
             for term in answer_terms:
                 term_idx = answer_term_to_idx[term]
                 answer_term_idxes.append(term_idx)
@@ -939,6 +950,7 @@ class QuestionClusterer:
 
         print('reading question didxes')
         mtx_obj['q_didxes'] = np.load(rootname + '.q.didx.npy')
+        print(mtx_obj['q_didxes'])
         print('reading answer didxes')
         mtx_obj['a_didxes'] = np.load(rootname + '.a.didx.npy')
 
@@ -1195,3 +1207,4 @@ class QuestionTypologyUtils:
 
     def get_text_idx(span_idx):
         return '.'.join(span_idx.split('.')[:-1])
+        # return span_idx[:span_idx.rfind("_")]
