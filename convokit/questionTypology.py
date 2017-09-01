@@ -142,9 +142,7 @@ class QuestionTypology:
 
         line_x = np.linspace(-1.2, 1.2, self.num_clusters) #for lines
 
-        labels = ['0. issue update', '1. shared concerns', '2. narrow factual', 
-        '3. prompt for comment', '4. agreement', '5. self-promotion', 
-        '6. concede/accept', '7. condemnatory']
+        labels = ['Typo 0', 'Type 1', 'Type 2', 'Type 3', 'Type 4', 'Type 5', 'Type 6', 'Type 7']
         #plot lines - probably a better way of doing this
         for i in clusters:
             y_i = np.full(self.num_clusters,i)
