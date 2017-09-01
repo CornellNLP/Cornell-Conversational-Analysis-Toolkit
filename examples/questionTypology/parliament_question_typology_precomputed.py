@@ -95,9 +95,9 @@ question_answer_pair = [
 
 print('5 examples for type 1-8:')
 for i in range(8):
-    questionTypology.display_motifs_for_type(i)
-    questionTypology.display_answer_fragments_for_type(i)
-    questionTypology.display_questions_for_type(i)
+    questionTypology.display_motifs_for_type(i, num_egs=10)
+    questionTypology.display_answer_fragments_for_type(i, num_egs=10)
+    questionTypology.display_questions_for_type(i, num_egs=10)
 
 questionTypology.display_question_type_log_odds_graph()
 

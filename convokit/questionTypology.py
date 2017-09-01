@@ -118,7 +118,11 @@ class QuestionTypology:
         num_questions_govt = [0 for i in range(self.num_clusters)]
         num_questions_opp = [0 for i in range(self.num_clusters)]
 
+        j = 0
         for q in self.corpus.utterances.values():
+            j += 1
+            if j%500 == 0:
+                print(j)
             user_info = q.user._get_info()
             if q.other["is_question"]:
                 if "is_minister" not in user_info or not user_info["is_minister"]: continue
