@@ -20,7 +20,7 @@ DEBUG_DIR = '/Users/ishaanjhaveri/Google_Drive/git/Cornell-Conversational-Analys
 motifs_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads', 'parliament-motifs')
 
 #Initialize QuestionTypology class
-data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads') if not DEBUG else DEBUG_DIR
+data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads', 'parliament-spacy') if not DEBUG else DEBUG_DIR
 # corpus = Corpus(filename=download('parliament-corpus')) if not DEBUG else Corpus(filename=DEBUG_DIR+'/full.json')
 corpus = Corpus(filename=data_dir+"/parliament-corpus") if not DEBUG else Corpus(filename=DEBUG_DIR+'/full.json')
 questionTypology = QuestionTypology(corpus, data_dir, motifs_dir)

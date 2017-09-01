@@ -169,9 +169,11 @@ class QuestionTypology:
         plt.margins(0.2)
         # Tweak spacing to prevent clipping of tick-labels
         plt.subplots_adjust(bottom=0.15)
+        print(govt_log_odds)
+        print(opp_log_odds)
+        
         plt.show() #This can be changed to show or write to file
-        # print(govt_log_odds)
-        # print(opp_log_odds)
+        
 
     def display_mean_propensities_graph(self):
         pass

@@ -16,8 +16,8 @@ DEBUG = False
 DEBUG_DIR = '/Users/ishaanjhaveri/Google_Drive/git/Cornell-Conversational-Analysis-Toolkit/datasets/tennis-corpus/downloads'
 
 #Initialize QuestionTypology class
-data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads') if not DEBUG else DEBUG_DIR
-corpus = Corpus(filename='/Users/ishaanjhaveri/Library/Caches/Python-Eggs/convokit-0.0.1-py3.6.egg-tmp/convokit/downloads/tennis-corpus') if not DEBUG else Corpus(filename=DEBUG_DIR+'/full.json')
+data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads', 'tennis-spacy') if not DEBUG else DEBUG_DIR
+corpus = Corpus(filename=data_dir+"/tennis-corpus") if not DEBUG else Corpus(filename=DEBUG_DIR+'/full.json')
 corpus.filter_utterances_by(other_kv_pairs={'result':1})
 questionTypology = QuestionTypology(corpus, data_dir, dataset_name="tennis")
 
@@ -46,4 +46,3 @@ for i in range(8):
     questionTypology.display_answer_fragments_for_type(i)
     questionTypology.display_questions_for_type(i)
 
-questionTypology.display_question_type_log_odds_graph()

@@ -20,7 +20,7 @@ DEBUG_DIR = '/Users/ishaanjhaveri/Google_Drive/git/Cornell-Conversational-Analys
 motifs_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads', 'tennis-motifs')
 
 #Initialize QuestionTypology class
-data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads') if not DEBUG else DEBUG_DIR
+data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads', 'tennis-spacy') if not DEBUG else DEBUG_DIR
 # corpus = Corpus(filename=download('tennis-corpus')) if not DEBUG else Corpus(filename=DEBUG_DIR+'/full.json')
 corpus = Corpus(filename=data_dir+"/tennis-corpus") if not DEBUG else Corpus(filename=DEBUG_DIR+'/full.json')
 corpus.filter_utterances_by(other_kv_pairs={'result':1})
@@ -99,9 +99,3 @@ for i in range(8):
     questionTypology.display_motifs_for_type(i)
     questionTypology.display_answer_fragments_for_type(i)
     questionTypology.display_questions_for_type(i)
-
-questionTypology.display_question_type_log_odds_graph()
-# questionTypology.classify_question(question_answer_pair)
-
-# the Parliament script would create this dictionary and print samples of each contents (i.e., recreate Table 1, of course it does not need to
-# be the exact same examples).   It would also use the function to assign types to a few new and existing questions.
