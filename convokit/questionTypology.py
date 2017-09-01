@@ -27,9 +27,20 @@ class QuestionTypology:
 
     :param corpus: the corpus to compute types for.
     :type corpus: Corpus
+    :param data_dir: the directory that the data is stored in, and written to
+    :param motifs_dir: the directory that the motifs are stored in, if they have been precomputed
+    :param num_clusters: the number of question types to find in the clustering algorithm
+    :param dataset_name: parliament or tennis
 
     :ivar corpus: the QuestionTypology object's corpus.
-    :ivar data_dir
+    :ivar data_dir: the directory that the data is stored in, and written to
+    :ivar motifs_dir: the directory that the motifs are stored in, if they have been precomputed
+    :ivar num_clusters: the number of question types to find in the clustering algorithm
+    :ivar mtx_obj: an object that contains information about the QA matrix from the paper
+    :ivar km: the Kmeans object that has the labels
+    :ivar types_to_data: an object that contains information about motifs, fragments and questions in each type
+    :ivar lq: the low dimensional Q matrix
+    :ivar a_u: the low dimensional A matrix
     """
 
     def __init__(self, corpus, data_dir, motifs_dir=None, num_clusters=8, dataset_name="parliament"):
@@ -51,7 +62,7 @@ class QuestionTypology:
         self.km_name = os.path.join(self.data_dir, 'demo_km.pkl')
         self.mtx_obj, self.km, self.types_to_data, self.lq, self.a_u = QuestionClusterer.extract_clusters(self.matrix_dir, self.km_name, k=num_clusters,d=100,num_egs=10)
 
-        self.motif_df, self.aarc_df, self.qdoc_df = QuestionClusterer.assign_clusters(self.km, self.lq, self.a_u, self.mtx_obj, 25)
+        self.motif_df, self.aarc_df, self.qdoc_df = QuestionClusterer.assign_clusters(self.km, self.lq, self.a_u, self.mtx_obj, 100)
         for index, row in self.qdoc_df.iterrows():
             cluster = row["cluster"]
             cluster_dist = row["cluster_dist"]
@@ -71,6 +82,7 @@ class QuestionTypology:
         pass
 
     def display_questions_for_type(self, type_num, num_egs=5):
+        "Displays num_egs number of questions that were assigned type type_num in the cluster"
         target = self.types_to_data[type_num]
         questions = target["questions"]
         questions_len = len(questions)
@@ -80,6 +92,7 @@ class QuestionTypology:
             print('\t\t%d.'%(i+1), self._get_question_text_from_pair_idx(questions[i]))
 
     def display_motifs_for_type(self, type_num, num_egs=5):
+        "Displays num_egs number of motifs that were assigned type type_num in the cluster"
         target = self.types_to_data[type_num]
         motifs = target["motifs"]
         motifs_len = len(motifs)
@@ -89,6 +102,7 @@ class QuestionTypology:
             print('\t\t%d.'%(i+1), motifs[i])
 
     def display_answer_fragments_for_type(self, type_num, num_egs=5):
+        "Displays num_egs number of answer fragments whose corresponding question motif were assigned type type_num in the cluster"
         target = self.types_to_data[type_num]
         answer_fragments = target["fragments"]
         fragment_len = len(answer_fragments)
@@ -99,59 +113,65 @@ class QuestionTypology:
 
 
     def display_question_type_log_odds_graph(self):
-        # N = np.array([[35,23], [20,29]])
-        # LOR = np.log(N[0,0]) + np.log(N[1,1]) - np.log(np.log(N[0,1])) - np.log(N[1,0])
-        # print(LOR)
+        clusters = [i for i in range(self.num_clusters, 0, -1)]
 
-        #EVERYTHING HARDCODED to 8 RIGHT NOW 
-
-        cluster_num = [1, 2, 3, 4, 5, 6, 7, 8]
-
-        num_questions_govt = [0,0,0,0,0,0,0,0]
-        num_questions_opp = [0,0,0,0,0,0,0,0]
+        num_questions_govt = [0 for i in range(self.num_clusters)]
+        num_questions_opp = [0 for i in range(self.num_clusters)]
 
         for q in self.corpus.utterances.values():
+            user_info = q.user._get_info()
             if q.other["is_question"]:
+                if "is_minister" not in user_info or not user_info["is_minister"]: continue
                 pair_idx = q.other["pair_idx"]
-                for i in range(8):
+                for i in range(self.num_clusters):
                     if pair_idx in self.types_to_data[i]["questions"]:
-                        if q.user._get_info()["is_oppn"]:
+                        if user_info["is_oppn"]:
                             num_questions_opp[i] += 1
                         else:
                             num_questions_govt[i] += 1
 
-        govt_log_odds = [0.1, 0.5, 0.6, 0.8, 0.2, 0.3, 0.15, 0.89]
-        opp_log_odds = [-0.1, -0.5, -0.6, -0.8, -0.2, -0.3, -0.15, -0.89]
+        govt_log_odds = [np.log(num_questions_govt[i]/len(self.types_to_data[i]["questions"])) - 
+            np.log((len(self.types_to_data[i]["questions"]) - num_questions_govt[i])/len(self.types_to_data[i]["questions"])) 
+            for i in range(self.num_clusters)]
+        opp_log_odds = [np.log(num_questions_opp[i]/len(self.types_to_data[i]["questions"])) - 
+            np.log((len(self.types_to_data[i]["questions"]) - num_questions_opp[i])/len(self.types_to_data[i]["questions"])) 
+            for i in range(self.num_clusters)]
 
-        govt_data_style = 'rs'
-        opp_data_style = 'bo'
+        govt_data_style = 'bo'
+        opp_data_style = 'rs'
 
-        line_x = np.linspace(-1.2, 1.2, 8) #for lines
+        line_x = np.linspace(-1.2, 1.2, self.num_clusters) #for lines
 
-        labels = ['Cluster 0', 'Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4', 'Cluster 5', 'Cluster 6', 'Cluster 7']
+        labels = ['0. issue update', '1. shared concerns', '2. narrow factual', 
+        '3. prompt for comment', '4. agreement', '5. self-promotion', 
+        '6. concede/accept', '7. condemnatory']
         #plot lines - probably a better way of doing this
-        for i in cluster_num:
-            y_i = np.full(8,i)
+        for i in clusters:
+            y_i = np.full(self.num_clusters,i)
             plt.plot(line_x, y_i, linestyle='dashed', linewidth=1, color='lightgrey')
 
         #plot govt
-        plt.plot(govt_log_odds, cluster_num, govt_data_style)
+        govt_plot, = plt.plot(govt_log_odds, clusters, govt_data_style, label='government affiliated')
 
         #plot opposition
-        plt.plot(opp_log_odds, cluster_num, opp_data_style)
+        opp_plot, = plt.plot(opp_log_odds, clusters, opp_data_style, label='opposition affiliated')
+
+        #legend
+        plt.legend(handles=[govt_plot, opp_plot], loc='lower right')
 
         #add labels
-        plt.yticks(cluster_num, labels, rotation='horizontal')
+        plt.yticks(clusters, labels, rotation='horizontal')
+
+        #add central line
+        plt.axvline(x=0, color='black')
 
         # Pad margins so that markers don't get clipped by the axes
         plt.margins(0.2)
         # Tweak spacing to prevent clipping of tick-labels
         plt.subplots_adjust(bottom=0.15)
-        # plt.show() #This can be changed to show or write to file
-        print(num_questions_govt)
-        print(num_questions_opp)
-
-
+        plt.show() #This can be changed to show or write to file
+        # print(govt_log_odds)
+        # print(opp_log_odds)
 
     def display_mean_propensities_graph(self):
         pass
@@ -1059,7 +1079,7 @@ class QuestionClusterer:
         return q_mtx, a_mtx, mtx_obj
 
     def do_sparse_svd(mtx, k=50):
-        u,s,v = sparse.linalg.svds(mtx, k=5) # ugh, right order dammit
+        u,s,v = sparse.linalg.svds(mtx, k=k) # ugh, right order dammit
         return u[:,::-1],s[::-1],v[::-1,:]
 
     def run_lowdim_pipe(q_mtx, a_mtx, k=50, snip=True):

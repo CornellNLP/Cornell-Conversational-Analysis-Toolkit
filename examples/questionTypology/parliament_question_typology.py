@@ -6,18 +6,17 @@
 
 import os
 import pkg_resources
-# import matplotlib.pyplot as plt
-# import matplotlib.patches as mpatches
 import numpy as np
 
 from convokit import Utterance, Corpus, QuestionTypology, download
 
-DEBUG = True
+DEBUG = False
 DEBUG_DIR = '/Users/ishaanjhaveri/Google_Drive/git/Cornell-Conversational-Analysis-Toolkit/datasets/parliament-corpus/downloads_p'
 
 #Initialize QuestionTypology class
 data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads') if not DEBUG else DEBUG_DIR
-corpus = Corpus(filename=download('parliament-corpus')) if not DEBUG else Corpus(filename=DEBUG_DIR+'/full.json')
+# corpus = Corpus(filename=download('parliament-corpus')) if not DEBUG else Corpus(filename=DEBUG_DIR+'/full.json')
+corpus = Corpus(filename="/Users/ishaanjhaveri/Google_Drive/git/Cornell-Conversational-Analysis-Toolkit/datasets/parliament-corpus/full.json")
 questionTypology = QuestionTypology(corpus, data_dir)
 
 #Output required data representations
@@ -90,8 +89,13 @@ question_answer_pair = [
 
 # questionTypology.classify_question(question_answer_pair)
 
-# questionTypology.display_motifs_for_type(1)
-# questionTypology.display_answer_fragments_for_type(4)
+print('5 examples for type 1-8:')
+for i in range(8):
+    questionTypology.display_motifs_for_type(i)
+    questionTypology.display_answer_fragments_for_type(i)
+    questionTypology.display_questions_for_type(i)
+
+questionTypology.display_question_type_log_odds_graph()
 
 # the Parliament script would create this dictionary and print samples of each contents (i.e., recreate Table 1, of course it does not need to
 # be the exact same examples).   It would also use the function to assign types to a few new and existing questions.

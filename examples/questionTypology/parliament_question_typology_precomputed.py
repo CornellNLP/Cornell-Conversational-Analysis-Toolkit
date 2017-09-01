@@ -12,16 +12,17 @@ import pkg_resources
 
 from convokit import Utterance, Corpus, QuestionTypology, download
 
-DEBUG = True
+DEBUG = False
 DEBUG_DIR = '/Users/ishaanjhaveri/Google_Drive/git/Cornell-Conversational-Analysis-Toolkit/datasets/parliament-corpus/downloads_p'
 
 #Download precomputed motifs
-motifs_dir = download('parliament-motifs') if not DEBUG else DEBUG_DIR + '/parliament-motifs'
+# motifs_dir = download('parliament-motifs') if not DEBUG else DEBUG_DIR + '/parliament-motifs'
+motifs_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads', 'parliament-motifs')
 
 #Initialize QuestionTypology class
 data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads') if not DEBUG else DEBUG_DIR
-corpus = Corpus(filename=download('parliament-corpus')) if not DEBUG else Corpus(filename=DEBUG_DIR+'/full.json')
-# corpus.filter_utterances_by(regular_kv_pairs={"root":"2016-11-15b.122.3"}, user_info_kv_pairs={"is_oppn":False})
+# corpus = Corpus(filename=download('parliament-corpus')) if not DEBUG else Corpus(filename=DEBUG_DIR+'/full.json')
+corpus = Corpus(filename=data_dir+"/parliament-corpus") if not DEBUG else Corpus(filename=DEBUG_DIR+'/full.json')
 questionTypology = QuestionTypology(corpus, data_dir, motifs_dir)
 
 #Output required data representations
@@ -92,10 +93,12 @@ question_answer_pair = [
   }
 ]
 
-# print('5 examples for type 1-8:')
-questionTypology.display_motifs_for_type(1)
-questionTypology.display_answer_fragments_for_type(1)
-questionTypology.display_questions_for_type(1)
+print('5 examples for type 1-8:')
+for i in range(8):
+    questionTypology.display_motifs_for_type(i)
+    questionTypology.display_answer_fragments_for_type(i)
+    questionTypology.display_questions_for_type(i)
+
 questionTypology.display_question_type_log_odds_graph()
 
 # questionTypology.classify_question(question_answer_pair)

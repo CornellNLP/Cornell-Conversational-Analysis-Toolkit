@@ -22,6 +22,9 @@ import numpy as np
 # major_name
 # minor_name
 # num_interjections
+# year   
+# spans_per_question
+# has_latent_repr
 
 # party_asker
 # party_answerer
@@ -29,6 +32,10 @@ import numpy as np
 # is_incumbent_answerer
 # is_oppn_asker
 # is_oppn_answerer
+# is_minister_asker
+# age_asker_year
+# asker_name
+# answerer_name
 
 # Keys in new full.json
 ID = "id" # equal to question_text_idx if current utterance is a question
@@ -48,12 +55,15 @@ GOVT = "govt"
 PAIR_IDX = "pair_idx"
 IS_PMQ = "is_pmq"
 IS_TOPICAL = "is_topical"
-ASKED_TBL = "asked_tbl"
-LEN_FOLLOWUPS = "len_followups"
+# ASKED_TBL = "asked_tbl"
+# LEN_FOLLOWUPS = "len_followups"
 OFFICIAL_NAME = "official_name"
 MAJOR_NAME = "major_name"
 MINOR_NAME = "minor_name"
-NUM_INTERJECTIONS = "num_interjections"
+# NUM_INTERJECTIONS = "num_interjections"
+YEAR = "year"
+SPANS_PER_QUESTION = "spans_per_question"
+HAS_LATENT_REPR = "has_latent_repr"
 
 USER_INFO = "user-info" # container for extra information
 
@@ -61,9 +71,12 @@ USER_INFO = "user-info" # container for extra information
 PARTY = "party" # to represent party_asker or party_answerer
 IS_INCUMBENT = "is_incumbent" # to represent is_incumbent_asker or is_incumbent_answerer
 IS_OPPN = "is_oppn" # to represent is_oppn_asker or is_oppn_answerer
+IS_MINISTER = "is_minister"
+AGE = "age"
+NAME = "name"
 
 utterances = []
-question_df = pd.read_csv('metadata_3000.tsv', index_col=0, sep='\t')
+question_df = pd.read_csv('parliament_metadata.tsv', index_col=0, sep='\t')
 i = 0
 for row in question_df.itertuples():
     i += 1
@@ -105,11 +118,11 @@ for row in question_df.itertuples():
     question_utter[IS_TOPICAL] = bool(row.is_topical)
     answer_utter[IS_TOPICAL] = bool(row.is_topical)
 
-    question_utter[ASKED_TBL] = bool(row.asked_tbl)
-    answer_utter[ASKED_TBL] = bool(row.asked_tbl)
+    # question_utter[ASKED_TBL] = bool(row.asked_tbl)
+    # answer_utter[ASKED_TBL] = bool(row.asked_tbl)
 
-    question_utter[LEN_FOLLOWUPS] = int(row.len_followups)
-    answer_utter[LEN_FOLLOWUPS] = int(row.len_followups)
+    # question_utter[LEN_FOLLOWUPS] = int(row.len_followups)
+    # answer_utter[LEN_FOLLOWUPS] = int(row.len_followups)
 
     question_utter[OFFICIAL_NAME] = row.official_name
     answer_utter[OFFICIAL_NAME] = row.official_name
@@ -120,18 +133,31 @@ for row in question_df.itertuples():
     question_utter[MINOR_NAME] = row.minor_name
     answer_utter[MINOR_NAME] = row.minor_name
 
-    question_utter[NUM_INTERJECTIONS] = int(row.num_interjections)
-    answer_utter[NUM_INTERJECTIONS] = int(row.num_interjections)
+    # question_utter[NUM_INTERJECTIONS] = int(row.num_interjections)
+    # answer_utter[NUM_INTERJECTIONS] = int(row.num_interjections)
+
+    question_utter[YEAR] = row.year
+    answer_utter[YEAR] = row.year
+
+    question_utter[SPANS_PER_QUESTION] = int(row.spans_per_question)
+    answer_utter[SPANS_PER_QUESTION] = int(row.spans_per_question)
+
+    question_utter[HAS_LATENT_REPR] = bool(row.has_latent_repr)
+    answer_utter[HAS_LATENT_REPR] = bool(row.has_latent_repr)
 
     question_utter[USER_INFO] = {
         PARTY: row.party_asker,
         IS_INCUMBENT: bool(row.is_incumbent_asker),
-        IS_OPPN: bool(row.is_oppn_asker)
+        IS_OPPN: bool(row.is_oppn_asker),
+        IS_MINISTER: bool(row.is_minister_asker),
+        AGE: float(row.age_asker_year),
+        NAME: row.asker_name
     }
     answer_utter[USER_INFO] = {
         PARTY: row.party_answerer,
         IS_INCUMBENT: bool(row.is_incumbent_answerer),
-        IS_OPPN: bool(row.is_oppn_answerer)
+        # IS_OPPN: bool(row.is_oppn_answerer),
+        NAME: row.answerer_name
     }
 
     utterances.append(question_utter)

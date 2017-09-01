@@ -40,5 +40,10 @@ questionTypology = QuestionTypology(corpus, data_dir, dataset_name="tennis")
 
 # questionTypology.classify_question(question_answer_pair)
 
-questionTypology.display_motifs_for_type(1)
-questionTypology.display_answer_fragments_for_type(4)
+print('5 examples for type 1-8:')
+for i in range(8):
+    questionTypology.display_motifs_for_type(i)
+    questionTypology.display_answer_fragments_for_type(i)
+    questionTypology.display_questions_for_type(i)
+
+questionTypology.display_question_type_log_odds_graph()
