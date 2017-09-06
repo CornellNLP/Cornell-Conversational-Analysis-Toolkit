@@ -66,7 +66,7 @@ class QuestionTypology:
 
     def __init__(self, corpus, data_dir, motifs_dir=None, 
         num_clusters=8, dataset_name="parliament",
-        question_threshold=40, answer_threshold=40,
+        question_threshold=100, answer_threshold=100,
         num_dims=100, verbose=5000, dedup_threshold=.9,
         follow_conj=True, norm='l2', num_svds=50, num_dims_to_inspect=5,
         max_iter_for_k_means=1000, remove_first=False, min_support=5, item_set_size=5,

@@ -22,7 +22,7 @@ from convokit import Corpus, QuestionTypology, download
 # # #Initialize QuestionTypology class
 
 # corpus = Corpus(filename=os.path.join(data_dir, 'full.json'))
-# questionTypology = QuestionTypology(corpus, data_dir, num_dims=5, 
+# questionTypology = QuestionTypology(corpus, data_dir, motifs_dir=motifs_dir, num_dims=5, 
 #   num_clusters=num_clusters, verbose=False)
 
 
@@ -36,7 +36,7 @@ motifs_dir = os.path.join(data_dir, 'parliament-motifs')
 #Initialize QuestionTypology class
 
 corpus = Corpus(filename=os.path.join(data_dir, 'parliament-corpus'))
-questionTypology = QuestionTypology(corpus, data_dir, num_dims=100, 
+questionTypology = QuestionTypology(corpus, data_dir, motifs_dir=motifs_dir, num_dims=100, 
   num_clusters=num_clusters, verbose=False)
 
 #Output required data representations
