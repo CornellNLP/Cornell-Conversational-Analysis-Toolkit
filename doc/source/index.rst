@@ -11,5 +11,7 @@ Contents:
 .. toctree::
    Coordination <coordination.rst>
    Model <model.rst>
+   QuestionTypology <questionTypology.rst>
    Utility functions <util.rst>
+
 
