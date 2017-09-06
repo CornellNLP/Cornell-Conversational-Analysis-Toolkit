@@ -39,7 +39,6 @@ corpus = Corpus(filename=os.path.join(data_dir, 'parliament-corpus'))
 questionTypology = QuestionTypology(corpus, data_dir, num_dims=100, 
   num_clusters=num_clusters, verbose=False)
 
-
 #Output required data representations
 
 questionTypology.display_totals()
