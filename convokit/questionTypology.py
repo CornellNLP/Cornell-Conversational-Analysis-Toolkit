@@ -161,7 +161,7 @@ class QuestionTypology:
         indices_to_print = np.argsort(question_dists)[:num_to_print]
         print('\t%d sample questions that were assigned type %d (%d total questions with this type) :'%(num_to_print, type_num, questions_len))
         n = 0
-        for i in indices_to_print[::-1]:
+        for i in indices_to_print:
             n += 1
             print('\t\t%d.'%(n), self._get_question_text_from_pair_idx(questions[i]))
 
@@ -175,7 +175,7 @@ class QuestionTypology:
         indices_to_print = np.argsort(motif_dists)[:num_to_print]
         print('\t%d sample question motifs for type %d (%d total motifs):'%(num_to_print, type_num, motifs_len))
         n = 0
-        for i in indices_to_print[::-1]:
+        for i in indices_to_print:
             n += 1
             print('\t\t%d.'%(n), motifs[i])
 
@@ -189,7 +189,7 @@ class QuestionTypology:
         indices_to_print = np.argsort(fragment_dists)[:num_to_print]
         print('\t%d sample answer fragments for type %d (%d total fragments) :'%(num_to_print, type_num, fragment_len))
         n = 0
-        for i in indices_to_print[::-1]:
+        for i in indices_to_print:
             n += 1
             print('\t\t%d.'%(n), answer_fragments[i])
 
