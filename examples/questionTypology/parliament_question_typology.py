@@ -28,7 +28,7 @@ num_clusters = 8
 
 data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads', 'parliament')
 corpus = Corpus(filename=os.path.join(data_dir, 'parliament-corpus'))
-questionTypology = QuestionTypology(corpus, data_dir, num_dims=100, 
+questionTypology = QuestionTypology(corpus, data_dir, num_dims=25, 
   num_clusters=num_clusters, verbose=False)
 
 #Output required data representations

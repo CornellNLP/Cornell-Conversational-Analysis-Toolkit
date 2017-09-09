@@ -1,5 +1,6 @@
 """QuestionTypology features
-(http://www.cs.cornell.edu/~cristian/Asking_too_much.html)."""
+(http://www.cs.cornell.edu/~cristian/Asking_too_much.html).
+"""
 
 import itertools
 import json
@@ -33,24 +34,20 @@ class QuestionTypology:
     :param dataset_name: parliament or tennis
     :param question_threshold: the minimum number of questions a motif must occur in for it to be considered
     :param num_dims: the number of latent dimensions in the sparse matrix
-    :param verbose: False or 0 if nothing should be printed, 
-                    otherwise equal to the interval at which the number of completed steps of any 
-                    part of the algorithm are printed
-    :param dedup_threshold: If two motifs co-occur in a higher proportion of cases than this 
-                            threshold, they are considered duplicates and one is removed
+    :param verbose: False or 0 if nothing should be printed, otherwise equal to the interval at which the number of completed steps of any part of the algorithm are printed
+    :param dedup_threshold: If two motifs co-occur in a higher proportion of cases than this threshold, they are considered duplicates and one is removed
     :param follow_conj: whether to follow conjunctions and treat subtrees as sentences too.
     :param norm: the normalizer to use in the normalization of the sparse matrix
     :param num_svds: the number of dimensions to preserve in the SVD
     :param num_dims_to_inspect: the number of dimensions to inspect
     :param max_iter_for_k_means: the maximum iterations to run the k means algorithm for
     :param remove_first: Whether to remove the first element in the k means classification set
-    :param min_support: the minimum number of times an itemset has to show up for the frequent 
-                        itemset counter to consider 
+    :param min_support: the minimum number of times an itemset has to show up for the frequent itemset counter to consider 
     :param item_set_size: the size of the item set 
     :param leaves_only_for_assign: whether to assign only sink motifs to clusters 
     :param idf: Whether to represent data using inverse document frequency 
     :param snip: Whether to increment the number of singular values and vectors to compute by one 
-    :param leaves_only_for_extract: whether to include only sink motifs in extracted clusters 
+    :param leaves_only_for_extract: whether to include only sink motifs in extracted clusters
 
     :ivar corpus: the QuestionTypology object's corpus.
     :ivar data_dir: the directory that the data is stored in, and written to
@@ -58,8 +55,7 @@ class QuestionTypology:
     :ivar num_clusters: the number of question types to find in the clustering algorithm
     :ivar mtx_obj: an object that contains information about the QA matrix from the paper
     :ivar km: the Kmeans object that has the labels
-    :ivar types_to_data: an object that contains information about motifs, fragments and questions in 
-    each type
+    :ivar types_to_data: an object that contains information about motifs, fragments and questions in each type
     :ivar lq: the low dimensional Q matrix
     :ivar a_u: the low dimensional A matrix
     """
@@ -117,6 +113,7 @@ class QuestionTypology:
         self.motif_df, self.aarc_df, self.qdoc_df = QuestionClusterer.assign_clusters(self.km, 
             self.lq, self.a_u, self.mtx_obj, self.num_dims, self.qdoc_df_file, self.norm, 
             self.idf, self.leaves_only_for_assign)
+
         for index, row in self.qdoc_df.iterrows():
             cluster = row["cluster"]
             cluster_dist = row["cluster_dist"]
@@ -126,6 +123,15 @@ class QuestionTypology:
 
         self.types_data_file = os.path.join(self.data_dir, 'types_to_data.pkl')
         joblib.dump(self.types_to_data, self.types_data_file)
+
+        self.motif_df.to_csv('motif_df.tsv', sep='\t')
+        self.aarc_df.to_csv('aarc_df.tsv', sep='\t')
+        self.qdoc_df.to_csv('qdoc_df.tsv', sep='\t')
+        motifs_in_each_cluster = [0 for i in range(num_clusters)]
+        for label in self.km.labels_:
+            motifs_in_each_cluster[label] += 1
+        print('number of motifs in each cluster: ', motifs_in_each_cluster)
+
 
     def _get_question_text_from_pair_idx(self, pair_idx):
         for q in self.corpus.utterances.values():
@@ -144,8 +150,8 @@ class QuestionTypology:
             num_motifs += len(self.types_to_data[cluster]['motifs'])
             num_fragments += len(self.types_to_data[cluster]['fragments'])
 
-        print("Total Questions: %d"%num_questions)
         print("Total Motifs: %d"%num_motifs)
+        print("Total Questions: %d"%num_questions)
         print("Total Fragments: %d"%num_fragments)
 
     def display_question_types(self):
@@ -1202,7 +1208,7 @@ class QuestionClusterer:
             print()
 
     def run_kmeans(X, in_dim, k, max_iter):
-        km = KMeans(n_clusters=k, max_iter=max_iter)
+        km = KMeans(n_clusters=k, max_iter=max_iter, n_init=1000)
         km.fit(X)
         return km
 
@@ -1319,7 +1325,8 @@ class QuestionClusterer:
             if verbose: print('matrix dir %s exists!' % matrix_dir)
 
         outfile = os.path.join(matrix_dir, 'qa_mtx')
-        QuestionClusterer.build_joint_matrix(question_fit_file, answer_arc_file,superset_file, outfile, question_threshold, answer_threshold, verbose)
+        QuestionClusterer.build_joint_matrix(question_fit_file, answer_arc_file,superset_file, 
+            outfile, question_threshold, answer_threshold, verbose)
 
     def extract_clusters(matrix_dir,km_file,k, d, snip, verbose, norm, idf, leaves_only, 
         remove_first, max_iter):
@@ -1332,9 +1339,10 @@ class QuestionClusterer:
 
         '''
         matrix_file = os.path.join(matrix_dir, 'qa_mtx')
-        q_mtx, a_mtx, mtx_obj = QuestionClusterer.run_simple_pipe(matrix_file, verbose, norm, idf, leaves_only)
-        lq, a_u, a_s, a_v = QuestionClusterer.run_lowdim_pipe(q_mtx,a_mtx,d, snip)
-        km, types_to_data = QuestionClusterer.inspect_kmeans_run(lq,a_u,d,k,mtx_obj['q_terms'], 
+        q_mtx, a_mtx, mtx_obj = QuestionClusterer.run_simple_pipe(matrix_file, verbose, 
+            norm, idf, leaves_only)
+        lq, a_u, a_s, a_v = QuestionClusterer.run_lowdim_pipe(q_mtx, a_mtx,d, snip)
+        km, types_to_data = QuestionClusterer.inspect_kmeans_run(lq, a_u, d, k, mtx_obj['q_terms'], 
             mtx_obj['a_terms'], None, remove_first, max_iter)
 
         joblib.dump(km, km_file)
