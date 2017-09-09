@@ -38,6 +38,6 @@ questionTypology = QuestionTypology(corpus, data_dir, dataset_name="tennis", num
 questionTypology.display_totals()
 print('10 examples for type 1-8:')
 for i in range(num_clusters):
-    questionTypology.display_motifs_for_type(i, num_egs=100)
-    questionTypology.display_answer_fragments_for_type(i, num_egs=100)
-    questionTypology.display_questions_for_type(i, num_egs=100)
+    questionTypology.display_motifs_for_type(i, num_egs=10)
+    questionTypology.display_answer_fragments_for_type(i, num_egs=10)
+    questionTypology.display_questions_for_type(i, num_egs=10)

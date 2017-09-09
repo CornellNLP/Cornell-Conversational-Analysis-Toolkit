@@ -43,8 +43,8 @@ questionTypology = QuestionTypology(corpus, data_dir, motifs_dir=motifs_dir,
 #Output required data representations
 
 questionTypology.display_totals()
-print('100 examples for type 1-8:')
+print('10 examples for type 1-8:')
 for i in range(num_clusters):
-    questionTypology.display_motifs_for_type(i, num_egs=100)
-    questionTypology.display_answer_fragments_for_type(i, num_egs=100)
-    questionTypology.display_questions_for_type(i, num_egs=100)
+    questionTypology.display_motifs_for_type(i, num_egs=10)
+    questionTypology.display_answer_fragments_for_type(i, num_egs=10)
+    questionTypology.display_questions_for_type(i, num_egs=10)

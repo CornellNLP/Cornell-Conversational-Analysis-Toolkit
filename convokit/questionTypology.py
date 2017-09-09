@@ -209,7 +209,7 @@ class QuestionTypology:
         j = 0
         for q in self.corpus.utterances.values():
             j += 1
-            if j%500 == 0:
+            if self.verbose and j%self.verbose == 0:
                 print(j)
             user_info = q.user._get_info()
             if q.other["is_question"]:
