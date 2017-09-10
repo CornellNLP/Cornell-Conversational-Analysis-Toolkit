@@ -1,8 +1,6 @@
-# This example uses the question typology court corpus to reproduce figures 1A and 1B from
-#   the asking too much paper (http://www.cs.cornell.edu/~cristian/Asking_too_much.html).
-#
-# The plots answer these questions:
-# - ?
+# This example extracts question types from the Tennis Interviews dataset (released with the Tie-breaker paper http://www.cs.cornell.edu/~liye/tennis.html)
+# This version uses precomputed motifs for speed.
+
 
 import os
 import pkg_resources
@@ -48,3 +46,4 @@ for i in range(num_clusters):
     questionTypology.display_motifs_for_type(i, num_egs=10)
     questionTypology.display_answer_fragments_for_type(i, num_egs=10)
     questionTypology.display_questions_for_type(i, num_egs=10)
+

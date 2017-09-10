@@ -1,0 +1,1974 @@
+number of motifs in each cluster:  [38, 37, 32, 54, 70, 73, 38, 43]
+Total Motifs: 385
+Total Questions: 48983
+Total Fragments: 1260
+100 examples for type 1-8:
+	38 sample question motifs for type 0 (38 total motifs):
+		1. ('see_*', 'see_did')
+		2. ('ask_*',)
+		3. ('did>*', 'see_*')
+		4. ('know_*', 'know_did')
+		5. ('say_*', 'say_did')
+		6. ('say_*', 'say_what')
+		7. ('say_*', 'say_to', 'say_what')
+		8. ('say_*', 'say_did', 'say_what')
+		9. ('say_*', 'say_to')
+		10. ('tell_*',)
+		11. ('*',)
+		12. ('had_*', 'have>*')
+		13. ('do>*', 'remember_*')
+		14. ('how>*', 'how>many')
+		15. ('watch_*', 'watch_did')
+		16. ('watch_*',)
+		17. ('do>*', 'know_*')
+		18. ('had_*', 'had_have')
+		19. ('did>*', 'watch_*')
+		20. ('say_*',)
+		21. ('could>*',)
+		22. ('why>*',)
+		23. ('done_*',)
+		24. ('had_*',)
+		25. ('have>*',)
+		26. ('been_*', 'have>*')
+		27. ('remember_*',)
+		28. ('why_*',)
+		29. ('tell_*', 'tell_can')
+		30. ('notice_*',)
+		31. ('what_*',)
+		32. ('remember_*', 'remember_do')
+		33. ('not>*',)
+		34. ('after>*',)
+		35. ('what>*',)
+		36. ('said_*',)
+		37. ('can>*', 'tell_*')
+		38. ('expect_*', 'expect_did')
+	100 sample answer fragments for type 0 (130 total fragments) :
+		1. know_what
+		2. read_*
+		3. ask_*
+		4. know_why
+		5. oh>*
+		6. happened_*
+		7. heard_*
+		8. know_just
+		9. know_did
+		10. speak_*
+		11. know_so
+		12. tell_*
+		13. know_do
+		14. okay_*
+		15. know_*
+		16. know_really
+		17. oh_*
+		18. know_was
+		19. okay>*
+		20. asked_*
+		21. told_*
+		22. know_mean
+		23. maybe>*
+		24. know_yeah
+		25. thought_be
+		26. know_even
+		27. know_know
+		28. know_think
+		29. said_was
+		30. like>*
+		31. what_*
+		32. sorry>*
+		33. know_'s
+		34. know_had
+		35. how>*
+		36. maybe_*
+		37. sorry_*
+		38. thought_about
+		39. see_did
+		40. remember_do
+		41. know_is
+		42. thought_never
+		43. realize_*
+		44. know_well
+		45. said_*
+		46. know_play
+		47. said_'s
+		48. talk_*
+		49. saw_*
+		50. guess_*
+		51. know_never
+		52. know_have
+		53. said_just
+		54. tell_can
+		55. looked_*
+		56. know_'m
+		57. what>*
+		58. know_going
+		59. guess_yeah
+		60. 'm_like
+		61. watch_*
+		62. talk_about
+		63. spoke_*
+		64. watching_was
+		65. so>maybe
+		66. said_like
+		67. guess_'s
+		68. hear_*
+		69. remember_*
+		70. know_played
+		71. said_have
+		72. said_know
+		73. watching_*
+		74. see_could
+		75. no_*
+		76. guess_so
+		77. why>*
+		78. spent_*
+		79. know_be
+		80. stopped_*
+		81. say_*
+		82. say_ca
+		83. see_do
+		84. know_playing
+		85. met_*
+		86. wish_*
+		87. showed_*
+		88. live_*
+		89. no_no
+		90. done_'s
+		91. before>*
+		92. no>*
+		93. say_was
+		94. understand_do
+		95. guess_was
+		96. honestly>*
+		97. say_would
+		98. say_'s
+		99. at>least
+		100. say_just
+	100 sample questions that were assigned type 0 (7760 total questions with this type) :
+		1. Why did he choose, do you know? Did he tell you why?
+		2. Do you know what that big break at the beginning of the match was all about? Did anyone tell you anything?
+		3. Did you know Bartoli was feeling a little ill?  Could you tell?
+		4. Did you know he's been going through a struggling period? He hasn't won a match this year yet? Did that help you think, oh, this guy is pretty beatable?
+		5. Have you and Novak ever had the same coach?  I ask because there seems to be some similarities in the way you play, you know, the hard forehand?
+		6. We are going to see Wozniacki on the Court 1 now. Of course we don't know your next opponent, but could you tell us a little about if you're having Caroline in the next round what kind of opponent would that be for you?
+		7. Do you know what was wrong with her? What did she tell you when she shook hands with you at the end?
+		8. You and Andy grew up together in Florida. When he walked by, did you see him today? Any words exchanged? Andy Roddick.
+		9. She played Serena last week in Brisbane. Did you see any of that match? Did you know much about her before?
+		10. Have you had much of Anderson before the match? Did you know much about him?
+		11. Did you have a flu or a stomach bug or do you know what you have?
+		12. Did you at any point have a chance to speak to Gulbis about it? Do you know what he thought about the courts?
+		13. I know you've cited your fitness as a big reason for your success, but I'm wondering, was there ever a point in the past couple months where you wondered, have I lost maybe too much weight in order to withstand a five-set test? Was that a thought? And if so, what did today tell you?
+		14. Do you remember back to your debut in Oakland in '94?  Did you know where you'd be going from there?  And do you ever think back to that night?
+		15. Simon said he was pretty anxious to get back to France to see his newborn son. Could you tell that he mentally checked out in the third set because he wanted to leave? What did you say to him at the net in the end?
+		16. You have clear memories of the moment when you were seven or eight? I think you said that in English. Could you tell us more about this with Maria?
+		17. Maria's only two years older than you but has been around for a long time. When did you first see her? There are similarities in your games. Is there anything you took from her watching her coming up?
+		18. You said you saw her in the locker room or on the courts? Where did you see her today?
+		19. When did you say you were going to come here to Boca? You already know you're coming?
+		20. Did losing last year's U.S. quarterfinal to him have any influence in the way you approached today's game?
+		21. Brandy, did you not see the N in there? She gave the clue the Bunch, like Brady Bunch?
+		22. When you saw her, did you see anything you would describe as unusual?
+		23. When you were down 0-3 in the tiebreak, did you see the match starting to go away from you at all?
+		24. Have the tournaments had to adapt to that, too? Say, if the children are coming onto the site?
+		25. Did somebody ask you to compare it to Koubek last year?
+		26. Did you ask him to stay, or did he volunteer to stay?
+		27. Did you ask for an early match?
+		28. Earlier in the week you said you're kind of a negative person. Did you ask yourself?
+		29. Did the tournament ask for your advice?
+		30. Did Paul ask you?
+		31. Did you ask to play on night session?
+		32. Did you ask him what he was doing?
+		33. Did you ask the chair umpire to tell her to stop catching the toss?
+		34. Did you ever ask anyone for an autograph?
+		35. Did they ask you to dance?
+		36. Did people recognize you or ask you to hold their babies?
+		37. I didn't see the end of your match, but did you have some sort of problem?
+		38. But what about on the court? Did you watch Maria's game? Did you see her win here in '06 or even Wimbledon when she was 17? What did you admire about her?
+		39. After Roland Garros, did you see yourself so few weeks later in the semifinal of a slam?
+		40. What did you ask him?
+		41. What did he ask you?
+		42. She blew Radwanska away in Paris. Did you see she was walking back towards her chair, shaking her head? Did you think you had broken her will?
+		43. When a press conference finish and the journalists don't ask about your serve, which sort of relief do you have?
+		44. You beat her what, Madrid, Rome last year? Madrid was fairly close, but Rome you got her pretty good. Did you see her make a big jump from there to today's tournament?
+		45. You've played through injuries here, of course. Did you see what Tiger Woods did recently at the U.S. Open, and what are your thoughts on what he did? Any parallels?
+		46. Concerning today's match, what do you think about Bolelli? Did you see any difference from last year?
+		47. Could you speak about the emotion of having the last point be subject to replay?  You sort of made a slight smile, but it was hard to read the emotion.  Did you know when to celebrate?
+		48. Could you tell us a little bit yourself? You practiced at the Bollettieri Academy. Why did you choose that academy?
+		49. Could I ask how you found Court 2, the surface? Was it okay?
+		50. You practiced with Andy Murray this morning. Do you think that benefits you for your match against Grigor? Did it have a positive effect, you think?
+		51. Why did you say that you had the feeling to play against two opponents at the end of the game?
+		52. We saw your mom was on court today with tears at the end. Have you spoken to her? What did she say?
+		53. I'm offering you the chance to say no.  Did you say it or not?
+		54. Did you know Michael Jackson at all? Ever meet him?
+		55. You analyzed Serena's game before you walked on the court. Did you know exactly how to play against her? Had you worked out a tactic, a strategy?
+		56. Did you watch the ceremony with Andre? If you didn't even, just what he's done with his foundation, what do you think other athletes can learn from him?
+		57. What did you say to each other at the end? Could you share with us?
+		58. Did he say anything to you, I'm sorry, or tell you he couldn't play, or did you guys not talk?
+		59. Could we ask how vocal you were in the discussions about actually playing the Davis Cup quarterfinal here?
+		60. Could I ask your take on tomorrow's final between Nadal and Novak?
+		61. Could I just ask how you felt about your first game?
+		62. Could I ask you about drug testing, because on the TV they said four tests in 27 days, and last Thursday, on a rare day off, they knocked you up at 7:00 a.m. It's kind of weird, isn't it?
+		63. Could I ask you about the noise you make after you win a point? Is that something you've always done, or is your coach...
+		64. There was an incident on court today with the ball boy. Did you see what happened? Did it disrupt you?
+		65. Do you count aces? Did you know you broke your own record today?
+		66. Did you tell yourself something different when you got home and you were having problems? Did you say, I need to do something different?
+		67. When you see your picture, do you say, That was just a young girl then; she didn't know what she was doing?
+		68. When you hit the second lob at 3-3, did you know it was going to be a winner?
+		69. You didn't see it as a lucky win?
+		70. Madison, you played her in Australia, her biggest slam match. From that match, did you see in her sort of a readiness to be able to make these deep slam runs?
+		71. I didn't see Hobart, but your level first match in Hobart to now, how much higher is it?
+		72. You didn't see that coming with him at all?
+		73. You played Morita a couple times before. Today did you see any difference in her game? Today she played more aggressive and mixed up some different kind of shots.
+		74. Was he already at home by the time you got home? Was he still at the hospital? Where did you actually see him?
+		75. There's a famous football player Nicolas Anelka that came to watch your match. Did you know that? It seems you have a lot of (indiscernible) with football, Brazil, do some work with football teams. Is that true?
+		76. Do you sense that he became discouraged pretty early in the match? Did you have any feeling about that looking across the net or the vibes you were getting?
+		77. I know Kim Clijsters was your idol growing up, but did the Williams sisters have any influence on you coming up as a junior player?
+		78. Didn't you say recently, though, that you were happy not to have a full-time coach? I read a couple weeks ago that now you're looking for a full-time coach again, or was that wrong?
+		79. You can understand, did you say? Did you say you can understand more things?
+		80. You said Davis Cup is very important to you. What is the Asian game situation for you? From China you have to sacrifice ATP Tour or challenger event to play the Asian Games? Did the Japanese Tennis Federation ask you to play or did you have the freedom to not play?
+		81. When were you first aware of Maria? Wimbledon final? Did you see her on TV?
+		82. Could you say hi to Colombia for me?
+		83. One month ago I ask Petkovic at the tournament at Carlsbad, What happened with Kerber? Her ranking drop down so far. She said, don't worry, she will soon be in 30s. Do you know how much you will improve after the tournament in the ranking?
+		84. Do you have any idea how long? Did the doctor say?
+		85. Are they just fans or family? I just wasn't sure. Did you know them?
+		86. Is there any part of his game that's impressed you? He's coming back from injury and hasn't played in three months. Did you know that going in?
+		87. Did you say you thought you might come off at some point? Is that what you said there?
+		88. Did you see Serena's match last night? What's your take on that whole thing? Were you pleased to see her back?
+		89. Do you think some of the questions that we ask help you to look into your own game? So maybe something that you haven't thought of. So we might ask you something about your game and you say, I haven't thought about that, and that might help you in the future?
+		90. The three other semifinalists all are from Europe but have moved to the United States. You obviously have stayed at home. Why have you done that? Did you have any interest at all in moving or are you happy staying put in Czech Republic?
+		91. As you mentioned, it's been sort of an interesting year for Sloane, up and down results. Obviously she looked pretty sharp out there today. What did you see from her in terms of her potential or getting back on the right track or anything like that?
+		92. What did you see as the biggest benefit you've gained with a new coach?
+		93. The ball was out by so little. What did you see? You didn't see it out, in, you just took a chance?
+		94. What did you see in her game that was different that surprised you?
+		95. A few words about your opponent. It was her first main draw match at Wimbledon. What did you see on the other side of the net?
+		96. Angie, what is your mentality when you take the court against Maria? What do you know and tell yourself that you have to do that day?
+		97. You are known for many things, but also including your mind, your mental strength. When you're in trouble, when your game is not working well, what goes through your mind? What do you say to yourself?
+		98. So then can I ask, on tour, in the locker room, who's the person that you're most likely to be having these deep and meaningful conversations and debates about life with?
+		99. Did you see the Cincinnati draw? Do you know whether you will be in the main draw or whether you have to play the quallies?
+		100. There's a story in the British press this morning about match fixing in tennis. Can I ask you, have you ever experienced anything like that in your career?
+	37 sample question motifs for type 1 (37 total motifs):
+		1. ('mean_*', 'what>*', 'what>does')
+		2. ('how>*', 'how>does')
+		3. ('what>*', 'what>does')
+		4. ('mean_*', 'mean_does', 'mean_to', 'mean_what')
+		5. ('mean_*', 'mean_does', 'mean_what')
+		6. ('mean_*', 'mean_does', 'mean_to')
+		7. ('mean_*', 'mean_does')
+		8. ('feel_*', 'feel_does', 'how>*')
+		9. ('mean_*', 'mean_to', 'what>*')
+		10. ('mean_*', 'mean_to')
+		11. ('mean_*', 'mean_to', 'mean_what')
+		12. ('feel_*', 'feel_be')
+		13. ('mean_*', 'what>*')
+		14. ('are>*',)
+		15. ('are>*', 'are_*')
+		16. ('mean_*', 'mean_what')
+		17. ('are_*', 'how>*')
+		18. ('mean_*',)
+		19. ('been_*', 'been_has')
+		20. ('been_*', 'how>*')
+		21. ('are_*', 'are_surprised')
+		22. ('are_*',)
+		23. ('been_*',)
+		24. ('are>*', 'are_*', 'are_surprised')
+		25. ('now>*',)
+		26. ('compare_*', 'compare_how')
+		27. ('is_*', 'is_how')
+		28. ('where>*',)
+		29. ('just>*',)
+		30. ('given>*',)
+		31. ('been_*', 'been_have')
+		32. ('what>*', 'what>has')
+		33. ('say_*', 'say_can')
+		34. ('been_*', 'been_what')
+		35. ('been_*', 'what>*')
+		36. ('what>*', 'what>have')
+		37. ('playing_*',)
+	100 sample answer fragments for type 1 (118 total fragments) :
+		1. 'm_proud
+		2. enjoying_'m
+		3. enjoying_*
+		4. 'm_now
+		5. 'm_*
+		6. now>*
+		7. 'm_for
+		8. 'm_know
+		9. so>far
+		10. 'm_here
+		11. 's_exciting
+		12. 'm_happy
+		13. 'm_in
+		14. 'm_still
+		15. 'm_yeah
+		16. 'm_'s
+		17. 'm_so
+		18. 'm_excited
+		19. means_*
+		20. 'm_sure
+		21. 'm_well
+		22. 'm_not
+		23. 'm_no
+		24. 'm_mean
+		25. 'm_aware
+		26. right>*
+		27. right>now
+		28. love_*
+		29. been_great
+		30. 's_amazing
+		31. like_would
+		32. love_playing
+		33. being>*
+		34. getting_'m
+		35. enjoy_really
+		36. 'm_glad
+		37. hope_*
+		38. been_never
+		39. worked_hard
+		40. 'm_pleased
+		41. been_mean
+		42. been_'s
+		43. say_is
+		44. been_so
+		45. 's_cool
+		46. call_*
+		47. enjoy_*
+		48. been_'ve
+		49. doing_'m
+		50. say_can
+		51. been_*
+		52. been_on
+		53. been_doing
+		54. been_yeah
+		55. been_working
+		56. hope_so
+		57. been_know
+		58. been_for
+		59. been_has
+		60. look_forward
+		61. done_'ve
+		62. been_able
+		63. been_playing
+		64. look_to
+		65. been_in
+		66. hoping_*
+		67. been_have
+		68. been_just
+		69. had_'ve
+		70. been_well
+		71. look_*
+		72. been_always
+		73. hope_be
+		74. having>*
+		75. that>*
+		76. say_well
+		77. been_good
+		78. is_'m
+		79. yes>*
+		80. spend_*
+		81. been_would
+		82. injured_*
+		83. been_there
+		84. yes_*
+		85. thank_*
+		86. 's_yes
+		87. focused_on
+		88. yeah>*
+		89. had_always
+		90. helping_*
+		91. coming_*
+		92. believe_*
+		93. so>*
+		94. to>be
+		95. being_*
+		96. hopefully>*
+		97. be_happy
+		98. believe_in
+		99. doing_well
+		100. is_great
+	100 sample questions that were assigned type 1 (3411 total questions with this type) :
+		1. What does he mean to the tour? What has he meant to the tour?
+		2. You defended a lot of things in your career. What does defending a yearend No.1, how does that stack up?
+		3. Is playing a final now at this state of your career as exciting as it was at the start? Are the emotions different? What does it mean for you at this stage of your career?
+		4. Another record which I think you have is that you've won the ATP Edberg Award For Sportsmanship I believe more than anyone. What does that award mean to you, and how cool is it having that guy as your coach now?
+		5. Obviously the job is not done yet. What does it mean to you? What does it feel like to be in the semis of the Open for the first time and the first Australian Queenslander since Wendy in '84?
+		6. Jack, third round at the US Open a couple times. Now in Paris. What does it mean to you? How do you feel about the way you played today?
+		7. How do you feel about this win? What does it mean to you in your career?
+		8. You chose the word "courage," and in tennis there are lots of examples of courage from, you know, Blake and Ashe, the Williams sister, Monica, and so forth. Is there an example courage that means a lot to you? Talk about that quality. What does it mean to you?
+		9. When you think of the US Open in general, you've had high moments and moments where you ended up out in the first round. What does it mean to you when you look at the US Open on the calendar every year? Is it something you look forward to?
+		10. This is the fifth matchup against Rafa this year.  What does this matchup mean to you?  Is it proving No.1 or anything?
+		11. What does that mean to you?  Pushed ahead to be the best ever, man or woman?
+		12. You were spotted at the doubles last night. I'm curious what you think about Zimonjic's return? What does it mean to you to have a player like Nenad on tour when you were just getting started?
+		13. Yesterday I asked you how about changing China Open to Nole Open. What is your feeling right now and what does this title mean to you?
+		14. What does Wimbledon mean to you? For a lot of the players, they say this one is one of their favorite tournaments because of tradition and history. What is this tournament about for you?
+		15. You touched on your support of Argentina. How about the World Cup in general. What does the World Cup mean to you and what is your passion for the event?
+		16. Well, Davis Cup is a team event. What does it mean for you? Friends?
+		17. And the self confidence? What does it mean in front of Roland Garros to gain more?
+		18. What does it mean to come in here as the second seed? Is No.1 on your mind?
+		19. What does it mean for the Australian Open? Is this the sort of highquality match you need before a Grand Slam?
+		20. What does Wimbledon mean to you? This is your best Grand Slam so far. How special is it?
+		21. What does Arthur Ashe's legacy mean to you as people are thinking about the 40th anniversary of his defeat of Jimmy Connors here?
+		22. What does this title mean to you in the grand scheme of your career? What does it mean?
+		23. All sports have incredible records, marks. What does the history book mean to you?
+		24. Talk about the US Open Series win that you just completed. What does it mean to you?
+		25. You're going into your first Grand Slam semifinal.  What does that mean to you?  This is as if far as you've got in a Slam before.
+		26. What does it mean to you to be the youngest winner here in a match?
+		27. What does No.1 mean to you?  You're going to reclaim that when the tournament is done.
+		28. What does that word mean to you, "genius"?
+		29. Jarkko reached the quarterfinals here two years ago.  You took him out in the first round.  What does today mean to you, your confidence, your career?
+		30. I believe this is your first semifinal at a Masters level. What does that mean to you, especially at 32? You're a little bit older than some of the other guys.
+		31. What does it mean to you to have another shot at the title?
+		32. What does that mean to you after everything you've been through?
+		33. You're the first Canadian to get this far since 1989, Grant Connell and Andrew Sznajder.  What does that mean to you?
+		34. John McEnroe once called you America's next great talent. What does it mean to you to have that come from him and what do you draw from it?
+		35. What does Roland Garros mean to you and the fact that you've won Roland Garros nine times? Nobody's done that before for any Grand Slam.
+		36. If you reach the semis, obviously you become No.1, and you'd be the oldest player to reach that, the top ranking again. What does that mean to you?
+		37. What does it mean to you that she has won a couple of times here, and with all that she's been through physically is on a run again at Wimbledon?
+		38. What does it mean to you to get to the finals of the US Open?
+		39. There are endless milestones you have been passing on the way. What does it actually mean to you to rack up 1000 and do it in such style, as well?
+		40. Next week you will be at 141 consecutive weeks at No.1 in the world, tying Rafa for six most of all time. First of all, do you pay attention to those milestones, and what does it mean to you?
+		41. Five semifinals in a row. What does that mean to you? You're looking for consistency. You must be incredibly proud of that.
+		42. Well, you say you just want to be me. What does that mean to you?
+		43. What does that opportunity mean to you?
+		44. I believe you have achieved something that no male player in your country has done since 1995, so almost as long as you've been alive. What does that mean to you?
+		45. What does Venus Williams' example mean to you and what was your reaction when you heard about her illness?
+		46. The phrase "get the monkey off your back" is a common phrase, but it's not very descriptive when push comes to shove.  What does this really mean to you?
+		47. What does it mean to you to finally get that win after nearly a year?
+		48. What does that mean to you to sort of do that, to be a pioneer of sorts?
+		49. What does that mean to you? Talk about this run. You haven't lost a set yet. I mean, to be honest, if you look at the results prior to coming in, there isn't much to say that you would be in a situation that you are in right now.
+		50. What does it mean to you to win your first Grand Slam match?
+		51. What does this battle for ranking of No.1 mean to you?
+		52. What does it mean to you, this record?
+		53. What does it mean to you to win your fourth title here?
+		54. What does that mean to you?  Obviously he's traveled with you.
+		55. You've spoken a bit about what it means to be in the final and what it would mean to win. What does it mean to you to also be in the company of Margaret Court, Evonne, Wendy, the only Australian women to reach this final in the Open era?
+		56. What does it mean to you personally and professionally to have your brother on tour with you?
+		57. What does it mean to you to reach the final here?
+		58. What does Wimbledon mean to you?
+		59. Congratulations. I think this is the first title for you in almost two and a half years, especially after not-so-good season compared to last. What does it mean to you, the championship?
+		60. What does it mean to you to be the highest earner not only in tennis but overall?
+		61. What does it mean to you to make it to the third round of a slam? You're not young.
+		62. Heck of a first-round match. You just took out the French Open champion. What does that mean to you?
+		63. What does it mean to you to be in this position, to be able to have another shot at the title?
+		64. What does this opportunity at this stage of your career mean to you?
+		65. What does it mean to you to make the final here this week?
+		66. Just wondering, obviously you know how everyone gets behind Andy when it comes to the summer over here, how big it is in terms of Queen's and Wimbledon. What does it mean to people back home when you, in your home country, when you get to quarterfinals of a tournament like this?
+		67. What does Venus Williams mean to you and to the sport?
+		68. What does it mean to you, though, when your peers who are from America are succeeding?
+		69. You seem by the majority of people in tennis as clay court king. Now your name is on the trophy with some of the greatest grass court players of all time. What does that actually mean to you?
+		70. What does James Blake mean to the tour?
+		71. What does it mean to you to be this far at Wimbledon?
+		72. You have won 30 sets in a row in Monaco. What does it mean to you?
+		73. Martina Navratilova was in here earlier and spoke in glowing terms about you, thought it could be a real breakthrough for you. What does that mean to you?
+		74. You were pretty emotional after the match. What does the victory mean to you personally and for your career?
+		75. What does Serena Williams' example mean to you?
+		76. What does it mean to you to win a match like this?
+		77. What does he mean to the guys who have followed in his footsteps, and how has he served in a mentor's role?
+		78. One of the themes of USTA Player Development, is that you have to take each step at a time. What does that mean to you, that you can't skip a step?
+		79. What does it mean to you to be able to watch her at this age the way she's playing now?
+		80. What does Wimbledon mean to you? What's so special about this tournament?
+		81. What does it mean to you to be into the second week here and playing with such confidence?
+		82. Even if you were to talk away now, you'd take a check with you for nearly $100,000.  What does that mean to you?  Do you have any treats planned for you?
+		83. I still remember first time you came to China Open, and you came here as qualifier. Now you're a top seed. What does this kind of story mean to you? You have anything to say?
+		84. What does playing in the Olympics mean to you?
+		85. There have obviously been a few comments about your career. You haven't exactly been asked to go on Davis Cup, even though the rankings look pretty good. You were a pretty happy guy out there, a lot of heartfelt fist pumps. What does this win mean to Donald Young?
+		86. Given the slow start you had in Australia, I mean, what does it mean to reach the semis for the first time this year?
+		87. What does it mean to you to see so much success right here for American players concurrent with your success? What do you think it might mean as a spring board for future success of American players?
+		88. What does his legacy mean to you?
+		89. You're the first 18-year-old for 21 years to reach the fourth round. What does something like that mean to you?
+		90. What does it mean at this stage of your career to reach these quarterfinals?
+		91. We understand this win puts you in the top 20. What does it mean to achieve that in your career?
+		92. What does it mean?
+		93. There are not too many tournaments where you've been in the final seven times. What does that mean?
+		94. What does it mean for you to take so many times the serve of Roger Federer? So many times you were leaving him one point, zero points.
+		95. What does Wimbledon mean for you?
+		96. What does it mean to make the final after you were disrupted the last few years because of injury?
+		97. What does it mean to beat Roger Federer for the first time in 10 tries?
+		98. What does it mean for you to win and what was the reason you were able to keep things together?
+		99. What does it mean for you this period in your life, this period in which you have won two tournaments and now you won a lot of matches in three sets? Great moment, great matches, and so on.
+		100. You have said this in English, I think, but could you give us more details. Tell us why this victory was even more important now after the beginning of the season. What does it mean to beat Na Li today?
+	32 sample question motifs for type 2 (32 total motifs):
+		1. ('seen_*',)
+		2. ('make_*', 'make_do')
+		3. ('make_*', 'make_what')
+		4. ('make_*', 'make_of')
+		5. ('seen_*', 'seen_have')
+		6. ('know_*', 'know_do')
+		7. ('know_*',)
+		8. ('expect_*', 'expect_what')
+		9. ('look_*',)
+		10. ('think_*', 'think_of', 'think_what')
+		11. ('expect_*',)
+		12. ('think_*', 'think_do', 'think_of', 'think_what')
+		13. ('what>*', 'what>about')
+		14. ('talk_*',)
+		15. ('make_*',)
+		16. ('played_*', 'played_have')
+		17. ('talk_*', 'talk_about')
+		18. ('talk_*', 'talk_can')
+		19. ('have>*', 'played_*')
+		20. ('about_*',)
+		21. ('look_*', 'look_at')
+		22. ('talk_*', 'talk_about', 'talk_can')
+		23. ('does>*', 'make_*')
+		24. ('played_*',)
+		25. ('look_*', 'look_do')
+		26. ('can>*',)
+		27. ('looking_*',)
+		28. ('how_*',)
+		29. ('make_*', 'make_does')
+		30. ('how>*', 'how>how')
+		31. ('give_*',)
+		32. ('play_*',)
+	100 sample answer fragments for type 2 (115 total fragments) :
+		1. won_'s
+		2. seen_'ve
+		3. seen_*
+		4. never>*
+		5. had_'s
+		6. has>*
+		7. played_never
+		8. played_here
+		9. practiced_with
+		10. played_'s
+		11. 's_got
+		12. played_before
+		13. watched_*
+		14. played_'ve
+		15. moves_*
+		16. seems_*
+		17. played_against
+		18. hits_*
+		19. beat_*
+		20. played_think
+		21. beaten_*
+		22. played_in
+		23. plays_*
+		24. likes_*
+		25. played_on
+		26. played_mean
+		27. played_yeah
+		28. played_have
+		29. again>*
+		30. played_know
+		31. hope_play
+		32. played_just
+		33. played_*
+		34. practiced_*
+		35. won_*
+		36. beat_in
+		37. played_actually
+		38. 's_obviously
+		39. played_at
+		40. played_well
+		41. played_for
+		42. 's_played
+		43. like_yeah
+		44. got_'s
+		45. look>*
+		46. beat_can
+		47. 's_again
+		48. played>*
+		49. has_know
+		50. got_be
+		51. hope_going
+		52. lost_to
+		53. played_really
+		54. 's_look
+		55. 's_right
+		56. won_in
+		57. grew_*
+		58. needs_*
+		59. 's_playing
+		60. sure_*
+		61. played_with
+		62. obviously>*
+		63. coming_'s
+		64. expecting_*
+		65. coming_back
+		66. won_have
+		67. 's_going
+		68. played_better
+		69. played_good
+		70. got_yeah
+		71. serves_*
+		72. got_'ve
+		73. playing_been
+		74. much_not
+		75. playing_'s
+		76. most>*
+		77. had_obviously
+		78. think_won
+		79. 's_had
+		80. looking_'m
+		81. looking_forward
+		82. looking_*
+		83. improved_*
+		84. looking_really
+		85. looking_for
+		86. looking_just
+		87. played_then
+		88. definitely_*
+		89. shows_*
+		90. be_tough
+		91. yeah_of
+		92. play_on
+		93. serve_well
+		94. obviously_*
+		95. expect_*
+		96. playing_great
+		97. looking_was
+		98. probably_*
+		99. lost_in
+		100. one_*
+	100 sample questions that were assigned type 2 (3130 total questions with this type) :
+		1. What about the pepper spray incident last night?  What do you make of that?
+		2. I know we don't know who your next opponent is, but can you just talk about Mathieu or Dominic Thiem?
+		3. How well do you know Laura off the court? Do you talk ever?
+		4. How do you prepare for a match like that? Do you look at the most recent match that he played or talk to your coach and other players about him? Do you watch any video?
+		5. I know you said you couldn't talk about all the family members and what they tell you, but your sister, Venus, how much of a contribution does she continue to make? What does she talk to you about before you go out to play? How do you share things about careers? She's been there. That's a real advantage.
+		6. How confident are you, if it's Rafa? Obviously I don't know how confident you are, but talk about what you need to do to beat Rafa, if it, indeed, is him?
+		7. I don't know if you keep up at all with the women's side, but can you comment on DateKrumm? She saved six match points before she lost to Venus yesterday, and she's 42.
+		8. What about Leonardo Mayer? What do you know of him?
+		9. What do you make of Bautista Agut? Have you practiced with him before?
+		10. Bernard Tomic is on the other side of the draw. There's been talk about his improved maturity and fitness out on the court. Have you caught either of his matches? What do you make of him?
+		11. What do you think of Pacquiao? You've probably seen Pacquiao fight, right?
+		12. What do you think about this tournament? You have a lot of the top 10 players, I think eight of the top 10 are here. What do you make of your chances?
+		13. What do you know of Jadwiga Jedrzejowska? Is that somebody you knew about through your childhood?
+		14. You were talking at Queen's about looking at videos of your greatest hits, your best matches on grass. Have you reviewed that and seen that Olympic one again in the course of the last couple of weeks? Would you also look at the 2012 final as well to see what you didn't do so well for your match on Friday?
+		15. Your next match is Safarova. Can you look ahead to that? What are your thoughts on that?
+		16. We don't know for sure who your semifinal opponent is, but if it is Rafa, your record on the pro tour is not so great, but can you talk about I was trying to be nice but can you talk about the match you played when you were 13?
+		17. Having seen up close what Mirka has gone through the last several months with pregnancy and motherhood, what do you think about what Kim has done here coming back and playing as she has?
+		18. You haven't seen anything different in his game since you last played him?
+		19. You seen the Melbourne draw?
+		20. What about the next opponent. I haven't seen the score, but Donald Young, how do you match up with him and potentially Rochus?
+		21. You've never seen him play?
+		22. Ever seen an opponent with socks like he was wearing out there today?
+		23. Had you seen her play an Monday? She was pretty impressive.
+		24. Had you seen her play at all before today?
+		25. Never seen a concert there or anything like that?
+		26. Having seen Serena play so well today, what can you expect when you play her?
+		27. You haven't seen it yet?
+		28. David was saying yesterday he thinks indoor might be his best surface. Having seen him today and having beaten him relatively easily in Australia, what makes his game work so well indoors with the conditions here?
+		29. I've seen you played very well, but do you think you've ever played better than that over three sets?
+		30. Still a question about your two coaches. I'm curious the exact way in which both of them work together. Do both of them talk to you after your matches or just one of them? Who's taking charge during your training session?
+		31. Today matches are delayed, you get put on Court 14. You drop the second set. How do you make sure it doesn't get out of control?
+		32. How do you make yourself maybe not go for too much on those second serves where you could have stayed in the point maybe?
+		33. The result of a tennis game can be changeable, and especially today it's a tough game. Everybody was cheering for Zhang Shuai. How do you make justifications in your game?
+		34. What do you think about your next opponent, Alize? Serena withdraw, and she got to the semis without any problems. Had you seen her game against Svetlana? If not, maybe do you have any plans how to play her?
+		35. The beginning of the tournament it was said that Serena being a favorite was an indictment of the woman's tour because she has been away from the game so long. Venus the same. Have you seen her out of shape, not as good as she was last time around? What do you think about the argument that it's better for you that they are not going farther into the tournament?
+		36. What do you know about Hantuchova next?
+		37. What do you know about Sabine Lisicki?
+		38. What do you know about your next opponent?
+		39. James Blake has just lost. You'll be playing Nicolas Kiefer. What do you know about him?
+		40. I spoke before with Fognini, who is your next opponent. You played him first time when he was a kid in Australia. He said after that you became No.1 in the world. What do you know about him? What do you appreciate of him?
+		41. What do you know about Halep? She's like you, been rising really fast.
+		42. What do you know about your next opponent, Benneteau?
+		43. What do you know about Sam Querrey? You played him two years ago in Cincinnati.
+		44. What do you know about Garcia-Lopez?
+		45. What do you know about either of your next opponents?
+		46. You never played Simon before. What do you know about him?
+		47. What do you know now that you didn't know then when you made that splash at Wimbledon?
+		48. What do you know if your possible opponents for your next match?
+		49. What do you know about him?
+		50. What do you know about Jarmila Groth?
+		51. What do you know about Katie O' Brien, talking about new faces around?
+		52. Your sister's opponent next is going to be a Polish player.  What do you know about Polish tennis?
+		53. What do you know about Stepanek?
+		54. What do you know about her?
+		55. What do you know about Verdasco?
+		56. Nishikori said he knew absolutely nothing about Dan. You saw the result, but what do you know about Dan? He's has a colorful career, seems like.
+		57. You have in a couple weeks an exhibition in South America. What do you know about Brazil, Argentina and Colombia. I'm not talking about sport, but what do you know about the countries?
+		58. What do you know about your next opponent?
+		59. What do you know about playing tomorrow?
+		60. What do you know about Pospisil?
+		61. What do you know about him?
+		62. What do you know about Dustin Brown?
+		63. What do you know about Dancevic?
+		64. What do you know about your next opponent?
+		65. What do you know about your next opponent?
+		66. What do you know about your next opponent? Not too many of us know much about him.
+		67. What do you know about Tipsarevic?
+		68. What do you know about Espinosa?
+		69. What do you know about your next opponent?
+		70. Julia Goerges is your next opponent. What do you know of her game?
+		71. What do you know about your semifinal opponent? Must be rather a surprise that you're not playing Venus, that you're playing Pironkova.
+		72. What do you know about Janowicz?
+		73. Li Na up next. What do you know about her?
+		74. What do you know about Althea Gibson?
+		75. What do you know about the next one?
+		76. If Nick Kyrgios gets through, he'll be your next opponent. This will be a pretty big story in Australia. What do you know about him and what would you expect about playing him in the fourth round potentially?
+		77. Seems possible that you might have to play a young Australian in the next round, Bernard Tomic. What do you know about him?
+		78. What do you know of your next opponent, Bouchard?
+		79. Your next opponent, Mauresmo, you know her well. What do you know about Azarenka?
+		80. What do you know about them?
+		81. What do you know about Jo-Wilfried Tsonga?
+		82. Another young opponent next Svitolina. What do you know about her?
+		83. What do you know about your potential opponents in the next round?
+		84. What do you know about the other possible opponent?
+		85. What do you know about David Goffin?
+		86. What do you know about Bolleli, if he gets through?
+		87. What do you know about your next opponent?
+		88. What do you know about him and his style of play?
+		89. What do you know about Szavay?
+		90. What do you know of your second-round opponent?
+		91. What do you know about Chela, how you feel you'll match up against him?
+		92. What do you know about Rybarikova?
+		93. Your next opponent is Brian Baker. What do you know about him?
+		94. What do you know about Tomaljanovic?
+		95. What do you know about the whole 30-year history of this academy?
+		96. You've been a player who has been out of the game but been able to come back a few times in your career. What do you make of Jelena Dokic's performance?
+		97. For the match tonight, talk about your opponent. Only 18 years old. What do you make of his game?
+		98. What do you make of that performance?
+		99. What do you make of her as a player? You have played her a few times. She can be a player who runs hot and cold, be hitting casual winners, and goes off the rails. What do you make of where she's at right now?
+		100. Pretty comfortable first round there today. What do you make of the first match of your season here?
+	54 sample question motifs for type 3 (54 total motifs):
+		1. ('think_*', 'think_be', 'think_do')
+		2. ('do>*', 'think_*', 'think_be', 'think_do')
+		3. ('think_*', 'think_do')
+		4. ('think_*', 'think_be')
+		5. ('see_*',)
+		6. ('think_*',)
+		7. ('think_*', 'think_do', 'think_what')
+		8. ('do>*', 'think_*')
+		9. ('see_*', 'see_do')
+		10. ('if>*',)
+		11. ('think_*', 'think_do', 'what>*')
+		12. ('think_*', 'think_about', 'think_do')
+		13. ('think_*', 'think_do', 'think_going')
+		14. ('think_*', 'think_what')
+		15. ('think_*', 'think_about')
+		16. ('what>*', 'what>do')
+		17. ('think_*', 'think_going')
+		18. ("think_'s", 'think_*')
+		19. ('think_*', 'what>*')
+		20. ('do>*', "think_'s", 'think_*', 'think_do')
+		21. ('think_*', 'think_about', 'think_what')
+		22. ('do>*', 'see_*')
+		23. ('be_*',)
+		24. ('are_*', 'are_what')
+		25. ('think_*', 'think_have')
+		26. ('will>*',)
+		27. ('be_*', 'be_what')
+		28. ('what>*', 'what>are')
+		29. ('see_*', 'see_do', 'see_how')
+		30. ('how>*', 'think_*')
+		31. ('be_*', 'be_will')
+		32. ('expect_*', 'expect_do')
+		33. ('do>*', 'think_*', 'think_have')
+		34. ('are>*', 'going_*')
+		35. ('see_*', 'see_how')
+		36. ('going_*', 'going_is')
+		37. ('going_*', 'going_be')
+		38. ('do>*', 'think_*', 'think_do', 'think_is')
+		39. ('think_*', 'think_do', 'think_of')
+		40. ('be_*', 'be_would')
+		41. ('how>*', 'how>do', 'think_*', 'think_do')
+		42. ('would>*',)
+		43. ('think_*', 'think_of')
+		44. ('what>*', 'what>would')
+		45. ('going_*', 'going_are')
+		46. ('like_*', 'like_would')
+		47. ('who>*',)
+		48. ('think_*', 'think_how')
+		49. ('be_*', 'would>*')
+		50. ('how>*', 'think_*', 'think_how')
+		51. ('agree_*',)
+		52. ('think_*', 'think_in')
+		53. ('take_*', 'take_do')
+		54. ('on>*',)
+	95 sample answer fragments for type 3 (95 total fragments) :
+		1. think_be
+		2. think_going
+		3. looks_*
+		4. has_*
+		5. think_'re
+		6. think_is
+		7. think_go
+		8. think_see
+		9. think_has
+		10. think_do
+		11. think_know
+		12. think_like
+		13. think_think
+		14. think_have
+		15. see_'ll
+		16. think_playing
+		17. think_so
+		18. see_going
+		19. think_win
+		20. think_need
+		21. think_for
+		22. think_*
+		23. see_will
+		24. think_of
+		25. think_now
+		26. think_no
+		27. think_want
+		28. see_so
+		29. think_mean
+		30. see_*
+		31. think_feel
+		32. think_just
+		33. think_still
+		34. think_definitely
+		35. think_play
+		36. think_said
+		37. think_about
+		38. think_much
+		39. anyway>*
+		40. think_on
+		41. think_really
+		42. see_goes
+		43. think_well
+		44. think_done
+		45. see_then
+		46. think_at
+		47. think_been
+		48. think_yeah
+		49. think_in
+		50. gotten_*
+		51. love_would
+		52. think_lost
+		53. be_might
+		54. think_had
+		55. happen_can
+		56. are>*
+		57. think_got
+		58. happen_*
+		59. be_could
+		60. be_great
+		61. going_be
+		62. believe_do
+		63. be_should
+		64. be_so
+		65. be_would
+		66. be_will
+		67. going_is
+		68. going_'s
+		69. be_*
+		70. be_mean
+		71. think_played
+		72. be_'ll
+		73. be_nice
+		74. be_for
+		75. be_hopefully
+		76. be_yeah
+		77. going_have
+		78. be_in
+		79. be_able
+		80. only>*
+		81. going_mean
+		82. be_can
+		83. going_yeah
+		84. be_there
+		85. going_*
+		86. be_well
+		87. going>*
+		88. be_'s
+		89. going_definitely
+		90. going_obviously
+		91. going_so
+		92. going_always
+		93. playing_are
+		94. is>*
+		95. is_true
+	100 sample questions that were assigned type 3 (6423 total questions with this type) :
+		1. What are your impressions so far of the ATP's new CEO? What do you think his priorities should be in that job?
+		2. What do you think the Olympics at Wimbledon will be like? What do you anticipate?
+		3. When you went home last year after the semifinals, there was a very good reception for you. What do you think it would be like if you made the final?
+		4. What do you think Lindsay's legacy will be in terms of her game and the way she played it?
+		5. It's been about a week since what happened in Montreal with Kyrgios. ATP is still determining possible further penalties. What do you think would be a fair decision?
+		6. What do you think it would be like if Roger Federer hung out in the Village in Beijing?
+		7. You did win against Robin Soderling a couple of weeks ago in France. What do you think will be the difference playing here on grass?
+		8. What do you think will be the biggest key to sustain this success into next year?
+		9. You know what it's like to hold up a trophy from the juniors. What do you think it would be like to hold the real one?
+		10. What do you think would be the single largest reason for you to win the match today?
+		11. You seen her play obviously.  What do you think the key will be to beat her?
+		12. You said your type of game was different from Wozniacki's. What do you think the key of the match against Wozniacki will be?
+		13. What do you think it will be like facing Taylor if you face her next?
+		14. What do you think the threat for Serena would be to Andy?
+		15. What do you think would be so difficult about facing each of those guys? Break it down.
+		16. It's a repeat of last year's final. What similarities and differences do you think might be out there on Monday versus last year?
+		17. What do you think that would be like, mixed doubles in the Olympics?
+		18. You had a wrist injury a few years ago. You know what it's like to come back from that. What do you think it will be like for Laura coming back after such a long absence?
+		19. If you do face Williams, what do you think would be the key to that match?
+		20. One of the players who really loves you is Serena Williams. It seemed like last year a lot of times when you won a tournament, she would win a tournament. After many years of not playing Indian Wells, she's in the entry list for Indian Wells this year. What are your thoughts on that, and do you think it would be good for the game for our greatest woman player to come into the tournament at Indian Wells?
+		21. I know for Wimbledon without the Williams sister is like strawberries without cream. What do you think if there were no Williams sisters anymore at Wimbledon? Do you think it would be less of an exciting place?
+		22. You are No.1 in the world. Nobody wants to take anything out of you being No.1. This was in a year where there were four different winners. Murray was the only one who won also Olympic Games. Do you think if he would win, for the public opinion, even if you will be No.1 for the ATP computer, he could be the No.1 in the public opinion image, as it happens for Serena Williams, that she is No.3 in the world but everyone thinks she's the best? What do you think?
+		23. So if you had to pick a height, what do you think would be the best out there?
+		24. Obviously you had your time as world No.1. Towards the end of that there must be a period where somebody chips an odd result against you here or there. That's happened to Federer this year. Will that make an impact on him, do you think?
+		25. Will that bring you a bit of luck, do you think?
+		26. What are your thoughts on the idea of a timer for the time in between points? Do you think that could possibly be something that would be embraced by the players and be helpful?
+		27. About Gasquet, do you think he will be a permanent top 5, top 10 player in the next few years?
+		28. Yesterday the last match of the day on center court started at 1:12 a.m. What do you think about those late starts? Do you think there should be a rule to prevent that?
+		29. You're very good off both wings; played good defense. What do you think you're going to need to keep building on this and be able to compete at this level on a regular basis?
+		30. Sam, sorry. I guess I made an assumption. Anyway, my point being, though, do you ever think about, as a mother, how wonderful it would be to -- is that a dream and a motivation of yours?
+		31. You've already said that in Madrid you're not at 100%. Talking about Rome, do you think you'll be in the highest level there in order to go to Roland Garros in your best shape? Do you think that after Madrid you're going to go to Rome in your best shape?
+		32. You have Julia Goerges next. You have never played her. Will you think to Zheng Jie to find out?
+		33. With your win today, what would you think would be the first thing that you practice on when you practice later today or tomorrow? What do you think you do that you would need to practice on? What would be the first thing that you would need to practice on?
+		34. Huge, can it be very huge? How big of an achievement do you think it could be?
+		35. You brought up the point that you seem uncertain concerning whether you will continue in this tournament. As you sit up there at the moment, what do you think it will be? Do you think you'll be able to get out there or do you think this is it?
+		36. It was such a high hurdle for you. Do you think you'll enjoy the actual tournament more than you have in the past? How do you think it will be different?
+		37. Yet another final for you here in London. Is it fair to say you're getting used to this surface? Are you going to be 100% for tomorrow? Can you think about the final you played with Roger a few years back to now?
+		38. What do you think you need to be like when you play her?  Keep it in check or just be yourself?
+		39. A lot of the game is the mental side of the game. Players before they play Nadal say, I have nothing to lose. You don't have that attitude. You say you want to win. If you approach him with that steely mentality, do you think it may intimidate him?
+		40. You said you didn't know that the other matches had stopped when you came off. If it's deemed too hot to play, do you think matches should stop then rather than having to continue for the rest of the set?
+		41. If Andy Murray doesn't win Wimbledon, do you think the crowd here would like you to win it more than anybody else now?
+		42. If you hadn't had the 41 matches in a row going into the semifinal with Roger at the French, do you think you would have had more chance to win that match?
+		43. If he had won the point, how different do you think things might have been?
+		44. If you win it, do you think they'll get the right name on the trophy?
+		45. If you play this well again on Sunday night, do you think either Federer or Djokovic can beat you?
+		46. You've continued to improve right along.  If you keep it up at this rate, do you think you can go all the way?
+		47. If I could ask, what are your thoughts about Serena, and do you think her absence hurts the game?
+		48. So your racquets were in trouble today; you were in trouble. If the roof didn't close, do you think you would have lost the match?
+		49. If you win this tournament, will you sort of silence those people who began to doubt you a bit after your recent setbacks and problems, or do you think you've done that already?
+		50. If you had to play all those sets in the wind yesterday, do you think the outcome might have been different?
+		51. If you play her, who do you think Max will root for?
+		52. If this match does go to Monday  we'll see  would you watch it or go along or send Bob along to scout it or how would you do it?
+		53. If being out with injury recently, has that renewed your enthusiasm for the game?  If so, if you stay healthy, will we see Serena full time on the tour this year?
+		54. What do you think about the clay court? It will be a three-player battle, with Novak you and Roger, or do you think other players can fight also?
+		55. If it is Andy Murray in the next game, do you think the Wimbledon crowd will be a difficult thing to overcome?
+		56. What are your expectations for Rome and Paris after this impressive run? Do you think you can take the form even if the conditions are a bit different?
+		57. How do you think about getting to the final four, the semis? Do you think you have a good chance to get there? You've beaten Lleyton Hewitt here before. Do you think he's still got the ability to think that he can get to the final four, perhaps the final?
+		58. Will we see you back next year in Sydney at the Medibank International?
+		59. Will we see you out playing soccer sometime?
+		60. I remember that you used to dance for celebration after the match. You didn't dance after beating Victoria and today. Will we see you dance next match?
+		61. Will we see you trying a between-the-leg shot anytime soon?
+		62. So if you are in the second week here, what do you think that will be like for you?
+		63. Andy hasn't dropped a set yet in this tournament. If you can be the first person to take a set off him, do you think that will put him under the kind of pressure he hasn't experienced for a while?
+		64. If you reach the final, do you think it will be a phone conversation between you and Rafa?
+		65. If you had not gone gluten free do you think you'd be able to do what you're doing?
+		66. They're doing away with one of the biggest traditions of Wimbledon, wearing all white for the Olympics. Are you going to go wild or do you think it will be weird?
+		67. What do you think she'll make of your comments about her outfit? Will you seek her out afterwards?
+		68. Do you plan to watch the Roddick match tonight? If Roddick does win tonight, what are your thoughts on potentially facing him next round?
+		69. What is your relationship with Maria Sharapova, and what do you think the potential might be for a rivalry on the court between the two of you?
+		70. Stacey yesterday spoke a little bit about the idea of the women's tournament and the men's year-ender all taking place at the same time possibly in the future. What would you think about that? Would you support that? Or do you think the women should stay separate?
+		71. Maybe after really long points or if it is very hot, do you think it would be appropriate to make a little more time?
+		72. What do you think can take you to the next level?  You played in the Sydney final, lost to Justine.  You're world No.2.  What is it going to take for you to step up and start winning those kinds of matches, perhaps be No.1?
+		73. Irrespective of how long you carry on, do you think it will always be Henman Hill?
+		74. The sort of younger players, a group of players who have yet to properly emerge, how far away do you think they might be from being able to challenge the likes of you?
+		75. Looking ahead, do you think Wimbledon will be your best chance again as a slam this year?
+		76. Congratulations for another Masters 1000 for your career. I wanted to ask you about Nishikori. Seeing how he played the first set and the rest of the tournament and Barcelona, too, do you think that that potentially he can be No.1 of the world?
+		77. I just want to ask you in terms of your forehand going off sometimes in terms of timing, how much do you think the game needs to get better for you this week and next so you can be content?
+		78. Obviously there is not a lot of talk in the last five, six years about the sort of Golden Age of tennis that people consider it to be now with you and Rafa and Roger. Having played Kei and about to play Milos, do you think these guys will be able to keep up that level, or will it be just sort of a different generation, different era, and people will have to accept in the next few years?
+		79. Considering all the amount of time you already spent on court this year, do you think, whatever the result you achieve here, the period between tomorrow or Sunday, within your next tournament, will be a crucial one regarding your objectives at the French Open?
+		80. You've struggled this year to win back-to-back matches. Do you think it could be different this week in Shanghai? Obviously you hope it will, but do you think it could be different?
+		81. How likely do you think it is there will be a strike? You mentioned in your tweet it could even be here.
+		82. The next group of African American women after you, Jamea, Shenay, Alexandra, are struggling a fair amount, not getting very top-level results.  Why do you think that is?  Will there be another surge among African Americans?
+		83. If you hadn't come back, what do you think you'd be doing this week and next week?
+		84. If you win a Grand Slam, what do you think will happen in Russia?
+		85. If you had been on the other side of the net watching what happened on that forehand winner that saved a match point and then your communication with the crowd, what do you think you would have been thinking at that point?
+		86. Kukushkin is coached by his wife. If Kim was helping you this week, what do you think she'd be telling you?
+		87. The next opponent will be Jankovic.  What kind of opponent do you think she will be?
+		88. What sort of outfit do you think would be suitable to wear on Thursday then?
+		89. You have been here in America, I don't know, 10 days or so, and you come here all the time. What do you like best about American culture, American life? Just reflect on that. Do you think your country could learn anything from what we do?
+		90. What do you foresee now? Do you think you won't repeat that score?
+		91. Do you think you can win the tournament here? Do you think you can be Wimbledon champion?
+		92. If you play against Nadal tomorrow for the final, what do you think about it?  Do you think -- are you sure he's going to play against you this final again, or you think it's more you --
+		93. I noticed your first-serve percentage is just 53%, even lower than Chardy's 68%. What do you think about that? Is it normal? If not, what's the reason?
+		94. Here's something else you probably never thought about.  Everybody said there's nobody good in the bottom.  Nobody any good down there after Sharapova lost.  What do you think of that, to be among the bottom feeders?
+		95. What do you think about the schedule, the way you've been put on Court 1 a couple of times? Potentially world No.1 at the end of this week, you should be on Centre Court from now on in?
+		96. How hard do you think the recovery will be with a match again tomorrow?
+		97. How good do you think he can be?
+		98. How dangerous do you think Gulbis will be when he has more experience?
+		99. How tough do you think this must be for Shahar to come here in this situation and still play good tennis?
+		100. How good do you think she can be?
+	70 sample question motifs for type 4 (70 total motifs):
+		1. ('was_*',)
+		2. ('was>*',)
+		3. ('what>*', 'what>was')
+		4. ('did>*',)
+		5. ('were_*',)
+		6. ('was_*', 'what>*')
+		7. ('were>*',)
+		8. ('were>*', 'were_*')
+		9. ('how>*', 'how>did')
+		10. ('happened_*',)
+		11. ('were_*', 'were_what')
+		12. ('get_*', 'get_did')
+		13. ('how>*', 'was_*')
+		14. ('going_*', 'going_was')
+		15. ('did_*',)
+		16. ('going_*', 'going_was', 'what>*')
+		17. ('was>*', 'was>there')
+		18. ('was_*', 'was_there')
+		19. ('what>*', 'what>were')
+		20. ('think_*', 'think_did')
+		21. ('how>*', 'were_*')
+		22. ('did>*', 'did_*')
+		23. ('feel_*', 'feel_did')
+		24. ('when>*', 'when>did')
+		25. ('take_*', 'take_did')
+		26. ('did>*', 'feel_*')
+		27. ('have_*', 'have_did')
+		28. ('what>*', 'what>did')
+		29. ('was_*', 'was_how')
+		30. ('did>*', 'have_*')
+		31. ('think_*', 'think_was')
+		32. ('did>*', 'think_*')
+		33. ('going_*', 'going_through')
+		34. ('think_*', 'think_do', 'think_was')
+		35. ('how>*', 'how>was')
+		36. ('was_*', 'was_important')
+		37. ('come_*', 'come_did')
+		38. ('feel_*', 'feel_was')
+		39. ('get_*', 'how>*')
+		40. ('get_*', 'get_how')
+		41. ('do_*', 'do_did')
+		42. ('think_*', 'think_did', 'think_what')
+		43. ('feel_*', 'feel_did', 'feel_how')
+		44. ('find_*', 'find_did')
+		45. ('at>*',)
+		46. ('were_*', 'were_surprised')
+		47. ('do_*', 'do_did', 'do_what')
+		48. ('think_*', 'what>*', 'what>did')
+		49. ('was_*', 'when>*')
+		50. ('did>*', 'get_*')
+		51. ('were>*', 'were_*', 'were_surprised')
+		52. ('go_*', 'go_did')
+		53. ('was_*', 'was_like')
+		54. ('going_*', 'going_what')
+		55. ('start_*',)
+		56. ('take_*',)
+		57. ('going_*', 'what>*')
+		58. ('thinking_*', 'thinking_were')
+		59. ('make_*', 'make_did')
+		60. ('when>*',)
+		61. ('get_*',)
+		62. ('how>*', 'how>long')
+		63. ('how>*', 'take_*')
+		64. ('come_*',)
+		65. ('made_*',)
+		66. ('explain_*', 'explain_can')
+		67. ('explain_*',)
+		68. ('explain_*', 'explain_how')
+		69. ('play_*', 'play_did')
+		70. ('how>*', 'how>difficult')
+	100 sample answer fragments for type 4 (247 total fragments) :
+		1. gave_*
+		2. did_*
+		3. was_*
+		4. was_just
+		5. kept_just
+		6. was_able
+		7. helped_*
+		8. started_*
+		9. was_still
+		10. kept_*
+		11. was_of
+		12. broke_*
+		13. did_well
+		14. was_up
+		15. started_then
+		16. was_in
+		17. was_then
+		18. was_happy
+		19. missed_*
+		20. was_like
+		21. had_then
+		22. was_nervous
+		23. had_just
+		24. was_know
+		25. did>*
+		26. was_hard
+		27. knew_*
+		28. knew_was
+		29. was_said
+		30. was_good
+		31. was_had
+		32. was_tough
+		33. was_really
+		34. was_so
+		35. was_aggressive
+		36. was_was
+		37. was_yeah
+		38. was_lucky
+		39. was_obviously
+		40. was_on
+		41. was_at
+		42. was_tired
+		43. and>then
+		44. made_*
+		45. wanted_*
+		46. then>*
+		47. took_*
+		48. was_playing
+		49. was>*
+		50. was_after
+		51. was_difficult
+		52. was_well
+		53. was_be
+		54. was_going
+		55. was_get
+		56. was_okay
+		57. knew_had
+		58. give_did
+		59. was_actually
+		60. was_down
+		61. thought_*
+		62. started>*
+		63. set_*
+		64. was_not
+		65. was_think
+		66. came_back
+		67. was_have
+		68. make_did
+		69. was_mean
+		70. was_windy
+		71. was_'s
+		72. was_no
+		73. was_fine
+		74. knew_going
+		75. came_*
+		76. wanted_really
+		77. was_important
+		78. started_play
+		79. had_*
+		80. thought_was
+		81. thought_played
+		82. started_playing
+		83. was_definitely
+		84. hit_*
+		85. was_ready
+		86. was_great
+		87. had_so
+		88. struggling_was
+		89. wanted_just
+		90. managed_*
+		91. went_*
+		92. was_also
+		93. was_because
+		94. came_out
+		95. was_surprised
+		96. was_better
+		97. needed_*
+		98. came_to
+		99. turned_*
+		100. thought_know
+	100 sample questions that were assigned type 4 (8954 total questions with this type) :
+		1. You received a time warning. Maybe it was not the best timing, right? Did it disturb you?
+		2. Did you debrief with your team out there, Sam? Was anything raised?
+		3. Did you discuss in advance of today's match with Boris the thing about signals, not to do it? Was that subject discussed in advance of the game?
+		4. The crowd are very close to you on court No.2. Did you appreciate the home support? Was it nice to play in your hometown and with the home support?
+		5. Did he follow tennis? Was he a Sharapova fan?
+		6. Five years ago here in the first round you lost the first two sets to Falla. Since then you haven't lost a set in a firstround match in a major. You haven't even been pushed in most of the sets. Did that match change anything for you? Was that just one tough opponent on one tough day?
+		7. Was variety a big thing for your dad? Did it matter to him?
+		8. Did you meet at an organized event, or was it just randomly around town?
+		9. Did your dad ever suggest tennis, or was that your thinking?
+		10. Was your participation here ever in doubt? Did you worry that you would not be able to play here at all?
+		11. Could you talk just a little bit about the lob you hit, I believe to break her the first time in the third set. Was your mindset offensive or defensive? Did that unfold just like you pictured it, I imagine?
+		12. Did you sense anything, or was it a complete surprise when she pulled out?
+		13. Did you speak to him or was it written?
+		14. This was your first time on the new court, 17. Did anything about it strike you? Was it different?
+		15. It seemed like you were playing very deep on the court today, and you've been doing so well on hard courts by playing inside the court. Was that part of problem, and did you fix that as the match went on?
+		16. Was it a tough decision for you to make? Did you agonize over it?
+		17. Was the preparation for Wuhan and this Asian swing any different than your preparation for other tournaments at all? Did you arrive here feeling better physically or better prepared, anything like that?
+		18. Did your father teach you to play tennis? Was he involved in tennis?
+		19. Was it difficult to get over it? Did it stay in your mind for a while?
+		20. A crucial point in the second game of the second set. Did it bounce twice there or was he just saying things?
+		21. What was your goal coming into the match? Were you trying to be more aggressive than normal or trying to play with more margin?
+		22. Going back to today's game, obviously when an opponent wins the second set on tiebreak, perhaps the crowd is thinking, This could be quite tight and whatnot. More often than not, it seems that that player then drops down a level and the opponent just sails through, as happened today. What was that boundary? Did you step up? Did she drop off?
+		23. What was his advice? Did you speak to him today?
+		24. Did you feel you had this match coming in you? Was there anything about this week where you were thinking this is your time or you have a chance? What were the major reasons? You spoke about mentally changing some things in your game. What did you change?
+		25. You talked about the support of the fellow top-10 players. How did they support you? Did they call you or send messages?
+		26. You saved all 11 break chances she had. Talk a little bit about that. Did you focus more? How did you manage not to get broken?
+		27. How did you change? Did you use sports psychologists?
+		28. How did you cope with the birth of your child? Did it change your routine?
+		29. Did he coach you and your sister like at the same time? How did it work with your sister?
+		30. Did you feel, from the beginning of the match, Novak was a little off?  That your game was throwing him off?  What were you sensing from him?
+		31. You were up one set, one break, and then in English you said maybe it was due to pressure. Was it due to pressure or was it due to the heat? Because you asked for the physician to come, the doctor to come. Or was it both things?
+		32. Hell of a match, wasn't it?
+		33. It was not with a doctor?
+		34. Only two sets tonight. Your mother wasn't as nervous as the last few matches?
+		35. Speaking of that, that week you spent with them at Davis Cup came right before your first tournament.  Looking back, was that a crucial time for you to spend time with those guys and have them give you confidence?
+		36. Fitnesswise, was the emphasis strength or speed or endurance?
+		37. During the injury timeout, how hard was it to stay focused?
+		38. It was proper test of your foot, too?
+		39. It was easier than expected?
+		40. The conversation at the end of the first set, was that a little bit of reassurance you wanted?
+		41. Whose idea was it to do the Miami thing?
+		42. Pretty satisfying, wasn't it?
+		43. You're not referring to your decision to play on last night despite your injury; you're talking about your unprofessional decision, then, was your decision to compete today?
+		44. Oh, it was the knee?
+		45. Playing a night match in front of quite a big crowd and an opponent who is good but not too good, was that ideal, get the desire going?
+		46. That was a battle out there, huh?
+		47. I see.  It was something you didn't know about?
+		48. Pretty routine, wasn't it?
+		49. Congrats. Really tough out there, wasn't it?
+		50. Back to when you hurt your back, was it a specific moment or was it cumulative, degenerating over time?
+		51. My question actually was, for somebody who wins four games in the final of a Grand Slam, is it likely to linger in his mind a lot?
+		52. Yesterday when we talked I ask what are the tactics for the match with Li Na, what do you have to do to beat her. You said, I don't know yet because I have to talk with coach. Obviously you had tactics. The plan was not good enough to beat her or the execution of the plan was not proper today?
+		53. This was during the first game of the second set?
+		54. Yesterday was solid; today was?
+		55. The mistake was how you was moving?
+		56. Oh, she was here?
+		57. That was the advice you got at the time?
+		58. Second set, was that the best tennis you've ever played, or close to it?
+		59. Federer said you hit with him in Australia once. It was in January?
+		60. The tension that you had in first set, was that just routine or was there any problem to your thigh?
+		61. It was a bit of a struggle but you got the edge in the end?
+		62. At what point did you know, was it after Washington or during Washington, that outside your serve you could stay with the pro guys from the ground?
+		63. It was below the knee?
+		64. Your friend was a tennis player as well?
+		65. This steady focus on tennis, was that something that came within you, or did you talk to others about that, or how did that form itself?
+		66. Good one to get through, wasn't it? Tough match.
+		67. So you're not usually straight into press. This was a fairly easy night for you; fair to say?
+		68. He was part of the Boca Mafia?
+		69. Summarize that game for us.  It was a good one first up?
+		70. Well, how satisfying was that today under the circumstances?
+		71. He was the guy driving the car that rescued you?
+		72. That was your first time there?
+		73. You haven't played her in a while, but you did have a 14 record against her. This match, was it completely different?
+		74. The way she seemed to slow down, the way her game was heading, particularly during points and things like that, was that frustrating you?
+		75. I remember when you reached the finals of the Australian Open, you explained you were working many hours a day. Perhaps this was one of the reasons of the injuries afterwards, that you did too much?
+		76. I know you talked about your diet change last week; was it a medical diagnosis that prompted the change, or you just wanted to see what it was like?
+		77. Presumably the match in Miami was a little misleading?
+		78. Jarmila's game today, she was very aggressive today?
+		79. Obviously the game plan was to play to his backhand, yes?
+		80. Your idol was Tamarine Tanasugarn?
+		81. This was in 2000 you're talking about?
+		82. Unusual end, wasn't it?
+		83. Difficult finish of the match, wasn't it?
+		84. Last year wasn't as much fun?
+		85. School was to study what?
+		86. Venus today was a good as ever?
+		87. It was a total reconstruction of the shoulder?
+		88. That was my point, yeah. Is the thought in the back of your mind that you have to be careful?
+		89. Could you talk about the emotion you felt on that match point. It was a great sort of drop volley you hit and you really got up in the air?
+		90. I guess the next match, you know her very well. She's been playing great; she's a veteran player. Last time you played her, was it Rome?
+		91. It was more difficult for you today than last time?
+		92. The cousin that was sent, was that by some kind of a refuge organization?
+		93. This year, was it?
+		94. It was your choice to replay the point?  He said he couldn't.
+		95. Nice and quick, wasn't it, for a hot afternoon to get that over with?
+		96. The Stan breakthrough, was that the impetus of that change, or is it about the other guys getting older as well?
+		97. It was in Umag, right?
+		98. Stardom wasn't part of your mindset?
+		99. It was a baby?
+		100. A bit of sun strike in your eyes a few times. The sun on the court, was that an issue today?
+	73 sample question motifs for type 5 (73 total motifs):
+		1. ('is>*',)
+		2. ('is_*',)
+		3. ('is_*', 'is_like')
+		4. ('does>*',)
+		5. ('like_*', 'like_do')
+		6. ('is_*', 'is_there')
+		7. ('is>*', 'is>there')
+		8. ('think_*', 'think_is')
+		9. ('like_*',)
+		10. ('is_*', 'what>*')
+		11. ('do>*',)
+		12. ("what>'s", 'what>*')
+		13. ('find_*', 'find_do')
+		14. ('why>*', 'why>do')
+		15. ('has_*',)
+		16. ('to>*',)
+		17. ('is_*', 'is_different')
+		18. ('think_*', 'think_why')
+		19. ("'s_*",)
+		20. ('with>*',)
+		21. ('is_*', 'is_is')
+		22. ("'s_*", "'s_what")
+		23. ('but>*',)
+		24. ('do>*', 'like_*')
+		25. ('how>*', 'is_*', 'is_important')
+		26. ("feel_'s", 'feel_*')
+		27. ('do>*', 'have_*')
+		28. ('how>*', 'is_*')
+		29. ('as>*',)
+		30. ('is_*', 'is_important')
+		31. ('is_*', 'so>*')
+		32. ('does_*',)
+		33. ('do>*', 'find_*')
+		34. ('are>*', 'are>there', 'are_*')
+		35. ('has>*',)
+		36. ('have_*', 'have_do')
+		37. ('is_*', 'is_hard')
+		38. ('like_*', 'like_what')
+		39. ('for>*',)
+		40. ('compare_*',)
+		41. ('are>*', 'are>there')
+		42. ('is_*', 'when>*')
+		43. ('do>*', 'get_*')
+		44. ('does>*', 'does_*')
+		45. ('how>*', 'how>much')
+		46. ('get_*', 'get_do')
+		47. ('where>*', 'where>do')
+		48. ('wondering_*',)
+		49. ('has>*', 'has_*')
+		50. ('think_*', 'think_are')
+		51. ('help_*',)
+		52. ('describe_*', 'describe_how')
+		53. ('consider_*',)
+		54. ('enjoy_*', 'enjoy_do')
+		55. ('which>*',)
+		56. ('enjoy_*',)
+		57. ('find_*',)
+		58. ('describe_*',)
+		59. ('is_*', 'is_difficult')
+		60. ('give_*', 'give_does')
+		61. ('talk_*', 'talk_could')
+		62. ('could>*', 'talk_*', 'talk_about')
+		63. ('what>*', 'what_*', 'what_what')
+		64. ('and>*', 'and_*')
+		65. ('which>*', 'which>which')
+		66. ('how>*', 'how>important')
+		67. ('describe_*', 'how>*')
+		68. ('say_*', 'would>*')
+		69. ('affect_*',)
+		70. ('and>*',)
+		71. ('getting_*',)
+		72. ('because>*',)
+		73. ('prefer_*',)
+	100 sample answer fragments for type 5 (214 total fragments) :
+		1. become_*
+		2. 's_think
+		3. 's_about
+		4. respect_*
+		5. like_*
+		6. 're_*
+		7. works_*
+		8. helps_*
+		9. 's_is
+		10. 's_*
+		11. appreciate_*
+		12. 's_see
+		13. 's_maybe
+		14. 's_make
+		15. 's_have
+		16. think_'s
+		17. 's_'s
+		18. 's_same
+		19. does_*
+		20. 's_for
+		21. like_do
+		22. 's_not
+		23. think_are
+		24. learn_*
+		25. 's_really
+		26. 's_like
+		27. think_doing
+		28. 's_say
+		29. 's_probably
+		30. 's_at
+		31. 's_just
+		32. 's_'re
+		33. 's_also
+		34. 's_are
+		35. 's_great
+		36. 's_nice
+		37. 's_in
+		38. 's_too
+		39. 's_feel
+		40. 's_now
+		41. 's_important
+		42. but>if
+		43. 's_still
+		44. 's_definitely
+		45. 's_come
+		46. 's_so
+		47. 's_of
+		48. think_get
+		49. 's_fine
+		50. 's_do
+		51. 's_different
+		52. like_really
+		53. 's_mean
+		54. 's_good
+		55. 's_no
+		56. comes_*
+		57. 's_hard
+		58. 's_much
+		59. gives_*
+		60. 's_because
+		61. makes_*
+		62. but>*
+		63. 's_been
+		64. 's_'m
+		65. 's_okay
+		66. think_also
+		67. gets_*
+		68. like_'d
+		69. 's_know
+		70. 's_go
+		71. mean_*
+		72. 's_tough
+		73. 's_sometimes
+		74. 's_better
+		75. mean_does
+		76. think_with
+		77. enjoy_playing
+		78. 's_guess
+		79. 's_well
+		80. 's_difficult
+		81. 's_on
+		82. wants_*
+		83. 's_be
+		84. like_play
+		85. 's_here
+		86. 's_then
+		87. but>as
+		88. mind_do
+		89. see_can
+		90. 's_easier
+		91. 's_easy
+		92. mind_*
+		93. 's_yeah
+		94. 's_play
+		95. seem_*
+		96. goes_*
+		97. think_getting
+		98. 's_always
+		99. 's_want
+		100. says_*
+	100 sample questions that were assigned type 5 (12069 total questions with this type) :
+		1. During such a match, what would you say is the most difficult thing to manage? Is it the rotten weather conditions or the opponent? Well, I thought at the beginning of the match you could beat him easily.
+		2. Even though obviously everyone would love to win quickly and stay fresh, is it a good thing to have tournaments like this where you face some adversity? Is that good once in a while to have?
+		3. Milos, his serve, how tough is his serve to return? Is it the toughest on tour?
+		4. You were saying at Eastbourne you don't feel there's any pressure on you this year. Is that right? The only pressure you can put on is yourself?
+		5. You state really clearly this year you want to win the tournament. Is this also kind of a strategy? You could also keep the ball low and say, I don't want to make the pressure bigger by stating that you want to win the tournament. You're making the pressure even bigger. This is also a strategy?
+		6. I mean, is it because you feel much more rested or did you get a good training block in? Is it just because it's Dubai?
+		7. The break that you had after the US Open, is that something you think you'll continue as you're in the twilight of your career of your life? Is that the kind of way you want to do it or was it forced on you?
+		8. Is that something you kind of have to manage as you go along to your own expectations?
+		9. Is that one of the biggest differences from when you were the best player in the world?
+		10. It looked like you went to the body quite a bit with the serve. Is that accurate?
+		11. You've been in tough positions in your career before with injuries. Today it looked like the serve was not your normal serve, then maybe the forehand to the other side. Is it a problem holding the racquet?
+		12. Is it special for to you win a title on clay?
+		13. Is your husband a good coach to work with?
+		14. You said you like to emulate Venus, getting to 500 after she got to 500. She has a lot more than that now. Is that the next target for you?
+		15. You're bringing a lot of emotion, and the crowd interaction, if you like.  Is that something that you personally want to bring, get the crowd more involved?
+		16. Your rise the last few years came at a time when she was starting to decline. She's working her way back. Is it still something special to be able to play her?
+		17. You said over the last few years that it's a process. You said it constantly. Is it safe to say that it's paid off?
+		18. Is it fair to say that you looked a bit nervous today?
+		19. Your semifinal opponent plays tonight. You played today in the heat. Is that unfair?
+		20. I know it's looking far ahead, but you are in the same half as Nadal. Is it strange to be penned against him possibly in the semifinal as opposed to a final?
+		21. Is the fact you came back from 2-1 down give you more confidence than what you would have gotten from a straight-sets victory?
+		22. You had lots of tight games and you managed to stay focused and keep emotions in check. Is that something you worked on?
+		23. Is it a family celebration?
+		24. We're unused to this kind of weather in this country. Is it fair to say you kind of grew up in this kind of stuff, your tennis education anyway?
+		25. Yeah. You won in straight sets, 62, 63. Is that the best start?
+		26. Time and time again people have been saying 'greatest era'. Is it a fair reflection of how things actually stand between the four of you in that each of you has won a major this year?
+		27. Is it maybe for you easier to play not in front to have such a success compared to if you are playing in Roland Garros?
+		28. Is being here in the final the last two years making you really want to win this tournament more?
+		29. You've spoken about how you haven't felt as confident in the last couple of months. Is that the kind of win that brings that kind of confidence back to you again?
+		30. It says your perfect day would be to spend it with your girlfriend, hanging out with friends, a restful evening at home reading. Is reading something that you're that passionate about?
+		31. Is that a new emphasis for you, fitness?
+		32. Is that your biggest success so far?
+		33. Is that a hard thing to resist? Because obviously, you know, you go for five days. I'm sure you made quite a bit of money, more than a lot of tournaments. Is that kind of tough?
+		34. Roger Federer made an interesting comment. He was talking about the England/Germany game, and said that the best players need to play the best players to bring the best out of themselves. Is that something you can relate to?
+		35. Is Rafa the most intense guy you have been across the net from?
+		36. Is it good to have a coach that gets that nervous?
+		37. Is it good for the game?
+		38. Is the body well enough to play singles and doubles and everything?
+		39. Is that something that David had to work with you on, as far as playing other Czech players?
+		40. You have to play Nadal, that listening to Murray, has a great second serve. Everybody says Nadal has a huge forehand, improved a lot the first serve. But Murray said he was in trouble to return his second serve. Is that also something that bothers you a bit, something that you noticed, that you suffer in a way or not?
+		41. There is a stat going around that you're the seventh man to get to the semis of all the Grand Slams in the same year. Is that pretty gratifying to reach that stat?
+		42. Is it always a policy to take match by match? You don't worry about meeting different players in the tournament?
+		43. You closed both of these matches pretty convincingly. Is that a part of the fitness, of the, of the confidence, are you trying to put the hammer down?
+		44. How are you with kind of when play kind of starts and stops or when there is rain delays. I know in terms of your warmup it can kind of cause issues, and that's going to be something that comes up, you know, especially at Wimbledon. Is it ever kind of a stress for you to kind of keep your body warm and your back loose when the schedule kind of gets a little wonky?
+		45. A lot of top players talk about their kids and my kid's never gonna go near tennis and have that kind of attitude. Seems like you may think a little bit differently about that; is that true?
+		46. Rory obviously came back from such a disappointment in the Masters in such spectacular style. Is that something you could take inspiration from?
+		47. You have come to the net again today. Is this something that is more natural for you? Is that something you feel comfortable doing against any opponent?
+		48. Is it ever a worry that by doing so well this week that you might go to Wimbledon with little rest?
+		49. Is it just because of the wear and tear, the scheduling? Is that at the root of it?
+		50. Your outfit today was a little different. It was not as colorful and no collar on the shirt. Is that a new look?
+		51. Is this the best Serena in' your mind?
+		52. She saved three match points. They mentioned last night that she's won eight matches where she's come match point down. Is she the toughest player on the tour to beat?
+		53. Is it tough to play an opponent that has such a similar game to you?
+		54. You defended so well today. Is that the most pleasing thing that you get out of today's win?
+		55. I believe you hit 22 winners with your forehand today. Is that about as good as you've felt on any one stroke ever?
+		56. You come here, and obviously you've won it four times. Is it still a special place for you?
+		57. You're playing well at the minute. Is this your best tennis you have come across?
+		58. Is that one of the worst blisters you've ever had?
+		59. You seem more focused in the last sort of six months than you were last couple years perhaps.  Is that because you've short of shaken off the injuries, you feel fully fit again?
+		60. Your righthanded and lefthanded play. It was in German and my German is rubbish. Is it correct that in everything else in life you use your right hand?
+		61. Is this your best winning streak of your career?
+		62. For the fans, that's a lot of fun to watch a match like that. Is it fun for you in any way, or is it just too stressful to enjoy the moment?
+		63. Is the yearend No.1 on your mind at all?
+		64. You mentioned staying positive. Is that something you've got better at, in life and even in matches?
+		65. Your serve is so good all the week, and it always around 200 just when you play key points, 40-30, 30-40, deuce. Is that your tactic, to save energy for the moment and make the opponents feel frustrated and shock?
+		66. Is he here?
+		67. Looking back at Wimbledon, you were so excited after every single match. You were jumping up and down, fist pumping, a lot of emotion. We're not seeing a ton of that this week or last week in Wuhan. Is that an intentional change in how you're trying to control your demeanor on the court?
+		68. Is that as a result of the last few months?
+		69. That break is quite a long break, isn't it?
+		70. Isn't that kind of taking a risk, not knowing what's in it?
+		71. Is the enjoyment the same?
+		72. Is that the best match you've ever played in your life?
+		73. Is it just you meeting Etienne tonight?
+		74. Last year seemed to work quite well for you. Is that the similar plan, traveling to the higher end tournaments this year and traveling with the family?
+		75. Also, you mentioned this earlier in the week, your fitness. One of the commentators noted when you were out there, I think it was one of the 18shot rallies, and your opponent was kind of looking very tired after it. You didn't show any signs of fatigue. I mean, is your fitness, is it at a different level than it was a few months ago, as well?
+		76. I understand you had a hit after the match. Is that a good substitute for on-court play?
+		77. That seemed a lot more satisfactory today than yesterday. Is that correct?
+		78. He owned you on this court before. He won the two matches last year. Is it a little bit of a revenge today?
+		79. Is it possible to enjoy your inbetween days at the slams?
+		80. Is he walking, talking?
+		81. You said you hit with Andy in Monte-Carlo. Is he the highest-ranked player you hit with?
+		82. Davis Cup team named tomorrow. Is your plan to play doubles?
+		83. You've won a higher percentage of points on your second serve than anyone else in the tournament. Is that something you've been particularly happy with, and how important can that be?
+		84. Is it easy for you to just play tennis and not worry about anything that hurts or might fall apart?
+		85. You had some good results in Delray Beach and Memphis. Is this the year for you to break through and win some titles?
+		86. We were talking to Mona here the other day, and she said she thinks it's coincidence that all of you German women are big women. Is it? One can think that Germany has encouraged big girls to play tennis.
+		87. Is it easier said than done? Those tiebreakers, there's a lot of pressure. To really go for it, it makes sense to be slightly passive. Is that the difference between the top four in those situations and everyone else?
+		88. Is this the most sound you've been in terms of coach and now being married as a package?
+		89. Is that where you get your strength from?
+		90. On Thursday and Friday here there is a men's invitational tournament as well as the women's match with firstround losers from the Montreal tournament. I'm wondering what you think about that. Is it good to have the men playing here, or does it detract from the women's game?
+		91. Is it fun having the British women like Watson and Robson around?
+		92. You're working the points better.  Is part of that experience?
+		93. Is Virginia still a part of your team?
+		94. In America we talk about how Agassi evolved from being a bratty young guy into a really thoughtful, giving guy. Your journey has been a little different. A lot of people talk about your growth over the years. People are talking about your command of things. Talk about your own path. Is it something you're aware of or something you feel good about?
+		95. Just on the same subject, you said you know he has worked with some players. Is that with some other tennis players?
+		96. Is this the best you've felt in quite a while?
+		97. Is it safe to say that things are going well with Sam in this Asia swing? Can you talk about what it's been like the last two weeks working with him.
+		98. Great support yesterday and today. Is that a British Tshirt you're wearing?
+		99. I saw a strapping on your hand. Is everything okay with your hand, or is that for protection?
+		100. Is it a hard time to get back to 2004 here and get you back on track at this tournament?  Is it time for you to get back to your championship form here?
+	38 sample question motifs for type 6 (38 total motifs):
+		1. ('do_*', 'do_do')
+		2. ('do_*', 'do_do', 'do_what')
+		3. ('do_*', 'do_do', 'what>*')
+		4. ('go_*',)
+		5. ('try_*',)
+		6. ('what>*', 'what>what')
+		7. ('do_*', 'do_what')
+		8. ('have_*', 'what>*')
+		9. ('have_*', 'have_what')
+		10. ('do_*',)
+		11. ('have_*', 'have_what', 'what>*')
+		12. ('so>*',)
+		13. ('have_*', 'have_do', 'what>*')
+		14. ('do>*', 'do_*')
+		15. ('have_*', 'have_do', 'have_what')
+		16. ('have_*',)
+		17. ('keep_*',)
+		18. ('put_*',)
+		19. ('go_*', 'go_do')
+		20. ("'re_*",)
+		21. ('so>*', 'so_*')
+		22. ('so_*',)
+		23. ('thinking_*',)
+		24. ('think_*', 'when>*')
+		25. ('so>*', 'so>what')
+		26. ('thought_*',)
+		27. ('want_*',)
+		28. ('need_*',)
+		29. ('going_*',)
+		30. ('given_*',)
+		31. ('want_*', 'want_do')
+		32. ('going_*', 'going_how')
+		33. ('got_*',)
+		34. ('in>*',)
+		35. ('change_*',)
+		36. ('in_*',)
+		37. ('doing_*',)
+		38. ('learn_*',)
+	100 sample answer fragments for type 6 (276 total fragments) :
+		1. stay_*
+		2. stay>*
+		3. take>*
+		4. prepare_*
+		5. do>*
+		6. do_just
+		7. focus_*
+		8. take_just
+		9. take_*
+		10. just>*
+		11. focus_on
+		12. have_like
+		13. do_do
+		14. work_*
+		15. do_*
+		16. keep>*
+		17. move_*
+		18. wait_*
+		19. have_get
+		20. try_make
+		21. do_ca
+		22. try>*
+		23. if>*
+		24. get>*
+		25. have_to
+		26. sometimes>*
+		27. do_will
+		28. have_go
+		29. keep_*
+		30. fight_*
+		31. usually>*
+		32. try>to
+		33. have_do
+		34. make>*
+		35. go_just
+		36. get_just
+		37. have_of
+		38. have_just
+		39. have_'s
+		40. try_*
+		41. have_no
+		42. have_still
+		43. try_have
+		44. keep_just
+		45. have_try
+		46. have_'ll
+		47. try_just
+		48. try_get
+		49. just>try
+		50. make_*
+		51. try_know
+		52. go>*
+		53. try_think
+		54. try_go
+		55. go_there
+		56. have_know
+		57. have_really
+		58. have_*
+		59. forget_*
+		60. try_play
+		61. go_for
+		62. go_*
+		63. try_win
+		64. go_on
+		65. have_take
+		66. go_know
+		67. try_do
+		68. have_obviously
+		69. have_would
+		70. try_well
+		71. do_can
+		72. go_out
+		73. want_try
+		74. have_mean
+		75. give_*
+		76. lose_*
+		77. need_do
+		78. put_*
+		79. want_have
+		80. do_well
+		81. try_focus
+		82. put_on
+		83. go_do
+		84. have_sometimes
+		85. try_yeah
+		86. want_play
+		87. have_think
+		88. sometimes_*
+		89. have_keep
+		90. have_so
+		91. have_also
+		92. what>do
+		93. want_do
+		94. get_know
+		95. keep_going
+		96. want_go
+		97. try_so
+		98. find_*
+		99. want_really
+		100. have_have
+	100 sample questions that were assigned type 6 (2854 total questions with this type) :
+		1. You've had a lot of trouble with him in the past. Why?
+		2. You always take your balls from the ball kid on one side. Why?
+		3. Normally you write your name on the camera lens. Today you did something different. You just draw a little ball. Why?
+		4. Why?
+		5. Why?
+		6. You've played Grand Slams before against players who were in their own country and been okay. Why the nerves? You've been in great form, haven't lost in a while.
+		7. Why?
+		8. Why rather than previous years?
+		9. Why?
+		10. Why?
+		11. When you lost the second set you didn't call him. Why?
+		12. Why?
+		13. In the beginning, you were almost down 4Love. Why the slow start?
+		14. Why?
+		15. Why?
+		16. You been more consistent over the last year, much more improved. Why?
+		17. You finished last season well, but why this several moths of great success?
+		18. Why no nerves at all all day?
+		19. Last year you came for the first time in the Masters Cup pretty exhausted and you lost your three matches. This year did you prepare especially to do better at this competition?
+		20. Why?
+		21. Why?
+		22. Why especially this year?
+		23. Why?
+		24. Why?
+		25. Why?
+		26. Why?
+		27. Why?
+		28. Why the change with the fitness?
+		29. Why Argentina?
+		30. You served very well today. I don't think anyone has asked you about when your changed your service motion. First of all, why did you change it and how difficult was it to do that?
+		31. That was a very big celebration for you for a fourthround match in a slam. Why?
+		32. Wimbledon is so full of rules and all that kind of stuff. Maybe too many rules, a lot of people would say. The one thing I hear that's getting on your nerves this week is there's no eating allowed in the locker rooms. Why?
+		33. Why?
+		34. When you got to the lowest point. Why a forward jump?
+		35. Federer was saying he's a bit surprised to see Becker back in. Talk about Djokovic though. He went undefeated at the end of the year, playing at a high level, and brings in another coach. Why, in your opinion?
+		36. During today's match, I noticed several routine shots down the line for winners. You're pumping your fist, yelling, Come on. There were some other truly more dramatic moments where you're almost sort of icy cold, stone face. Why emotions on some shots and others that truly are dramatic you seem to be sort of in a different place?
+		37. You didn't answer the question.  Why?
+		38. Why?
+		39. Why the long absence?
+		40. Why?
+		41. Why?
+		42. Why an even number of times?
+		43. Why the nerves?
+		44. Why?
+		45. You said your dad started you in tennis. Why tennis?
+		46. I was thinking, would you prepare for him different than someone like Lleyton, who's as baseline player?
+		47. Why?
+		48. You just said previously you lost to Kei two times. This time did you change your tactics or approach in today's match?
+		49. Why?
+		50. Why?
+		51. You're playing better and better.  But you were a little bit in trouble in the first set when you were down 3-1 and he had three breakpoints to go 4-1.  Why?
+		52. Why?
+		53. Why?
+		54. I think you made a nice speech today.  That comes with experience also, or you prepare sometimes a little bit before?
+		55. We see a lot of the top players playing doubles at a tournament like this. Why not you?
+		56. Why?
+		57. Why?
+		58. Why?
+		59. Why the cancan?
+		60. Why doubles at this tournament?
+		61. Why?
+		62. Why the transition? You had some pretty good results under Roger, huh?
+		63. Why?
+		64. Why not dubs with Sam?
+		65. Why all the pressure? Why after the year that you've had did you want to win this one so badly?
+		66. So how does one go about duplicating the really good stuff? You know, once you played really well and feel really good about things, can you consciously try and figure out what you did, or is it a matter of just playing and not thinking too much?
+		67. You played every Grand Slam for 12 years. Are you the type of person that soaks up everything around you, or do you just do your job and go home?
+		68. What do you do to rest? Watch TV, a movie, read a book, just go straight to sleep and wake up when you have to?
+		69. Do you do anything besides relax tomorrow? Do anything for fun? Go to a movie?
+		70. So when you play someone you know almost nothing about, do you usually try to find out about your opponent or just go out and stick to your tennis?
+		71. You go to a cinema? You like dancing? Shopping? What do you do? You don't play tennis, you have three days, what do you do?
+		72. How do you do homework on a guy you don't know a lot about? What sort of things do you need to do?
+		73. So when you're feeling negative emotion inside you, what do you do? Just try to swallow it?
+		74. So when you enter a match playing a top player like Rafa, do you do anything different mentally to prepare yourself going into that kind of match?
+		75. So it's only really practice? You don't do any work in a gym?
+		76. In your rest what do you do? Play games? Read books?
+		77. My question was about the same Roger. I have been beaten so many times on this court when I was young player. When you walk into the court and you have close to you the guy that beat you the previous year, what passes through your mind? You're thinking about that, or you try to forget?
+		78. Could you speak about your training routine off the court. What kind of things do you do? Do you do cycling or running?
+		79. A question about your twitter account. What made you do that? Do you update it yourself? Do you have fun doing it?
+		80. A question about your twitter account. What made you do that? Do you have fun? Do you update it yourself?
+		81. Obviously this tournament, the upcoming ones, are important to you. At this stage, do you already have one eye on Roland Garros? Do you try not to peak too soon?
+		82. So you don't try to change your game or the way you play or anything like that?
+		83. When you won the third set and you were doing a celebration and the crowd is going crazy, can you try and put into words the emotion of that moment and that adrenaline?
+		84. What will you do, have ice pack on it?
+		85. What are the particular challenges of playing you know Sloane pretty well, don't you, from juniors and everything?
+		86. So do you have a thought to just let Elena win, so a Russian can go to the semifinal?
+		87. What is the key to playing her? When you do well against her, what do you do well?
+		88. In those moments, do you kind of go numb? Do you do any kind of flashback to when you're a kid and just in the moments after that?
+		89. When you're not playing, what do you do to relax?
+		90. Today you have put in a good showing, even though your opponent came back. You are quite serene and calm. When you don't play between matches, what do you do to stay in the tournament, to remain focused on the tournament?
+		91. When you win so quickly each time, what do you do with the extra spare time?
+		92. If it's 70% mental, what do you do to get yourself mentally in a great space so when you're on the court things don't go away from you?
+		93. Is it funny that men and women both at a certain age still need coaches. What do you need a coach to help you do?
+		94. So being much more patient, you're saying that you don't need to hit the winner in two shots, you can go five or six shots every point?
+		95. So you go out no matter what?
+		96. So you go to him?
+		97. So when you were seeing all those seeds getting upset, does it go through your head when you were going on the court at all? Like Venus lost...
+		98. What will you do tonight? Have a big night out planned in Eastbourne?
+		99. When you say buckle down on those late points, what do you do? Is there a routine?
+		100. You don't do that anymore?
+	43 sample question motifs for type 7 (43 total motifs):
+		1. ('feeling_*', 'feeling_are', 'feeling_how')
+		2. ('feeling_*', 'feeling_how')
+		3. ('feeling_*', 'feeling_are')
+		4. ('feel_*', 'feel_do', 'feel_how')
+		5. ('feel_*', 'feel_do', 'how>*')
+		6. ('feel_*', 'feel_do')
+		7. ('feel_*', 'feel_do', 'feel_now')
+		8. ('feel_*',)
+		9. ('feeling_*',)
+		10. ('feel_*', 'feel_now')
+		11. ('feel_*', 'feel_how')
+		12. ('do>*', 'feel_*')
+		13. ('how>*', 'how>are')
+		14. ('feel_*', 'feel_about')
+		15. ('feel_*', 'feel_playing')
+		16. ('feel_*', 'feel_about', 'feel_do')
+		17. ('feel_*', 'feel_does')
+		18. ('feel_*', 'feel_like')
+		19. ('how>*', 'how>do')
+		20. ('feel_*', 'feel_do', 'feel_like')
+		21. ('feel_*', 'feel_is')
+		22. ('do>*', 'feel_*', 'feel_like')
+		23. ('how>*',)
+		24. ('feel_*', 'feel_do', 'feel_is')
+		25. ('how>*', 'how>is')
+		26. ('are_*', 'are_now')
+		27. ('how>*', 'how>is', 'is_*', 'is_how')
+		28. ("feel_'re", 'feel_*')
+		29. ("feel_'re", 'feel_*', 'feel_do')
+		30. ('is_*', 'is_now')
+		31. ('feel_*', 'feel_what')
+		32. ('are_*', 'are_happy')
+		33. ('feel_*', 'what>*')
+		34. ('feel_*', 'feel_what', 'what>*')
+		35. ('say_*', 'say_would')
+		36. ('are>*', 'are_*', 'are_happy')
+		37. ('does>*', 'feel_*')
+		38. ('how>*', 'how>would')
+		39. ('assess_*',)
+		40. ('changed_*',)
+		41. ('assess_*', 'assess_how')
+		42. ('does>*', 'give_*')
+		43. ('going_*', 'how>*')
+	65 sample answer fragments for type 7 (65 total fragments) :
+		1. physically>*
+		2. feel_better
+		3. feel_good
+		4. feel_now
+		5. feels_*
+		6. feeling_'m
+		7. but>now
+		8. feels_good
+		9. feel_well
+		10. feel_'m
+		11. feel_still
+		12. feel_definitely
+		13. feeling_good
+		14. feel_*
+		15. feeling_*
+		16. feel_so
+		17. feel_great
+		18. feel_know
+		19. feel_is
+		20. feel_no
+		21. feel_yeah
+		22. feel_just
+		23. feel_feel
+		24. feel_playing
+		25. feel_'s
+		26. feel_do
+		27. 'm_ready
+		28. feel_comfortable
+		29. feel_have
+		30. feel_mean
+		31. feel_like
+		32. so>now
+		33. 'm_confident
+		34. feel_really
+		35. mentally>*
+		36. feel_was
+		37. continue_*
+		38. better_*
+		39. feel_did
+		40. feeling_was
+		41. last>*
+		42. working_hard
+		43. coming>*
+		44. starting_*
+		45. still>*
+		46. moving_*
+		47. working_'m
+		48. working_*
+		49. working_was
+		50. improve_*
+		51. having_*
+		52. taking_*
+		53. working_on
+		54. even>though
+		55. even>*
+		56. definitely>*
+		57. 's_need
+		58. getting_*
+		59. yeah_definitely
+		60. winning>*
+		61. need_play
+		62. winning_*
+		63. play_mean
+		64. against>*
+		65. play_did
+	100 sample questions that were assigned type 7 (4382 total questions with this type) :
+		1. Victoria, that was a solid first match. Dug out of some early trouble and seemed to find your rhythm. How are you feeling after Canada now? You feel back to full strength roughly?
+		2. How do you feel going into the second week?  Are you where you want to be?  Do you still feel there are parts of your game that need to improve to get through the second week?
+		3. We all know that when you play your best game you can beat anybody in the world.  How have you been feeling lately?  Do you feel you're coming into form?
+		4. Like you talked on the court, you're having a great start to the year. Are you feeling this momentum coming into this tournament? How do you feel?
+		5. How do you feel with the dash back home and rush and comeback? Are you feeling a little tired, jet lagged?
+		6. You seem pretty comfortable with No.1. How do you feel lately on the court? Are you feeling that there is a bigger gap between you and the rest of the players?
+		7. How do you feel your serve is going at the moment? Are you feeling confident with it?
+		8. How are you feeling in general on court after Wimbledon? Does it feel any different having that huge accomplishment under your belt and sort of a weight off your shoulders? Does it feel different going about your whole career right now?
+		9. Are you feeling tired? Do you feel it in your body now?
+		10. Nike just uploaded an ad of you saying Age is Just a Number. I don't know if you have seen that. Is that really how you feel? How do you feel, and how does your body feel on court right now?
+		11. Are you quite pleased? Straight set victory again second round? Feel pretty good about the way you played?
+		12. Four wins so far here in the tournament.  I guess it's exceeded expectations to this point.  How do you feel at this point right now into the third round?  Is this as deep as you've ever been in a Masters Series?
+		13. How do you feel starting this last part of the season, fighting for London? Do you feel fresher because you had weeks off due to injuries or is it still draining?
+		14. How do you feel like you played today?  Do you feel like you stepped it up?
+		15. In previous years when you've arrived at this time of the season, it's often been quite difficult for you because you've had so many matches and you've been quite tired. How do you feel now compared to previous years? Do you feel fresher?
+		16. I know you're playing such great tennis. Just won another title. You have so many already. You did your best a few years ago. How do you feel? Do you feel prepared mentally and feel strongly that it's a good surface for you?
+		17. You have an extra difficult game where you have to use an extra spin of your game. So given the fact that you have to play some extra games  Nadal now is out, which gives you maybe an extra motivation. How do you feel? Do you feel extra motivated for the rest of the tournament?
+		18. You had a tough match yesterday, a tough match today. You fought very hard to get out of these situations. How do you feel for the recovery for the final? Do you feel it's going to be fine or are you a bit worried about it?
+		19. How do you feel now after this match? Do you feel good? Normal?
+		20. Is that the longest match of your career? How are you feeling physically now?
+		21. How are you feeling physically? Seemed to have a few issues with your hip. Is that right?
+		22. You played three very good movers in a row. Obviously a tough draw. Are you pleased with the fact that you can handle these kind of players? How do you feel you are moving on the court?
+		23. Do you feel like things are coming together any better now than you felt in the past? Do you feel like things are clicking, you're feeling it?
+		24. How do you feel your form is right now? Are you in peak form?
+		25. The question was asked in English, but I would like to come back on this. You were supported by the crowd today. The fans this year maybe thought you were in a difficult position and your love quota has increased. Can you feel that? Are you touched by that?
+		26. That's two very solid wins now. How do you feel you're playing? And obviously given you did so well here last year, how close do you feel you are to that form?
+		27. How do you feel playing here? And how do you feel sending Wozniacki to the semifinals?
+		28. So kind of coincidental. But how do you feel health-wise after the surgery? Do you feel anything from the surgery? You feel healthy? Feel strong?
+		29. Heading into the second week, how do you feel the level of your game is at?
+		30. Considering Rafa's results this spring and some of the things he's said about his own confidence, how vulnerable do you feel like he is here?
+		31. How are you feeling? Do you think you're fully recovered?
+		32. You had two matches this afternoon, singles and doubles. How do you feel now? Very good? A little tired?
+		33. Healthwise, how do you feel right now, coming back from the long layoff?
+		34. Casting ahead, how do you feel going in now, next opponent?
+		35. Physically how do you feel now?
+		36. The thing in Madrid that kept you out, what exactly was that?  How are you feeling now?
+		37. How are you feeling in general? Confident now?
+		38. First quarterfinal at 19. How are you feeling? Nervous, excited, mixture?
+		39. How are you feeling now physically? Tired?
+		40. How are you feeling? Everything seem to be going this way this year (Pointing upward)?
+		41. You haven't had to spend too much time on court. How are you feeling other than the neck? Are you feeling fresh for this stage of the tournament?
+		42. In Brisbane you sounded pretty pessimistic about your back and everything. How are you feeling now? Are you feeling back to good?
+		43. Do you feel like you're playing for Poland as well as your country at all? I mean, do you feel like you're representing Poland ever? Because you obviously have a big connection.
+		44. Do you feel in yourself that you're playing really well? You're having some struggles in matches which is absolutely normal. How do you feel your tennis is?
+		45. How are you feeling overall?
+		46. How are you feeling physically after that match? As a fivesetter when it seemed like it went by awfully quickly.
+		47. Congratulations. How are you feeling after only one match? How are you feeling about your form for this weekend and longer term?
+		48. A few years since you've been to the quarterfinals.  How are you feeling?
+		49. How are you feeling compared to the other years you've won here?
+		50. How are you feeling? Spent a long time out there for yourself.
+		51. How are you generally feeling about your form? Must be pretty confident.
+		52. Congratulations on your second win in a row. How are you feeling with your game right now? You must be feeling pretty good.
+		53. How are you feeling in general about your grass season?
+		54. How are you feeling? Because you looked like you did have a leg issue at one point.
+		55. How are you feeling?
+		56. Physically how are you feeling?
+		57. As far as the match with Maria goes, it's wellknown you're not the best of friends, as it were. People call it a grudge match. I suppose it actually has to be even sided for it to be a grudge match. You haven't lost to her in 11 years. How are you feeling about it?
+		58. How are you sort of feeling for the rest of tournament and how are you feeling in yourself?
+		59. How are you feeling on grass this year? You've had a good record here before, and you've got the game to go far.
+		60. Last week we see in the women's draw a lot of the women, particularly Serena and Victoria, pull out given that they had backtoback tournaments, Doha and then here. You have obviously come straight from Marseilles. How are you feeling physically?
+		61. How are you feeling in general?
+		62. Shoulder watch. Looks okay. No strapping. It was quite a heavy day. How are you feeling in yourself now?
+		63. You haven't won a final and you haven't lost a set this week. How are you feeling about playing Nieminen tomorrow?
+		64. How happy are you feeling at the moment with the way you're hitting the ball?
+		65. That would be your first Masters win, by the way. How are you feeling after that one?
+		66. How are you feeling, your shoulder and all that?
+		67. How are you feeling going into the Aussie Open? You seem relaxed.
+		68. How are you feeling physically?
+		69. How are you feeling out there? You looked pretty good.
+		70. How are you feeling after the two surgeries?
+		71. You were cocky, cheeky today. How are you feeling today?
+		72. How comfortable are you feeling on the grass now?
+		73. How are you feeling with your game overall after this summer?
+		74. How are you feeling in terms of this whole beginning of the season? Because you have had rough patches in your career and great patches.
+		75. How are you feeling going into Saturday's game?
+		76. Playing Madison Keys next. How are you feeling about that match?
+		77. We saw the braces on your ankles tonight. How are they feeling after your first match?
+		78. How are you feeling yourself going through three sets?
+		79. How are you feeling physically now after that?
+		80. John McEnroe was saying that with Lpez coming up tomorrow having a bit more time to rest than yourself, it might be an issue how you go into the match in terms fitness.  How are you feeling?
+		81. How are you feeling being off the clay and on to the grass?
+		82. How are you feeling today?
+		83. Even though you felt a little bit off today, you've had some great wins this week. How are you feeling overall? Obviously excited about being in the semifinals here.
+		84. How are you feeling?
+		85. You mentioned that you had muscle pain in Toronto; earlier this week you were talking about it. How are you feeling now?
+		86. Congratulations for this performance. During the last tournament we saw you having a bit of trouble after the first round. How are you feeling right now?
+		87. How are you feeling just day to day and mentally? Obviously you have come a long way since last year.
+		88. I know the year is not over yet, but can you put your year in perspective up to this point. Haven't gotten a major, but two backtoback Masters, back up to No.2. How are you feeling overall?
+		89. How are you feeling after coming straight from Marseilles?
+		90. Last week you won the tournament in L.A., and this week you're just plowing through the draw right now. How are you feeling about your confidence?
+		91. How are you feeling with the doubles coming up?
+		92. How are you feeling physically?
+		93. How are you feeling?
+		94. John, it's a pretty solid win. Seems like you've been not needing tiebreaks much the last few weeks. How are you feeling on your return and just playing overall?
+		95. How are you feeling now?
+		96. How are you feeling about this year in general? I mean, it's been a very good year for you. Interested in your thoughts on how this year has been compared to other years.
+		97. How are you feeling?
+		98. Talk about your season.  Your first title last week.  How are you feeling in general?
+		99. How are you feeling physically in this tournament? It seems like maybe you're not stressed, but there's a lot going into every game, every match, and you're not yet at your loosest.
+		100. How are you feeling about your serve coming out of the match?

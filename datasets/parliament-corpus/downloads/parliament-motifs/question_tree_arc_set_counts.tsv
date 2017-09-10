@@ -1,0 +1,1297 @@
+3030	1	*
+668	1	will>*
+526	1	does>*
+473	1	is_*
+398	1	is>*
+370	2	is>*	is_*
+313	1	agree_*
+287	1	agree_does
+287	2	agree_*	agree_does
+262	2	agree_*	does>*
+259	2	agree_does	does>*
+259	3	agree_*	agree_does	does>*
+238	1	what>*
+175	1	is_aware
+175	2	is_*	is_aware
+167	2	is>*	is_aware
+167	3	is>*	is_*	is_aware
+112	1	can>*
+100	1	accept_*
+100	1	agree_is
+100	2	agree_*	agree_is
+95	2	agree_does	agree_is
+95	3	agree_*	agree_does	agree_is
+93	1	what>what
+93	2	what>*	what>what
+90	2	agree_is	does>*
+90	3	agree_*	agree_is	does>*
+88	3	agree_does	agree_is	does>*
+88	4	agree_*	agree_does	agree_is	does>*
+86	1	in>*
+84	1	how>*
+83	1	be_*
+81	1	accept_does
+81	2	accept_*	accept_does
+80	1	give_*
+78	1	if>*
+78	1	when>*
+77	1	confirm_*
+77	1	have_*
+76	1	given>*
+76	1	tell_*
+72	2	accept_*	does>*
+71	2	accept_does	does>*
+71	3	accept_*	accept_does	does>*
+65	1	may>*
+64	1	ensure_*
+61	1	confirm_will
+61	2	confirm_*	confirm_will
+60	1	take_*
+59	1	why>*
+57	1	would>*
+55	1	assure_*
+54	2	confirm_*	will>*
+53	1	ensure_will
+53	2	confirm_will	will>*
+53	2	ensure_*	ensure_will
+53	3	confirm_*	confirm_will	will>*
+51	1	as>*
+51	1	given_*
+51	1	has>*
+48	1	give_will
+48	2	give_*	give_will
+47	1	do_*
+47	1	is_not
+47	2	is_*	is_not
+45	2	is>*	is_not
+45	3	is>*	is_*	is_not
+44	1	does_*
+43	1	is>not
+43	2	is>*	is>not
+42	1	take_will
+42	2	ensure_*	will>*
+42	2	take_*	take_will
+41	2	is>not	is_*
+41	3	is>*	is>not	is_*
+40	1	are_*
+40	1	explain_*
+40	1	has_*
+40	2	give_*	will>*
+39	1	ask_*
+39	1	consider_*
+38	1	make_*
+38	2	give_will	will>*
+38	2	given>*	given_*
+38	3	give_*	give_will	will>*
+37	1	tell_will
+37	2	ensure_will	will>*
+37	2	tell_*	tell_will
+37	3	ensure_*	ensure_will	will>*
+36	2	does>*	does_*
+35	1	assure_will
+35	2	assure_*	assure_will
+35	2	take_*	will>*
+34	2	has>*	has_*
+33	1	think_*
+33	2	assure_*	will>*
+33	2	assure_will	will>*
+33	3	assure_*	assure_will	will>*
+32	1	agree_with
+32	1	be_would
+32	2	agree_*	agree_with
+32	2	be_*	be_would
+32	2	take_will	will>*
+32	3	take_*	take_will	will>*
+31	1	given>that
+31	2	given>*	given>that
+31	2	tell_*	will>*
+30	1	join_*
+30	1	what>is
+30	1	when>will
+30	2	what>*	what>is
+30	2	when>*	when>will
+29	1	be_will
+29	1	consider_will
+29	1	have_does
+29	1	look_*
+29	1	think_does
+29	2	be_*	be_will
+29	2	consider_*	consider_will
+29	2	have_*	have_does
+29	2	think_*	think_does
+28	1	do_will
+28	1	join_in
+28	1	join_will
+28	2	do_*	do_will
+28	2	join_*	join_will
+28	2	join_*	join_in
+28	2	tell_will	will>*
+28	3	tell_*	tell_will	will>*
+27	1	accept_is
+27	1	give_can
+27	1	made_*
+27	2	accept_*	accept_is
+27	2	give_*	give_can
+27	2	is>not	is_not
+27	3	is>*	is>not	is_not
+27	3	is>not	is_*	is_not
+27	4	is>*	is>not	is_*	is_not
+26	1	ask_may
+26	1	look_at
+26	1	say_*
+26	1	will_*
+26	2	agree_does	agree_with
+26	2	ask_*	ask_may
+26	2	be_*	would>*
+26	2	be_would	would>*
+26	2	join_*	will>*
+26	2	join_in	join_will
+26	2	join_will	will>*
+26	2	look_*	look_at
+26	3	agree_*	agree_does	agree_with
+26	3	be_*	be_would	would>*
+26	3	join_*	join_will	will>*
+26	3	join_*	join_in	join_will
+25	1	look_will
+25	1	tell_can
+25	2	join_in	will>*
+25	2	look_*	look_will
+25	2	tell_*	tell_can
+25	3	join_*	join_in	will>*
+25	3	join_in	join_will	will>*
+25	4	join_*	join_in	join_will	will>*
+24	1	be_not
+24	1	make_will
+24	2	be_*	be_not
+24	2	look_at	look_will
+24	2	make_*	make_will
+24	2	will>*	will_*
+24	3	look_*	look_at	look_will
+23	1	are>*
+23	1	have_will
+23	2	agree_with	does>*
+23	2	have_*	have_will
+23	3	agree_*	agree_with	does>*
+23	3	agree_does	agree_with	does>*
+23	4	agree_*	agree_does	agree_with	does>*
+22	1	agree_be
+22	1	is_there
+22	1	on>*
+22	2	accept_does	accept_is
+22	2	agree_*	agree_be
+22	2	is_*	is_there
+22	3	accept_*	accept_does	accept_is
+21	1	believe_*
+21	1	doing_*
+21	1	however>*
+21	2	look_*	will>*
+21	2	look_will	will>*
+21	3	look_*	look_will	will>*
+20	1	although>*
+20	1	do>*
+20	1	explain_will
+20	2	agree_be	agree_does
+20	2	consider_*	will>*
+20	2	doing_*	what>*
+20	2	explain_*	explain_will
+20	2	look_at	will>*
+20	3	agree_*	agree_be	agree_does
+20	3	look_*	look_at	will>*
+20	3	look_at	look_will	will>*
+20	4	look_*	look_at	look_will	will>*
+19	1	assure_can
+19	2	assure_*	assure_can
+19	2	be_not	be_would
+19	2	consider_will	will>*
+19	3	be_*	be_not	be_would
+19	3	consider_*	consider_will	will>*
+18	1	is_is
+18	1	understand_*
+18	1	welcome_*
+18	2	accept_is	does>*
+18	2	be_not	would>*
+18	2	can>*	give_*
+18	2	can>*	give_can
+18	2	is_*	is_is
+18	2	is_*	what>*
+18	2	make_*	will>*
+18	3	accept_*	accept_is	does>*
+18	3	accept_does	accept_is	does>*
+18	3	be_*	be_not	would>*
+18	3	be_not	be_would	would>*
+18	3	can>*	give_*	give_can
+18	4	accept_*	accept_does	accept_is	does>*
+18	4	be_*	be_not	be_would	would>*
+17	1	acknowledge_*
+17	1	explain_can
+17	1	have_what
+17	1	is_what
+17	1	what>are
+17	2	ask_*	may>*
+17	2	explain_*	explain_can
+17	2	have_*	have_what
+17	2	have_*	what>*
+17	2	is_*	is_what
+17	2	what>*	what>are
+16	1	believe_does
+16	1	confirm_can
+16	1	do_what
+16	1	give_to
+16	1	going_*
+16	1	how>can
+16	1	how>many
+16	1	if>so
+16	1	should>*
+16	1	what>does
+16	1	why>is
+16	2	agree_be	does>*
+16	2	believe_*	believe_does
+16	2	can>*	tell_*
+16	2	confirm_*	confirm_can
+16	2	do_*	do_what
+16	2	explain_*	will>*
+16	2	give_*	give_to
+16	2	have_what	what>*
+16	2	how>*	how>many
+16	2	how>*	how>can
+16	2	if>*	if>so
+16	2	what>*	what>does
+16	2	why>*	why>is
+16	3	agree_*	agree_be	does>*
+16	3	agree_be	agree_does	does>*
+16	3	have_*	have_what	what>*
+16	4	agree_*	agree_be	agree_does	does>*
+15	1	how>does
+15	1	is_why
+15	1	put_*
+15	1	undertake_*
+15	1	undertake_will
+15	1	update_*
+15	1	what>will
+15	2	ask_may	may>*
+15	2	can>*	tell_can
+15	2	do_*	what>*
+15	2	does>*	think_*
+15	2	does>*	think_does
+15	2	explain_will	will>*
+15	2	how>*	how>does
+15	2	if>*	is_*
+15	2	is>*	is_is
+15	2	is_*	is_why
+15	2	make_will	will>*
+15	2	undertake_*	undertake_will
+15	2	what>*	what>will
+15	3	ask_*	ask_may	may>*
+15	3	can>*	tell_*	tell_can
+15	3	does>*	think_*	think_does
+15	3	explain_*	explain_will	will>*
+15	3	is>*	is_*	is_is
+15	3	make_*	make_will	will>*
+14	1	agree_will
+14	1	encourage_*
+14	1	made_what
+14	1	remind_*
+14	1	understand_does
+14	1	urge_*
+14	1	use_*
+14	2	agree_*	agree_will
+14	2	are>*	are_*
+14	2	assure_*	can>*
+14	2	assure_can	can>*
+14	2	be_*	will>*
+14	2	be_will	will>*
+14	2	believe_*	does>*
+14	2	believe_does	does>*
+14	2	can>*	explain_*
+14	2	can>*	explain_can
+14	2	do_*	will>*
+14	2	do_what	what>*
+14	2	do_will	will>*
+14	2	does>*	understand_*
+14	2	have_*	will>*
+14	2	is_*	why>*
+14	2	is_what	what>*
+14	2	made_*	made_what
+14	2	understand_*	understand_does
+14	3	assure_*	assure_can	can>*
+14	3	be_*	be_will	will>*
+14	3	believe_*	believe_does	does>*
+14	3	can>*	explain_*	explain_can
+14	3	do_*	do_will	will>*
+14	3	do_*	do_what	what>*
+14	3	is_*	is_what	what>*
+13	1	accept_will
+13	1	agree_are
+13	1	bear_*
+13	1	bear_will
+13	1	confirm_is
+13	1	have>*
+13	1	made_has
+13	1	realise_*
+13	1	update_will
+13	1	was_*
+13	1	what>can
+13	2	accept_*	accept_will
+13	2	accept_*	will>*
+13	2	agree_*	agree_are
+13	2	agree_are	agree_does
+13	2	bear_*	bear_will
+13	2	can>*	confirm_*
+13	2	can>*	confirm_can
+13	2	confirm_*	confirm_is
+13	2	does>*	understand_does
+13	2	does>*	have_*
+13	2	give_to	give_will
+13	2	given>that	given_*
+13	2	is>*	is_there
+13	2	made_*	made_has
+13	2	update_*	update_will
+13	2	what>*	what>can
+13	3	agree_*	agree_are	agree_does
+13	3	can>*	confirm_*	confirm_can
+13	3	does>*	understand_*	understand_does
+13	3	give_*	give_to	give_will
+13	3	given>*	given>that	given_*
+13	3	is>*	is_*	is_there
+12	1	but>*
+12	1	going_is
+12	1	intend_*
+12	1	meet_*
+12	1	realise_does
+12	1	see_*
+12	1	taken_*
+12	1	taking_*
+12	1	that>*
+12	1	to>*
+12	1	while>*
+12	1	with>*
+12	2	agree_*	will>*
+12	2	agree_are	does>*
+12	2	does>*	realise_does
+12	2	does>*	realise_*
+12	2	going_*	going_is
+12	2	have_does	have_what
+12	2	have_does	what>*
+12	2	is_*	why>is
+12	2	is_why	why>*
+12	2	is_why	why>is
+12	2	made_*	what>*
+12	2	made_what	what>*
+12	2	realise_*	realise_does
+12	2	update_*	will>*
+12	2	update_will	will>*
+12	3	agree_*	agree_are	does>*
+12	3	agree_are	agree_does	does>*
+12	3	does>*	realise_*	realise_does
+12	3	have_*	have_does	what>*
+12	3	have_*	have_does	have_what
+12	3	is_*	is_why	why>*
+12	3	is_*	is_why	why>is
+12	3	is_*	why>*	why>is
+12	3	is_why	why>*	why>is
+12	3	made_*	made_what	what>*
+12	3	update_*	update_will	will>*
+12	4	agree_*	agree_are	agree_does	does>*
+12	4	is_*	is_why	why>*	why>is
+11	1	be_there
+11	1	continue_*
+11	1	could>*
+11	1	does>not
+11	1	doing_is
+11	1	ensure_is
+11	1	how>will
+11	1	meet_will
+11	1	recall_*
+11	1	since>*
+11	1	use_will
+11	1	was>*
+11	1	would>not
+11	2	be_*	be_there
+11	2	does>*	does>not
+11	2	doing_*	doing_is
+11	2	ensure_*	ensure_is
+11	2	have_will	will>*
+11	2	how>*	how>will
+11	2	made_*	what>what
+11	2	made_has	what>what
+11	2	made_has	made_what
+11	2	made_has	what>*
+11	2	made_what	what>what
+11	2	meet_*	meet_will
+11	2	meet_*	will>*
+11	2	undertake_*	will>*
+11	2	undertake_will	will>*
+11	2	use_*	use_will
+11	2	would>*	would>not
+11	3	have_*	have_will	will>*
+11	3	have_does	have_what	what>*
+11	3	made_*	made_has	made_what
+11	3	made_*	what>*	what>what
+11	3	made_*	made_what	what>what
+11	3	made_*	made_has	what>*
+11	3	made_*	made_has	what>what
+11	3	made_has	what>*	what>what
+11	3	made_has	made_what	what>what
+11	3	made_has	made_what	what>*
+11	3	made_what	what>*	what>what
+11	3	undertake_*	undertake_will	will>*
+11	4	have_*	have_does	have_what	what>*
+11	4	made_*	made_has	made_what	what>what
+11	4	made_*	made_has	what>*	what>what
+11	4	made_*	made_has	made_what	what>*
+11	4	made_*	made_what	what>*	what>what
+11	4	made_has	made_what	what>*	what>what
+11	5	made_*	made_has	made_what	what>*	what>what
+10	1	bear_in
+10	1	been_*
+10	1	commit_*
+10	1	congratulate_*
+10	1	do_can
+10	1	doing_are
+10	1	expect_*
+10	1	give_what
+10	1	had_*
+10	1	intend_does
+10	1	is>there
+10	1	recall_does
+10	1	show_*
+10	1	so>*
+10	1	think_is
+10	1	update_on
+10	2	bear_*	bear_in
+10	2	bear_in	bear_will
+10	2	confirm_is	confirm_will
+10	2	do_*	do_can
+10	2	does>*	recall_*
+10	2	does>*	recall_does
+10	2	does>*	have_does
+10	2	doing_*	what>are
+10	2	doing_*	doing_are
+10	2	doing_are	what>are
+10	2	doing_are	what>*
+10	2	doing_is	what>*
+10	2	ensure_is	ensure_will
+10	2	give_*	give_what
+10	2	give_*	what>*
+10	2	give_to	will>*
+10	2	given_*	what>*
+10	2	intend_*	intend_does
+10	2	is>*	is>there
+10	2	is>there	is_*
+10	2	is>there	is_there
+10	2	is_*	what>is
+10	2	is_what	what>is
+10	2	meet_will	will>*
+10	2	recall_*	recall_does
+10	2	think_*	think_is
+10	2	update_*	update_on
+10	2	was>*	was_*
+10	3	bear_*	bear_in	bear_will
+10	3	confirm_*	confirm_is	confirm_will
+10	3	does>*	recall_*	recall_does
+10	3	does>*	have_*	have_does
+10	3	doing_*	doing_are	what>are
+10	3	doing_*	what>*	what>are
+10	3	doing_*	doing_are	what>*
+10	3	doing_*	doing_is	what>*
+10	3	doing_are	what>*	what>are
+10	3	ensure_*	ensure_is	ensure_will
+10	3	give_*	give_to	will>*
+10	3	is>*	is>there	is_*
+10	3	is>*	is>there	is_there
+10	3	is>there	is_*	is_there
+10	3	is_*	is_what	what>is
+10	3	is_*	what>*	what>is
+10	3	is_what	what>*	what>is
+10	3	meet_*	meet_will	will>*
+10	4	doing_*	doing_are	what>*	what>are
+10	4	is>*	is>there	is_*	is_there
+10	4	is_*	is_what	what>*	what>is
+9	1	acknowledge_does
+9	1	agree_have
+9	1	answer_*
+9	1	be_can
+9	1	clarify_*
+9	1	commit_will
+9	1	done_*
+9	1	given_is
+9	1	is_satisfied
+9	1	learned_*
+9	1	recognise_*
+9	1	support_*
+9	1	what_*
+9	1	what_what
+9	1	why>does
+9	2	accept_will	will>*
+9	2	acknowledge_*	acknowledge_does
+9	2	agree_*	agree_have
+9	2	agree_will	will>*
+9	2	be_*	be_can
+9	2	commit_*	commit_will
+9	2	do_what	do_will
+9	2	doing_*	what>is
+9	2	doing_is	what>is
+9	2	give_*	what>what
+9	2	give_what	what>*
+9	2	given_*	given_is
+9	2	is_*	is_satisfied
+9	2	taking_*	what>*
+9	2	think_does	think_is
+9	2	what>*	what_*
+9	2	what>*	what_what
+9	2	what_*	what_what
+9	2	why>*	why>does
+9	3	accept_*	accept_will	will>*
+9	3	agree_*	agree_will	will>*
+9	3	do_*	do_what	do_will
+9	3	doing_*	doing_is	what>is
+9	3	doing_*	what>*	what>is
+9	3	doing_is	what>*	what>is
+9	3	give_*	what>*	what>what
+9	3	give_*	give_what	what>*
+9	3	give_to	give_will	will>*
+9	3	think_*	think_does	think_is
+9	3	what>*	what_*	what_what
+9	4	doing_*	doing_is	what>*	what>is
+9	4	give_*	give_to	give_will	will>*
+8	1	admit_*
+8	1	agree_need
+8	1	answer_will
+8	1	appreciate_*
+8	1	appreciate_does
+8	1	are_there
+8	1	are_what
+8	1	commit_to
+8	1	confirm_are
+8	1	continue_will
+8	1	did>*
+8	1	ensure_have
+8	1	expect_does
+8	1	go_*
+8	1	has_had
+8	1	is_are
+8	1	know_*
+8	1	mean_*
+8	1	need_*
+8	1	reassure_*
+8	1	review_*
+8	1	take_may
+8	1	try_*
+8	1	why>are
+8	1	would_*
+8	2	acknowledge_*	does>*
+8	2	acknowledge_does	does>*
+8	2	agree_*	agree_need
+8	2	agree_does	agree_have
+8	2	answer_*	answer_will
+8	2	appreciate_*	appreciate_does
+8	2	are_*	are_there
+8	2	are_*	what>*
+8	2	are_*	are_what
+8	2	are_what	what>*
+8	2	be_*	what>*
+8	2	be_*	would>not
+8	2	be_would	would>not
+8	2	commit_*	commit_to
+8	2	commit_*	will>*
+8	2	commit_to	commit_will
+8	2	commit_will	will>*
+8	2	confirm_*	confirm_are
+8	2	continue_*	will>*
+8	2	continue_*	continue_will
+8	2	do_*	what>will
+8	2	do_what	what>will
+8	2	do_will	what>will
+8	2	do_will	what>*
+8	2	ensure_*	ensure_have
+8	2	expect_*	expect_does
+8	2	give_what	what>what
+8	2	given_*	what>what
+8	2	going_*	what>*
+8	2	has_*	has_had
+8	2	is>*	is_satisfied
+8	2	is_*	is_are
+8	2	take_*	take_may
+8	2	update_on	will>*
+8	2	update_on	update_will
+8	2	use_*	will>*
+8	2	use_will	will>*
+8	2	why>*	why>are
+8	3	acknowledge_*	acknowledge_does	does>*
+8	3	agree_*	agree_does	agree_have
+8	3	are_*	are_what	what>*
+8	3	be_*	would>*	would>not
+8	3	be_*	be_would	would>not
+8	3	be_would	would>*	would>not
+8	3	commit_*	commit_will	will>*
+8	3	commit_*	commit_to	commit_will
+8	3	do_*	what>*	what>will
+8	3	do_*	do_will	what>*
+8	3	do_*	do_what	what>will
+8	3	do_*	do_will	what>will
+8	3	do_what	do_will	what>*
+8	3	do_what	do_will	what>will
+8	3	do_what	what>*	what>will
+8	3	do_will	what>*	what>will
+8	3	give_*	give_what	what>what
+8	3	give_what	what>*	what>what
+8	3	given_*	what>*	what>what
+8	3	is>*	is_*	is_satisfied
+8	3	update_*	update_on	will>*
+8	3	update_*	update_on	update_will
+8	3	update_on	update_will	will>*
+8	3	use_*	use_will	will>*
+8	4	be_*	be_would	would>*	would>not
+8	4	do_*	do_will	what>*	what>will
+8	4	do_*	do_what	do_will	what>*
+8	4	do_*	do_what	do_will	what>will
+8	4	do_*	do_what	what>*	what>will
+8	4	do_what	do_will	what>*	what>will
+8	4	give_*	give_what	what>*	what>what
+8	4	update_*	update_on	update_will	will>*
+8	5	do_*	do_what	do_will	what>*	what>will
+7	1	acknowledge_will
+7	1	agree_given
+7	1	am_*
+7	1	are>not
+7	1	ask_will
+7	1	at>*
+7	1	be_able
+7	1	be_better
+7	1	bring_*
+7	1	come_*
+7	1	draw_*
+7	1	explain_to
+7	1	express_*
+7	1	get_*
+7	1	given_what
+7	1	going_do
+7	1	help_*
+7	1	how_*
+7	1	is_in
+7	1	learned_will
+7	1	look_again
+7	1	made_be
+7	1	make_to
+7	1	mean_does
+7	1	pay_*
+7	1	realise_not
+7	1	remind_will
+7	1	show_not
+7	1	stand_*
+7	1	take_into
+7	1	take_what
+7	1	taken_has
+7	1	taken_what
+7	1	taking_what
+7	1	tell_may
+7	2	acknowledge_*	acknowledge_will
+7	2	agree_*	agree_given
+7	2	agree_does	agree_need
+7	2	agree_have	does>*
+7	2	answer_*	will>*
+7	2	answer_will	will>*
+7	2	are>*	are>not
+7	2	ask_*	will>*
+7	2	ask_*	ask_will
+7	2	be_*	be_able
+7	2	be_*	be_better
+7	2	be_able	be_will
+7	2	be_better	would>*
+7	2	be_better	be_would
+7	2	bear_*	will>*
+7	2	bear_will	will>*
+7	2	commit_to	will>*
+7	2	confirm_is	will>*
+7	2	continue_will	will>*
+7	2	do_can	do_what
+7	2	does>*	realise_not
+7	2	does>*	will>*
+7	2	explain_*	explain_to
+7	2	given_*	given_what
+7	2	given_what	what>*
+7	2	going_*	going_do
+7	2	going_do	what>*
+7	2	has>*	has_had
+7	2	have>*	have_*
+7	2	have_*	what>what
+7	2	have_what	what>what
+7	2	how>*	is_*
+7	2	is_*	is_in
+7	2	learned_*	learned_will
+7	2	look_*	look_again
+7	2	look_again	look_at
+7	2	made_*	made_be
+7	2	make_*	make_to
+7	2	mean_*	mean_does
+7	2	realise_*	realise_not
+7	2	realise_does	realise_not
+7	2	remind_*	remind_will
+7	2	show_*	show_not
+7	2	take_*	take_into
+7	2	take_*	take_what
+7	2	taken_*	taken_has
+7	2	taken_*	what>*
+7	2	taken_*	taken_what
+7	2	taking_*	taking_what
+7	2	tell_*	tell_may
+7	2	would>*	would_*
+7	3	agree_*	agree_have	does>*
+7	3	agree_*	agree_does	agree_need
+7	3	agree_does	agree_have	does>*
+7	3	answer_*	answer_will	will>*
+7	3	be_*	be_able	be_will
+7	3	be_*	be_better	would>*
+7	3	be_*	be_better	be_would
+7	3	be_better	be_would	would>*
+7	3	bear_*	bear_will	will>*
+7	3	commit_*	commit_to	will>*
+7	3	commit_to	commit_will	will>*
+7	3	confirm_*	confirm_is	will>*
+7	3	confirm_is	confirm_will	will>*
+7	3	continue_*	continue_will	will>*
+7	3	do_*	do_can	do_what
+7	3	does>*	realise_does	realise_not
+7	3	does>*	realise_*	realise_not
+7	3	given_*	given_what	what>*
+7	3	going_*	going_do	what>*
+7	3	has>*	has_*	has_had
+7	3	have_*	what>*	what>what
+7	3	have_*	have_what	what>what
+7	3	have_what	what>*	what>what
+7	3	look_*	look_again	look_at
+7	3	realise_*	realise_does	realise_not
+7	4	agree_*	agree_does	agree_have	does>*
+7	4	be_*	be_better	be_would	would>*
+7	4	commit_*	commit_to	commit_will	will>*
+7	4	confirm_*	confirm_is	confirm_will	will>*
+7	4	does>*	realise_*	realise_does	realise_not
+7	4	have_*	have_what	what>*	what>what
+6	1	accept_been
+6	1	agree_further
+6	1	be_should
+6	1	clarify_will
+6	1	confirm_be
+6	1	do_ensure
+6	1	doing_what
+6	1	done_what
+6	1	encourage_will
+6	1	ensure>*
+6	1	ensure>that
+6	1	explain_is
+6	1	further>*
+6	1	get_will
+6	1	given_has
+6	1	given_to
+6	1	going_when
+6	1	had_what
+6	1	had_with
+6	1	how>how
+6	1	instead>*
+6	1	is_confident
+6	1	made_been
+6	1	made_of
+6	1	made_will
+6	1	make_clear
+6	1	offer_*
+6	1	put_will
+6	1	reassure_will
+6	1	received_*
+6	1	remind_may
+6	1	review_will
+6	1	say_can
+6	1	say_to
+6	1	say_what
+6	1	share_*
+6	1	show_does
+6	1	stop_*
+6	1	suggest_*
+6	1	support_will
+6	1	take_ensure
+6	1	taking_are
+6	1	taking_is
+6	1	thank_*
+6	1	think_not
+6	1	try_will
+6	1	urge_will
+6	1	want_*
+6	1	which>*
+6	1	why>do
+6	2	accept_*	accept_been
+6	2	accept_been	accept_does
+6	2	acknowledge_*	will>*
+6	2	agree_*	agree_further
+6	2	agree_does	agree_given
+6	2	agree_is	agree_with
+6	2	agree_need	does>*
+6	2	appreciate_*	does>*
+6	2	appreciate_does	does>*
+6	2	as>*	is_*
+6	2	be_*	be_should
+6	2	be_better	be_not
+6	2	clarify_*	clarify_will
+6	2	confirm_*	confirm_be
+6	2	confirm_be	confirm_will
+6	2	do_*	what>can
+6	2	do_*	do_ensure
+6	2	do_can	what>*
+6	2	do_can	what>can
+6	2	do_what	what>can
+6	2	does>*	is_*
+6	2	doing_*	doing_what
+6	2	doing_what	what>*
+6	2	done_*	done_what
+6	2	encourage_*	encourage_will
+6	2	ensure>*	ensure>that
+6	2	ensure>*	ensure_*
+6	2	ensure>that	ensure_*
+6	2	ensure_is	will>*
+6	2	explain_*	explain_is
+6	2	get_*	get_will
+6	2	give_can	give_what
+6	2	give_can	what>what
+6	2	give_can	what>*
+6	2	given_*	given_to
+6	2	given_*	given_has
+6	2	given_to	what>*
+6	2	given_to	given_what
+6	2	going_*	going_when
+6	2	going_*	when>*
+6	2	going_*	what>is
+6	2	going_is	what>is
+6	2	going_is	what>*
+6	2	going_when	when>*
+6	2	had_*	had_what
+6	2	had_*	had_with
+6	2	how>*	how>how
+6	2	how>*	how_*
+6	2	is_*	is_confident
+6	2	look_again	will>*
+6	2	look_again	look_will
+6	2	made_*	made_will
+6	2	made_*	made_of
+6	2	made_*	made_been
+6	2	made_be	made_will
+6	2	make_*	make_clear
+6	2	make_*	what>*
+6	2	may>*	tell_may
+6	2	may>*	tell_*
+6	2	may>*	take_*
+6	2	may>*	take_may
+6	2	put_*	put_will
+6	2	reassure_*	reassure_will
+6	2	remind_*	remind_may
+6	2	review_*	review_will
+6	2	say_*	say_what
+6	2	say_*	say_can
+6	2	say_*	say_to
+6	2	show_*	show_does
+6	2	show_does	show_not
+6	2	support_*	support_will
+6	2	take_*	take_ensure
+6	2	taken_what	what>*
+6	2	taking_*	taking_are
+6	2	taking_*	taking_is
+6	2	taking_what	what>*
+6	2	think_*	think_not
+6	2	think_does	think_not
+6	2	try_*	try_will
+6	2	urge_*	urge_will
+6	2	welcome_*	will>*
+6	2	what>what	what_what
+6	2	what>what	what_*
+6	2	why>*	why>do
+6	3	accept_*	accept_been	accept_does
+6	3	agree_*	agree_is	agree_with
+6	3	agree_*	agree_need	does>*
+6	3	agree_*	agree_does	agree_given
+6	3	agree_does	agree_need	does>*
+6	3	appreciate_*	appreciate_does	does>*
+6	3	be_*	be_better	be_not
+6	3	be_better	be_not	would>*
+6	3	be_better	be_not	be_would
+6	3	confirm_*	confirm_be	confirm_will
+6	3	do_*	do_can	what>can
+6	3	do_*	what>*	what>can
+6	3	do_*	do_can	what>*
+6	3	do_*	do_what	what>can
+6	3	do_can	do_what	what>*
+6	3	do_can	what>*	what>can
+6	3	do_can	do_what	what>can
+6	3	do_what	what>*	what>can
+6	3	doing_*	doing_what	what>*
+6	3	ensure>*	ensure>that	ensure_*
+6	3	ensure_*	ensure_is	will>*
+6	3	ensure_is	ensure_will	will>*
+6	3	give_*	give_can	give_what
+6	3	give_*	give_can	what>what
+6	3	give_*	give_can	what>*
+6	3	give_can	what>*	what>what
+6	3	given_*	given_to	given_what
+6	3	given_*	given_to	what>*
+6	3	given_to	given_what	what>*
+6	3	going_*	going_when	when>*
+6	3	going_*	going_is	what>is
+6	3	going_*	what>*	what>is
+6	3	going_*	going_is	what>*
+6	3	going_is	what>*	what>is
+6	3	look_*	look_again	look_will
+6	3	look_*	look_again	will>*
+6	3	look_again	look_at	look_will
+6	3	look_again	look_at	will>*
+6	3	look_again	look_will	will>*
+6	3	made_*	made_be	made_will
+6	3	may>*	tell_*	tell_may
+6	3	may>*	take_*	take_may
+6	3	show_*	show_does	show_not
+6	3	taken_*	taken_what	what>*
+6	3	taking_*	taking_what	what>*
+6	3	think_*	think_does	think_not
+6	3	what>*	what>what	what_*
+6	3	what>*	what>what	what_what
+6	3	what>what	what_*	what_what
+6	4	agree_*	agree_does	agree_need	does>*
+6	4	be_*	be_better	be_not	would>*
+6	4	be_*	be_better	be_not	be_would
+6	4	be_better	be_not	be_would	would>*
+6	4	do_*	do_what	what>*	what>can
+6	4	do_*	do_can	do_what	what>can
+6	4	do_*	do_can	do_what	what>*
+6	4	do_*	do_can	what>*	what>can
+6	4	do_can	do_what	what>*	what>can
+6	4	ensure_*	ensure_is	ensure_will	will>*
+6	4	give_*	give_can	what>*	what>what
+6	4	given_*	given_to	given_what	what>*
+6	4	going_*	going_is	what>*	what>is
+6	4	look_*	look_again	look_at	look_will
+6	4	look_*	look_again	look_at	will>*
+6	4	look_*	look_again	look_will	will>*
+6	4	look_again	look_at	look_will	will>*
+6	4	what>*	what>what	what_*	what_what
+6	5	be_*	be_better	be_not	be_would	would>*
+6	5	do_*	do_can	do_what	what>*	what>can
+6	5	look_*	look_again	look_at	look_will	will>*
+5	1	agree_also
+5	1	agree_meet
+5	1	are_in
+5	1	as>there
+5	1	ask>*
+5	1	be_how
+5	1	be_in
+5	1	be_what
+5	1	been_has
+5	1	been_have
+5	1	believe_is
+5	1	confirm_in
+5	1	consider_would
+5	1	do>not
+5	1	during>*
+5	1	examine_*
+5	1	explain_why
+5	1	feel_*
+5	1	further>to
+5	1	going_are
+5	1	had_has
+5	1	have_say
+5	1	in>particular
+5	1	in_*
+5	1	instead>of
+5	1	invite_*
+5	1	involved_*
+5	1	is_concerned
+5	1	is_take
+5	1	is_true
+5	1	justify_*
+5	1	justify_how
+5	1	let_*
+5	1	made_in
+5	1	now>*
+5	1	point_*
+5	1	press_*
+5	1	provide_*
+5	1	recognise_does
+5	1	reconsider_*
+5	1	reconsider_will
+5	1	reflect_*
+5	1	say_may
+5	1	say_will
+5	1	see_will
+5	1	seek_*
+5	1	seen_*
+5	1	share_does
+5	1	should>not
+5	1	so>will
+5	1	stop_will
+5	1	tell_given
+5	1	tell_is
+5	1	where>*
+5	1	who>*
+5	1	why>did
+5	2	accept_is	accept_will
+5	2	acknowledge_will	will>*
+5	2	agree_*	although>*
+5	2	agree_*	in>*
+5	2	agree_*	agree_meet
+5	2	agree_*	agree_also
+5	2	agree_also	agree_does
+5	2	agree_also	does>*
+5	2	agree_does	although>*
+5	2	agree_does	agree_further
+5	2	agree_meet	agree_will
+5	2	agree_meet	will>*
+5	2	are>not	are_*
+5	2	are_*	are_in
+5	2	as>*	as>there
+5	2	ask>*	ask_*
+5	2	ask_will	will>*
+5	2	be_*	be_in
+5	2	be_*	be_what
+5	2	be_*	when>*
+5	2	be_*	how>*
+5	2	be_*	be_how
+5	2	be_how	how>*
+5	2	be_not	would>not
+5	2	be_what	what>*
+5	2	bear_in	will>*
+5	2	been_*	been_has
+5	2	been_*	been_have
+5	2	believe_*	believe_is
+5	2	clarify_*	will>*
+5	2	clarify_will	will>*
+5	2	confirm_*	confirm_in
+5	2	confirm_are	confirm_can
+5	2	consider_*	consider_would
+5	2	do>*	do>not
+5	2	do_ensure	do_will
+5	2	does>*	show_not
+5	2	does>*	show_*
+5	2	does>*	show_does
+5	2	does>*	recognise_does
+5	2	does>*	recognise_*
+5	2	does>*	intend_does
+5	2	does>*	intend_*
+5	2	done_*	what>*
+5	2	done_what	what>*
+5	2	ensure_have	ensure_will
+5	2	explain_*	explain_why
+5	2	further>*	further>to
+5	2	given>*	tell_*
+5	2	given_to	what>what
+5	2	given_what	what>what
+5	2	going_*	going_are
+5	2	going_do	going_is
+5	2	going_do	what>is
+5	2	had_*	what>what
+5	2	had_*	had_has
+5	2	had_*	what>*
+5	2	had_what	had_with
+5	2	had_with	what>what
+5	2	had_with	what>*
+5	2	have_*	have_say
+5	2	have_*	what>does
+5	2	have_*	how>*
+5	2	have_does	what>does
+5	2	have_does	have_say
+5	2	have_say	what>*
+5	2	have_say	have_what
+5	2	have_say	what>does
+5	2	have_what	what>does
+5	2	how>*	justify_*
+5	2	how>*	justify_how
+5	2	in>*	in>particular
+5	2	in>*	in_*
+5	2	instead>*	instead>of
+5	2	is>*	is_confident
+5	2	is>*	is_true
+5	2	is_*	is_concerned
+5	2	is_*	is_take
+5	2	is_*	what>what
+5	2	is_*	is_true
+5	2	is_aware	is_is
+5	2	justify_*	justify_how
+5	2	made_*	made_in
+5	2	made_been	made_what
+5	2	made_has	made_of
+5	2	made_of	made_what
+5	2	made_of	what>*
+5	2	made_of	what>what
+5	2	make_clear	will>*
+5	2	make_clear	make_will
+5	2	pay_*	will>*
+5	2	put_*	will>*
+5	2	recognise_*	recognise_does
+5	2	reconsider_*	reconsider_will
+5	2	remind_*	will>*
+5	2	remind_will	will>*
+5	2	say_*	what>*
+5	2	say_*	say_may
+5	2	say_*	will>*
+5	2	say_*	say_will
+5	2	say_what	what>*
+5	2	see_*	see_will
+5	2	share_*	share_does
+5	2	should>*	should>not
+5	2	so>*	so>will
+5	2	stop_*	stop_will
+5	2	take_ensure	take_will
+5	2	take_into	take_will
+5	2	taken_*	what>what
+5	2	taking_is	what>*
+5	2	tell_*	tell_is
+5	2	tell_*	tell_given
+5	2	that>*	will>*
+5	2	why>*	why>did
+5	3	accept_*	accept_is	accept_will
+5	3	acknowledge_*	acknowledge_will	will>*
+5	3	agree_*	agree_does	although>*
+5	3	agree_*	agree_meet	will>*
+5	3	agree_*	agree_meet	agree_will
+5	3	agree_*	agree_also	does>*
+5	3	agree_*	agree_also	agree_does
+5	3	agree_*	agree_does	agree_further
+5	3	agree_also	agree_does	does>*
+5	3	agree_does	agree_is	agree_with
+5	3	agree_is	agree_with	does>*
+5	3	agree_meet	agree_will	will>*
+5	3	are>*	are>not	are_*
+5	3	ask_*	ask_will	will>*
+5	3	be_*	be_what	what>*
+5	3	be_*	be_not	would>not
+5	3	be_*	be_how	how>*
+5	3	be_not	be_would	would>not
+5	3	be_not	would>*	would>not
+5	3	bear_*	bear_in	will>*
+5	3	bear_in	bear_will	will>*
+5	3	clarify_*	clarify_will	will>*
+5	3	confirm_*	confirm_are	confirm_can
+5	3	do_*	do_ensure	do_will
+5	3	does>*	show_*	show_does
+5	3	does>*	show_*	show_not
+5	3	does>*	show_does	show_not
+5	3	does>*	recognise_*	recognise_does
+5	3	does>*	intend_*	intend_does
+5	3	done_*	done_what	what>*
+5	3	ensure_*	ensure_have	ensure_will
+5	3	give_can	give_what	what>*
+5	3	give_can	give_what	what>what
+5	3	given_*	given_to	what>what
+5	3	given_*	given_what	what>what
+5	3	given_to	given_what	what>what
+5	3	given_to	what>*	what>what
+5	3	given_what	what>*	what>what
+5	3	going_*	going_do	going_is
+5	3	going_*	going_do	what>is
+5	3	going_do	what>*	what>is
+5	3	going_do	going_is	what>*
+5	3	going_do	going_is	what>is
+5	3	had_*	had_with	what>what
+5	3	had_*	had_with	what>*
+5	3	had_*	what>*	what>what
+5	3	had_*	had_what	had_with
+5	3	had_with	what>*	what>what
+5	3	have_*	have_say	have_what
+5	3	have_*	have_what	what>does
+5	3	have_*	what>*	what>does
+5	3	have_*	have_say	what>does
+5	3	have_*	have_does	what>does
+5	3	have_*	have_say	what>*
+5	3	have_*	have_does	have_say
+5	3	have_does	have_say	what>*
+5	3	have_does	have_say	what>does
+5	3	have_does	have_say	have_what
+5	3	have_does	what>*	what>does
+5	3	have_does	have_what	what>does
+5	3	have_say	have_what	what>*
+5	3	have_say	have_what	what>does
+5	3	have_say	what>*	what>does
+5	3	have_what	what>*	what>does
+5	3	how>*	justify_*	justify_how
+5	3	is>*	is_aware	is_is
+5	3	is>*	is_*	is_confident
+5	3	is>*	is_*	is_true
+5	3	is_*	is_aware	is_is
+5	3	is_*	what>*	what>what
+5	3	made_*	made_of	what>what
+5	3	made_*	made_has	made_of
+5	3	made_*	made_of	made_what
+5	3	made_*	made_of	what>*
+5	3	made_*	made_been	made_what
+5	3	made_has	made_of	what>what
+5	3	made_has	made_of	what>*
+5	3	made_has	made_of	made_what
+5	3	made_of	what>*	what>what
+5	3	made_of	made_what	what>*
+5	3	made_of	made_what	what>what
+5	3	make_*	make_clear	will>*
+5	3	make_*	make_clear	make_will
+5	3	remind_*	remind_will	will>*
+5	3	say_*	say_what	what>*
+5	3	take_*	take_ensure	take_will
+5	3	take_*	take_into	take_will
+5	3	taken_*	what>*	what>what
+5	3	taking_*	taking_is	what>*
+5	4	agree_*	agree_is	agree_with	does>*
+5	4	agree_*	agree_does	agree_is	agree_with
+5	4	agree_*	agree_meet	agree_will	will>*
+5	4	agree_*	agree_also	agree_does	does>*
+5	4	agree_does	agree_is	agree_with	does>*
+5	4	be_*	be_not	be_would	would>not
+5	4	be_*	be_not	would>*	would>not
+5	4	be_not	be_would	would>*	would>not
+5	4	bear_*	bear_in	bear_will	will>*
+5	4	does>*	show_*	show_does	show_not
+5	4	give_*	give_can	give_what	what>what
+5	4	give_*	give_can	give_what	what>*
+5	4	give_can	give_what	what>*	what>what
+5	4	given_*	given_to	what>*	what>what
+5	4	given_*	given_to	given_what	what>what
+5	4	given_*	given_what	what>*	what>what
+5	4	given_to	given_what	what>*	what>what
+5	4	going_*	going_do	going_is	what>*
+5	4	going_*	going_do	going_is	what>is
+5	4	going_*	going_do	what>*	what>is
+5	4	going_do	going_is	what>*	what>is
+5	4	had_*	had_with	what>*	what>what
+5	4	have_*	have_say	have_what	what>does
+5	4	have_*	have_does	have_say	what>*
+5	4	have_*	have_say	what>*	what>does
+5	4	have_*	have_does	have_what	what>does
+5	4	have_*	have_does	what>*	what>does
+5	4	have_*	have_what	what>*	what>does
+5	4	have_*	have_does	have_say	have_what
+5	4	have_*	have_does	have_say	what>does
+5	4	have_*	have_say	have_what	what>*
+5	4	have_does	have_say	have_what	what>does
+5	4	have_does	have_what	what>*	what>does
+5	4	have_does	have_say	what>*	what>does
+5	4	have_does	have_say	have_what	what>*
+5	4	have_say	have_what	what>*	what>does
+5	4	is>*	is_*	is_aware	is_is
+5	4	made_*	made_has	made_of	made_what
+5	4	made_*	made_of	what>*	what>what
+5	4	made_*	made_of	made_what	what>what
+5	4	made_*	made_has	made_of	what>*
+5	4	made_*	made_has	made_of	what>what
+5	4	made_*	made_of	made_what	what>*
+5	4	made_has	made_of	made_what	what>*
+5	4	made_has	made_of	what>*	what>what
+5	4	made_has	made_of	made_what	what>what
+5	4	made_of	made_what	what>*	what>what
+5	5	agree_*	agree_does	agree_is	agree_with	does>*
+5	5	be_*	be_not	be_would	would>*	would>not
+5	5	give_*	give_can	give_what	what>*	what>what
+5	5	given_*	given_to	given_what	what>*	what>what
+5	5	going_*	going_do	going_is	what>*	what>is
+5	5	have_*	have_does	have_say	have_what	what>does
+5	5	have_*	have_does	have_say	what>*	what>does
+5	5	have_*	have_say	have_what	what>*	what>does
+5	5	have_*	have_does	have_what	what>*	what>does
+5	5	have_*	have_does	have_say	have_what	what>*
+5	5	have_does	have_say	have_what	what>*	what>does
+5	5	made_*	made_of	made_what	what>*	what>what
+5	5	made_*	made_has	made_of	what>*	what>what
+5	5	made_*	made_has	made_of	made_what	what>what
+5	5	made_*	made_has	made_of	made_what	what>*
+5	5	made_has	made_of	made_what	what>*	what>what
+5	6	have_*	have_does	have_say	have_what	what>*	what>does
+5	6	made_*	made_has	made_of	made_what	what>*	what>what

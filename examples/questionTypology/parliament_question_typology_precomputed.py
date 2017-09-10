@@ -1,8 +1,8 @@
-# This example uses the question typology court corpus to reproduce figures 1A and 1B from
-#   the asking too much paper (http://www.cs.cornell.edu/~cristian/Asking_too_much.html).
-#
-# The plots answer these questions:
-# - ?
+# This example extracts question types from the UK Parliament Question Answer Sessions
+#   reproducing the asking too much paper (http://www.cs.cornell.edu/~cristian/Asking_too_much.html).
+#   (due to the non-deterministic nature of clustering, the order of the clusters and some cluster assignments will vary)
+# This version uses precomputed motifs for speed.
+
 
 import os
 import pkg_resources
@@ -48,6 +48,4 @@ for i in range(num_clusters):
     questionTypology.display_answer_fragments_for_type(i, num_egs=10)
     questionTypology.display_questions_for_type(i, num_egs=10)
 
-# questionTypology.display_question_type_log_odds_graph()
 
-# questionTypology.classify_question(question_answer_pair)
