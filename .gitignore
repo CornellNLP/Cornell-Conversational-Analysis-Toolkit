@@ -3,15 +3,10 @@
 /*.egg-info
 *.swp
 *.p
-/doc/build/
 /convokit/data/downloads/
 /convokit/downloads/
-datasets/*
 examples/*.txt
 *.png
-datasets/parliament-corpus/metadata.tsv
-datasets/parliament-corpus/full.json
 build/*
-datasets/parliament-corpus/downloads/*
 backups/*
-
+not_for_public/*

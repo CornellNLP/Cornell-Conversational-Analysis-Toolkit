@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Model &#8212; convokit 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Question Typology" href="questionTypology.html" />
+    <link rel="prev" title="Coordination" href="coordination.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="questionTypology.html" title="Question Typology"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="coordination.html" title="Coordination"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">convokit 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-convokit.model">
+<span id="model"></span><h1>Model<a class="headerlink" href="#module-convokit.model" title="Permalink to this headline">¶</a></h1>
+<p>The objects used to represent a dataset.</p>
+<dl class="class">
+<dt id="convokit.model.Corpus">
+<em class="property">class </em><code class="descclassname">convokit.model.</code><code class="descname">Corpus</code><span class="sig-paren">(</span><em>filename=None</em>, <em>utterances=None</em>, <em>merge_lines=False</em>, <em>subdivide_users_by=[]</em>, <em>delim='</em>, <em>'</em><span class="sig-paren">)</span><a class="headerlink" href="#convokit.model.Corpus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a dataset, which can be loaded from a JSON file, CSV file or a
+list of utterances.</p>
+<p>If a CSV file, the first row should consist of key names. Unknown key names
+will have their attributes added to the &#8220;user-info&#8221; entry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> &#8211; path of json or csv file to load</li>
+<li><strong>utterances</strong> &#8211; list of utterances to load</li>
+<li><strong>merge_lines</strong> &#8211; whether to merge adjacent
+lines from the same user if the two utterances have the same root.</li>
+<li><strong>subdivide_users_by</strong> &#8211; collection of strings corresponding to attribute
+names defined in the &#8220;user-info&#8221; entry. Use this if you want to count
+the same user as being different depending on attributes other than
+username. For example, in the Supreme Court dataset, users are annotated
+with the current case id. You could use this to count the same person
+across different cases as being different users.</li>
+<li><strong>delim</strong> &#8211; if loading a csv, specifies the delimiter string.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Variables:</th><td class="field-body"><p class="first last"><strong>utterances</strong> &#8211; dictionary of utterances in the dataset, indexed by id.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="convokit.model.Corpus.filter_utterances_by">
+<code class="descname">filter_utterances_by</code><span class="sig-paren">(</span><em>regular_kv_pairs={}</em>, <em>user_info_kv_pairs={}</em>, <em>other_kv_pairs={}</em><span class="sig-paren">)</span><a class="headerlink" href="#convokit.model.Corpus.filter_utterances_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a subset of the utterances filtered by certain attributes. Irreversible. 
+If the method is run again, it will filter the already filtered subset.
+Always takes the intersection of the specified key-pairs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="convokit.model.Corpus.iterate_by">
+<code class="descname">iterate_by</code><span class="sig-paren">(</span><em>iter_type</em><span class="sig-paren">)</span><a class="headerlink" href="#convokit.model.Corpus.iterate_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterator for utterances.</p>
+<p>Can give just questions, just answers or questions followed by their answers</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="convokit.model.Corpus.pairwise_exchanges">
+<code class="descname">pairwise_exchanges</code><span class="sig-paren">(</span><em>selector=None</em>, <em>user_names_only=False</em><span class="sig-paren">)</span><a class="headerlink" href="#convokit.model.Corpus.pairwise_exchanges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all directed pairwise exchanges in the dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>selector</strong> &#8211; optional function that takes in a
+speaker user and a replied-to user and returns True to include
+the pair in the result, or False otherwise.</li>
+<li><strong>user_names_only</strong> (<em>bool</em>) &#8211; if True, index conversations
+by user names rather than user objects.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Dictionary mapping (speaker, target) tuples to a list of
+utterances given by the speaker in reply to the target.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="convokit.model.Corpus.speaking_pairs">
+<code class="descname">speaking_pairs</code><span class="sig-paren">(</span><em>selector=None</em>, <em>user_names_only=False</em><span class="sig-paren">)</span><a class="headerlink" href="#convokit.model.Corpus.speaking_pairs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Get all directed speaking pairs (a, b) of users such that a replies</dt>
+<dd>to b at least once in the dataset.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>selector</strong> &#8211; optional function that takes in
+a speaker user and a replied-to user and returns True to include
+the pair in the result, or False otherwise.</li>
+<li><strong>user_names_only</strong> (<em>bool</em>) &#8211; if True, return just pairs of
+user names rather than user objects.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Set containing all speaking pairs selected by the selector
+function, or all speaking pairs in the dataset if no selector
+function was used.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="convokit.model.Corpus.subdivide_users_by">
+<code class="descname">subdivide_users_by</code><span class="sig-paren">(</span><em>attribs</em><span class="sig-paren">)</span><a class="headerlink" href="#convokit.model.Corpus.subdivide_users_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this if you want to count the same user as being different
+depending on attributes other than username. For example, in the Supreme
+Court dataset, users are annotated with the current case id. You could
+use this to count the same person across different cases as being
+different users.</p>
+<p>Repeated calls to this method will override previous subdivisions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribs</strong> (<em>Collection</em>) &#8211; Collection of attribute names to subdivide users on.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="convokit.model.Corpus.user_names">
+<code class="descname">user_names</code><span class="sig-paren">(</span><em>selector=None</em><span class="sig-paren">)</span><a class="headerlink" href="#convokit.model.Corpus.user_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get names of users in the dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>selector</strong> &#8211; optional function that takes in a
+<cite>User</cite> and returns True to include the user&#8217;s name in the
+resulting list, or False otherwise.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Set containing all user names selected by the selector
+function, or all user names in the dataset if no selector function
+was used.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="convokit.model.Corpus.users">
+<code class="descname">users</code><span class="sig-paren">(</span><em>selector=None</em><span class="sig-paren">)</span><a class="headerlink" href="#convokit.model.Corpus.users" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get users in the dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>selector</strong> &#8211; optional function that takes in a
+<cite>User</cite> and returns True to include the user in the
+resulting list, or False otherwise.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Set containing all users selected by the selector function,
+or all users in the dataset if no selector function was
+used.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="convokit.model.User">
+<em class="property">class </em><code class="descclassname">convokit.model.</code><code class="descname">User</code><span class="sig-paren">(</span><em>name=None</em>, <em>info={}</em><span class="sig-paren">)</span><a class="headerlink" href="#convokit.model.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a single user in a dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; name of the user.</li>
+<li><strong>info</strong> (<em>dict</em>) &#8211; arbitrary dictionary of attributes associated
+with the user.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; name of the user.</li>
+<li><strong>info</strong> &#8211; dictionary of attributes associated with the user.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="convokit.model.User.identify_by_attribs">
+<code class="descname">identify_by_attribs</code><span class="sig-paren">(</span><em>attribs</em><span class="sig-paren">)</span><a class="headerlink" href="#convokit.model.User.identify_by_attribs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identify a user by a list of attributes. Sets which user info
+attributes should distinguish users of the same name in equality tests.
+For example, in the Supreme Court dataset, users are labeled with the
+current case id. Call this method with attribs = [&#8220;case&#8221;] to count
+the same person across different cases as different users.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attribs</strong> (<em>Collection</em>) &#8211; Collection of attribute names.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="convokit.model.Utterance">
+<em class="property">class </em><code class="descclassname">convokit.model.</code><code class="descname">Utterance</code><span class="sig-paren">(</span><em>id=None</em>, <em>user=None</em>, <em>root=None</em>, <em>reply_to=None</em>, <em>timestamp=None</em>, <em>text=None</em>, <em>other=None</em><span class="sig-paren">)</span><a class="headerlink" href="#convokit.model.Utterance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a single utterance in the dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>id</strong> &#8211; the unique id of the utterance. Can be any hashable type.</li>
+<li><strong>user</strong> &#8211; the user giving the utterance.</li>
+<li><strong>root</strong> &#8211; the id of the root utterance of the conversation.</li>
+<li><strong>reply_to</strong> &#8211; id of the utterance this was a reply to.</li>
+<li><strong>timestamp</strong> &#8211; timestamp of the utterance. Can be any
+comparable type.</li>
+<li><strong>text</strong> (<em>str</em>) &#8211; text of the utterance.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> &#8211; the unique id of the utterance.</li>
+<li><strong>user</strong> &#8211; the user giving the utterance.</li>
+<li><strong>root</strong> &#8211; the id of the root utterance of the conversation.</li>
+<li><strong>reply_to</strong> &#8211; id of the utterance this was a reply to.</li>
+<li><strong>timestamp</strong> &#8211; timestamp of the utterance.</li>
+<li><strong>text</strong> &#8211; text of the utterance.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="coordination.html"
+                        title="previous chapter">Coordination</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="questionTypology.html"
+                        title="next chapter">Question Typology</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/model.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="questionTypology.html" title="Question Typology"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="coordination.html" title="Coordination"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">convokit 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Cristian Danescu-Niculescu-Mizil, Andrew Wang.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>
