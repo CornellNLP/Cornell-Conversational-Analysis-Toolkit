@@ -48,6 +48,6 @@ for i in range(num_clusters):
     questionTypology.display_answer_fragments_for_type(i, num_egs=10)
     questionTypology.display_questions_for_type(i, num_egs=10)
 
-questionTypology.display_question_type_log_odds_graph()
+# questionTypology.display_question_type_log_odds_graph()
 
 # questionTypology.classify_question(question_answer_pair)
