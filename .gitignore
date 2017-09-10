@@ -3,6 +3,7 @@
 /*.egg-info
 *.swp
 *.p
+/doc/build/
 /convokit/data/downloads/
 /convokit/downloads/
 examples/*.txt
