@@ -11,3 +11,4 @@ examples/*.txt
 build/*
 backups/*
 not_for_public/*
+isolated_env/*

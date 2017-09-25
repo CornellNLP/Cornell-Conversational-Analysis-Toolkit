@@ -1,0 +1,493 @@
+{"idx": 0, "id": ["*"], "items": [["*"]]}
+{"idx": 1, "id": ["agree_*"], "items": [["agree_*", "agree_does"], ["agree_*", "agree_does", "does>*"], ["agree_*", "does>*"], ["agree_*"], ["agree_does", "does>*"], ["agree_does"]]}
+{"idx": 2, "id": ["agree_*", "agree_is"], "items": [["agree_*", "agree_is", "does>*"], ["agree_*", "agree_is"], ["agree_*", "agree_does", "agree_is", "does>*"], ["agree_does", "agree_is", "does>*"], ["agree_is", "does>*"], ["agree_does", "agree_is"], ["agree_*", "agree_does", "agree_is"], ["agree_is"]]}
+{"idx": 3, "id": ["however>*"], "items": [["however>*"]]}
+{"idx": 4, "id": ["does>*"], "items": [["does>*"]]}
+{"idx": 5, "id": ["accept_*", "does>*"], "items": [["accept_does", "does>*"], ["accept_*", "does>*"], ["accept_*", "accept_does", "does>*"]]}
+{"idx": 6, "id": ["accept_*"], "items": [["accept_*"]]}
+{"idx": 7, "id": ["accept_*", "accept_does"], "items": [["accept_does"], ["accept_*", "accept_does"]]}
+{"idx": 8, "id": ["will>*"], "items": [["will>*"]]}
+{"idx": 9, "id": ["ensure_*", "will>*"], "items": [["ensure_*", "will>*"]]}
+{"idx": 10, "id": ["ensure_*"], "items": [["ensure_*"]]}
+{"idx": 11, "id": ["assure_*", "assure_will"], "items": [["assure_will"], ["assure_*", "will>*"], ["assure_will", "will>*"], ["assure_*", "assure_will"], ["assure_*", "assure_will", "will>*"]]}
+{"idx": 12, "id": ["assure_*"], "items": [["assure_*"]]}
+{"idx": 13, "id": ["join_*"], "items": [["join_*", "will>*"], ["join_*", "join_will", "will>*"], ["join_will", "will>*"], ["join_*", "join_in", "will>*"], ["join_*", "join_in"], ["join_*", "join_will"], ["join_*"], ["join_*", "join_in", "join_will", "will>*"], ["join_will"], ["join_in", "will>*"], ["join_in", "join_will", "will>*"], ["join_in", "join_will"], ["join_in"], ["join_*", "join_in", "join_will"]]}
+{"idx": 14, "id": ["does>*", "does>not"], "items": [["does>*", "does>not"], ["does>not"]]}
+{"idx": 15, "id": ["can>*"], "items": [["can>*"]]}
+{"idx": 16, "id": ["is_*"], "items": [["is_*"]]}
+{"idx": 17, "id": ["are_*"], "items": [["are_*"]]}
+{"idx": 18, "id": ["although>*"], "items": [["although>*"]]}
+{"idx": 19, "id": ["give_*", "will>*"], "items": [["give_*", "will>*"], ["give_will", "will>*"], ["give_*", "give_will", "will>*"]]}
+{"idx": 20, "id": ["give_*", "give_to", "will>*"], "items": [["give_to", "give_will", "will>*"], ["give_to", "will>*"], ["give_*", "give_to", "give_will", "will>*"], ["give_*", "give_to", "will>*"]]}
+{"idx": 21, "id": ["give_*"], "items": [["give_*"]]}
+{"idx": 22, "id": ["give_*", "give_will"], "items": [["give_will"], ["give_*", "give_will"]]}
+{"idx": 23, "id": ["give_*", "give_to", "give_will"], "items": [["give_to", "give_will"], ["give_*", "give_to", "give_will"]]}
+{"idx": 24, "id": ["give_*", "give_to"], "items": [["give_to"], ["give_*", "give_to"]]}
+{"idx": 25, "id": ["be_*"], "items": [["be_*"]]}
+{"idx": 26, "id": ["be_*", "be_will"], "items": [["be_will"], ["be_*", "be_will"]]}
+{"idx": 27, "id": ["how>*"], "items": [["how>*"]]}
+{"idx": 28, "id": ["how>*", "how>how"], "items": [["how>*", "how>how"], ["how>how"]]}
+{"idx": 29, "id": ["has>*"], "items": [["has>*"]]}
+{"idx": 30, "id": ["has>*", "has_*"], "items": [["has>*", "has_*"]]}
+{"idx": 31, "id": ["has_*"], "items": [["has_*"]]}
+{"idx": 32, "id": ["take_*", "will>*"], "items": [["take_will", "will>*"], ["take_*", "take_will", "will>*"], ["take_*", "will>*"]]}
+{"idx": 33, "id": ["tell_*", "will>*"], "items": [["tell_*", "tell_will", "will>*"], ["tell_will", "will>*"], ["tell_*", "will>*"]]}
+{"idx": 34, "id": ["tell_*"], "items": [["tell_*"]]}
+{"idx": 35, "id": ["tell_*", "tell_will"], "items": [["tell_will"], ["tell_*", "tell_will"]]}
+{"idx": 36, "id": ["take_*"], "items": [["take_*"]]}
+{"idx": 37, "id": ["take_*", "take_will"], "items": [["take_will"], ["take_*", "take_will"]]}
+{"idx": 38, "id": ["been_*"], "items": [["been_*"]]}
+{"idx": 39, "id": ["been_*", "been_has"], "items": [["been_*", "been_has"], ["been_has"]]}
+{"idx": 40, "id": ["which>*"], "items": [["which>*"]]}
+{"idx": 41, "id": ["who>*"], "items": [["who>*"]]}
+{"idx": 42, "id": ["do_*", "do_will", "will>*"], "items": [["do_*", "do_will", "will>*"], ["do_*", "will>*"], ["do_will", "will>*"]]}
+{"idx": 43, "id": ["welcome_*", "will>*"], "items": [["welcome_*", "will>*"]]}
+{"idx": 44, "id": ["do_*"], "items": [["do_*"]]}
+{"idx": 45, "id": ["do_*", "do_will"], "items": [["do_will"], ["do_*", "do_will"]]}
+{"idx": 46, "id": ["welcome_*"], "items": [["welcome_*"]]}
+{"idx": 47, "id": ["accept_*", "accept_does", "accept_is", "does>*"], "items": [["accept_*", "accept_does", "accept_is", "does>*"], ["accept_does", "accept_is", "does>*"], ["accept_is", "does>*"], ["accept_*", "accept_is", "does>*"]]}
+{"idx": 48, "id": ["accept_*", "accept_does", "accept_is"], "items": [["accept_does", "accept_is"], ["accept_*", "accept_does", "accept_is"]]}
+{"idx": 49, "id": ["accept_*", "accept_is"], "items": [["accept_is"], ["accept_*", "accept_is"]]}
+{"idx": 50, "id": ["ensure_*", "ensure_will", "will>*"], "items": [["ensure_will", "will>*"], ["ensure_*", "ensure_will", "will>*"]]}
+{"idx": 51, "id": ["ensure_*", "ensure_will"], "items": [["ensure_*", "ensure_will"], ["ensure_will"]]}
+{"idx": 52, "id": ["say_*"], "items": [["say_*"]]}
+{"idx": 53, "id": ["on>*"], "items": [["on>*"]]}
+{"idx": 54, "id": ["given>*"], "items": [["given>*"]]}
+{"idx": 55, "id": ["given>*", "given>that"], "items": [["given>*", "given>that"], ["given>that"]]}
+{"idx": 56, "id": ["ensure_*", "ensure_is", "ensure_will", "will>*"], "items": [["ensure_is", "ensure_will", "will>*"], ["ensure_*", "ensure_is", "ensure_will", "will>*"], ["ensure_*", "ensure_is", "will>*"], ["ensure_is", "will>*"]]}
+{"idx": 57, "id": ["make_*", "will>*"], "items": [["make_*", "will>*"]]}
+{"idx": 58, "id": ["ensure_*", "ensure_is"], "items": [["ensure_is", "ensure_will"], ["ensure_*", "ensure_is", "ensure_will"], ["ensure_*", "ensure_is"], ["ensure_is"]]}
+{"idx": 59, "id": ["make_*"], "items": [["make_*"]]}
+{"idx": 60, "id": ["what>*"], "items": [["what>*"]]}
+{"idx": 61, "id": ["given_*", "what>*"], "items": [["given_*", "what>*"]]}
+{"idx": 62, "id": ["given_*", "given_what", "what>*"], "items": [["given_*", "given_what"], ["given_*", "given_what", "what>*"], ["given_what"], ["given_what", "what>*"]]}
+{"idx": 63, "id": ["given_*", "given_to", "given_what", "what>*"], "items": [["given_to", "given_what"], ["given_to"], ["given_*", "given_to", "what>*"], ["given_to", "given_what", "what>*"], ["given_*", "given_to", "given_what", "what>*"], ["given_to", "what>*"], ["given_*", "given_to"], ["given_*", "given_to", "given_what"]]}
+{"idx": 64, "id": ["given_*"], "items": [["given_*"]]}
+{"idx": 65, "id": ["given_*", "given_is"], "items": [["given_*", "given_is"], ["given_is"]]}
+{"idx": 66, "id": ["if>*"], "items": [["if>*"]]}
+{"idx": 67, "id": ["be_*", "be_can"], "items": [["be_can"], ["be_*", "be_can"]]}
+{"idx": 68, "id": ["in>*"], "items": [["in>*"]]}
+{"idx": 69, "id": ["be_*", "be_there"], "items": [["be_*", "be_there"], ["be_there"]]}
+{"idx": 70, "id": ["be_*", "be_in"], "items": [["be_*", "be_in"], ["be_in"]]}
+{"idx": 71, "id": ["was_*"], "items": [["was_*"]]}
+{"idx": 72, "id": ["was>*"], "items": [["was>*", "was_*"], ["was>*"]]}
+{"idx": 73, "id": ["doing_*"], "items": [["doing_*"], ["doing_*", "what>*"]]}
+{"idx": 74, "id": ["doing_*", "doing_are", "what>*", "what>are"], "items": [["doing_are", "what>are"], ["doing_*", "doing_are"], ["doing_*", "doing_are", "what>*"], ["doing_are"], ["doing_are", "what>*"], ["doing_*", "doing_are", "what>are"], ["doing_are", "what>*", "what>are"], ["doing_*", "what>are"], ["doing_*", "doing_are", "what>*", "what>are"], ["doing_*", "what>*", "what>are"]]}
+{"idx": 75, "id": ["what>*", "what>are"], "items": [["what>*", "what>are"], ["what>are"]]}
+{"idx": 76, "id": ["what>*", "what>what"], "items": [["what>what"], ["what>*", "what>what"]]}
+{"idx": 77, "id": ["put_*"], "items": [["put_*"]]}
+{"idx": 78, "id": ["given>*", "given_*"], "items": [["given>*", "given_*"]]}
+{"idx": 79, "id": ["meet_*"], "items": [["meet_*", "meet_will", "will>*"], ["meet_will"], ["meet_*", "will>*"], ["meet_*", "meet_will"], ["meet_*"], ["meet_will", "will>*"]]}
+{"idx": 80, "id": ["may>*"], "items": [["may>*"]]}
+{"idx": 81, "id": ["ask_*", "may>*"], "items": [["ask_*", "may>*"]]}
+{"idx": 82, "id": ["ask_*", "ask_may", "may>*"], "items": [["ask_*", "ask_may", "may>*"], ["ask_may", "may>*"]]}
+{"idx": 83, "id": ["ask_*"], "items": [["ask_*"]]}
+{"idx": 84, "id": ["ask_*", "ask_may"], "items": [["ask_may"], ["ask_*", "ask_may"]]}
+{"idx": 85, "id": ["is>*"], "items": [["is>*", "is_*"], ["is>*"]]}
+{"idx": 86, "id": ["commit_*", "commit_will", "will>*"], "items": [["commit_*", "commit_will", "will>*"], ["commit_will", "will>*"], ["commit_*", "will>*"]]}
+{"idx": 87, "id": ["commit_*", "commit_to", "commit_will", "will>*"], "items": [["commit_*", "commit_to", "will>*"], ["commit_to", "commit_will", "will>*"], ["commit_*", "commit_to", "commit_will", "will>*"], ["commit_to", "will>*"]]}
+{"idx": 88, "id": ["commit_*"], "items": [["commit_*", "commit_will"], ["commit_will"], ["commit_*"]]}
+{"idx": 89, "id": ["commit_*", "commit_to", "commit_will"], "items": [["commit_*", "commit_to", "commit_will"], ["commit_to", "commit_will"], ["commit_*", "commit_to"], ["commit_to"]]}
+{"idx": 90, "id": ["is_*", "is_in"], "items": [["is_in"], ["is_*", "is_in"]]}
+{"idx": 91, "id": ["is_*", "is_aware"], "items": [["is_*", "is_aware"], ["is_aware"], ["is>*", "is_*", "is_aware"], ["is>*", "is_aware"]]}
+{"idx": 92, "id": ["confirm_*", "will>*"], "items": [["confirm_will", "will>*"], ["confirm_*", "confirm_will", "will>*"], ["confirm_*", "will>*"]]}
+{"idx": 93, "id": ["confirm_*"], "items": [["confirm_*"]]}
+{"idx": 94, "id": ["confirm_*", "confirm_will"], "items": [["confirm_*", "confirm_will"], ["confirm_will"]]}
+{"idx": 95, "id": ["when>*"], "items": [["when>*"]]}
+{"idx": 96, "id": ["assure_*", "assure_can", "can>*"], "items": [["assure_*", "can>*"], ["assure_*", "assure_can", "can>*"], ["assure_can", "can>*"]]}
+{"idx": 97, "id": ["assure_*", "assure_can"], "items": [["assure_can"], ["assure_*", "assure_can"]]}
+{"idx": 98, "id": ["try_*"], "items": [["try_*"]]}
+{"idx": 99, "id": ["instead>*"], "items": [["instead>*"]]}
+{"idx": 100, "id": ["instead>*", "instead>of"], "items": [["instead>of"], ["instead>*", "instead>of"]]}
+{"idx": 101, "id": ["do>*"], "items": [["do>*"]]}
+{"idx": 102, "id": ["need_*"], "items": [["need_*"]]}
+{"idx": 103, "id": ["express_*"], "items": [["express_*"]]}
+{"idx": 104, "id": ["think_*"], "items": [["think_*"]]}
+{"idx": 105, "id": ["think_*", "think_does"], "items": [["think_*", "think_does"], ["think_does"]]}
+{"idx": 106, "id": ["think_*", "think_is"], "items": [["think_*", "think_does", "think_is"], ["think_is"], ["think_*", "think_is"], ["think_does", "think_is"]]}
+{"idx": 107, "id": ["accept_*", "will>*"], "items": [["accept_*", "will>*"]]}
+{"idx": 108, "id": ["accept_*", "accept_will", "will>*"], "items": [["accept_*", "accept_will", "will>*"], ["accept_will", "will>*"]]}
+{"idx": 109, "id": ["accept_*", "accept_is", "accept_will"], "items": [["accept_*", "accept_is", "accept_will"], ["accept_is", "accept_will"]]}
+{"idx": 110, "id": ["accept_*", "accept_will"], "items": [["accept_will"], ["accept_*", "accept_will"]]}
+{"idx": 111, "id": ["if>*", "is_*"], "items": [["if>*", "is_*"]]}
+{"idx": 112, "id": ["is_*", "is_are"], "items": [["is_are"], ["is_*", "is_are"]]}
+{"idx": 113, "id": ["make_*", "make_to"], "items": [["make_*", "make_to"], ["make_to"]]}
+{"idx": 114, "id": ["that>*"], "items": [["that>*"]]}
+{"idx": 115, "id": ["if>*", "if>so"], "items": [["if>*", "if>so"], ["if>so"]]}
+{"idx": 116, "id": ["what>*", "what>what", "what_*", "what_what"], "items": [["what>what", "what_*"], ["what>*", "what>what", "what_what"], ["what>what", "what_what"], ["what>*", "what>what", "what_*"], ["what>*", "what>what", "what_*", "what_what"], ["what>what", "what_*", "what_what"]]}
+{"idx": 117, "id": ["what>*", "what_*", "what_what"], "items": [["what>*", "what_*"], ["what_*"], ["what_*", "what_what"], ["what>*", "what_*", "what_what"], ["what_what"], ["what>*", "what_what"]]}
+{"idx": 118, "id": ["agree_*", "agree_are", "agree_does"], "items": [["agree_*", "agree_are"], ["agree_are"], ["agree_*", "agree_are", "agree_does", "does>*"], ["agree_*", "agree_are", "agree_does"], ["agree_are", "does>*"], ["agree_are", "agree_does", "does>*"], ["agree_are", "agree_does"], ["agree_*", "agree_are", "does>*"]]}
+{"idx": 119, "id": ["recall_*"], "items": [["recall_*"], ["recall_*", "recall_does"], ["does>*", "recall_*", "recall_does"], ["recall_does"], ["does>*", "recall_does"], ["does>*", "recall_*"]]}
+{"idx": 120, "id": ["how>*", "how>many"], "items": [["how>*", "how>many"], ["how>many"]]}
+{"idx": 121, "id": ["how>*", "is_*"], "items": [["how>*", "is_*"]]}
+{"idx": 122, "id": ["appreciate_*", "appreciate_does"], "items": [["appreciate_*"], ["appreciate_*", "appreciate_does"], ["appreciate_does"]]}
+{"idx": 123, "id": ["realise_*"], "items": [["does>*", "realise_does"], ["realise_does"], ["does>*", "realise_*"], ["realise_*"], ["realise_*", "realise_does"], ["does>*", "realise_*", "realise_does"]]}
+{"idx": 124, "id": ["should>*"], "items": [["should>*"]]}
+{"idx": 125, "id": ["are>*"], "items": [["are>*"]]}
+{"idx": 126, "id": ["taking_*"], "items": [["taking_*"]]}
+{"idx": 127, "id": ["taking_*", "taking_are"], "items": [["taking_are"], ["taking_*", "taking_are"]]}
+{"idx": 128, "id": ["have_*"], "items": [["have_*"]]}
+{"idx": 129, "id": ["as>*"], "items": [["as>*"]]}
+{"idx": 130, "id": ["be_*", "what>*"], "items": [["be_*", "what>*"]]}
+{"idx": 131, "id": ["be_*", "be_what", "what>*"], "items": [["be_*", "be_what", "what>*"], ["be_what", "what>*"], ["be_*", "be_what"], ["be_what"]]}
+{"idx": 132, "id": ["be_*", "be_able", "be_will"], "items": [["be_able", "be_will"], ["be_able"], ["be_*", "be_able", "be_will"], ["be_*", "be_able"]]}
+{"idx": 133, "id": ["be_*", "when>*"], "items": [["be_*", "when>*"]]}
+{"idx": 134, "id": ["when>*", "when>will"], "items": [["when>*", "when>will"], ["when>will"]]}
+{"idx": 135, "id": ["consider_*", "will>*"], "items": [["consider_*", "will>*"], ["consider_*", "consider_will", "will>*"], ["consider_will", "will>*"]]}
+{"idx": 136, "id": ["consider_*"], "items": [["consider_*"]]}
+{"idx": 137, "id": ["examine_*"], "items": [["examine_*"]]}
+{"idx": 138, "id": ["is_*", "is_not"], "items": [["is>*", "is_not"], ["is>*", "is_*", "is_not"], ["is_*", "is_not"], ["is_not"]]}
+{"idx": 139, "id": ["is>*", "is>not", "is_*", "is_not"], "items": [["is>*", "is>not", "is_not"], ["is>*", "is>not", "is_*", "is_not"], ["is>not", "is_*", "is_not"], ["is>not", "is_not"]]}
+{"idx": 140, "id": ["is>*", "is>not"], "items": [["is>*", "is>not"], ["is>not", "is_*"], ["is>*", "is>not", "is_*"], ["is>not"]]}
+{"idx": 141, "id": ["will_*"], "items": [["will_*"], ["will>*", "will_*"]]}
+{"idx": 142, "id": ["given_*", "what>*", "what>what"], "items": [["given_*", "what>*", "what>what"], ["given_*", "what>what"]]}
+{"idx": 143, "id": ["given_*", "given_to", "given_what", "what>*", "what>what"], "items": [["given_what", "what>*", "what>what"], ["given_to", "what>*", "what>what"], ["given_*", "given_to", "what>what"], ["given_to", "what>what"], ["given_what", "what>what"], ["given_*", "given_what", "what>*", "what>what"], ["given_to", "given_what", "what>what"], ["given_*", "given_to", "given_what", "what>*", "what>what"], ["given_*", "given_to", "given_what", "what>what"], ["given_*", "given_what", "what>what"], ["given_to", "given_what", "what>*", "what>what"], ["given_*", "given_to", "what>*", "what>what"]]}
+{"idx": 144, "id": ["given_*", "given_has"], "items": [["given_*", "given_has"], ["given_has"]]}
+{"idx": 145, "id": ["be_*", "be_would"], "items": [["be_would"], ["be_*", "be_would"]]}
+{"idx": 146, "id": ["be_*", "be_would", "would>*"], "items": [["be_would", "would>*"], ["be_*", "be_would", "would>*"], ["be_*", "would>*"]]}
+{"idx": 147, "id": ["be_*", "be_would", "would>*", "would>not"], "items": [["be_*", "would>not"], ["be_*", "be_would", "would>*", "would>not"], ["be_*", "would>*", "would>not"], ["be_*", "be_would", "would>not"], ["be_would", "would>*", "would>not"], ["be_would", "would>not"]]}
+{"idx": 148, "id": ["would>*"], "items": [["would>*"]]}
+{"idx": 149, "id": ["would>*", "would>not"], "items": [["would>not"], ["would>*", "would>not"]]}
+{"idx": 150, "id": ["look_*"], "items": [["look_*"]]}
+{"idx": 151, "id": ["acknowledge_*", "acknowledge_does", "does>*"], "items": [["acknowledge_*", "does>*"], ["acknowledge_*", "acknowledge_does", "does>*"], ["acknowledge_does", "does>*"]]}
+{"idx": 152, "id": ["acknowledge_*"], "items": [["acknowledge_*"]]}
+{"idx": 153, "id": ["acknowledge_*", "acknowledge_does"], "items": [["acknowledge_does"], ["acknowledge_*", "acknowledge_does"]]}
+{"idx": 154, "id": ["how>*", "how>will"], "items": [["how>will"], ["how>*", "how>will"]]}
+{"idx": 155, "id": ["how>*", "how_*"], "items": [["how>*", "how_*"]]}
+{"idx": 156, "id": ["how_*"], "items": [["how_*"]]}
+{"idx": 157, "id": ["received_*"], "items": [["received_*"]]}
+{"idx": 158, "id": ["review_*"], "items": [["review_*"]]}
+{"idx": 159, "id": ["review_*", "review_will"], "items": [["review_*", "review_will"], ["review_will"]]}
+{"idx": 160, "id": ["reassure_*"], "items": [["reassure_*"]]}
+{"idx": 161, "id": ["reassure_*", "reassure_will"], "items": [["reassure_*", "reassure_will"], ["reassure_will"]]}
+{"idx": 162, "id": ["can>*", "give_*", "give_can"], "items": [["can>*", "give_can"], ["can>*", "give_*"], ["can>*", "give_*", "give_can"]]}
+{"idx": 163, "id": ["give_*", "give_can"], "items": [["give_can"], ["give_*", "give_can"]]}
+{"idx": 164, "id": ["confirm_*", "confirm_be", "confirm_will"], "items": [["confirm_*", "confirm_be", "confirm_will"], ["confirm_be", "confirm_will"], ["confirm_be"], ["confirm_*", "confirm_be"]]}
+{"idx": 165, "id": ["are>*", "are_*"], "items": [["are>*", "are_*"]]}
+{"idx": 166, "id": ["are>*", "are>not", "are_*"], "items": [["are>*", "are>not", "are_*"], ["are>not", "are_*"]]}
+{"idx": 167, "id": ["are>*", "are>not"], "items": [["are>not"], ["are>*", "are>not"]]}
+{"idx": 168, "id": ["mean_*"], "items": [["mean_*"]]}
+{"idx": 169, "id": ["mean_*", "mean_does"], "items": [["mean_*", "mean_does"], ["mean_does"]]}
+{"idx": 170, "id": ["be_*", "be_not", "be_would"], "items": [["be_not", "would>*"], ["be_*", "be_not", "would>*"], ["be_*", "be_not", "be_would"], ["be_not", "be_would", "would>*"], ["be_*", "be_not", "be_would", "would>*"], ["be_not", "be_would"]]}
+{"idx": 171, "id": ["be_*", "be_not"], "items": [["be_not"], ["be_*", "be_not"]]}
+{"idx": 172, "id": ["look_*", "look_will", "will>*"], "items": [["look_at", "will>*"], ["look_*", "look_at", "look_will", "will>*"], ["look_at", "look_will", "will>*"], ["look_will", "will>*"], ["look_*", "look_at", "will>*"], ["look_*", "look_will", "will>*"], ["look_*", "will>*"]]}
+{"idx": 173, "id": ["look_*", "look_at"], "items": [["look_*", "look_at", "look_will"], ["look_*", "look_will"], ["look_at", "look_will"], ["look_at"], ["look_will"], ["look_*", "look_at"]]}
+{"idx": 174, "id": ["acknowledge_*", "will>*"], "items": [["acknowledge_*", "will>*"]]}
+{"idx": 175, "id": ["acknowledge_*", "acknowledge_will", "will>*"], "items": [["acknowledge_will", "will>*"], ["acknowledge_*", "acknowledge_will", "will>*"]]}
+{"idx": 176, "id": ["acknowledge_*", "acknowledge_will"], "items": [["acknowledge_will"], ["acknowledge_*", "acknowledge_will"]]}
+{"idx": 177, "id": ["how>*", "how>can"], "items": [["how>can"], ["how>*", "how>can"]]}
+{"idx": 178, "id": ["what>*", "what>will"], "items": [["what>will"], ["what>*", "what>will"]]}
+{"idx": 179, "id": ["do_*", "do_what", "do_will", "what>*", "what>will"], "items": [["do_*", "what>will"], ["do_*", "do_what", "what>*", "what>will"], ["do_what", "what>will"], ["do_*", "what>*", "what>will"], ["do_will", "what>*"], ["do_will", "what>*", "what>will"], ["do_*", "do_will", "what>will"], ["do_*", "do_what", "do_will", "what>*", "what>will"], ["do_*", "do_will", "what>*", "what>will"], ["do_*", "do_what", "do_will", "what>will"], ["do_what", "do_will", "what>*"], ["do_*", "do_what", "what>will"], ["do_*", "do_will", "what>*"], ["do_*", "do_what", "do_will", "what>*"], ["do_what", "do_will", "what>will"], ["do_what", "what>*", "what>will"], ["do_will", "what>will"], ["do_what", "do_will", "what>*", "what>will"]]}
+{"idx": 180, "id": ["do_*", "what>*"], "items": [["do_*", "what>*"], ["do_what", "what>*"], ["do_*", "do_what", "what>*"]]}
+{"idx": 181, "id": ["do_*", "do_what", "do_will"], "items": [["do_what", "do_will"], ["do_*", "do_what", "do_will"]]}
+{"idx": 182, "id": ["do_*", "do_what"], "items": [["do_what"], ["do_*", "do_what"]]}
+{"idx": 183, "id": ["why>*"], "items": [["why>*"]]}
+{"idx": 184, "id": ["why>*", "why>is"], "items": [["why>*", "why>is"], ["why>is"]]}
+{"idx": 185, "id": ["remind_*", "remind_will", "will>*"], "items": [["remind_*", "will>*"], ["remind_will", "will>*"], ["remind_*", "remind_will", "will>*"]]}
+{"idx": 186, "id": ["remind_*"], "items": [["remind_*"]]}
+{"idx": 187, "id": ["remind_*", "remind_will"], "items": [["remind_will"], ["remind_*", "remind_will"]]}
+{"idx": 188, "id": ["given>*", "given>that", "given_*"], "items": [["given>*", "given>that", "given_*"], ["given>that", "given_*"]]}
+{"idx": 189, "id": ["am_*"], "items": [["am_*"]]}
+{"idx": 190, "id": ["thank_*"], "items": [["thank_*"]]}
+{"idx": 191, "id": ["believe_*", "believe_does", "does>*"], "items": [["believe_does", "does>*"], ["believe_*", "does>*"], ["believe_*", "believe_does", "does>*"]]}
+{"idx": 192, "id": ["believe_*"], "items": [["believe_*"]]}
+{"idx": 193, "id": ["believe_*", "believe_does"], "items": [["believe_does"], ["believe_*", "believe_does"]]}
+{"idx": 194, "id": ["pay_*"], "items": [["pay_*"]]}
+{"idx": 195, "id": ["learned_*"], "items": [["learned_*"]]}
+{"idx": 196, "id": ["to>*"], "items": [["to>*"]]}
+{"idx": 197, "id": ["does>*", "does_*"], "items": [["does>*", "does_*"]]}
+{"idx": 198, "id": ["does_*"], "items": [["does_*"]]}
+{"idx": 199, "id": ["be_*", "be_not", "be_would", "would>*", "would>not"], "items": [["be_not", "be_would", "would>not"], ["be_*", "be_not", "would>*", "would>not"], ["be_not", "be_would", "would>*", "would>not"], ["be_*", "be_not", "be_would", "would>not"], ["be_*", "be_not", "would>not"], ["be_*", "be_not", "be_would", "would>*", "would>not"], ["be_not", "would>*", "would>not"], ["be_not", "would>not"]]}
+{"idx": 200, "id": ["during>*"], "items": [["during>*"]]}
+{"idx": 201, "id": ["can>*", "tell_*"], "items": [["can>*", "tell_can"], ["can>*", "tell_*", "tell_can"], ["can>*", "tell_*"]]}
+{"idx": 202, "id": ["tell_*", "tell_can"], "items": [["tell_can"], ["tell_*", "tell_can"]]}
+{"idx": 203, "id": ["tell_*", "tell_is"], "items": [["tell_is"], ["tell_*", "tell_is"]]}
+{"idx": 204, "id": ["what>*", "what>can"], "items": [["what>*", "what>can"], ["what>can"]]}
+{"idx": 205, "id": ["say_*", "say_what", "what>*"], "items": [["say_*", "say_what", "what>*"], ["say_what", "what>*"], ["say_*", "what>*"]]}
+{"idx": 206, "id": ["say_*", "say_to"], "items": [["say_to"], ["say_*", "say_to"]]}
+{"idx": 207, "id": ["say_*", "say_what"], "items": [["say_what"], ["say_*", "say_what"]]}
+{"idx": 208, "id": ["say_*", "say_can"], "items": [["say_*", "say_can"], ["say_can"]]}
+{"idx": 209, "id": ["consider_*", "consider_will"], "items": [["consider_will"], ["consider_*", "consider_will"]]}
+{"idx": 210, "id": ["while>*"], "items": [["while>*"]]}
+{"idx": 211, "id": ["get_*"], "items": [["get_*"]]}
+{"idx": 212, "id": ["get_*", "get_will"], "items": [["get_will"], ["get_*", "get_will"]]}
+{"idx": 213, "id": ["agree_*", "agree_does", "agree_is", "agree_with", "does>*"], "items": [["agree_does", "agree_is", "agree_with"], ["agree_*", "agree_does", "agree_is", "agree_with", "does>*"], ["agree_is", "agree_with", "does>*"], ["agree_*", "agree_does", "agree_is", "agree_with"], ["agree_*", "agree_is", "agree_with", "does>*"], ["agree_does", "agree_is", "agree_with", "does>*"]]}
+{"idx": 214, "id": ["agree_*", "agree_does", "agree_with", "does>*"], "items": [["agree_*", "agree_with", "does>*"], ["agree_with", "does>*"], ["agree_*", "agree_does", "agree_with", "does>*"], ["agree_does", "agree_with", "does>*"]]}
+{"idx": 215, "id": ["agree_*", "agree_does", "agree_with"], "items": [["agree_does", "agree_with"], ["agree_*", "agree_does", "agree_with"]]}
+{"idx": 216, "id": ["agree_*", "agree_is", "agree_with"], "items": [["agree_*", "agree_is", "agree_with"], ["agree_is", "agree_with"]]}
+{"idx": 217, "id": ["agree_*", "agree_with"], "items": [["agree_with"], ["agree_*", "agree_with"]]}
+{"idx": 218, "id": ["taken_*"], "items": [["taken_*"]]}
+{"idx": 219, "id": ["taken_*", "taken_has"], "items": [["taken_has"], ["taken_*", "taken_has"]]}
+{"idx": 220, "id": ["going_*", "going_when", "when>*"], "items": [["going_when", "when>*"], ["going_*", "going_when"], ["going_when"], ["going_*", "going_when", "when>*"], ["going_*", "when>*"]]}
+{"idx": 221, "id": ["going_*"], "items": [["going_*"]]}
+{"idx": 222, "id": ["going_*", "going_is"], "items": [["going_*", "going_is"], ["going_is"]]}
+{"idx": 223, "id": ["why>*", "why>do"], "items": [["why>*", "why>do"], ["why>do"]]}
+{"idx": 224, "id": ["seen_*"], "items": [["seen_*"]]}
+{"idx": 225, "id": ["support_*"], "items": [["support_*"]]}
+{"idx": 226, "id": ["answer_*", "answer_will", "will>*"], "items": [["answer_will", "will>*"], ["answer_*", "will>*"], ["answer_*", "answer_will", "will>*"]]}
+{"idx": 227, "id": ["answer_*"], "items": [["answer_*"]]}
+{"idx": 228, "id": ["answer_*", "answer_will"], "items": [["answer_will"], ["answer_*", "answer_will"]]}
+{"idx": 229, "id": ["does>*", "show_*", "show_does", "show_not"], "items": [["does>*", "show_*", "show_does"], ["does>*", "show_*", "show_does", "show_not"], ["does>*", "show_*", "show_not"], ["does>*", "show_*"], ["does>*", "show_does", "show_not"], ["does>*", "show_does"], ["does>*", "show_not"]]}
+{"idx": 230, "id": ["show_*"], "items": [["show_*"]]}
+{"idx": 231, "id": ["show_*", "show_not"], "items": [["show_*", "show_not"], ["show_not"]]}
+{"idx": 232, "id": ["show_*", "show_does", "show_not"], "items": [["show_*", "show_does", "show_not"], ["show_*", "show_does"], ["show_does", "show_not"], ["show_does"]]}
+{"idx": 233, "id": ["are_*", "are_in"], "items": [["are_in"], ["are_*", "are_in"]]}
+{"idx": 234, "id": ["understand_*"], "items": [["understand_*"]]}
+{"idx": 235, "id": ["does>*", "understand_*"], "items": [["does>*", "understand_*"], ["understand_*", "understand_does"], ["does>*", "understand_*", "understand_does"], ["does>*", "understand_does"], ["understand_does"]]}
+{"idx": 236, "id": ["bear_*", "bear_will", "will>*"], "items": [["bear_will", "will>*"], ["bear_*", "will>*"], ["bear_*", "bear_will", "will>*"]]}
+{"idx": 237, "id": ["bear_*", "bear_in", "bear_will", "will>*"], "items": [["bear_*", "bear_in", "will>*"], ["bear_in", "bear_will", "will>*"], ["bear_in", "will>*"], ["bear_*", "bear_in", "bear_will", "will>*"]]}
+{"idx": 238, "id": ["that>*", "will>*"], "items": [["that>*", "will>*"]]}
+{"idx": 239, "id": ["bear_*", "bear_will"], "items": [["bear_will"], ["bear_*", "bear_will"], ["bear_*"]]}
+{"idx": 240, "id": ["bear_*", "bear_in", "bear_will"], "items": [["bear_*", "bear_in"], ["bear_in", "bear_will"], ["bear_in"], ["bear_*", "bear_in", "bear_will"]]}
+{"idx": 241, "id": ["want_*"], "items": [["want_*"]]}
+{"idx": 242, "id": ["should>*", "should>not"], "items": [["should>not"], ["should>*", "should>not"]]}
+{"idx": 243, "id": ["confirm_*", "confirm_in"], "items": [["confirm_in"], ["confirm_*", "confirm_in"]]}
+{"idx": 244, "id": ["further>*"], "items": [["further>*"]]}
+{"idx": 245, "id": ["further>*", "further>to"], "items": [["further>to"], ["further>*", "further>to"]]}
+{"idx": 246, "id": ["agree_*", "agree_does", "although>*"], "items": [["agree_does", "although>*"], ["agree_*", "although>*"], ["agree_*", "agree_does", "although>*"]]}
+{"idx": 247, "id": ["do>*", "do>not"], "items": [["do>*", "do>not"], ["do>not"]]}
+{"idx": 248, "id": ["stand_*"], "items": [["stand_*"]]}
+{"idx": 249, "id": ["can>*", "explain_*", "explain_can"], "items": [["can>*", "explain_can"], ["can>*", "explain_*", "explain_can"], ["can>*", "explain_*"]]}
+{"idx": 250, "id": ["explain_*"], "items": [["explain_*"]]}
+{"idx": 251, "id": ["explain_*", "explain_can"], "items": [["explain_can"], ["explain_*", "explain_can"]]}
+{"idx": 252, "id": ["give_*", "what>*"], "items": [["give_what", "what>*"], ["give_*", "what>*", "what>what"], ["give_*", "what>*"], ["give_*", "give_what"], ["give_*", "what>what"], ["give_*", "give_what", "what>*"], ["give_what"]]}
+{"idx": 253, "id": ["give_*", "give_what", "what>*", "what>what"], "items": [["give_what", "what>*", "what>what"], ["give_what", "what>what"], ["give_*", "give_what", "what>*", "what>what"], ["give_*", "give_what", "what>what"]]}
+{"idx": 254, "id": ["stop_*"], "items": [["stop_*"]]}
+{"idx": 255, "id": ["stop_*", "stop_will"], "items": [["stop_*", "stop_will"], ["stop_will"]]}
+{"idx": 256, "id": ["is_*", "is_concerned"], "items": [["is_concerned"], ["is_*", "is_concerned"]]}
+{"idx": 257, "id": ["is>*", "is_*", "is_aware", "is_is"], "items": [["is>*", "is_aware", "is_is"], ["is>*", "is_*", "is_aware", "is_is"], ["is_aware", "is_is"], ["is_*", "is_aware", "is_is"]]}
+{"idx": 258, "id": ["is>*", "is_*", "is_is"], "items": [["is>*", "is_*", "is_is"], ["is>*", "is_is"]]}
+{"idx": 259, "id": ["is_*", "is_is"], "items": [["is_*", "is_is"], ["is_is"]]}
+{"idx": 260, "id": ["make_*", "make_will", "will>*"], "items": [["make_will", "will>*"], ["make_*", "make_will", "will>*"]]}
+{"idx": 261, "id": ["make_*", "make_clear", "will>*"], "items": [["make_clear", "will>*"], ["make_*", "make_clear", "will>*"]]}
+{"idx": 262, "id": ["make_*", "make_will"], "items": [["make_*", "make_will"], ["make_will"]]}
+{"idx": 263, "id": ["make_*", "make_clear", "make_will"], "items": [["make_clear", "make_will"], ["make_*", "make_clear", "make_will"]]}
+{"idx": 264, "id": ["make_*", "make_clear"], "items": [["make_*", "make_clear"], ["make_clear"]]}
+{"idx": 265, "id": ["agree_*", "agree_does", "agree_have", "does>*"], "items": [["agree_*", "agree_does", "agree_have", "does>*"], ["agree_*", "agree_have", "does>*"], ["agree_does", "agree_have", "does>*"], ["agree_have", "does>*"]]}
+{"idx": 266, "id": ["agree_*", "agree_does", "agree_have"], "items": [["agree_does", "agree_have"], ["agree_*", "agree_does", "agree_have"]]}
+{"idx": 267, "id": ["agree_*", "agree_have"], "items": [["agree_*", "agree_have"], ["agree_have"]]}
+{"idx": 268, "id": ["explain_*", "explain_to"], "items": [["explain_*", "explain_to"], ["explain_to"]]}
+{"idx": 269, "id": ["explain_*", "explain_is"], "items": [["explain_is"], ["explain_*", "explain_is"]]}
+{"idx": 270, "id": ["could>*"], "items": [["could>*"]]}
+{"idx": 271, "id": ["urge_*"], "items": [["urge_*"]]}
+{"idx": 272, "id": ["urge_*", "urge_will"], "items": [["urge_*", "urge_will"], ["urge_will"]]}
+{"idx": 273, "id": ["in>*", "in>particular"], "items": [["in>*", "in>particular"], ["in>particular"]]}
+{"idx": 274, "id": ["made_*"], "items": [["made_*"]]}
+{"idx": 275, "id": ["made_*", "made_be"], "items": [["made_*", "made_be"], ["made_be"]]}
+{"idx": 276, "id": ["made_*", "made_be", "made_will"], "items": [["made_*", "made_be", "made_will"], ["made_*", "made_will"], ["made_will"], ["made_be", "made_will"]]}
+{"idx": 277, "id": ["made_*", "made_in"], "items": [["made_*", "made_in"], ["made_in"]]}
+{"idx": 278, "id": ["take_*", "take_into"], "items": [["take_*", "take_into"], ["take_into"]]}
+{"idx": 279, "id": ["look_*", "look_again", "look_at", "look_will", "will>*"], "items": [["look_again", "will>*"], ["look_*", "look_again", "look_will"], ["look_*", "look_again", "look_at", "look_will"], ["look_again", "look_will", "will>*"], ["look_*", "look_again", "look_will", "will>*"], ["look_again", "look_will"], ["look_*", "look_again", "will>*"], ["look_*", "look_again", "look_at", "will>*"], ["look_again", "look_at", "look_will"], ["look_again", "look_at", "will>*"], ["look_again", "look_at", "look_will", "will>*"], ["look_*", "look_again", "look_at", "look_will", "will>*"]]}
+{"idx": 280, "id": ["look_*", "look_again", "look_at"], "items": [["look_*", "look_again"], ["look_*", "look_again", "look_at"], ["look_again", "look_at"], ["look_again"]]}
+{"idx": 281, "id": ["involved_*"], "items": [["involved_*"]]}
+{"idx": 282, "id": ["does>*", "is_*"], "items": [["does>*", "is_*"]]}
+{"idx": 283, "id": ["what>*", "what>does"], "items": [["what>*", "what>does"], ["what>does"]]}
+{"idx": 284, "id": ["does>*", "realise_*", "realise_does", "realise_not"], "items": [["realise_*", "realise_does", "realise_not"], ["does>*", "realise_*", "realise_not"], ["realise_not"], ["does>*", "realise_does", "realise_not"], ["does>*", "realise_*", "realise_does", "realise_not"], ["does>*", "realise_not"], ["realise_does", "realise_not"], ["realise_*", "realise_not"]]}
+{"idx": 285, "id": ["encourage_*"], "items": [["encourage_*"]]}
+{"idx": 286, "id": ["encourage_*", "encourage_will"], "items": [["encourage_*", "encourage_will"], ["encourage_will"]]}
+{"idx": 287, "id": ["take_*", "take_what"], "items": [["take_what"], ["take_*", "take_what"]]}
+{"idx": 288, "id": ["congratulate_*"], "items": [["congratulate_*"]]}
+{"idx": 289, "id": ["have_*", "will>*"], "items": [["have_*", "will>*"]]}
+{"idx": 290, "id": ["have>*", "have_*"], "items": [["have>*", "have_*"]]}
+{"idx": 291, "id": ["have>*"], "items": [["have>*"]]}
+{"idx": 292, "id": ["can>*", "confirm_*", "confirm_can"], "items": [["can>*", "confirm_can"], ["can>*", "confirm_*"], ["can>*", "confirm_*", "confirm_can"]]}
+{"idx": 293, "id": ["confirm_*", "confirm_can"], "items": [["confirm_can"], ["confirm_*", "confirm_can"]]}
+{"idx": 294, "id": ["intend_*"], "items": [["intend_*"]]}
+{"idx": 295, "id": ["intend_*", "intend_does"], "items": [["intend_does"], ["intend_*", "intend_does"]]}
+{"idx": 296, "id": ["confirm_*", "confirm_are", "confirm_can"], "items": [["confirm_are", "confirm_can"], ["confirm_*", "confirm_are", "confirm_can"]]}
+{"idx": 297, "id": ["confirm_*", "confirm_are"], "items": [["confirm_*", "confirm_are"], ["confirm_are"]]}
+{"idx": 298, "id": ["give_*", "give_can", "give_what", "what>*", "what>what"], "items": [["give_*", "give_can", "give_what", "what>*"], ["give_can", "give_what", "what>*"], ["give_*", "give_can", "give_what", "what>*", "what>what"], ["give_can", "give_what", "what>what"], ["give_*", "give_can", "give_what", "what>what"], ["give_can", "give_what", "what>*", "what>what"]]}
+{"idx": 299, "id": ["give_*", "give_can", "what>*", "what>what"], "items": [["give_can", "what>what"], ["give_*", "give_can", "what>*"], ["give_*", "give_can", "what>what"], ["give_can", "what>*"], ["give_*", "give_can", "what>*", "what>what"], ["give_can", "what>*", "what>what"]]}
+{"idx": 300, "id": ["give_*", "give_can", "give_what"], "items": [["give_can", "give_what"], ["give_*", "give_can", "give_what"]]}
+{"idx": 301, "id": ["going_*", "going_are"], "items": [["going_are"], ["going_*", "going_are"]]}
+{"idx": 302, "id": ["is_*", "is_what"], "items": [["is_what"], ["is_*", "is_what"]]}
+{"idx": 303, "id": ["ensure_*", "ensure_have", "ensure_will"], "items": [["ensure_have", "ensure_will"], ["ensure_*", "ensure_have", "ensure_will"]]}
+{"idx": 304, "id": ["ensure_*", "ensure_have"], "items": [["ensure_*", "ensure_have"], ["ensure_have"]]}
+{"idx": 305, "id": ["so>*"], "items": [["so>*"]]}
+{"idx": 306, "id": ["so>*", "so>will"], "items": [["so>*", "so>will"], ["so>will"]]}
+{"idx": 307, "id": ["have_*", "have_what", "what>*", "what>what"], "items": [["have_*", "have_what", "what>*", "what>what"], ["have_*", "have_what", "what>what"], ["have_*", "what>what"], ["have_what", "what>*", "what>what"], ["have_what", "what>what"], ["have_*", "what>*", "what>what"]]}
+{"idx": 308, "id": ["have_*", "what>*"], "items": [["have_what"], ["have_*", "what>*"], ["have_what", "what>*"], ["have_*", "have_what", "what>*"], ["have_*", "have_what"]]}
+{"idx": 309, "id": ["update_*"], "items": [["update_*"]]}
+{"idx": 310, "id": ["update_*", "update_will"], "items": [["update_will", "will>*"], ["update_will"], ["update_*", "update_will"], ["update_*", "update_will", "will>*"], ["update_*", "will>*"]]}
+{"idx": 311, "id": ["does>*", "think_*", "think_does"], "items": [["does>*", "think_*", "think_does"], ["does>*", "think_does"], ["does>*", "think_*"]]}
+{"idx": 312, "id": ["is_*", "is_there"], "items": [["is_*", "is_there"], ["is_there"]]}
+{"idx": 313, "id": ["what>*", "what>is"], "items": [["what>is"], ["what>*", "what>is"]]}
+{"idx": 314, "id": ["taking_*", "what>*"], "items": [["taking_*", "what>*"]]}
+{"idx": 315, "id": ["taking_*", "taking_what", "what>*"], "items": [["taking_what", "what>*"], ["taking_*", "taking_what", "what>*"]]}
+{"idx": 316, "id": ["taking_*", "taking_is", "what>*"], "items": [["taking_*", "taking_is", "what>*"], ["taking_is", "what>*"]]}
+{"idx": 317, "id": ["taking_*", "taking_what"], "items": [["taking_what"], ["taking_*", "taking_what"]]}
+{"idx": 318, "id": ["taking_*", "taking_is"], "items": [["taking_is"], ["taking_*", "taking_is"]]}
+{"idx": 319, "id": ["how>*", "how>does"], "items": [["how>*", "how>does"], ["how>does"]]}
+{"idx": 320, "id": ["does>*", "have_*"], "items": [["does>*", "have_*"]]}
+{"idx": 321, "id": ["does>*", "have_*", "have_does"], "items": [["does>*", "have_does"], ["does>*", "have_*", "have_does"]]}
+{"idx": 322, "id": ["have_*", "have_does"], "items": [["have_does"], ["have_*", "have_does"]]}
+{"idx": 323, "id": ["had_*", "had_with", "what>*", "what>what"], "items": [["had_*", "had_with", "what>*", "what>what"], ["had_with", "what>what"], ["had_*", "what>what"], ["had_*", "had_with", "what>what"], ["had_*", "what>*", "what>what"], ["had_with", "what>*", "what>what"], ["had_with", "what>*"], ["had_*", "what>*"], ["had_*", "had_with", "what>*"]]}
+{"idx": 324, "id": ["had_*"], "items": [["had_*"]]}
+{"idx": 325, "id": ["had_*", "had_what"], "items": [["had_*", "had_what"], ["had_what"]]}
+{"idx": 326, "id": ["had_*", "had_what", "had_with"], "items": [["had_what", "had_with"], ["had_*", "had_what", "had_with"]]}
+{"idx": 327, "id": ["had_*", "had_with"], "items": [["had_*", "had_with"], ["had_with"]]}
+{"idx": 328, "id": ["had_*", "had_has"], "items": [["had_*", "had_has"], ["had_has"]]}
+{"idx": 329, "id": ["agree_*", "agree_will"], "items": [["agree_*", "agree_will"], ["agree_will"]]}
+{"idx": 330, "id": ["agree_*", "in>*"], "items": [["agree_*", "in>*"]]}
+{"idx": 331, "id": ["given>*", "tell_*"], "items": [["given>*", "tell_*"]]}
+{"idx": 332, "id": ["tell_*", "tell_given"], "items": [["tell_given"], ["tell_*", "tell_given"]]}
+{"idx": 333, "id": ["agree_*", "agree_does", "agree_need", "does>*"], "items": [["agree_*", "agree_does", "agree_need", "does>*"], ["agree_*", "agree_need", "does>*"], ["agree_does", "agree_need", "does>*"], ["agree_need", "does>*"]]}
+{"idx": 334, "id": ["agree_*", "agree_does", "agree_need"], "items": [["agree_does", "agree_need"], ["agree_*", "agree_does", "agree_need"]]}
+{"idx": 335, "id": ["agree_*", "agree_need"], "items": [["agree_*", "agree_need"], ["agree_need"]]}
+{"idx": 336, "id": ["is_*", "is_confident"], "items": [["is_*", "is_confident"], ["is_confident"]]}
+{"idx": 337, "id": ["be_*", "be_how", "how>*"], "items": [["be_*", "how>*"], ["be_how", "how>*"], ["be_how"], ["be_*", "be_how"], ["be_*", "be_how", "how>*"]]}
+{"idx": 338, "id": ["made_*", "made_what", "what>*"], "items": [["made_*", "what>*", "what>what"], ["made_has", "what>what"], ["made_what", "what>*"], ["made_*", "made_has", "what>*"], ["made_has", "made_what", "what>*"], ["made_*", "made_has", "made_what", "what>what"], ["made_has", "made_what"], ["made_*", "made_has", "what>*", "what>what"], ["made_has", "made_what", "what>*", "what>what"], ["made_what", "what>what"], ["made_*", "made_what", "what>*"], ["made_*", "made_has", "what>what"], ["made_has", "made_what", "what>what"], ["made_*", "made_has", "made_what"], ["made_*", "made_what", "what>*", "what>what"], ["made_what", "what>*", "what>what"], ["made_*", "what>*"], ["made_*", "made_has", "made_what", "what>*"], ["made_*", "made_has", "made_what", "what>*", "what>what"], ["made_*", "made_what", "what>what"], ["made_has", "what>*", "what>what"], ["made_*", "what>what"], ["made_has", "what>*"]]}
+{"idx": 339, "id": ["made_*", "made_has", "made_of", "made_what", "what>*", "what>what"], "items": [["made_of", "what>what"], ["made_has", "made_of", "what>*"], ["made_*", "made_has", "made_of", "what>*", "what>what"], ["made_has", "made_of", "made_what", "what>what"], ["made_*", "made_has", "made_of"], ["made_*", "made_has", "made_of", "made_what"], ["made_has", "made_of"], ["made_*", "made_of", "what>*", "what>what"], ["made_of", "what>*"], ["made_of", "what>*", "what>what"], ["made_of", "made_what", "what>*"], ["made_of", "made_what", "what>*", "what>what"], ["made_*", "made_has", "made_of", "what>what"], ["made_has", "made_of", "what>*", "what>what"], ["made_*", "made_of", "made_what", "what>*"], ["made_*", "made_of", "made_what"], ["made_*", "made_of", "what>what"], ["made_has", "made_of", "made_what", "what>*", "what>what"], ["made_of", "made_what", "what>what"], ["made_has", "made_of", "made_what", "what>*"], ["made_has", "made_of", "made_what"], ["made_has", "made_of", "what>what"], ["made_*", "made_has", "made_of", "made_what", "what>*"], ["made_*", "made_of", "made_what", "what>*", "what>what"], ["made_*", "made_of", "what>*"], ["made_*", "made_of", "made_what", "what>what"], ["made_of", "made_what"], ["made_*", "made_has", "made_of", "what>*"], ["made_*", "made_has", "made_of", "made_what", "what>what"], ["made_*", "made_has", "made_of", "made_what", "what>*", "what>what"]]}
+{"idx": 340, "id": ["made_*", "made_what"], "items": [["made_what"], ["made_*", "made_what"]]}
+{"idx": 341, "id": ["made_*", "made_has"], "items": [["made_has"], ["made_*", "made_has"]]}
+{"idx": 342, "id": ["made_*", "made_of"], "items": [["made_of"], ["made_*", "made_of"]]}
+{"idx": 343, "id": ["try_*", "try_will"], "items": [["try_will"], ["try_*", "try_will"]]}
+{"idx": 344, "id": ["taken_*", "what>*", "what>what"], "items": [["taken_*", "what>what"], ["taken_*", "what>*", "what>what"]]}
+{"idx": 345, "id": ["taken_*", "what>*"], "items": [["taken_*", "what>*"]]}
+{"idx": 346, "id": ["agree_*", "agree_does", "agree_given"], "items": [["agree_does", "agree_given"], ["agree_*", "agree_does", "agree_given"]]}
+{"idx": 347, "id": ["agree_*", "agree_given"], "items": [["agree_given"], ["agree_*", "agree_given"]]}
+{"idx": 348, "id": ["ask_*", "will>*"], "items": [["ask_*", "will>*"]]}
+{"idx": 349, "id": ["ask_*", "ask_will", "will>*"], "items": [["ask_will", "will>*"], ["ask_*", "ask_will", "will>*"]]}
+{"idx": 350, "id": ["ask_*", "ask_will"], "items": [["ask_will"], ["ask_*", "ask_will"]]}
+{"idx": 351, "id": ["help_*"], "items": [["help_*"]]}
+{"idx": 352, "id": ["is>*", "is_*", "is_there"], "items": [["is>*", "is_*", "is_there"], ["is>*", "is_there"]]}
+{"idx": 353, "id": ["now>*"], "items": [["now>*"]]}
+{"idx": 354, "id": ["is_*", "is_satisfied"], "items": [["is_satisfied"], ["is_*", "is_satisfied"]]}
+{"idx": 355, "id": ["with>*"], "items": [["with>*"]]}
+{"idx": 356, "id": ["recognise_*"], "items": [["recognise_*"]]}
+{"idx": 357, "id": ["go_*"], "items": [["go_*"]]}
+{"idx": 358, "id": ["see_*"], "items": [["see_*"]]}
+{"idx": 359, "id": ["see_*", "see_will"], "items": [["see_*", "see_will"], ["see_will"]]}
+{"idx": 360, "id": ["would>*", "would_*"], "items": [["would>*", "would_*"]]}
+{"idx": 361, "id": ["would_*"], "items": [["would_*"]]}
+{"idx": 362, "id": ["undertake_*", "undertake_will", "will>*"], "items": [["undertake_will", "will>*"], ["undertake_*", "undertake_will", "will>*"], ["undertake_*", "will>*"]]}
+{"idx": 363, "id": ["undertake_*", "undertake_will"], "items": [["undertake_*", "undertake_will"], ["undertake_will"], ["undertake_*"]]}
+{"idx": 364, "id": ["have_*", "have_will", "will>*"], "items": [["have_*", "have_will", "will>*"], ["have_will", "will>*"]]}
+{"idx": 365, "id": ["have_*", "have_will"], "items": [["have_*", "have_will"], ["have_will"]]}
+{"idx": 366, "id": ["since>*"], "items": [["since>*"]]}
+{"idx": 367, "id": ["offer_*"], "items": [["offer_*"]]}
+{"idx": 368, "id": ["clarify_*", "clarify_will", "will>*"], "items": [["clarify_*", "clarify_will", "will>*"], ["clarify_*", "will>*"], ["clarify_will", "will>*"]]}
+{"idx": 369, "id": ["clarify_*"], "items": [["clarify_*"]]}
+{"idx": 370, "id": ["clarify_*", "clarify_will"], "items": [["clarify_will"], ["clarify_*", "clarify_will"]]}
+{"idx": 371, "id": ["has_*", "has_had"], "items": [["has_had"], ["has_*", "has_had"]]}
+{"idx": 372, "id": ["expect_*"], "items": [["expect_*"]]}
+{"idx": 373, "id": ["expect_*", "expect_does"], "items": [["expect_does"], ["expect_*", "expect_does"]]}
+{"idx": 374, "id": ["explain_*", "will>*"], "items": [["explain_will", "will>*"], ["explain_*", "will>*"], ["explain_*", "explain_will", "will>*"]]}
+{"idx": 375, "id": ["explain_*", "explain_will"], "items": [["explain_will"], ["explain_*", "explain_will"]]}
+{"idx": 376, "id": ["provide_*"], "items": [["provide_*"]]}
+{"idx": 377, "id": ["come_*"], "items": [["come_*"]]}
+{"idx": 378, "id": ["is_*", "is_take"], "items": [["is_take"], ["is_*", "is_take"]]}
+{"idx": 379, "id": ["consider_*", "consider_would"], "items": [["consider_*", "consider_would"], ["consider_would"]]}
+{"idx": 380, "id": ["but>*"], "items": [["but>*"]]}
+{"idx": 381, "id": ["press_*"], "items": [["press_*"]]}
+{"idx": 382, "id": ["is_*", "what>*"], "items": [["is_*", "what>*"]]}
+{"idx": 383, "id": ["is_*", "is_what", "what>*"], "items": [["is_*", "is_what", "what>*"], ["is_what", "what>*"]]}
+{"idx": 384, "id": ["is_*", "is_what", "what>*", "what>is"], "items": [["is_*", "is_what", "what>*", "what>is"], ["is_*", "what>*", "what>is"], ["is_what", "what>is"], ["is_what", "what>*", "what>is"], ["is_*", "what>is"], ["is_*", "is_what", "what>is"]]}
+{"idx": 385, "id": ["is_*", "is_why"], "items": [["is_why"], ["is_*", "is_why"]]}
+{"idx": 386, "id": ["is_*", "is_why", "why>*", "why>is"], "items": [["is_*", "is_why", "why>*", "why>is"], ["is_*", "is_why", "why>*"], ["is_*", "why>*", "why>is"], ["is_why", "why>is"], ["is_*", "is_why", "why>is"], ["is_why", "why>*", "why>is"], ["is_why", "why>*"], ["is_*", "why>is"]]}
+{"idx": 387, "id": ["is_*", "why>*"], "items": [["is_*", "why>*"]]}
+{"idx": 388, "id": ["update_*", "update_on", "update_will", "will>*"], "items": [["update_on", "update_will", "will>*"], ["update_*", "update_on", "update_will", "will>*"], ["update_*", "update_on", "will>*"], ["update_on", "will>*"], ["update_on", "update_will"], ["update_*", "update_on", "update_will"]]}
+{"idx": 389, "id": ["update_*", "update_on"], "items": [["update_on"], ["update_*", "update_on"]]}
+{"idx": 390, "id": ["agree_*", "will>*"], "items": [["agree_*", "will>*"]]}
+{"idx": 391, "id": ["agree_*", "agree_will", "will>*"], "items": [["agree_*", "agree_will", "will>*"], ["agree_will", "will>*"]]}
+{"idx": 392, "id": ["agree_*", "agree_meet", "agree_will", "will>*"], "items": [["agree_meet", "agree_will"], ["agree_*", "agree_meet", "will>*"], ["agree_meet"], ["agree_meet", "agree_will", "will>*"], ["agree_*", "agree_meet"], ["agree_*", "agree_meet", "agree_will", "will>*"], ["agree_*", "agree_meet", "agree_will"], ["agree_meet", "will>*"]]}
+{"idx": 393, "id": ["be_*", "be_should"], "items": [["be_should"], ["be_*", "be_should"]]}
+{"idx": 394, "id": ["draw_*"], "items": [["draw_*"]]}
+{"idx": 395, "id": ["ask>*", "ask_*"], "items": [["ask>*"], ["ask>*", "ask_*"]]}
+{"idx": 396, "id": ["are_*", "are_there"], "items": [["are_there"], ["are_*", "are_there"]]}
+{"idx": 397, "id": ["done_*", "done_what", "what>*"], "items": [["done_what", "what>*"], ["done_*", "what>*"], ["done_*", "done_what", "what>*"]]}
+{"idx": 398, "id": ["done_*"], "items": [["done_*"]]}
+{"idx": 399, "id": ["done_*", "done_what"], "items": [["done_*", "done_what"], ["done_what"]]}
+{"idx": 400, "id": ["is>*", "is_*", "is_confident"], "items": [["is>*", "is_*", "is_confident"], ["is>*", "is_confident"]]}
+{"idx": 401, "id": ["admit_*"], "items": [["admit_*"]]}
+{"idx": 402, "id": ["confirm_*", "confirm_is", "confirm_will", "will>*"], "items": [["confirm_is", "confirm_will", "will>*"], ["confirm_*", "confirm_is", "confirm_will", "will>*"], ["confirm_is", "will>*"], ["confirm_*", "confirm_is", "will>*"]]}
+{"idx": 403, "id": ["confirm_*", "confirm_is", "confirm_will"], "items": [["confirm_is", "confirm_will"], ["confirm_*", "confirm_is", "confirm_will"]]}
+{"idx": 404, "id": ["confirm_*", "confirm_is"], "items": [["confirm_is"], ["confirm_*", "confirm_is"]]}
+{"idx": 405, "id": ["agree_*", "agree_be"], "items": [["agree_*", "agree_be", "agree_does"], ["agree_*", "agree_be"], ["agree_be"], ["agree_be", "agree_does"]]}
+{"idx": 406, "id": ["know_*"], "items": [["know_*"]]}
+{"idx": 407, "id": ["is>*", "is>there", "is_*", "is_there"], "items": [["is>*", "is>there"], ["is>there", "is_*", "is_there"], ["is>there", "is_*"], ["is>*", "is>there", "is_there"], ["is>there"], ["is>*", "is>there", "is_*"], ["is>there", "is_there"], ["is>*", "is>there", "is_*", "is_there"]]}
+{"idx": 408, "id": ["say_*", "say_may"], "items": [["say_may"], ["say_*", "say_may"]]}
+{"idx": 409, "id": ["accept_*", "accept_been", "accept_does"], "items": [["accept_*", "accept_been", "accept_does"], ["accept_been"], ["accept_been", "accept_does"], ["accept_*", "accept_been"]]}
+{"idx": 410, "id": ["invite_*"], "items": [["invite_*"]]}
+{"idx": 411, "id": ["agree_*", "agree_further"], "items": [["agree_further"], ["agree_*", "agree_further"]]}
+{"idx": 412, "id": ["put_*", "will>*"], "items": [["put_*", "will>*"]]}
+{"idx": 413, "id": ["put_*", "put_will"], "items": [["put_will"], ["put_*", "put_will"]]}
+{"idx": 414, "id": ["believe_*", "believe_is"], "items": [["believe_is"], ["believe_*", "believe_is"]]}
+{"idx": 415, "id": ["does>*", "recognise_*", "recognise_does"], "items": [["does>*", "recognise_*", "recognise_does"], ["recognise_*", "recognise_does"], ["does>*", "recognise_does"], ["recognise_does"], ["does>*", "recognise_*"]]}
+{"idx": 416, "id": ["is_*", "what>*", "what>what"], "items": [["is_*", "what>what"], ["is_*", "what>*", "what>what"]]}
+{"idx": 417, "id": ["why>*", "why>did"], "items": [["why>did"], ["why>*", "why>did"]]}
+{"idx": 418, "id": ["be_*", "be_better", "be_would", "would>*"], "items": [["be_*", "be_better", "would>*"], ["be_*", "be_better"], ["be_*", "be_better", "be_would", "would>*"], ["be_better", "be_would"], ["be_better", "be_would", "would>*"], ["be_better", "would>*"], ["be_*", "be_better", "be_would"], ["be_better"]]}
+{"idx": 419, "id": ["point_*"], "items": [["point_*"]]}
+{"idx": 420, "id": ["does>*", "intend_*", "intend_does"], "items": [["does>*", "intend_*"], ["does>*", "intend_does"], ["does>*", "intend_*", "intend_does"]]}
+{"idx": 421, "id": ["how>*", "justify_*", "justify_how"], "items": [["how>*", "justify_*", "justify_how"], ["justify_*"], ["how>*", "justify_*"], ["justify_*", "justify_how"], ["justify_how"], ["how>*", "justify_how"]]}
+{"idx": 422, "id": ["reflect_*"], "items": [["reflect_*"]]}
+{"idx": 423, "id": ["as>*", "as>there"], "items": [["as>*", "as>there"], ["as>there"]]}
+{"idx": 424, "id": ["is>*", "is_*", "is_satisfied"], "items": [["is>*", "is_*", "is_satisfied"], ["is>*", "is_satisfied"]]}
+{"idx": 425, "id": ["take_*", "take_ensure", "take_will"], "items": [["take_ensure", "take_will"], ["take_*", "take_ensure", "take_will"]]}
+{"idx": 426, "id": ["take_*", "take_ensure"], "items": [["take_ensure"], ["take_*", "take_ensure"]]}
+{"idx": 427, "id": ["where>*"], "items": [["where>*"]]}
+{"idx": 428, "id": ["going_*", "what>*"], "items": [["going_*", "what>*"]]}
+{"idx": 429, "id": ["going_*", "going_do", "what>*"], "items": [["going_do", "what>*"], ["going_do"], ["going_*", "going_do"], ["going_*", "going_do", "what>*"]]}
+{"idx": 430, "id": ["appreciate_*", "appreciate_does", "does>*"], "items": [["appreciate_*", "does>*"], ["appreciate_does", "does>*"], ["appreciate_*", "appreciate_does", "does>*"]]}
+{"idx": 431, "id": ["do_*", "do_can", "do_what", "what>*", "what>can"], "items": [["do_*", "do_can", "what>*"], ["do_*", "do_can", "do_what", "what>*", "what>can"], ["do_*", "do_can", "do_what", "what>can"], ["do_can", "do_what", "what>*", "what>can"], ["do_what", "what>can"], ["do_*", "do_can", "what>can"], ["do_*", "do_can", "do_what", "what>*"], ["do_*", "what>*", "what>can"], ["do_can", "what>*"], ["do_*", "do_can", "what>*", "what>can"], ["do_*", "do_what", "what>*", "what>can"], ["do_*", "do_what", "what>can"], ["do_what", "what>*", "what>can"], ["do_can", "do_what", "what>*"], ["do_can", "do_what", "what>can"], ["do_*", "what>can"], ["do_can", "what>can"], ["do_can", "what>*", "what>can"]]}
+{"idx": 432, "id": ["do_*", "do_can", "do_what"], "items": [["do_can", "do_what"], ["do_*", "do_can", "do_what"]]}
+{"idx": 433, "id": ["do_*", "do_can"], "items": [["do_*", "do_can"], ["do_can"]]}
+{"idx": 434, "id": ["share_*"], "items": [["share_*"]]}
+{"idx": 435, "id": ["share_*", "share_does"], "items": [["share_*", "share_does"], ["share_does"]]}
+{"idx": 436, "id": ["be_*", "be_better", "be_not", "be_would", "would>*"], "items": [["be_*", "be_better", "be_not", "would>*"], ["be_better", "be_not", "be_would"], ["be_better", "be_not"], ["be_better", "be_not", "would>*"], ["be_*", "be_better", "be_not", "be_would"], ["be_better", "be_not", "be_would", "would>*"], ["be_*", "be_better", "be_not"], ["be_*", "be_better", "be_not", "be_would", "would>*"]]}
+{"idx": 437, "id": ["continue_*", "will>*"], "items": [["continue_*", "will>*"]]}
+{"idx": 438, "id": ["continue_*", "continue_will", "will>*"], "items": [["continue_will", "will>*"], ["continue_*", "continue_will", "will>*"]]}
+{"idx": 439, "id": ["continue_*"], "items": [["continue_*"]]}
+{"idx": 440, "id": ["continue_*", "continue_will"], "items": [["continue_will"], ["continue_*", "continue_will"]]}
+{"idx": 441, "id": ["as>*", "is_*"], "items": [["as>*", "is_*"]]}
+{"idx": 442, "id": ["have_*", "have_does", "what>*"], "items": [["have_does", "have_what", "what>*"], ["have_does", "what>*"], ["have_*", "have_does", "what>*"], ["have_does", "have_what"], ["have_*", "have_does", "have_what"], ["have_*", "have_does", "have_what", "what>*"]]}
+{"idx": 443, "id": ["have_*", "have_does", "have_say", "have_what", "what>*", "what>does"], "items": [["have_what", "what>*", "what>does"], ["have_*", "have_does", "have_say", "what>*"], ["have_*", "have_does", "have_say", "have_what", "what>*", "what>does"], ["have_say", "what>*"], ["have_*", "have_say", "have_what", "what>*"], ["have_say", "have_what", "what>*"], ["have_does", "have_what", "what>*", "what>does"], ["have_say"], ["have_does", "have_say", "have_what", "what>*", "what>does"], ["have_*", "have_does", "have_say", "what>does"], ["have_*", "have_say", "what>does"], ["have_*", "have_say", "what>*", "what>does"], ["have_does", "have_say", "have_what"], ["have_say", "what>does"], ["have_*", "have_does", "have_say", "what>*", "what>does"], ["have_*", "what>*", "what>does"], ["have_does", "have_say"], ["have_*", "have_does", "what>*", "what>does"], ["have_*", "have_does", "what>does"], ["have_*", "have_does", "have_say", "have_what"], ["have_what", "what>does"], ["have_does", "what>*", "what>does"], ["have_*", "have_say", "have_what", "what>*", "what>does"], ["have_*", "have_say", "have_what", "what>does"], ["have_*", "have_say", "what>*"], ["have_*", "have_does", "have_say", "have_what", "what>*"], ["have_*", "have_say", "have_what"], ["have_*", "have_what", "what>does"], ["have_does", "have_say", "what>does"], ["have_does", "have_say", "what>*", "what>does"], ["have_*", "what>does"], ["have_say", "what>*", "what>does"], ["have_*", "have_say"], ["have_say", "have_what"], ["have_say", "have_what", "what>*", "what>does"], ["have_*", "have_does", "have_say"], ["have_does", "have_what", "what>does"], ["have_*", "have_does", "have_say", "have_what", "what>does"], ["have_*", "have_what", "what>*", "what>does"], ["have_*", "have_does", "have_what", "what>does"], ["have_does", "have_say", "have_what", "what>does"], ["have_does", "have_say", "have_what", "what>*"], ["have_does", "have_say", "what>*"], ["have_does", "what>does"], ["have_say", "have_what", "what>does"], ["have_*", "have_does", "have_what", "what>*", "what>does"]]}
+{"idx": 444, "id": ["tell_*", "tell_may"], "items": [["tell_may"], ["tell_*", "tell_may"]]}
+{"idx": 445, "id": ["may>*", "tell_*", "tell_may"], "items": [["may>*", "tell_*", "tell_may"], ["may>*", "tell_*"], ["may>*", "tell_may"]]}
+{"idx": 446, "id": ["suggest_*"], "items": [["suggest_*"]]}
+{"idx": 447, "id": ["make_*", "what>*"], "items": [["make_*", "what>*"]]}
+{"idx": 448, "id": ["agree_*", "agree_be", "agree_does", "does>*"], "items": [["agree_*", "agree_be", "agree_does", "does>*"], ["agree_be", "does>*"], ["agree_be", "agree_does", "does>*"], ["agree_*", "agree_be", "does>*"]]}
+{"idx": 449, "id": ["use_*"], "items": [["use_*"]]}
+{"idx": 450, "id": ["pay_*", "will>*"], "items": [["pay_*", "will>*"]]}
+{"idx": 451, "id": ["use_*", "use_will"], "items": [["use_*", "use_will"], ["use_will"]]}
+{"idx": 452, "id": ["why>*", "why>does"], "items": [["why>does"], ["why>*", "why>does"]]}
+{"idx": 453, "id": ["ensure>*", "ensure>that", "ensure_*"], "items": [["ensure>that", "ensure_*"], ["ensure>*", "ensure_*"], ["ensure>*", "ensure>that"], ["ensure>*", "ensure>that", "ensure_*"], ["ensure>that"], ["ensure>*"]]}
+{"idx": 454, "id": ["remind_*", "remind_may"], "items": [["remind_may"], ["remind_*", "remind_may"]]}
+{"idx": 455, "id": ["agree_*", "agree_also", "agree_does", "does>*"], "items": [["agree_also", "agree_does", "does>*"], ["agree_also", "agree_does"], ["agree_also", "does>*"], ["agree_*", "agree_also", "does>*"], ["agree_*", "agree_also", "agree_does"], ["agree_*", "agree_also", "agree_does", "does>*"], ["agree_*", "agree_also"], ["agree_also"]]}
+{"idx": 456, "id": ["reconsider_*", "reconsider_will"], "items": [["reconsider_*", "reconsider_will"], ["reconsider_*"], ["reconsider_will"]]}
+{"idx": 457, "id": ["explain_*", "explain_why"], "items": [["explain_*", "explain_why"], ["explain_why"]]}
+{"idx": 458, "id": ["let_*"], "items": [["let_*"]]}
+{"idx": 459, "id": ["may>*", "take_*", "take_may"], "items": [["may>*", "take_*", "take_may"], ["may>*", "take_may"], ["may>*", "take_*"]]}
+{"idx": 460, "id": ["take_*", "take_may"], "items": [["take_may"], ["take_*", "take_may"]]}
+{"idx": 461, "id": ["does>*", "will>*"], "items": [["does>*", "will>*"]]}
+{"idx": 462, "id": ["have_*", "how>*"], "items": [["have_*", "how>*"]]}
+{"idx": 463, "id": ["doing_*", "doing_is"], "items": [["doing_is", "what>is"], ["doing_is", "what>*", "what>is"], ["doing_*", "what>*", "what>is"], ["doing_*", "doing_is", "what>is"], ["doing_is"], ["doing_*", "what>is"], ["doing_is", "what>*"], ["doing_*", "doing_is", "what>*", "what>is"], ["doing_*", "doing_is"], ["doing_*", "doing_is", "what>*"]]}
+{"idx": 464, "id": ["why>*", "why>are"], "items": [["why>are"], ["why>*", "why>are"]]}
+{"idx": 465, "id": ["use_*", "use_will", "will>*"], "items": [["use_*", "will>*"], ["use_*", "use_will", "will>*"], ["use_will", "will>*"]]}
+{"idx": 466, "id": ["be_*", "be_will", "will>*"], "items": [["be_will", "will>*"], ["be_*", "be_will", "will>*"], ["be_*", "will>*"]]}
+{"idx": 467, "id": ["did>*"], "items": [["did>*"]]}
+{"idx": 468, "id": ["say_*", "will>*"], "items": [["say_*", "will>*"]]}
+{"idx": 469, "id": ["say_*", "say_will"], "items": [["say_*", "say_will"], ["say_will"]]}
+{"idx": 470, "id": ["has>*", "has_*", "has_had"], "items": [["has>*", "has_had"], ["has>*", "has_*", "has_had"]]}
+{"idx": 471, "id": ["seek_*"], "items": [["seek_*"]]}
+{"idx": 472, "id": ["at>*"], "items": [["at>*"]]}
+{"idx": 473, "id": ["going_*", "going_is", "what>*", "what>is"], "items": [["going_*", "what>*", "what>is"], ["going_*", "going_is", "what>*", "what>is"], ["going_is", "what>*", "what>is"], ["going_*", "going_is", "what>is"], ["going_is", "what>*"], ["going_*", "what>is"], ["going_*", "going_is", "what>*"], ["going_is", "what>is"]]}
+{"idx": 474, "id": ["going_*", "going_do", "going_is", "what>*", "what>is"], "items": [["going_*", "going_do", "going_is", "what>*", "what>is"], ["going_*", "going_do", "going_is", "what>is"], ["going_*", "going_do", "what>*", "what>is"], ["going_do", "going_is", "what>is"], ["going_do", "what>is"], ["going_*", "going_do", "going_is", "what>*"], ["going_do", "going_is", "what>*", "what>is"], ["going_do", "what>*", "what>is"], ["going_*", "going_do", "going_is"], ["going_do", "going_is"], ["going_do", "going_is", "what>*"], ["going_*", "going_do", "what>is"]]}
+{"idx": 475, "id": ["feel_*"], "items": [["feel_*"]]}
+{"idx": 476, "id": ["agree_*", "agree_does", "agree_further"], "items": [["agree_does", "agree_further"], ["agree_*", "agree_does", "agree_further"]]}
+{"idx": 477, "id": ["support_*", "support_will"], "items": [["support_*", "support_will"], ["support_will"]]}
+{"idx": 478, "id": ["is>*", "is_*", "is_true"], "items": [["is>*", "is_*", "is_true"], ["is>*", "is_true"], ["is_*", "is_true"], ["is_true"]]}
+{"idx": 479, "id": ["taken_*", "taken_what", "what>*"], "items": [["taken_what", "what>*"], ["taken_*", "taken_what", "what>*"]]}
+{"idx": 480, "id": ["taken_*", "taken_what"], "items": [["taken_what"], ["taken_*", "taken_what"]]}
+{"idx": 481, "id": ["learned_*", "learned_will"], "items": [["learned_will"], ["learned_*", "learned_will"]]}
+{"idx": 482, "id": ["been_*", "been_have"], "items": [["been_*", "been_have"], ["been_have"]]}
+{"idx": 483, "id": ["do_*", "do_ensure", "do_will"], "items": [["do_ensure", "do_will"], ["do_*", "do_ensure", "do_will"]]}
+{"idx": 484, "id": ["do_*", "do_ensure"], "items": [["do_ensure"], ["do_*", "do_ensure"]]}
+{"idx": 485, "id": ["bring_*"], "items": [["bring_*"]]}
+{"idx": 486, "id": ["in>*", "in_*"], "items": [["in_*"], ["in>*", "in_*"]]}
+{"idx": 487, "id": ["doing_*", "doing_what", "what>*"], "items": [["doing_*", "doing_what"], ["doing_*", "doing_what", "what>*"], ["doing_what"], ["doing_what", "what>*"]]}
+{"idx": 488, "id": ["are_*", "are_what", "what>*"], "items": [["are_*", "are_what", "what>*"], ["are_what"], ["are_*", "are_what"], ["are_what", "what>*"], ["are_*", "what>*"]]}
+{"idx": 489, "id": ["think_*", "think_does", "think_not"], "items": [["think_does", "think_not"], ["think_*", "think_not"], ["think_not"], ["think_*", "think_does", "think_not"]]}
+{"idx": 490, "id": ["take_*", "take_into", "take_will"], "items": [["take_*", "take_into", "take_will"], ["take_into", "take_will"]]}
+{"idx": 491, "id": ["made_*", "made_been", "made_what"], "items": [["made_*", "made_been", "made_what"], ["made_been", "made_what"]]}
+{"idx": 492, "id": ["made_*", "made_been"], "items": [["made_been"], ["made_*", "made_been"]]}
