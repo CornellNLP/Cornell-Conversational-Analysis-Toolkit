@@ -48,6 +48,7 @@ class QuestionTypology:
     :param idf: Whether to represent data using inverse document frequency 
     :param snip: Whether to increment the number of singular values and vectors to compute by one 
     :param leaves_only_for_extract: whether to include only sink motifs in extracted clusters
+    :param random_seed: the random seed to provide to the clustering algorithm
 
     :ivar corpus: the QuestionTypology object's corpus.
     :ivar data_dir: the directory that the data is stored in, and written to
@@ -66,7 +67,7 @@ class QuestionTypology:
         num_dims=100, verbose=5000, dedup_threshold=.9,
         follow_conj=True, norm='l2', num_svds=50, num_dims_to_inspect=5,
         max_iter_for_k_means=1000, remove_first=False, min_support=5, item_set_size=5,
-        leaves_only_for_assign=True, idf=False, snip=True, leaves_only_for_extract=False):
+        leaves_only_for_assign=True, idf=False, snip=True, leaves_only_for_extract=False, random_seed=0):
 
         self.corpus = corpus
         self.data_dir = data_dir
@@ -89,6 +90,7 @@ class QuestionTypology:
         self.idf = idf
         self.snip = snip
         self.leaves_only_for_extract = leaves_only_for_extract
+        self.random_seed = random_seed
 
         if not self.motifs_dir:
             self.motifs_dir = os.path.join(self.data_dir, dataset_name+'-motifs')
@@ -108,7 +110,8 @@ class QuestionTypology:
         self.mtx_obj, self.km, self.types_to_data, self.lq, self.a_u, self.a_s, self.a_v = \
         QuestionClusterer.extract_clusters(self.matrix_dir, 
             self.km_name, self.num_clusters,self.num_dims, self.snip, self.verbose, self.norm,
-            self.idf, self.leaves_only_for_extract, self.remove_first, self.max_iter_for_k_means)
+            self.idf, self.leaves_only_for_extract, self.remove_first, self.max_iter_for_k_means, 
+            self.random_seed)
 
         self.qdoc_df_file = os.path.join(self.data_dir, 'qdoc_df.pkl')
         self.motif_df, self.aarc_df, self.qdoc_df, self.q_leaves, self.qdoc_vects = QuestionClusterer.assign_clusters(self.km, 
@@ -204,105 +207,6 @@ class QuestionTypology:
         for i in indices_to_print:
             n += 1
             print('\t\t%d.'%(n), answer_fragments[i])
-
-
-    def display_question_type_log_odds_graph(self):
-        clusters = [i for i in range(self.num_clusters, 0, -1)]
-
-        num_questions_govt = [0 for i in range(self.num_clusters)]
-        num_questions_opp = [0 for i in range(self.num_clusters)]
-
-        j = 0
-        for q in self.corpus.utterances.values():
-            j += 1
-            if self.verbose and j%self.verbose == 0:
-                print(j)
-            user_info = q.user._get_info()
-            if q.other["is_question"]:
-                if "is_minister" not in user_info or not user_info["is_minister"]: continue
-                pair_idx = q.other["pair_idx"]
-                for i in range(self.num_clusters):
-                    if pair_idx in self.types_to_data[i]["questions"]:
-                        if user_info["is_oppn"]:
-                            num_questions_opp[i] += 1
-                        else:
-                            num_questions_govt[i] += 1
-
-        govt_log_odds = [np.log(num_questions_govt[i]/len(self.types_to_data[i]["questions"])) - 
-            np.log((len(self.types_to_data[i]["questions"]) - num_questions_govt[i])/len(self.types_to_data[i]["questions"])) 
-            for i in range(self.num_clusters)]
-        opp_log_odds = [np.log(num_questions_opp[i]/len(self.types_to_data[i]["questions"])) - 
-            np.log((len(self.types_to_data[i]["questions"]) - num_questions_opp[i])/len(self.types_to_data[i]["questions"])) 
-            for i in range(self.num_clusters)]
-
-        govt_data_style = 'bo'
-        opp_data_style = 'rs'
-
-        line_x = np.linspace(-1.2, 1.2, self.num_clusters) #for lines
-
-        labels = ['Typo 0', 'Type 1', 'Type 2', 'Type 3', 'Type 4', 'Type 5', 'Type 6', 'Type 7']
-        #plot lines - probably a better way of doing this
-        for i in clusters:
-            y_i = np.full(self.num_clusters,i)
-            plt.plot(line_x, y_i, linestyle='dashed', linewidth=1, color='lightgrey')
-
-        #plot govt
-        govt_plot, = plt.plot(govt_log_odds, clusters, govt_data_style, label='government affiliated')
-
-        #plot opposition
-        opp_plot, = plt.plot(opp_log_odds, clusters, opp_data_style, label='opposition affiliated')
-
-        #legend
-        plt.legend(handles=[govt_plot, opp_plot], loc='lower right')
-
-        #add labels
-        plt.yticks(clusters, labels, rotation='horizontal')
-
-        #add central line
-        plt.axvline(x=0, color='black')
-
-        # Pad margins so that markers don't get clipped by the axes
-        plt.margins(0.2)
-        # Tweak spacing to prevent clipping of tick-labels
-        plt.subplots_adjust(bottom=0.15)
-        
-        plt.show() #This can be changed to show or write to file
-        
-
-    def display_mean_propensities_graph(self):
-        pass
-        # B: Mean propensities for each question type, for MPs who switch from
-        #being in the opposition to being in the government (top) and vice-versa (bottom)
-        #after an election. Stars indicate statistically significant differences at the
-        #p < 0.05 (*), p < 0.01 (**) and p < 0.001 (***) levels (Wilcoxon test).
-
-    def _compute_question_matrix(self, question_text):
-        #create spacy object
-        spacy_NLP = spacy.load('en')
-        vocab = English().vocab
-        spacy_q_obj = Doc(vocab).from_bytes(spacy_NLP(question_text).to_bytes())
-    
-        #extract question fragments
-        for span_idx, span in enumerate(spacy_q_obj.sents):
-            curr_arcset = MotifsExtractor.get_arcs(span.root, True)
-            fragments = list(curr_arcset)
-        # take non sink out of fragments 
-        #TODO: Should I just remove fragments with outdegree > 0. How to check this?
-
-        # create question_matrix
-        question_matrix = np.zeros((self.num_motifs, 1))
-        for i in range(len(self.mtx_obj['q_terms'])):
-            intersection = [term in fragments for term in self.mtx_obj['q_terms'][i]]
-            if all(intersection):
-                question_matrix[i] = 1
-        question_matrix = Normalizer(norm=self.norm).fit_transform(question_matrix)
-        return question_matrix
-
-    def classify_question(self, question_text):
-        question_matrix = self._compute_question_matrix(question_text)
-        mtx = np.matmul(question_matrix.T, self.lq)
-        label = self.km.predict(mtx)
-        return label
 
 
 class MotifsExtractor:
@@ -478,7 +382,7 @@ class MotifsExtractor:
         node_stack = [('*',)]
         while len(node_stack) > 0:
             next_node = node_stack.pop()
-            node_count = node_counts.get(next_node,None)
+            node_count = node_counts.get(next_node, None)
             if node_count:
                 entry = {'arcset': next_node, 'arcset_count': node_count}
                 children = downlinks.get(next_node, [])
@@ -654,8 +558,6 @@ class MotifsExtractor:
                 downlink_list.append({'parent': parent, 'children': sorted(child_dict.items(),key=lambda x: x[1]['pr_child'])})
             downlink_list = sorted(downlink_list, key=lambda x: itemset_counts[x['parent']], reverse=True)
             f.write('\n'.join(json.dumps(down) for down in downlink_list))
-
-
 
 
     def is_noun_ish(word):
@@ -1089,13 +991,13 @@ class QuestionClusterer:
                     print('\t\t',names[argsorted[-1-i]], '%+.4f' % row[argsorted[-1-i]])
             print()
 
-    def run_kmeans(X, in_dim, k, max_iter):
-        km = KMeans(n_clusters=k, max_iter=max_iter, n_init=1000)
+    def run_kmeans(X, in_dim, k, max_iter, random_seed):
+        km = KMeans(n_clusters=k, max_iter=max_iter, n_init=1000, random_state=random_seed)
         km.fit(X)
         return km
 
     def inspect_kmeans_run(q_mtx, a_mtx, num_svd_dims, num_clusters, q_terms, 
-        a_terms, km, remove_first, max_iter):
+        a_terms, km, remove_first, max_iter, random_seed):
         if remove_first:
             q_mtx = q_mtx[:,1:(num_svd_dims + 1)]
             a_mtx = a_mtx[:,1:(num_svd_dims + 1)]
@@ -1108,7 +1010,7 @@ class QuestionClusterer:
         if km:
             q_km = km
         else:
-            q_km = QuestionClusterer.run_kmeans(q_mtx, num_svd_dims, num_clusters, max_iter)
+            q_km = QuestionClusterer.run_kmeans(q_mtx, num_svd_dims, num_clusters, max_iter, random_seed)
 
         q_dists = q_km.transform(q_mtx)
         q_assigns = q_km.labels_
@@ -1211,7 +1113,7 @@ class QuestionClusterer:
             outfile, question_threshold, answer_threshold, verbose)
 
     def extract_clusters(matrix_dir,km_file,k, d, snip, verbose, norm, idf, leaves_only, 
-        remove_first, max_iter):
+        remove_first, max_iter, random_seed):
         '''
             convenience pipeline to get latent q-a dimensions and clusters.
 
@@ -1225,7 +1127,7 @@ class QuestionClusterer:
             norm, idf, leaves_only)
         lq, a_u, a_s, a_v = QuestionClusterer.run_lowdim_pipe(q_mtx, a_mtx,d, snip)
         km, types_to_data = QuestionClusterer.inspect_kmeans_run(lq, a_u, d, k, mtx_obj['q_terms'], 
-            mtx_obj['a_terms'], None, remove_first, max_iter)
+            mtx_obj['a_terms'], None, remove_first, max_iter, random_seed)
 
         joblib.dump(km, km_file)
         return mtx_obj, km, types_to_data, lq, a_u, a_s, a_v
