@@ -136,38 +136,57 @@ class QuestionTypology:
 
 
     def get_question_text_from_pair_idx(self, pair_idx):
+        '''
+            Returns the question text corresponding to pair_idx, 
+            which is a given question's ID
+        '''
+        
         for q in self.corpus.utterances.values():
             if q.other["pair_idx"] == pair_idx and q.other["is_question"]:
                 return q.text
         return "No question found"
 
+
     def _calculate_totals(self):
+        '''
+            Calculates variables for display. Calculates total questions, total extracted motifs,
+            total answer fragments, total number of motifs in each cluster, and the total nunber 
+            of questions assigned to each question type.
+        '''
         self.num_questions = 0
         self.num_motifs = 0
         self.num_fragments = 0
         self.motifs_in_each_cluster = [0 for i in range(self.num_clusters)]
+        self.questions_in_each_cluster = [0 for i in range(self.num_clusters)]
 
         for cluster in self.types_to_data.keys():
             self.num_questions += len(self.types_to_data[cluster]['questions'])
             self.num_motifs += len(self.types_to_data[cluster]['motifs'])
             self.num_fragments += len(self.types_to_data[cluster]['fragments'])
 
+        for label in self.types_to_data:
+            self.questions_in_each_cluster[label] = len(self.types_to_data[label]["questions"])
+
         for label in self.km.labels_:
             self.motifs_in_each_cluster[label] += 1
 
-
     def display_totals(self):
-        "Displays the total number of questions, motifs and fragments present in this data"
+        '''
+            Displays the total number of questions, motifs and fragments 
+            present in this data, as well as the number of motifs in each cluster 
+            and questions of each type
+        '''
         print("Total Motifs: %d"%self.num_motifs)
         print("Total Questions: %d"%self.num_questions)
         print("Total Fragments: %d"%self.num_fragments)
-        print("Number of Motifs in each Cluster: ", self.motifs_in_each_cluster)
-
-    def display_question_types(self):
-        pass
+        print("Number of Motifs in each cluster: ", self.motifs_in_each_cluster)
+        print("Number of Questions of each type: ", self.questions_in_each_cluster)
 
     def display_questions_for_type(self, type_num, num_egs=10):
-        "Displays num_egs number of questions that were assigned type type_num in the cluster"
+        '''
+            Displays num_egs number of questions that were assigned type 
+            type_num by the typing algorithm.
+        '''
         target = self.types_to_data[type_num]
         questions = target["questions"]
         question_dists = target["question_dists"]
@@ -178,31 +197,38 @@ class QuestionTypology:
         n = 0
         for i in indices_to_print:
             n += 1
-            print('\t\t%d.'%(n), self.get_question_text_from_pair_idx(questions[i]))
+            # print('\t\t%d.'%(n), self.get_question_text_from_pair_idx(questions[i]))
+            print('\t\t%d.'%(n), question_dists[i])
 
-    def display_motifs_for_type(self, type_num, num_egs=10):
-        "Displays num_egs number of motifs that were assigned type type_num in the cluster"
-        target = self.types_to_data[type_num]
+    def display_motifs_for_type(self, cluster_num, num_egs=10):
+        '''
+            Displays num_egs number of motifs that were assigned to cluster cluster_num 
+            by the clustering algorithm
+        '''
+        target = self.types_to_data[cluster_num]
         motifs = target["motifs"]
         motif_dists = target["motif_dists"]
         motifs_len = len(motifs)
         num_to_print = min(motifs_len, num_egs)
         indices_to_print = np.argsort(motif_dists)[:num_to_print]
-        print('\t%d sample question motifs for type %d (%d total motifs):'%(num_to_print, type_num, motifs_len))
+        print('\t%d sample question motifs for type %d (%d total motifs):'%(num_to_print, cluster_num, motifs_len))
         n = 0
         for i in indices_to_print:
             n += 1
             print('\t\t%d.'%(n), motifs[i])
 
-    def display_answer_fragments_for_type(self, type_num, num_egs=10):
-        "Displays num_egs number of answer fragments whose corresponding question motif were assigned type type_num in the cluster"
-        target = self.types_to_data[type_num]
+    def display_answer_fragments_for_type(self, cluster_num, num_egs=10):
+        '''
+            Displays num_egs number of answer fragments whose corresponding 
+            question motif were assigned to cluster cluster_num by the clustering algorithm
+        '''
+        target = self.types_to_data[cluster_num]
         answer_fragments = target["fragments"]
         fragment_dists = target["fragment_dists"]
         fragment_len = len(answer_fragments)
         num_to_print = min(fragment_len, num_egs)
         indices_to_print = np.argsort(fragment_dists)[:num_to_print]
-        print('\t%d sample answer fragments for type %d (%d total fragments) :'%(num_to_print, type_num, fragment_len))
+        print('\t%d sample answer fragments for type %d (%d total fragments) :'%(num_to_print, cluster_num, fragment_len))
         n = 0
         for i in indices_to_print:
             n += 1
@@ -211,6 +237,9 @@ class QuestionTypology:
 
 class MotifsExtractor:
     def load_vocab(verbose):
+        '''
+            Returns a spacy Vocab object for the English vocabulary
+        '''
         if verbose:
             print('loading spacy vocab')
         return English().vocab
@@ -269,7 +298,13 @@ class MotifsExtractor:
             f.write('\n'.join(spacy_keys))
 
     def deduplicate_motifs(question_fit_file, outfile, threshold, verbose):
-
+        '''
+            Removes duplicate motifs and writes final motifs to the outfiles.
+            question_fit_file contains the motifs to deduplicate
+            outfile is the prefix for the two motif outfiles
+            If two motifs co-occur in a higher proportion of cases than
+            threshold, they are considered duplicates and one is removed
+        '''
         if verbose:
             print('\treading raw fits')
         span_to_fits = defaultdict(set)
@@ -375,9 +410,16 @@ class MotifsExtractor:
             f.write('\n'.join(json.dumps(entry) for entry in new_entries))
 
     def contains_candidate(container, candidate):
+        '''
+            True if candidate is a subset of container
+        '''
         return set(candidate).issubset(container)
 
     def fit_question(arc_set, downlinks, node_counts):
+        '''
+            Helper to fit_all.
+            Figures out the number of children of each motif in the dependency parse
+        '''
         fit_nodes = {}
         node_stack = [('*',)]
         while len(node_stack) > 0:
@@ -401,7 +443,9 @@ class MotifsExtractor:
             figures out which motifs occur in each piece of text.
             arc_file: listing of arcs per text, from extract_arcs
             tree_file: the motif graph, from make_arc_tree. note that
-                this doesn't have to come from the same dataset as arc_file, in which case you're basically fitting a new dataset to motifs extracted elsewhere.
+                       this doesn't have to come from the same dataset 
+                       as arc_file, in which case you're basically fitting 
+                       a new dataset to motifs extracted elsewhere.
             outfile: where to put things.
         '''
         if verbose:
@@ -431,17 +475,27 @@ class MotifsExtractor:
             f.write('\n'.join(json.dumps(entry) for entry in span_fit_entries))
 
     def get_sorted_combos(itemset, k):
+        '''
+            Returns all sorted combinations of k elements of itemset
+        '''
         combos = set()
         for set_ in itertools.combinations(itemset,k):
             combos.add(tuple(sorted(set_)))
         return combos
     def get_mini_powerset(itemset, k):
+        '''
+            Returns a subset of the power set of itemset. The subset is the
+            set of all subsets of itemset that are of length k or shorter
+        '''
         powerset = set()
         for k in range(1,min(k+1,len(itemset)+1)):
             powerset.update(MotifsExtractor.get_sorted_combos(itemset,k))
         return powerset
 
     def count_frequent_itemsets(arc_sets, min_support, k, verbose):
+        '''
+
+        '''
         itemset_counts = defaultdict(lambda: defaultdict(int))
         span_to_itemsets = defaultdict(lambda: defaultdict(set))
         if verbose:
@@ -490,7 +544,7 @@ class MotifsExtractor:
 
     def make_arc_tree(arc_file, outname, min_support, item_set_size, verbose):
         '''
-            makes the tree of motifs. (G in the paper.)
+            makes the tree of motifs. (G in the paper)
         '''
 
         if verbose:
@@ -561,15 +615,24 @@ class MotifsExtractor:
 
 
     def is_noun_ish(word):
+        '''
+            True if the word is a noun, pronoun or determiner
+        '''
         return (word.dep in NP_LABELS) or (word.tag_.startswith('NN') or word.tag_.startswith('PRP')) or (word.tag_.endswith('DT'))
 
     def has_w_det(token):
+        '''
+            Returns the tokens text if it has a W determiner, False otherwise
+        '''
         if token.tag_.startswith('W'): return token.text
         first_tok = next(token.subtree)
         if (first_tok.tag_.startswith('W')): return first_tok.text
         return False
 
     def get_tok(token):
+        '''
+
+        '''
         if MotifsExtractor.is_noun_ish(token):
             has_w = MotifsExtractor.has_w_det(token)
             if has_w:
@@ -580,18 +643,33 @@ class MotifsExtractor:
             return token.text.lower(), False
 
     def get_clean_tok(tok):
+        '''
+            Removes dashes from the tokens text
+        '''
         out_tok, is_noun = MotifsExtractor.get_tok(tok)
         return out_tok.replace('--','').strip(), is_noun
 
     def is_alpha_ish(text):
+        '''
+            True if the token is comprised of only letters, or one non letter 
+            followed by only letters
+        '''
         return text.isalpha() or text[1:].isalpha()
 
     def is_usable(text):
+        '''
+            True if the text is alpha_ish and is not a noun
+        '''
         return MotifsExtractor.is_alpha_ish(text) and (text != 'NN')
 
 
     def get_arcs(root, follow_conj):
-
+        '''
+            Helper to extract_arcs.
+            Returns the arcs in a given question
+            follow_conj is whether conjunctions and their children should be included 
+            in the returned arc or not
+        '''
         # todo: could imagine version where nouns allowed
         arcs = set()
         root_tok, _ = MotifsExtractor.get_clean_tok(root)
@@ -627,6 +705,9 @@ class MotifsExtractor:
         return arcs
 
     def is_question(span):
+        '''
+            True if the sentence in span is a question
+        '''
         span_text = span.text.strip()
         return span_text[-1] == '?'
 
@@ -729,6 +810,10 @@ class MotifsExtractor:
         if verbose: print('done motif extraction')
 
     def read_downlinks(downlink_file):
+        '''
+            Returns a dicionary of parent to children nodes of the dependency parse of given input questions
+            downlink_file contains the parse
+        '''
         downlinks = {}
         with open(downlink_file) as f:
             for line in f.readlines():
@@ -737,6 +822,10 @@ class MotifsExtractor:
         return downlinks
 
     def read_nodecounts(nodecount_file):
+        '''
+            Returns the count for each set of arcs
+            nodecount_file contains the arcs and counts
+        '''
         node_counts = {}
         with open(nodecount_file) as f:
             for line in f:
@@ -770,6 +859,10 @@ class MotifsExtractor:
 class QuestionClusterer:
 
     def read_uplinks(uplink_file):
+        '''
+            Returns a dicionary of children to parent nodes of the dependency parse of given input questions
+            uplink_file contains the parse
+        '''
         uplinks = {}
         with open(uplink_file) as f:
             for line in f.readlines():
@@ -779,6 +872,11 @@ class QuestionClusterer:
 
     def get_motifs_per_question(question_fit_file, answer_arc_file, superset_file, 
         question_threshold, answer_threshold, verbose):
+        '''
+            Reads each of the input files and returns corresponding data structures.
+            Returns question_to_fits, a dictionary question_to_leaf_fits, motif_counts, question_to_arcs, arc_counts
+
+        '''
         question_to_fits = defaultdict(set)
         question_to_leaf_fits = defaultdict(set)
         motif_counts = defaultdict(set)
@@ -817,10 +915,14 @@ class QuestionClusterer:
                 arc_counts[arc] += 1
         question_to_arcs = {k: [x for x in v if arc_counts[x] >= answer_threshold] for k,v in question_to_arcs.items()}
         arc_counts = {k:v for k,v in arc_counts.items() if v >= answer_threshold}
+
         return question_to_fits, question_to_leaf_fits, motif_counts, question_to_arcs, arc_counts
 
     def build_joint_matrix(question_fit_file, answer_arc_file, superset_file, outfile, 
         question_threshold, answer_threshold, verbose):
+        '''
+            Saves the matrices computed in the algorithm as numpy files
+        '''
         if verbose: print('\treading arcs and motifs')
 
         question_to_fits, question_to_leaf_fits, motif_counts, question_to_arcs, arc_counts =\
@@ -877,6 +979,11 @@ class QuestionClusterer:
             f.write('\n'.join(pair_idx_list))
 
     def load_joint_mtx(rootname, verbose):
+        '''
+            Reads the saved matrix files and returns a data structure that contains all the information in them
+            mtx_obj has the following keys:
+
+        '''
         mtx_obj = {}
 
         if verbose: print('reading question tidxes')
@@ -936,6 +1043,10 @@ class QuestionClusterer:
         return mtx_obj
 
     def build_mtx(mtx_obj, data_type, norm, idf, leaves_only):
+        '''
+            Returns mtx which is a (shape) matrix that represents the input questions 
+            that need to be assigned types
+        '''
         #norm = l2, idf = False, leaves_only = True
         N_terms = len(mtx_obj[data_type + '_terms'])
         N_docs = len(mtx_obj['docs'])
@@ -953,6 +1064,9 @@ class QuestionClusterer:
         return mtx
 
     def run_simple_pipe(rootname, verbose, norm, idf, leaves_only):
+        '''
+            Create and return objects for each of the matrices in
+        '''
         mtx_obj = QuestionClusterer.load_joint_mtx(rootname, verbose)
         q_mtx = QuestionClusterer.build_mtx(mtx_obj, 'q', norm, idf, leaves_only)
         a_mtx = QuestionClusterer.build_mtx(mtx_obj, 'a', norm, True, leaves_only)
@@ -1144,6 +1258,4 @@ class QuestionTypologyUtils:
         return arc_sets
 
     def get_text_idx(span_idx):
-        # return '.'.join(span_idx.split('.')[:-1])
         return span_idx[:span_idx.rfind("_")]
-        # return span_idx
