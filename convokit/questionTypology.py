@@ -363,8 +363,9 @@ class MotifsExtractor:
 
     def postprocess_fits(question_fit_file, question_tree_file, question_superset_file, verbose):
         '''
-            this entire file consists of two quite hacky scripts to remove
-            redundant motifs (i.e. p(m1|m2), p(m2|m1) > threshold)
+            Removes redundant motifs. If a pair of motifs co-occur greater than
+            threshold fraction of the time (i.e. p(m1|m2), p(m2|m1) > threshold), one of them is removed.
+            Writes the remaining non redundant motifs to the three files specified by the arguments.
 
         '''
         downlinks = MotifsExtractor.read_downlinks(question_tree_file + '_downlinks.json')
@@ -494,7 +495,7 @@ class MotifsExtractor:
 
     def count_frequent_itemsets(arc_sets, min_support, k, verbose):
         '''
-
+            TODO
         '''
         itemset_counts = defaultdict(lambda: defaultdict(int))
         span_to_itemsets = defaultdict(lambda: defaultdict(set))
@@ -544,7 +545,7 @@ class MotifsExtractor:
 
     def make_arc_tree(arc_file, outname, min_support, item_set_size, verbose):
         '''
-            makes the tree of motifs. (G in the paper)
+            Makes the tree of motifs. (G in the paper)
         '''
 
         if verbose:
@@ -631,7 +632,7 @@ class MotifsExtractor:
 
     def get_tok(token):
         '''
-
+            TODO
         '''
         if MotifsExtractor.is_noun_ish(token):
             has_w = MotifsExtractor.has_w_det(token)
@@ -748,7 +749,9 @@ class MotifsExtractor:
 
     def is_uppercase_question(x):
         '''
-            for reasonably well-formatted datasets like transcripts of some proceedings, i've included this filter that questions start w/ uppercase and end in a question mark. this filter can be varied/swapped out.
+            for reasonably well-formatted datasets like transcripts of some proceedings, 
+            i've included this filter that questions start w/ uppercase and end in a question mark. 
+            this filter can be varied/swapped out.
         '''
         text = x.text.strip()
         return (text[-1] == '?') and (text[0].isupper())
@@ -980,8 +983,23 @@ class QuestionClusterer:
 
     def load_joint_mtx(rootname, verbose):
         '''
-            Reads the saved matrix files and returns a data structure that contains all the information in them
+            Reads the saved matrix files and returns a data structure that contains 
+            all the information in them
             mtx_obj has the following keys:
+            "q_tidxes": a list of the question term indices
+            "q_leaves": a list of bools for each term. True means the term is a sink motif.
+            "a_tidxes": a list of the answer term indices
+            "q_didxes": a list of the question doc indices 
+            "a_didxes": a list of the answer doc indices 
+            "q_terms": a list of tuples containing the actual extracted motifs
+            "q_term_to_idx": TODO
+            "q_term_counts": a list of the number of occurences of each motif
+            "a_terms": a list of tuples containing the actual extracted answer fragments
+            "a_term_to_idx": TODO
+            "a_term_counts": a list of the number of occurences of each answer fragment
+            "docs": a list of length num_questions. Each entry contains the spacy document that a 
+                given question is stored in
+            "doc_to_idx": TODO
 
         '''
         mtx_obj = {}
@@ -1044,8 +1062,9 @@ class QuestionClusterer:
 
     def build_mtx(mtx_obj, data_type, norm, idf, leaves_only):
         '''
-            Returns mtx which is a (shape) matrix that represents the input questions 
-            that need to be assigned types
+            Returns mtx which is a num_motifs X num_questions matrix that represents the input 
+            questions/answers as per the algorithm explained in section 5 of the paper
+            data_type determines whether it returns the question matrix or answer matrix
         '''
         #norm = l2, idf = False, leaves_only = True
         N_terms = len(mtx_obj[data_type + '_terms'])
@@ -1065,7 +1084,9 @@ class QuestionClusterer:
 
     def run_simple_pipe(rootname, verbose, norm, idf, leaves_only):
         '''
-            Create and return objects for each of the matrices in
+            Create and return mtx_obj, q_mtx and a_mtx.
+            mtx_obj has the following keys
+            q_mtx and a_mtx are the question and answer matrix from the paper
         '''
         mtx_obj = QuestionClusterer.load_joint_mtx(rootname, verbose)
         q_mtx = QuestionClusterer.build_mtx(mtx_obj, 'q', norm, idf, leaves_only)
@@ -1073,10 +1094,22 @@ class QuestionClusterer:
         return q_mtx, a_mtx, mtx_obj
 
     def do_sparse_svd(mtx, k):
+        '''
+            Computes the largest k singular values/vectors for a mtx with shape M X N.
+            returns u, a M X k unitary matrix having left singular vectors as columns, 
+            s a K X 1 vector of the singular values.
+            and v a k X N unitary matrix having right singular vectors as rows
+
+        '''
         u,s,v = sparse.linalg.svds(mtx, k=k)
         return u[:,::-1],s[::-1],v[::-1,:]
 
     def run_lowdim_pipe(q_mtx, a_mtx, k, snip):
+        '''
+            projects q_mtx and a_mtx to the latent space as described in the paper.
+            k is the number of singular values for the SVD decomposition.
+            snip is True if the results should be returned with the first dimension removed
+        '''
         a_u, a_s, a_v = QuestionClusterer.do_sparse_svd(a_mtx,k + int(snip))
         lq = q_mtx * (a_v.T * a_s**-1)
         if snip:
@@ -1105,13 +1138,37 @@ class QuestionClusterer:
                     print('\t\t',names[argsorted[-1-i]], '%+.4f' % row[argsorted[-1-i]])
             print()
 
-    def run_kmeans(X, in_dim, k, max_iter, random_seed):
+    def run_kmeans(X, k, max_iter, random_seed):
+        '''
+            runs a Kmeans clustering algorithm with X as inputs.
+            k is the number of clusters
+            max_iter is the number of iterations the clustering algorithm should run for\
+            random_seed ensures that the same clusters are produced if the same random seed is supplied again.
+
+        '''
         km = KMeans(n_clusters=k, max_iter=max_iter, n_init=1000, random_state=random_seed)
         km.fit(X)
         return km
 
     def inspect_kmeans_run(q_mtx, a_mtx, num_svd_dims, num_clusters, q_terms, 
         a_terms, km, remove_first, max_iter, random_seed):
+        '''
+            Runs the clustering algorithm and returns a sklearn.cluster.KMeans object that can be used
+            to classify new inputs and a dictionary types_to_data with the following keys:
+            its keys are the indices of the clusters (here 0-7). 
+            The values are dictionaries with the following keys:
+
+            "motifs": the motifs, as a list of tuples of the motif terms
+            "motif_dists": the corresponding distances of each motif from the centroid of the cluster this 
+                motif is in
+            "fragments": the answer fragments, as a list of tuples of answer terms
+            "fragment_dists": the corresponding distances of each fragment from the centroid of the 
+                cluster this fragment is in
+            "questions": the IDs of the questions in this cluster. You can get the corresponding 
+                question text by using the get_question_text_from_pair_idx(pair_idx) method.
+            "question_dists": the corresponding distances of each question from the centroid of the cluster 
+                this question is in
+        '''
         if remove_first:
             q_mtx = q_mtx[:,1:(num_svd_dims + 1)]
             a_mtx = a_mtx[:,1:(num_svd_dims + 1)]
@@ -1124,7 +1181,7 @@ class QuestionClusterer:
         if km:
             q_km = km
         else:
-            q_km = QuestionClusterer.run_kmeans(q_mtx, num_svd_dims, num_clusters, max_iter, random_seed)
+            q_km = QuestionClusterer.run_kmeans(q_mtx, num_clusters, max_iter, random_seed)
 
         q_dists = q_km.transform(q_mtx)
         q_assigns = q_km.labels_
@@ -1166,9 +1223,21 @@ class QuestionClusterer:
         return q_km, types_to_data
 
     def snip_first_dim(lq, a_u, a_s, a_v):
+        '''
+            Returns each of the input matrices with the first column snipped off
+        '''
         return lq[:,1:], a_u[:,1:], a_s[1:], a_v[1:]
 
     def assign_clusters(km, lq, a_u, mtx_obj, n_dims, qdoc_df_file, norm, idf, leaves_only):
+        '''
+            Assigns correct type to each of the questions in the training data
+            Returns motif_df, aarc_df, qdoc_df, q_leaves and qdoc_vects
+            motif_df: a dictionary that has information about the motifs and which clusters they were assigned
+            aarc_df: a dictionary that has information about the answer fragments and which clusters they were assigned
+            qdoc_df: a dictionary that has information about the questions and which clusters they were assigned
+            q_leaves: TODO
+            qdoc_vects: the vectors denoting each question in the latent space
+        '''
         km_qdists = km.transform(Normalizer().fit_transform(lq[:,:n_dims]))
         km_qlabels = km.predict(Normalizer().fit_transform(lq[:,:n_dims]))
         km_adists = km.transform(Normalizer().fit_transform(a_u[:,:n_dims]))
@@ -1248,6 +1317,10 @@ class QuestionClusterer:
 
 class QuestionTypologyUtils:
     def read_arcs(arc_file, verbose):
+        '''
+            Reads the files containing question arcs from the input questions and returns arc_sets,
+            a dicionary whose keys are the question indexes and values are the arcs in these questions
+        '''
         arc_sets = {}
         with open(arc_file) as f:
             for idx,line in enumerate(f.readlines()):
@@ -1258,4 +1331,7 @@ class QuestionTypologyUtils:
         return arc_sets
 
     def get_text_idx(span_idx):
+        '''
+            Given the index of a span within a question, return the index of the entire question
+        '''
         return span_idx[:span_idx.rfind("_")]
