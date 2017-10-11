@@ -1,0 +1,4 @@
+spacy==1.9.0
+pandas==0.20.3
+scikit-learn==0.16.1
+scipy==0.16.0
