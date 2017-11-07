@@ -244,10 +244,10 @@ class Corpus:
                 new_all_users.add(u.user)
         self.all_users = new_all_users
 
-    def filter_utterances_by(self, regular_kv_pairs={}, 
+    def filter_utterances_by(self, regular_kv_pairs={},
         user_info_kv_pairs={}, other_kv_pairs={}):
         """
-        Creates a subset of the utterances filtered by certain attributes. Irreversible. 
+        Creates a subset of the utterances filtered by certain attributes. Irreversible.
         If the method is run again, it will filter the already filtered subset.
         Always takes the intersection of the specified key-pairs
         """
@@ -346,18 +346,24 @@ class Corpus:
         return pairs
 
 
-    def iterate_by(self, iter_type):
+    def iterate_by(self, iter_type, is_utterance_question):
         """Iterator for utterances.
 
         Can give just questions, just answers or questions followed by their answers
         """
+        i = -1
         for utterance in self.utterances.values():
             if utterance.reply_to is not None:
-                if iter_type == 'answers':
-                    yield utterance.id, utterance.text, utterance.other['pair_idx']
-                    continue
-                question = self.utterances[utterance.reply_to]
-                yield question.id, question.text, question.other['pair_idx']
-                # print(question)
-                if iter_type == 'both':
-                    yield utterance.id, utterance.text, utterance.other['pair_idx']
+                root_text = self.utterances[utterance.reply_to].text
+                if is_utterance_question(root_text):
+                    i += 1
+                    if iter_type == 'answers':
+                        pair_idx = utterance.reply_to + '_' + utterance.id
+                        yield utterance.id, utterance.text, pair_idx
+                        continue
+                    question = self.utterances[utterance.reply_to]
+                    pair_idx = question.id + '_' + utterance.id
+                    yield question.id, question.text, pair_idx
+                    if iter_type == 'both':
+                        pair_idx = utterance.reply_to + '_' + utterance.id
+                        yield utterance.id, utterance.text, pair_idx
