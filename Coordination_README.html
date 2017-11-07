@@ -1,0 +1,28 @@
+<h1 id="coordination">Coordination</h1>
+<p>Linguistic Coordination is measure of relative power between individuals or groups based on their use of function words (see the <a href="https://www.cs.cornell.edu/~cristian/Echoes_of_power.html">Echoes of Power</a> paper). This readme contains information about  the <a href="#installation">Installation</a>, <a href="#basic-usage">Basic Usage</a>, <a href="#dataset-source">Dataset Source</a>, <a href="#dataset-details">Dataset Details</a>, <a href="#examples">Examples</a> and <a href="#documentation">Documentation</a>.</p>
+<h2 id="installation">Installation</h2>
+<ol>
+<li>The toolkit requires Python 3. If you don&#39;t have it install it by running <code>pip install python3</code> or using the Anaconda distribution. That can be found <a href="https://www.anaconda.com/download/#macos">here</a>.</li>
+<li>Install the required packages by running <code>pip install -r requirements.txt</code> (Note if your default version of <code>pip</code> is for Python 2.7 you might have to use <code>pip3 install -r requirements.txt</code> instead)</li>
+<li>Run <code>python3 setup.py install</code> to install the package.</li>
+<li>Use <code>import convokit</code> to import it into your project.</li>
+</ol>
+<h2 id="basic-usage">Basic usage</h2>
+<ol>
+<li>Load corpus: <code>corpus = convokit.Corpus(filename=...)</code></li>
+<li>Create coordination object: <code>coord = convokit.Coordination(corpus)</code></li>
+<li>Define groups using <code>corpus.users</code>:<pre><code> `group_A = corpus.users(lambda user: user.info[&quot;is-justice&quot;])  # [roberts, ginsburg, ...]`
+</code></pre></li>
+<li>Compute coordination: <code>scores = coord.score(group_A, group_B)</code></li>
+<li>(Optional) get aggregate scores:<pre><code> `average_by_marker_agg1, average_by_marker, agg1, agg2, agg3 = coord.score_report(scores)`
+</code></pre></li>
+</ol>
+<h2 id="dataset-source">Dataset Source</h2>
+<p>TODO<br>They can all be found <a href="zissou.infosci.cornell.edu/data/">here</a>.</p>
+<h2 id="dataset-details">Dataset Details</h2>
+<p>TODO: </p>
+<h2 id="examples">Examples</h2>
+<p>See <a href="https://github.com/CornellNLP/Cornell-Conversational-Analysis-Toolkit/tree/master/examples/coordination"><code>examples</code></a> for guided examples and reproductions of charts from the original papers.</p>
+<h2 id="documentation">Documentation</h2>
+<p>Documentation is hosted <a href="http://zissou.infosci.cornell.edu/socialkit/documentation/coordination.html">here</a>.</p>
+<p>The documentation is built with <a href="http://www.sphinx-doc.org/en/1.5.1/">Sphinx</a> (<code>pip3 install sphinx</code>). To build it yourself, navigate to <code>doc/</code> and run <code>make html</code>. </p>

@@ -1,0 +1,23 @@
+<h1 id="cornell-conversational-analysis-toolkit">Cornell Conversational Analysis Toolkit</h1>
+<p>This toolkit contains tools to extract conversational features and analyze social phenomena in conversations.  Several large <a href="http://zissou.infosci.cornell.edu/socialkit/datasets/">conversational datasets</a> are included together with scripts exemplifying the use of the toolkit on these datasets.</p>
+<p>The toolkit currently implements features for:</p>
+<ul>
+<li><p><a href="http://localhost:8000/Coordination_README.html">Linguistic coordination</a>, a measure of relative power between individuals or groups based on their use of function words (see the <a href="https://www.cs.cornell.edu/~cristian/Echoes_of_power.html">Echoes of Power</a> paper)</p>
+</li>
+<li><p><a href="http://localhost:8000/QuestionTypology_README.html">Question typology</a>, a method for extracting surface motifs that recur in questions, and for grouping them according to their latent rhetorical role (see the <a href="http://www.cs.cornell.edu/~cristian/Asking_too_much.html">Asking too much</a> paper)</p>
+</li>
+<li><p>Coming soon: Politeness, currently available here: <a href="https://github.com/sudhof/politeness">Politeness API</a></p>
+</li>
+<li><p>Coming soon: Basic message and turn features, currently available here <a href="https://github.com/CornellNLP/Cornell-Conversational-Analysis-Toolkit/tree/constructive/cornellversation/constructive">Constructive conversations</a></p>
+</li>
+</ul>
+<h2 id="code">Code</h2>
+<p>The code for the toolkit can be found <a href="https://github.com/CornellNLP/Cornell-Conversational-Analysis-Toolkit">here</a>.</p>
+<h2 id="usage">Usage</h2>
+<p>The toolkit requires Python 3. Run <code>python3 setup.py install</code> to install the package.<br>Use <code>import convokit</code> to import it into your project.<br>Detailed installation and usage examples are also provided on the specific pages dedicated to each function of this toolkit.</p>
+<h2 id="documentation">Documentation</h2>
+<p>Documentation is hosted <a href="http://zissou.infosci.cornell.edu/socialkit/documentation/">here</a>.</p>
+<p>The documentation is built with <a href="http://www.sphinx-doc.org/en/1.5.1/">Sphinx</a> (<code>pip3 install sphinx</code>). To build it yourself, navigate to <code>doc/</code> and run <code>make html</code>. </p>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>Andrew Wang (azw7@cornell.edu)  wrote the Coordination code and the respective example script, wrote the heper functions and designed the structure of the toolkit.</p>
+<p>Ishaan Jhaveri (iaj8@cornell.edu) refactored the Question Typology code and wrote the respective example scripts.</p>

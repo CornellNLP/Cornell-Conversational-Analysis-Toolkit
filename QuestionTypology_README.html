@@ -1,0 +1,28 @@
+<h1 id="question-typology">Question Typology</h1>
+<p>Question typology is a method for extracting surface motifs that recur in questions, and for grouping them according to their latent rhetorical role (see the <a href="http://www.cs.cornell.edu/~cristian/Asking_too_much.html">Asking too much</a> paper). This readme contains information about  the <a href="#installation">Installation</a>, <a href="#basic-usage">Basic Usage</a>, <a href="#dataset-source">Dataset Source</a>, <a href="#dataset-details">Dataset Details</a>, <a href="#examples">Examples</a> and <a href="#documentation">Documentation</a>.</p>
+<h2 id="installation">Installation</h2>
+<ol>
+<li>The toolkit requires Python 3. If you don&#39;t have it install it by running <code>pip install python3</code> or using the Anaconda distribution. That can be found <a href="https://www.anaconda.com/download/#macos">here</a>.</li>
+<li>Install the required packages by running <code>pip install -r requirements.txt</code> (Note if your default version of <code>pip</code> is for Python 2.7 you might have to use <code>pip3 install -r requirements.txt</code> instead)</li>
+<li>Run <code>python3 setup.py install</code> to install the package.</li>
+<li>Use <code>import convokit</code> to import it into your project.</li>
+</ol>
+<h2 id="basic-usage">Basic usage</h2>
+<ol>
+<li>Load corpus: <code>corpus = convokit.Corpus(filename=...)</code></li>
+<li>Create QuestionTypology object (discover typology): <code>questionTypology = QuestionTypology(</code></li>
+<li>Explore 10 questions of type <code>type_num</code>: <code>questionTypology.display_questions_for_type(type_num, 10)</code></li>
+<li>Explore 10 resulting motifs of type <code>type_num</code>: <code>questionTypology.display_motifs_for_type(cluster_num, 10)</code></li>
+<li>Explore 10 resulting answer fragments from answers to questions of type <code>type_num</code>: <code>questionTypology.display_answer_fragments_for_type(cluster_num, 10)</code></li>
+<li>Explore 10 question-answer pairs from the training data of type <code>type_num</code>: <code>questionTypology.display_question_answer_pairs_for_type(cluster_num, 10)</code></li>
+</ol>
+<h2 id="dataset-source">Dataset Source</h2>
+<p>The datasets currently released with the Question typology functionality are the UK Parliament Question Answer Sessions Dataset, the Wimbledon Winner Interviews Dataset and the Wikipedia Moderators Dataset.</p>
+<p>They can all be found <a href="zissou.infosci.cornell.edu/data/askingtoomuch/">here</a>.</p>
+<h2 id="dataset-details">Dataset Details</h2>
+<p>TODO: Where to host the text files</p>
+<h2 id="examples">Examples</h2>
+<p>See <a href="https://github.com/CornellNLP/Cornell-Conversational-Analysis-Toolkit/tree/master/examples/questionTypology"><code>examples</code></a> for guided examples and reproductions of charts from the original papers.</p>
+<h2 id="documentation">Documentation</h2>
+<p>Documentation is hosted <a href="http://zissou.infosci.cornell.edu/socialkit/documentation/questionTypology.html">here</a>.</p>
+<p>The documentation is built with <a href="http://www.sphinx-doc.org/en/1.5.1/">Sphinx</a> (<code>pip3 install sphinx</code>). To build it yourself, navigate to <code>doc/</code> and run <code>make html</code>. </p>
