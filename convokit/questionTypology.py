@@ -134,40 +134,58 @@ class QuestionTypology:
 
         self._calculate_totals()
 
+    def get_question_text_from_question_answer_idx(self, qa_idx):
+        """
+        """
 
-    def get_question_text_from_pair_idx(self, pair_idx):
-        for q in self.corpus.utterances.values():
-            if q.other["pair_idx"] == pair_idx and q.other["is_question"]:
-                return q.text
-        return "No question found"
+        question_id = qa_idx[:qa_idx.find('_')]
+        return self.corpus.utterances[question_id].text
+
+    def get_answer_text_from_question_answer_idx(self, qa_idx):
+        """
+        """
+
+        answer_id = qa_idx[qa_idx.find('_')+1:]
+        return self.corpus.utterances[answer_id].text
 
     def _calculate_totals(self):
+        """Calculates variables for display. Calculates total questions, total extracted motifs,
+            total answer fragments, total number of motifs in each cluster, and the total nunber
+            of questions assigned to each question type.
+        """
+
         self.num_questions = 0
         self.num_motifs = 0
         self.num_fragments = 0
         self.motifs_in_each_cluster = [0 for i in range(self.num_clusters)]
+        self.questions_in_each_cluster = [0 for i in range(self.num_clusters)]
 
         for cluster in self.types_to_data.keys():
             self.num_questions += len(self.types_to_data[cluster]['questions'])
             self.num_motifs += len(self.types_to_data[cluster]['motifs'])
             self.num_fragments += len(self.types_to_data[cluster]['fragments'])
 
+        for label in self.types_to_data:
+            self.questions_in_each_cluster[label] = len(self.types_to_data[label]["questions"])
+
         for label in self.km.labels_:
             self.motifs_in_each_cluster[label] += 1
 
-
     def display_totals(self):
-        "Displays the total number of questions, motifs and fragments present in this data"
+        """Displays the total number of questions, motifs and fragments
+            present in this data, as well as the number of motifs in each cluster
+            and questions of each type
+        """
         print("Total Motifs: %d"%self.num_motifs)
         print("Total Questions: %d"%self.num_questions)
         print("Total Fragments: %d"%self.num_fragments)
-        print("Number of Motifs in each Cluster: ", self.motifs_in_each_cluster)
-
-    def display_question_types(self):
-        pass
+        print("Number of Motifs in each cluster: ", self.motifs_in_each_cluster)
+        print("Number of Questions of each type: ", self.questions_in_each_cluster)
 
     def display_questions_for_type(self, type_num, num_egs=10):
-        "Displays num_egs number of questions that were assigned type type_num in the cluster"
+        """Displays num_egs number of questions that were assigned type
+            type_num by the typing algorithm.
+        """
         target = self.types_to_data[type_num]
         questions = target["questions"]
         question_dists = target["question_dists"]
@@ -178,31 +196,52 @@ class QuestionTypology:
         n = 0
         for i in indices_to_print:
             n += 1
-            print('\t\t%d.'%(n), self.get_question_text_from_pair_idx(questions[i]))
+            print('\t\t%d.'%(n), self.get_question_text_from_question_answer_idx(questions[i]))
 
-    def display_motifs_for_type(self, type_num, num_egs=10):
-        "Displays num_egs number of motifs that were assigned type type_num in the cluster"
+    def display_question_answer_pairs_for_type(self, type_num, num_egs=10):
+        """Displays num_egs number of question-answer pairs that were assigned type
+            type_num by the typing algorithm.
+        """
         target = self.types_to_data[type_num]
+        questions = target["questions"]
+        question_dists = target["question_dists"]
+        questions_len = len(questions)
+        num_to_print = min(questions_len, num_egs)
+        indices_to_print = np.argsort(question_dists)[:num_to_print]
+        print('\t%d sample question-answer pairs that were assigned type %d (%d total questions with this type) :'%(num_to_print, type_num, questions_len))
+        n = 0
+        for i in indices_to_print:
+            n += 1
+            print('\t\tQuestion %d.'%(n), self.get_question_text_from_question_answer_idx(questions[i]))
+            print('\t\tAnswer %d.'%(n), get_answer_text_from_question_answer_idx(questions[i]))
+
+    def display_motifs_for_type(self, cluster_num, num_egs=10):
+        """Displays num_egs number of motifs that were assigned to cluster cluster_num
+            by the clustering algorithm
+        """
+        target = self.types_to_data[cluster_num]
         motifs = target["motifs"]
         motif_dists = target["motif_dists"]
         motifs_len = len(motifs)
         num_to_print = min(motifs_len, num_egs)
         indices_to_print = np.argsort(motif_dists)[:num_to_print]
-        print('\t%d sample question motifs for type %d (%d total motifs):'%(num_to_print, type_num, motifs_len))
+        print('\t%d sample question motifs for type %d (%d total motifs):'%(num_to_print, cluster_num, motifs_len))
         n = 0
         for i in indices_to_print:
             n += 1
             print('\t\t%d.'%(n), motifs[i])
 
-    def display_answer_fragments_for_type(self, type_num, num_egs=10):
-        "Displays num_egs number of answer fragments whose corresponding question motif were assigned type type_num in the cluster"
-        target = self.types_to_data[type_num]
+    def display_answer_fragments_for_type(self, cluster_num, num_egs=10):
+        """Displays num_egs number of answer fragments whose corresponding
+            question motif were assigned to cluster cluster_num by the clustering algorithm
+        """
+        target = self.types_to_data[cluster_num]
         answer_fragments = target["fragments"]
         fragment_dists = target["fragment_dists"]
         fragment_len = len(answer_fragments)
         num_to_print = min(fragment_len, num_egs)
         indices_to_print = np.argsort(fragment_dists)[:num_to_print]
-        print('\t%d sample answer fragments for type %d (%d total fragments) :'%(num_to_print, type_num, fragment_len))
+        print('\t%d sample answer fragments for type %d (%d total fragments) :'%(num_to_print, cluster_num, fragment_len))
         n = 0
         for i in indices_to_print:
             n += 1
