@@ -9,12 +9,10 @@ import pkg_resources
 
 from convokit import Corpus, QuestionTypology, download
 
-num_clusters = 8
-
 #Initialize QuestionTypology class
 
 num_clusters = 8
-# Get precomputed motifs. data_dir contains the downloaded data. 
+# Get precomputed motifs. data_dir contains the downloaded data.
 
 data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads', 'tennis')
 
@@ -24,7 +22,7 @@ corpus = Corpus(filename=os.path.join(data_dir, 'tennis-corpus'))
 corpus.filter_utterances_by(other_kv_pairs={'result':1})
 
 #Extract clusters of the motifs and assign questions to these clusters
-questionTypology = QuestionTypology(corpus, data_dir, dataset_name="tennis", num_dims=25, 
+questionTypology = QuestionTypology(corpus, data_dir, dataset_name="tennis", num_dims=25,
                                     num_clusters=num_clusters, verbose=False, random_seed=125)
 
 #Output required data representations

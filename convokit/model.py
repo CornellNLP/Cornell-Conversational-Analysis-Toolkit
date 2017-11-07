@@ -4,6 +4,8 @@ import json
 from functools import total_ordering, reduce
 from collections import defaultdict
 
+pair_delim = '-q-a-'
+
 @total_ordering
 class User:
     """Represents a single user in a dataset.
@@ -358,12 +360,12 @@ class Corpus:
                 if is_utterance_question(root_text):
                     i += 1
                     if iter_type == 'answers':
-                        pair_idx = utterance.reply_to + '_' + utterance.id
+                        pair_idx = utterance.reply_to + pair_delim + utterance.id
                         yield utterance.id, utterance.text, pair_idx
                         continue
                     question = self.utterances[utterance.reply_to]
-                    pair_idx = question.id + '_' + utterance.id
+                    pair_idx = question.id + pair_delim + utterance.id
                     yield question.id, question.text, pair_idx
                     if iter_type == 'both':
-                        pair_idx = utterance.reply_to + '_' + utterance.id
+                        pair_idx = utterance.reply_to + pair_delim + utterance.id
                         yield utterance.id, utterance.text, pair_idx

@@ -1,0 +1,5 @@
+matplotlib==1.5.0
+pandas==0.20.3
+spacy==1.9.0
+scipy==0.16.0
+scikit-learn==0.16.1
