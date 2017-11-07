@@ -95,11 +95,11 @@ class QuestionTypology:
         if not self.motifs_dir:
             self.motifs_dir = os.path.join(self.data_dir, dataset_name+'-motifs')
             spacy_file = os.path.join(self.data_dir, 'spacy')
-            MotifsExtractor.spacify(self.corpus.iterate_by('both'), spacy_file, None, self.verbose)
-            MotifsExtractor.extract_question_motifs(self.corpus.iterate_by('questions'), spacy_file,
+            MotifsExtractor.spacify(self.corpus.iterate_by('both', MotifsExtractor.is_utterance_question), spacy_file, None, self.verbose)
+            MotifsExtractor.extract_question_motifs(self.corpus.iterate_by('questions', MotifsExtractor.is_utterance_question), spacy_file,
                 self.motifs_dir, MotifsExtractor.is_uppercase_question, self.follow_conj,
                 self.min_support, self.dedup_threshold, self.item_set_size, self.verbose)
-            MotifsExtractor.extract_answer_arcs(self.corpus.iterate_by('answers'), spacy_file,
+            MotifsExtractor.extract_answer_arcs(self.corpus.iterate_by('answers', MotifsExtractor.is_utterance_question), spacy_file,
                 self.motifs_dir, MotifsExtractor.is_uppercase, self.follow_conj, self.verbose)
 
         self.matrix_dir = os.path.join(self.data_dir, dataset_name+'-matrix')
@@ -629,6 +629,11 @@ class MotifsExtractor:
     def is_question(span):
         span_text = span.text.strip()
         return span_text[-1] == '?'
+
+    def is_utterance_question(text):
+        """True if text is a question
+        """
+        return '?' in text
 
     def extract_arcs(text_iter, spacy_filename, outfile, vocab, use_span,
         follow_conj, verbose):
