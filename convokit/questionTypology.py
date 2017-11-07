@@ -42,11 +42,11 @@ class QuestionTypology:
     :param num_dims_to_inspect: the number of dimensions to inspect
     :param max_iter_for_k_means: the maximum iterations to run the k means algorithm for
     :param remove_first: Whether to remove the first element in the k means classification set
-    :param min_support: the minimum number of times an itemset has to show up for the frequent itemset counter to consider 
-    :param item_set_size: the size of the item set 
-    :param leaves_only_for_assign: whether to assign only sink motifs to clusters 
-    :param idf: Whether to represent data using inverse document frequency 
-    :param snip: Whether to increment the number of singular values and vectors to compute by one 
+    :param min_support: the minimum number of times an itemset has to show up for the frequent itemset counter to consider
+    :param item_set_size: the size of the item set
+    :param leaves_only_for_assign: whether to assign only sink motifs to clusters
+    :param idf: Whether to represent data using inverse document frequency
+    :param snip: Whether to increment the number of singular values and vectors to compute by one
     :param leaves_only_for_extract: whether to include only sink motifs in extracted clusters
     :param random_seed: the random seed to provide to the clustering algorithm
 
@@ -61,7 +61,7 @@ class QuestionTypology:
     :ivar a_u: the low dimensional A matrix
     """
 
-    def __init__(self, corpus, data_dir, motifs_dir=None, 
+    def __init__(self, corpus, data_dir, motifs_dir=None,
         num_clusters=8, dataset_name="parliament",
         question_threshold=100, answer_threshold=100,
         num_dims=100, verbose=5000, dedup_threshold=.9,
@@ -96,26 +96,26 @@ class QuestionTypology:
             self.motifs_dir = os.path.join(self.data_dir, dataset_name+'-motifs')
             spacy_file = os.path.join(self.data_dir, 'spacy')
             MotifsExtractor.spacify(self.corpus.iterate_by('both'), spacy_file, None, self.verbose)
-            MotifsExtractor.extract_question_motifs(self.corpus.iterate_by('questions'), spacy_file, 
-                self.motifs_dir, MotifsExtractor.is_uppercase_question, self.follow_conj, 
+            MotifsExtractor.extract_question_motifs(self.corpus.iterate_by('questions'), spacy_file,
+                self.motifs_dir, MotifsExtractor.is_uppercase_question, self.follow_conj,
                 self.min_support, self.dedup_threshold, self.item_set_size, self.verbose)
-            MotifsExtractor.extract_answer_arcs(self.corpus.iterate_by('answers'), spacy_file, 
+            MotifsExtractor.extract_answer_arcs(self.corpus.iterate_by('answers'), spacy_file,
                 self.motifs_dir, MotifsExtractor.is_uppercase, self.follow_conj, self.verbose)
 
         self.matrix_dir = os.path.join(self.data_dir, dataset_name+'-matrix')
-        QuestionClusterer.build_matrix(self.motifs_dir, self.matrix_dir, self.question_threshold, 
+        QuestionClusterer.build_matrix(self.motifs_dir, self.matrix_dir, self.question_threshold,
             self.answer_threshold, self.verbose)
 
         self.km_name = os.path.join(self.data_dir, 'demo_km.pkl')
         self.mtx_obj, self.km, self.types_to_data, self.lq, self.a_u, self.a_s, self.a_v = \
-        QuestionClusterer.extract_clusters(self.matrix_dir, 
+        QuestionClusterer.extract_clusters(self.matrix_dir,
             self.km_name, self.num_clusters,self.num_dims, self.snip, self.verbose, self.norm,
-            self.idf, self.leaves_only_for_extract, self.remove_first, self.max_iter_for_k_means, 
+            self.idf, self.leaves_only_for_extract, self.remove_first, self.max_iter_for_k_means,
             self.random_seed)
 
         self.qdoc_df_file = os.path.join(self.data_dir, 'qdoc_df.pkl')
-        self.motif_df, self.aarc_df, self.qdoc_df, self.q_leaves, self.qdoc_vects = QuestionClusterer.assign_clusters(self.km, 
-            self.lq, self.a_u, self.mtx_obj, self.num_dims, self.qdoc_df_file, self.norm, 
+        self.motif_df, self.aarc_df, self.qdoc_df, self.q_leaves, self.qdoc_vects = QuestionClusterer.assign_clusters(self.km,
+            self.lq, self.a_u, self.mtx_obj, self.num_dims, self.qdoc_df_file, self.norm,
             self.idf, self.leaves_only_for_assign)
 
         for index, row in self.qdoc_df.iterrows():
@@ -777,7 +777,7 @@ class QuestionClusterer:
                 uplinks[tuple(entry['child'])] = [(tuple(x),y) for x,y in entry['parents']]
         return uplinks
 
-    def get_motifs_per_question(question_fit_file, answer_arc_file, superset_file, 
+    def get_motifs_per_question(question_fit_file, answer_arc_file, superset_file,
         question_threshold, answer_threshold, verbose):
         question_to_fits = defaultdict(set)
         question_to_leaf_fits = defaultdict(set)
@@ -819,12 +819,12 @@ class QuestionClusterer:
         arc_counts = {k:v for k,v in arc_counts.items() if v >= answer_threshold}
         return question_to_fits, question_to_leaf_fits, motif_counts, question_to_arcs, arc_counts
 
-    def build_joint_matrix(question_fit_file, answer_arc_file, superset_file, outfile, 
+    def build_joint_matrix(question_fit_file, answer_arc_file, superset_file, outfile,
         question_threshold, answer_threshold, verbose):
         if verbose: print('\treading arcs and motifs')
 
         question_to_fits, question_to_leaf_fits, motif_counts, question_to_arcs, arc_counts =\
-             QuestionClusterer.get_motifs_per_question(question_fit_file, answer_arc_file, 
+             QuestionClusterer.get_motifs_per_question(question_fit_file, answer_arc_file,
                 superset_file, question_threshold, answer_threshold, verbose)
         question_term_list = list(motif_counts.keys())
         answer_term_list = list(arc_counts.keys())
@@ -945,7 +945,7 @@ class QuestionClusterer:
             data = np.ones_like(mtx_obj[data_type + '_tidxes'])
             if leaves_only:
                 data[~mtx_obj[data_type + '_leaves']] = 0
-        mtx = sparse.csr_matrix((data, (mtx_obj[data_type + '_tidxes'], mtx_obj[data_type + '_didxes'])), 
+        mtx = sparse.csr_matrix((data, (mtx_obj[data_type + '_tidxes'], mtx_obj[data_type + '_didxes'])),
             shape=(N_terms,N_docs))
         if norm:
             mtx = Normalizer(norm=norm).fit_transform(mtx)
@@ -996,7 +996,7 @@ class QuestionClusterer:
         km.fit(X)
         return km
 
-    def inspect_kmeans_run(q_mtx, a_mtx, num_svd_dims, num_clusters, q_terms, 
+    def inspect_kmeans_run(q_mtx, a_mtx, num_svd_dims, num_clusters, q_terms,
         a_terms, km, remove_first, max_iter, random_seed):
         if remove_first:
             q_mtx = q_mtx[:,1:(num_svd_dims + 1)]
@@ -1109,10 +1109,10 @@ class QuestionClusterer:
             if verbose: print('matrix dir %s exists!' % matrix_dir)
 
         outfile = os.path.join(matrix_dir, 'qa_mtx')
-        QuestionClusterer.build_joint_matrix(question_fit_file, answer_arc_file,superset_file, 
+        QuestionClusterer.build_joint_matrix(question_fit_file, answer_arc_file,superset_file,
             outfile, question_threshold, answer_threshold, verbose)
 
-    def extract_clusters(matrix_dir,km_file,k, d, snip, verbose, norm, idf, leaves_only, 
+    def extract_clusters(matrix_dir,km_file,k, d, snip, verbose, norm, idf, leaves_only,
         remove_first, max_iter, random_seed):
         '''
             convenience pipeline to get latent q-a dimensions and clusters.
@@ -1123,10 +1123,10 @@ class QuestionClusterer:
 
         '''
         matrix_file = os.path.join(matrix_dir, 'qa_mtx')
-        q_mtx, a_mtx, mtx_obj = QuestionClusterer.run_simple_pipe(matrix_file, verbose, 
+        q_mtx, a_mtx, mtx_obj = QuestionClusterer.run_simple_pipe(matrix_file, verbose,
             norm, idf, leaves_only)
         lq, a_u, a_s, a_v = QuestionClusterer.run_lowdim_pipe(q_mtx, a_mtx,d, snip)
-        km, types_to_data = QuestionClusterer.inspect_kmeans_run(lq, a_u, d, k, mtx_obj['q_terms'], 
+        km, types_to_data = QuestionClusterer.inspect_kmeans_run(lq, a_u, d, k, mtx_obj['q_terms'],
             mtx_obj['a_terms'], None, remove_first, max_iter, random_seed)
 
         joblib.dump(km, km_file)
