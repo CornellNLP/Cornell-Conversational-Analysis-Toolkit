@@ -1,6 +1,8 @@
 # This example extracts question types from the UK Parliament Question Answer Sessions
 #   reproducing the asking too much paper (http://www.cs.cornell.edu/~cristian/Asking_too_much.html).
-#   (due to the non-deterministic nature of clustering, the order of the clusters and some cluster assignments will vary)
+#   (due to the non-deterministic nature of clustering, the order of the clusters and some cluster assignments
+#    will vary from the clusters published in the paper, but since there is a seed provided, multiple executions
+#    of this script will always produce the same clusters)
 # This version uses precomputed motifs for speed.
 
 import os
@@ -22,7 +24,7 @@ motifs_dir = os.path.join(data_dir, 'parliament-motifs')
 corpus = Corpus(filename=os.path.join(data_dir, 'parliament-corpus'))
 
 #Extract clusters of the motifs and assign questions to these clusters
-questionTypology = QuestionTypology(corpus, data_dir, motifs_dir=motifs_dir, num_dims=25,
+questionTypology = QuestionTypology(corpus, data_dir, dataset_name='parliament', motifs_dir=motifs_dir, num_dims=25,
   num_clusters=num_clusters, verbose=False, random_seed=164)
 
 # questionTypology.types_to_data contains the necessary data that is computed in the step above
@@ -40,9 +42,8 @@ questionTypology = QuestionTypology(corpus, data_dir, motifs_dir=motifs_dir, num
 # #Output required data representations
 
 questionTypology.display_totals()
-print('100 examples for types 1-8:')
+print('10 examples for types 1-8:')
 for i in range(num_clusters):
-    questionTypology.display_question_answer_pairs_for_type(i, num_egs=100)
-    questionTypology.display_motifs_for_type(i, num_egs=100)
-    questionTypology.display_answer_fragments_for_type(i, num_egs=100)
-
+    questionTypology.display_motifs_for_type(i, num_egs=10)
+    questionTypology.display_answer_fragments_for_type(i, num_egs=10)
+    questionTypology.display_question_answer_pairs_for_type(i, num_egs=10)
