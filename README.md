@@ -22,6 +22,7 @@ The code for the toolkit can be found [here](https://github.com/CornellNLP/Corne
 3. Run `python -m spacy download en`
 
 **Use**
+
 Use `import convokit` to import it into your project.
 
 Detailed installation and usage examples are also provided on the specific pages dedicated to each function of this toolkit.
