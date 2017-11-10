@@ -13,7 +13,7 @@ from convokit import Corpus, QuestionTypology, download
 num_clusters = 8
 
 # Get precomputed motifs. data_dir contains the downloaded data.
-data_dir = os.path.join(pkg_resources.resource_filename("convokit", ""), 'downloads', 'wiki')
+data_dir = download('wiki-corpus')
 
 #Load the corpus
 corpus = Corpus(filename=os.path.join(data_dir, 'wiki-corpus'))

@@ -15,8 +15,15 @@ The toolkit currently implements features for:
 The code for the toolkit can be found [here](https://github.com/CornellNLP/Cornell-Conversational-Analysis-Toolkit).
 
 ## Usage
-The toolkit requires Python 3. Run `python3 setup.py install` to install the package.
+
+###Installation
+1. Install or use `Python 3`.
+2. Run `python3 setup.py install` to install the package.
+3. Run `python -m spacy download en`
+
+###Use
 Use `import convokit` to import it into your project.
+
 Detailed installation and usage examples are also provided on the specific pages dedicated to each function of this toolkit.
 
 ## Documentation
