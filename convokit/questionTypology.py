@@ -98,6 +98,8 @@ class QuestionTypology:
         self.leaves_only_for_extract = leaves_only_for_extract
         self.random_seed = random_seed
         self.is_question = is_question
+        self.vocab_for_typing_questions = None
+        self.spacy_NLP_for_typing_questions = None
         if not self.is_question: self.is_question = MotifsExtractor.is_utterance_question
 
         if not self.motifs_dir:
@@ -254,6 +256,103 @@ class QuestionTypology:
         for i in indices_to_print:
             n += 1
             print('\t\t%d.'%(n), answer_fragments[i])
+
+    # if none of its children are in all_motifs, increment question_matrix
+    # else recurse on those children that are in all_motifs
+    def identify_sinks(self, parent, relevant_children, downlinks, question_matrix, all_motifs):
+        children_in_all_motifs = [motif in all_motifs and motif != parent for motif in relevant_children]
+        if any(children_in_all_motifs):
+            for i in range(len(relevant_children)):
+                if children_in_all_motifs[i]:
+                    self.identify_sinks(relevant_children[i], list(downlinks[relevant_children[i]].keys()), downlinks, question_matrix, all_motifs)
+        else:
+            j = all_motifs.index(parent)
+            question_matrix[j] = 1
+
+    def compute_question_matrix(self, question_text, question_to_leaf_fits):
+        '''
+            Helper function to classify_question. Computes and returns a representation of
+            question_text as a matrix in the latent space
+        '''
+        spacy_q_obj = Doc(self.vocab_for_typing_questions).from_bytes(self.spacy_NLP_for_typing_questions(question_text).to_bytes())
+
+        #extract question fragments
+        for span_idx, span in enumerate(spacy_q_obj.sents):
+            curr_arcset = MotifsExtractor.get_arcs(span.root, True)
+            fragments = list(curr_arcset)
+        fragment_dict = {}
+        fragment_dict['1'] = list(fragments)
+        itemset_counts, span_to_itemsets = MotifsExtractor.count_frequent_itemsets(fragment_dict, 
+                                                                                   self.min_support, 
+                                                                                   self.item_set_size, 
+                                                                                   self.verbose)
+
+        
+        itemsets = []
+        for count in itemset_counts:
+            for itemset in itemset_counts[count]:
+                if itemset in question_to_leaf_fits:
+                    itemsets.append(itemset)
+        
+        new_itemset_counts = {}
+        for setsize, size_dict in itemset_counts.items():
+            for k,v in size_dict.items():
+                new_itemset_counts[k] = v
+        itemset_counts = new_itemset_counts
+        itemset_counts[('*',)] = len(fragment_dict)
+
+        sorted_counts = sorted(itemset_counts.items(),key=lambda x: (-x[1],len(x[0]),x[0][0]))
+
+        edges = []
+        uplinks = defaultdict(dict)
+        downlinks = defaultdict(dict)
+
+        for itemset,count in itemset_counts.items():
+            parents = []
+            set_size = len(itemset)
+            if set_size == 1:
+                arc = itemset[0]
+                if arc.endswith('*'):
+                    parents.append(('*',))
+                elif '_' in arc:
+                    parents.append((arc.split('_')[0] + '_*',))
+                elif '>' in arc:
+                    parents.append((arc.split('>')[0] + '>*',))
+
+            else:
+                for idx in range(set_size):
+                    parents.append(itemset[:idx] + itemset[idx+1:])
+            for parent in parents:
+                parent_count = itemset_counts[parent]
+                pr_child = count / itemset_counts[parent]
+                edges.append({'child': itemset, 'child_count': count,
+                            'parent': parent, 'parent_count': parent_count,
+                            'pr_child': pr_child})
+                uplinks[itemset][parent] = {'pr_child': pr_child, 'parent_count': parent_count}
+                downlinks[parent][itemset] = {'pr_child': pr_child, 'child_count': count}
+
+
+        all_motifs = list(self.mtx_obj['q_terms'])
+    
+        # create question_matrix
+        question_matrix = np.zeros((self.num_motifs, 1))
+        self.identify_sinks(('*',), list(downlinks[('*',)].keys()), downlinks, question_matrix, all_motifs)
+        question_matrix = Normalizer(norm=self.norm).fit_transform(question_matrix)
+        return question_matrix
+
+    def classify_question(self, question_text):
+        '''
+            Returns the type of question_text
+        '''
+        question_to_leaf_fits = json.load(open(os.path.join(self.motifs_dir, 'question_to_leaf_fits.json')))
+        if not self.vocab_for_typing_questions:
+            self.vocab_for_typing_questions = MotifsExtractor.load_vocab(self.verbose)
+        if not self.spacy_NLP_for_typing_questions:
+            self.spacy_NLP_for_typing_questions = spacy.load('en')
+        question_matrix = self.compute_question_matrix(question_text, question_to_leaf_fits)
+        mtx = np.matmul(question_matrix.T, self.lq)
+        label = self.km.predict(mtx)
+        return question_matrix, mtx, label
 
 
 class MotifsExtractor:
@@ -740,6 +839,11 @@ class MotifsExtractor:
         """
         return '?' in text
 
+    def does_utterance_have_only_one_question(text):
+        """True if text is a question
+        """
+        return text.count('?') == 1
+
     def extract_arcs(text_iter, spacy_filename, outfile, vocab, use_span,
         follow_conj, verbose):
 
@@ -1008,6 +1112,8 @@ class QuestionClusterer:
             f.write('\n'.join(pair_idxes))
         with open(outfile + '.pair_idxs.txt', 'w') as f:
             f.write('\n'.join(pair_idx_list))
+        with open(outfile + 'question_to_leaf_fits.json', 'w') as f:
+            json.dump(question_to_leaf_fits, f)
 
     def load_joint_mtx(rootname, verbose):
         """
