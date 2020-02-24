@@ -62,7 +62,7 @@ class PolitenessStrategies(Transformer):
         utts = [corpus.get_utterance(x) for x in corpus.get_utterance_ids()]
     
         if self.MRKR_NAME not in utts[0].meta:
-            corpus = self.transform(corpus)
+            corpus = self.transform(corpus, markers=True)
             
         if selector != None:
             utts = [x for x in utts if selector(x.meta)]
