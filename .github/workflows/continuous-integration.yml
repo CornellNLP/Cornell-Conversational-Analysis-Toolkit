@@ -23,4 +23,4 @@ jobs:
         python -m pip install .
     - name: Run tests
       run: |
-        cd tests && python run_all_tests.py
+        cd convokit/tests && python run_all_tests.py
