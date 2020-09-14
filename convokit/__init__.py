@@ -15,5 +15,6 @@ from .forecaster import *
 from .fighting_words import *
 from .paired_prediction import *
 from .bag_of_words import *
+from .surprise import *
 
 #__path__ = __import__('pkgutil').extend_path(__path__, __name__)
