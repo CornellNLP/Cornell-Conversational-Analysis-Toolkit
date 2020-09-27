@@ -52,6 +52,7 @@ class Surprise(Transformer):
     }
 
     models = defaultdict(dict)
+    tokenizers = defaultdict(dict)
     for speaker, convos in self.grouped_text.items():
       speaker_convos = []
       for convo_id, convo_text in convos.items():
@@ -61,10 +62,15 @@ class Surprise(Transformer):
         cv = CountVectorizer()
         cv.fit(speaker_convos)
         models[speaker] = cv
+        tokenizers[speaker] = cv.build_analyzer()
       except ValueError:
         continue
     self.mapped_models = models
-    self.mapped_tokenizers = {speaker: model.build_analyzer() for speaker, model in models.items()}
+    self.grouped_tokens = {
+      speaker: {
+        convo: tokenizers[speaker](text) for convo, text in convos.items()
+      } for speaker, convos in self.grouped_text.items()
+    }
     return self
 
   def transform(self, corpus: Corpus,
@@ -80,9 +86,8 @@ class Surprise(Transformer):
           obj.add_meta(self.surprise_attr_name, seen[speaker_id][convo_id])
         elif speaker_id in self.mapped_models and convo_id in self.grouped_text[speaker_id]:
           speaker_model = self.mapped_models[speaker_id]
-          speaker_tokenizer = self.mapped_tokenizers[speaker_id]
-          target_toks = speaker_tokenizer(self.grouped_text[speaker_id][convo_id])
-          context_toks = list(chain(*[speaker_tokenizer(text) for convo, text in self.grouped_text[speaker_id].items() if convo != convo_id]))
+          target_toks = self.grouped_tokens[speaker_id][convo_id]
+          context_toks = list(chain(*[toks for convo, toks in self.grouped_tokens[speaker_id].items() if convo != convo_id]))
           surprise_score = self.compute_surprise(speaker_model, target_toks, context_toks)
           obj.add_meta(self.surprise_attr_name, surprise_score)
           seen[speaker_id][convo_id] = surprise_score
