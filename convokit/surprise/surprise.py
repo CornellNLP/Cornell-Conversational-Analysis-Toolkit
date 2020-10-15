@@ -11,14 +11,15 @@ from pandas.core.groupby.generic import SeriesGroupBy
 from sklearn.feature_extraction.text import CountVectorizer
 from typing import Callable, List, Tuple, Union
 
-def _cross_entropy(model, target, context):
+def _cross_entropy(model, target, context, smooth=True):
   # H(P,Q) = -sum_{x\inX}(P(x) * log(Q(x)))
   N_target, N_context = target.sum(), context.sum()
   if N_context == 0: return np.nan
-  context_log_probs = np.log2(context / N_context)
-  # log(0) gives us -inf, so replace all -inf with 0
-  context_log_probs[context_log_probs == -inf] = 0 
-  return -np.dot(target / N_target, context_log_probs)
+  V = np.sum(context > 0) if smooth else 0
+  k = 1 if smooth else 0
+  if not smooth: context[context == 0] = 1
+  context_log_probs = -np.log(context + k / (N_context + V))
+  return np.dot(target / N_target, context_log_probs)
 
 def sample(toks: np.ndarray, sample_size: int, n_samples=50):
   if toks.size < sample_size: return None
@@ -72,20 +73,20 @@ class Surprise(Transformer):
       group_target_by: List[str] = [],
       context_selector: Callable[[pd.Series, Tuple], np.ndarray]=lambda s, t: np.ones(len(s)).astype(bool), 
       model_selector: Callable[[Tuple], Union[str, int]]=lambda _: 0,
-      selector: Callable[[CorpusComponent], bool]=lambda _: True):
+      selector: Callable[[CorpusComponent], bool]=lambda _: True,
+      smooth: bool=True):
     utterances = corpus.get_utterances_dataframe()
     if group_target_by:
       grouped_utterances = utterances.groupby([self.df_col_name[group] for group in group_target_by])['text'].apply(lambda x: self.cv.build_analyzer()(' '.join(x)))
     else:
       grouped_utterances = pd.Series(self.cv.build_analyzer()(' '.join(utterances['text'])))
     surprise_scores = {}
-    for ind, val in grouped_utterances.items():
+    for ind, target in grouped_utterances.items():
       model_ind = model_selector(ind)
       if model_ind in self.mapped_models:
         model = self.mapped_models[model_ind]
-        target = val
         context = list(chain(*grouped_utterances[context_selector(grouped_utterances, ind)]))
-        surprise_scores[ind] = self.compute_surprise(model, target, context)
+        surprise_scores[ind] = self.compute_surprise(model, target, context, smooth)
       else:
         surprise_scores[ind] = np.nan
     for obj in corpus.iter_objs(obj_type):
@@ -96,7 +97,7 @@ class Surprise(Transformer):
         obj.add_meta(self.surprise_attr_name, surprise_scores[ind])
     return corpus
 
-  def compute_surprise(self, model: CountVectorizer, target: List[str], context: List[str]):
+  def compute_surprise(self, model: CountVectorizer, target: List[str], context: List[str], smooth):
     target_samples = self.sampling_fn(np.array(target), self.min_target_length, self.n_samples)
     context_samples = self.sampling_fn(np.array(context), self.min_context_length, self.n_samples)
     if target_samples is None or context_samples is None:
@@ -105,6 +106,6 @@ class Surprise(Transformer):
     for i in range(self.n_samples):
       target_doc_terms = np.asarray(model.transform(target_samples[i]).sum(axis=0)).squeeze()
       context_doc_terms = np.asarray(model.transform(context_samples[i]).sum(axis=0)).squeeze()
-      sample_entropies[i] = _cross_entropy(model, target_doc_terms, context_doc_terms)
+      sample_entropies[i] = _cross_entropy(model, target_doc_terms, context_doc_terms, smooth)
     return np.nanmean(sample_entropies)
     
