@@ -31,20 +31,22 @@ class Surprise(Transformer):
   TODO: Docs
   """
   df_col_name = {
+    'conversation': 'conversation_id',
     'speaker': 'speaker',
-    'conversation': 'conversation_id'
+    'utterance': 'id'
   }
 
   obj_field_getter = {
+    'id': lambda obj: obj.id,
     'speaker': lambda obj: obj.get_speaker().id,
     'conversation_id': lambda obj: obj.get_conversation().id
   }
 
-  def __init__(self, cv=CountVectorizer(), min_target_length=100, min_context_length=100, n_samples=50, 
+  def __init__(self, cv=CountVectorizer(), target_sample_size=100, context_sample_size=100, n_samples=50, 
       sampling_fn: Callable[[List[str], int], List[str]]=sample, surprise_attr_name="surprise"):
     self.cv = cv
-    self.min_target_length = min_target_length
-    self.min_context_length = min_context_length
+    self.target_sample_size = target_sample_size
+    self.context_sample_size = context_sample_size
     self.n_samples = n_samples
     self.sampling_fn = sampling_fn
     self.surprise_attr_name = surprise_attr_name
@@ -98,8 +100,8 @@ class Surprise(Transformer):
     return corpus
 
   def compute_surprise(self, model: CountVectorizer, target: List[str], context: List[str], smooth):
-    target_samples = self.sampling_fn(np.array(target), self.min_target_length, self.n_samples)
-    context_samples = self.sampling_fn(np.array(context), self.min_context_length, self.n_samples)
+    target_samples = self.sampling_fn(np.array(target), self.target_sample_size, self.n_samples)
+    context_samples = self.sampling_fn(np.array(context), self.context_sample_size, self.n_samples)
     if target_samples is None or context_samples is None:
       return np.nan
     sample_entropies = np.empty(self.n_samples)
