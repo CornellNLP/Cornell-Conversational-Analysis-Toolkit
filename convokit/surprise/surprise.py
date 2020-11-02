@@ -63,13 +63,15 @@ class Surprise(Transformer):
   :param sampling_fn: function for generating samples
   """
   def __init__(self, cv=CountVectorizer(), target_sample_size=100, context_sample_size=100, n_samples=50, 
-      sampling_fn: Callable[[np.ndarray, int], np.ndarray]=sample, surprise_attr_name="surprise"):
+      sampling_fn: Callable[[np.ndarray, int], np.ndarray]=sample, surprise_attr_name="surprise", 
+      verbosity=0):
     self.cv = cv
     self.target_sample_size = target_sample_size
     self.context_sample_size = context_sample_size
     self.n_samples = n_samples
     self.sampling_fn = sampling_fn
     self.surprise_attr_name = surprise_attr_name
+    self.verbosity = verbosity
   
   def fit(self, corpus: Corpus, 
       group_models_by: List[str]=[]):
@@ -122,7 +124,9 @@ class Surprise(Transformer):
     else:
       grouped_utterances = pd.Series(self.cv.build_analyzer()(' '.join(utterances['text'])))
     surprise_scores = {}
-    for ind, target in grouped_utterances.items():
+    for idx, (ind, target) in enumerate(grouped_utterances.items()):
+      if (self.verbosity > 0) and (idx % self.verbosity == 0) and (idx > 0):
+			  print(idx, '/', len(grouped_utterances))
       model_ind = model_selector(ind)
       if model_ind in self.mapped_models:
         model = self.mapped_models[model_ind]
