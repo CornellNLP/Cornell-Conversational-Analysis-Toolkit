@@ -126,7 +126,7 @@ class Surprise(Transformer):
     surprise_scores = {}
     for idx, (ind, target) in enumerate(grouped_utterances.items()):
       if (self.verbosity > 0) and (idx % self.verbosity == 0) and (idx > 0):
-			  print(idx, '/', len(grouped_utterances))
+        print(idx, '/', len(grouped_utterances))
       model_ind = model_selector(ind)
       if model_ind in self.mapped_models:
         model = self.mapped_models[model_ind]
