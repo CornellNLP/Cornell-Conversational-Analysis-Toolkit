@@ -44,15 +44,17 @@ class Surprise(Transformer):
   Computes how surprising a target is based on some context. The measure for surprise used is cross entropy.
   Uses fixed size samples from target and context text to mitigate effects of length on cross entropy.
 
-  :param model_key_selector: function that defines how utterances should be mapped to models
+  :param model_key_selector: function that defines how utterances should be mapped to models. 
+      Takes in an utterance and returns the key to use for mapping the utterance to a corresponding model.
   :param cv: optional CountVectorizer used to tokenize text and create term document matrices. 
       default: scikit learn's default CountVectorizer
-  :param surprise_attr_name: 
-  :param target_sample_size: number of tokens to sample from each target
-  :param context_sample_size: number of tokens to sample form each context
-  :param n_samples: number of samples to take for each target-context pair
-  :param sampling_fn: function for generating samples
-  :param smooth: whether to use laplace smoothing when calculating surprise
+  :param surprise_attr_name: the name for the metadata attribute to add to objects.
+      default: surprise
+  :param target_sample_size: number of tokens to sample from each target (test text).
+  :param context_sample_size: number of tokens to sample from each context (training text).
+  :param n_samples: number of samples to take for each target-context pair.
+  :param sampling_fn: function for generating samples of tokens.
+  :param smooth: whether to use laplace smoothing when calculating surprise.
   """
   def __init__(self, model_key_selector: Callable[[Utterance], str],
       cv=CountVectorizer(), 
@@ -70,21 +72,40 @@ class Surprise(Transformer):
     self.smooth = smooth
   
   def fit(self, corpus: Corpus,
-      model_text_selector: Callable[[Utterance], List[str]]):
+      text_func: Callable[[Utterance], List[str]]=None,
+      selector: Callable[[Utterance], bool]=lambda utt: True):
     """
-    Fit CountVectorizers to utterances in a corpus. Can optionally group utterances and fit vectorizers for each group.
+    Fits a model for each group of utterances in a corpus. The group that an 
+    utterance belongs to is determined by the `model_key_selector` parameter in 
+    the transformer's constructor. The type of model used is defined by the `cv` 
+    parameter in the constructor.
 
-    :param corpus: corpus to fit models on
+    :param corpus: corpus to fit models on.
+    :param text_func: optional function to define how the text a model is trained 
+        on should be selected. Takes an utterance as input and returns a list of 
+        strings to train the model corresponding to that utterance on. The model 
+        corresponding to the utterance is determined by `self.model_key_selector`. 
+        For every utterance corresponding to the same model key, this function 
+        should return the same result.
+        If `text_func` is `None`, a model will be trained on the text from all 
+        the utterances that belong to its group.
+    :param selector: determines which utterances in the corpus to train models for.
     """
-    model_groups = {}
-    for utt in corpus.iter_utterances():
+    model_groups = defaultdict(list)
+    for utt in corpus.iter_utterances(selector=selector):
       key = self.model_key_selector(utt)
-      if key not in model_groups:
-        model_groups[key] = model_text_selector(utt)
+      if text_func:
+        if key not in model_groups:
+          model_groups[key] = text_func(utt)
+      else:
+        model_groups[key].append(utt.text)
     self.models = {key: self.fit_cv(text) for key, text in model_groups.items()}
     return self
 
-  def fit_cv(self, text):
+  def fit_cv(self, text: List[str]):
+    """
+    Helper function to fit a new model to some text.
+    """
     try:
       cv = CountVectorizer().set_params(**self.cv.get_params())
       cv.fit(text)
@@ -93,15 +114,28 @@ class Surprise(Transformer):
       return None
 
   def transform(self, corpus: Corpus,
-      obj_type: str,
+      obj_type: Literal['utterance', 'speaker', 'conversation', 'corpus'],
       group_and_models: Callable[[Utterance], Tuple[str, List[str]]]=None,
       selector: Callable[[CorpusComponent], bool]=lambda _: True):
     """
-    Annotates `obj_type` components in `corpus` with surprise scores. Should be called after fit().
+    Annotates `obj_type` components in a corpus with surprise scores. Should be 
+    called after fit().
 
     :param corpus: corpus to compute surprise for.
-    :param obj_type: the type of corpus components to annotate.
-    :param group_and_models: 
+    :param obj_type: the type of corpus components to annotate. Should be either 
+        'utterance', 'speaker', 'conversation', or 'corpus'. 
+    :param group_and_models: optional function that defines how an utterance should 
+        be grouped to form a target text and what models (contexts) the group should 
+        be compared to when calculating surprise. Takes in an utterance and returns 
+        a tuple containing the name of the group the utterance belongs to and a 
+        list of models to calculate how surprising that group is against. Objects 
+        will be annotated with a metadata field `self.surprise_attr_name` that is 
+        a mapping 'GROUP_groupname_MODEL_modelkey' to the surprise score for 
+        utterances in `groupname` group when compared to `modelkey` model.
+        If `group_and_models` is `None`, `self.model_key_selector` will be used 
+        to select the group that an utterance belongs to. The surprise score will 
+        be calculated for each group of utterances compared to the model in 
+        `self.models` corresponding to the group.
     :param selector: function to select objects to annotate. if function returns true, object will be annotated.
     """
     if obj_type == 'corpus':
@@ -126,11 +160,11 @@ class Surprise(Transformer):
           group_name, models = group_and_models(utt)
           surprise_scores = {}
           for model_key in models:
-            surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(self.models[model_key], utt.text)
+            surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(self.models[model_key], [utt.text])
           utt.add_meta(self.surprise_attr_name, surprise_scores)
         else:
           group_name = self.model_key_selector(utt)
-          utt.add_meta(self.surprise_attr_name, self.compute_surprise(self.models[group_name], utt.text))
+          utt.add_meta(self.surprise_attr_name, self.compute_surprise(self.models[group_name], [utt.text]))
     else:
       for obj in corpus.iter_objs(obj_type, selector=selector):
         utt_groups = defaultdict(list)
@@ -154,9 +188,14 @@ class Surprise(Transformer):
 
   def compute_surprise(self, model: CountVectorizer, target: List[str]):
     """
+    Computes how surprising a target text is based on a model trained on a context. 
+    Surprise scores are calculated using cross entropy. To mitigate length based 
+    effects on cross entropy, several random samples of fixed size are taken from 
+    the target and context. Returns the average of the cross entropies for all 
+    pairs of samples.
+
     :param model: the CountVectorizer to use for finding term-doc matrices
     :param target: a list of tokens in the target
-    :param context: a list of tokens in the context
     """
     model_vocab, model_vocab_freq = list(map(np.array, zip(*model.vocabulary_.items())))
     model_vocab_prob = model_vocab_freq / np.sum(model_vocab_freq)
