@@ -114,7 +114,7 @@ class Surprise(Transformer):
       return None
 
   def transform(self, corpus: Corpus,
-      obj_type: Literal['utterance', 'speaker', 'conversation', 'corpus'],
+      obj_type: str,
       group_and_models: Callable[[Utterance], Tuple[str, List[str]]]=None,
       selector: Callable[[CorpusComponent], bool]=lambda _: True):
     """
