@@ -24,19 +24,21 @@ def _cross_entropy(target, context, smooth=True):
   context_log_probs = -np.log(context + k / (N_context + V))
   return np.dot(target / N_target, context_log_probs)
 
-def sample(toks: Union[np.ndarray, List[str]], sample_size: int, n_samples=50, p=None):
+def sample(tokens: List[Union[np.ndarray, List[str]]], sample_size: int, n_samples=50, p=None):
   """
-  Generates random samples from a list of tokens.
+  Generates random samples from a list of lists of tokens.
 
-  :param toks: the list of tokens to sample from (either a numpy array or list of strings).
+  :param toks: a list of lists of tokens to sample from.
   :param sample_size: the number of tokens to include in each sample.
   :param n_samples: the number of samples to take.
 
   :return: numpy array where each row is a sample of tokens
   """
-  if len(toks) < sample_size: return None
+  tokens_list = [toks for toks in tokens if len(toks) >= sample_size]
+  if len(tokens_list) == 0: return None
   rng = np.random.default_rng()
-  return rng.choice(toks, (n_samples, sample_size), p=p)
+  sample_idxes = rng.integers(0, len(tokens_list), size=(n_samples))
+  return [rng.choice(tokens_list[i], sample_size) for i in sample_idxes]
 
 
 class Surprise(Transformer):
@@ -109,7 +111,7 @@ class Surprise(Transformer):
     try:
       cv = CountVectorizer().set_params(**self.cv.get_params())
       cv.fit(text)
-      return cv
+      return cv, cv.transform(text)
     except ValueError:
       return None
 
@@ -152,7 +154,8 @@ class Surprise(Transformer):
       surprise_scores = {}
       for group_name in utt_groups:
         for model_key in group_models[group_name]:
-          surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(self.models[model_key], utt_groups[group_name])
+          model, context = self.models[model_key]
+          surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(model, utt_groups[group_name], context)
       corpus.add_meta(self.surprise_attr_name, surprise_scores)
     elif obj_type == 'utterance':
       for utt in corpus.iter_utterances(selector=selector):
@@ -160,11 +163,13 @@ class Surprise(Transformer):
           group_name, models = group_and_models(utt)
           surprise_scores = {}
           for model_key in models:
-            surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(self.models[model_key], [utt.text])
+            model, context = self.models[model_key]
+            surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(self.models[model_key], [utt.text], context)
           utt.add_meta(self.surprise_attr_name, surprise_scores)
         else:
           group_name = self.model_key_selector(utt)
-          utt.add_meta(self.surprise_attr_name, self.compute_surprise(self.models[group_name], [utt.text]))
+          model, context = self.models[group_name]
+          utt.add_meta(self.surprise_attr_name, self.compute_surprise(model, [utt.text], context))
     else:
       for obj in corpus.iter_objs(obj_type, selector=selector):
         utt_groups = defaultdict(list)
@@ -182,11 +187,12 @@ class Surprise(Transformer):
           for model_key in group_models[group_name]:
             assert (model_key in self.models), 'invalid model key'
             if not self.models[model_key]: continue
-            surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(self.models[model_key], utt_groups[group_name])
+            model, context = self.models[model_key]
+            surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(model, utt_groups[group_name], context)
         obj.add_meta(self.surprise_attr_name, surprise_scores)
     return corpus
 
-  def compute_surprise(self, model: CountVectorizer, target: List[str]):
+  def compute_surprise(self, model: CountVectorizer, target: List[str], context):
     """
     Computes how surprising a target text is based on a model trained on a context. 
     Surprise scores are calculated using cross entropy. To mitigate length based 
@@ -196,12 +202,11 @@ class Surprise(Transformer):
 
     :param model: the CountVectorizer to use for finding term-doc matrices
     :param target: a list of tokens in the target
+    :param context: the term document matrix for the context
     """
-    model_vocab, model_vocab_freq = list(map(np.array, zip(*model.vocabulary_.items())))
-    model_vocab_prob = model_vocab_freq / np.sum(model_vocab_freq)
-    target_tokens = model.build_analyzer()(' '.join(target))
-    target_samples = self.sampling_fn(np.array(target_tokens), self.target_sample_size, self.n_samples)
-    context_samples = self.sampling_fn(model_vocab, self.context_sample_size, self.n_samples, p=model_vocab_prob)
+    target_tokens = np.array(model.build_analyzer()(' '.join(target)))
+    target_samples = self.sampling_fn([target_tokens], self.target_sample_size, self.n_samples)
+    context_samples = self.sampling_fn(model.inverse_transform(context), self.context_sample_size, self.n_samples)
     if target_samples is None or context_samples is None:
       return np.nan
     sample_entropies = np.empty(self.n_samples)
