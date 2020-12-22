@@ -4,6 +4,7 @@ from convokit.speaker_convo_helpers.speaker_convo_attrs import SpeakerConvoAttrs
 from itertools import chain
 from collections import Counter
 from convokit.speaker_convo_helpers.speaker_convo_lifestage import SpeakerConvoLifestage
+from convokit.surprise import Surprise
 
 def _join_all_tokens(parses):
 	joined = []
@@ -112,7 +113,7 @@ class SpeakerConvoDiversity(Transformer):
 								 agg_fn=_join_all_tokens,
 								 recompute=recompute_tokens)
 
-
+ 
 	def transform(self, corpus):
 		if self.verbosity > 0:
 			print('joining tokens across conversation utterances')
@@ -214,54 +215,87 @@ class SpeakerConvoDiversityWrapper(Transformer):
 		self.output_field = output_field
 
 		# SpeakerConvoDiversity transformer to compute within-diversity
-		self.self_div = SpeakerConvoDiversity(output_field + '__self',
-			cmp_select_fn=lambda df, aux: (df.convo_idx < aux['max_exp']) & (df.n_convos__speaker >= aux['max_exp'])\
-				& (df.tokens.map(len) >= aux['cmp_sample_size']) & (df.n_utterances >= aux['min_n_utterances']),
-			ref_select_fn = lambda df, aux: np.ones(len(df)).astype(bool),
-			select_fn = lambda df, row, aux: (df.convo_idx % 2 != row.convo_idx % 2)\
-				& (df.speaker == row.speaker) & (df.lifestage == row.lifestage),
-			speaker_convo_cols=['n_utterances','lifestage'], speaker_cols=['n_convos'],
-			divergence_fn=compute_divergences, groupby=[], aux_input=aux_input, verbosity=verbosity
-		 )
+		self.self_div = Surprise(
+      lambda utt: '_'.join([utt.speaker.id, utt.conversation_id, str(utt.meta['lifestage'])]),
+      surprise_attr_name=output_field + '__self',
+      target_sample_size=sample_size,
+      context_sample_size=(lifestage_size//2) * sample_size,
+      n_samples=n_iters,
+      smooth=False
+    )
+    # SpeakerConvoDiversity(output_field + '__self',
+		# 	cmp_select_fn=lambda df, aux: (df.convo_idx < aux['max_exp']) & (df.n_convos__speaker >= aux['max_exp'])\
+		# 		& (df.tokens.map(len) >= aux['cmp_sample_size']) & (df.n_utterances >= aux['min_n_utterances']),
+		# 	ref_select_fn = lambda df, aux: np.ones(len(df)).astype(bool),
+		# 	select_fn = lambda df, row, aux: (df.convo_idx % 2 != row.convo_idx % 2)\
+		# 		& (df.speaker == row.speaker) & (df.lifestage == row.lifestage),
+		# 	speaker_convo_cols=['n_utterances','lifestage'], speaker_cols=['n_convos'],
+		# 	divergence_fn=compute_divergences, groupby=[], aux_input=aux_input, verbosity=verbosity
+		#  )
 
 		# SpeakerConvoDiversity transformer to compute across-diversity
-		self.other_div = SpeakerConvoDiversity(output_field + '__other',
-			cmp_select_fn=lambda df, aux: (df.convo_idx < aux['max_exp']) & (df.n_convos__speaker >= aux['max_exp'])\
-				& (df.tokens.map(len) >= aux['cmp_sample_size']) & (df.n_utterances >= aux['min_n_utterances']),
-			ref_select_fn=lambda df, aux: np.ones(len(df)).astype(bool),
-			select_fn = lambda df, row, aux: (df.convo_idx % 2 != row.convo_idx % 2)\
-				& (df.speaker != row.speaker) & (df.lifestage == row.lifestage)\
-				& (df.n_convos__speaker >= (row.lifestage + 1) * aux['lifestage_size'])\
-				& (df.start_time__speaker.between(row.start_time__speaker - aux['cohort_delta'],
-											  row.start_time__speaker + aux['cohort_delta'])),
-			divergence_fn=compute_divergences,
-			speaker_convo_cols=['n_utterances', 'lifestage'], speaker_cols=['n_convos', 'start_time'],
-			groupby=['speaker', 'lifestage'], aux_input=aux_input, verbosity=verbosity
-		 )
+		# self.other_div = SpeakerConvoDiversity(output_field + '__other',
+		# 	cmp_select_fn=lambda df, aux: (df.convo_idx < aux['max_exp']) & (df.n_convos__speaker >= aux['max_exp'])\
+		# 		& (df.tokens.map(len) >= aux['cmp_sample_size']) & (df.n_utterances >= aux['min_n_utterances']),
+		# 	ref_select_fn=lambda df, aux: np.ones(len(df)).astype(bool),
+		# 	select_fn = lambda df, row, aux: (df.convo_idx % 2 != row.convo_idx % 2)\
+		# 		& (df.speaker != row.speaker) & (df.lifestage == row.lifestage)\
+		# 		& (df.n_convos__speaker >= (row.lifestage + 1) * aux['lifestage_size'])\
+		# 		& (df.start_time__speaker.between(row.start_time__speaker - aux['cohort_delta'],
+		# 									  row.start_time__speaker + aux['cohort_delta'])),
+		# 	divergence_fn=compute_divergences,
+		# 	speaker_convo_cols=['n_utterances', 'lifestage'], speaker_cols=['n_convos', 'start_time'],
+		# 	groupby=['speaker', 'lifestage'], aux_input=aux_input, verbosity=verbosity
+		#  )
+		self.other_div = Surprise(
+			lambda utt: '_'.join([utt.speaker.id, utt.conversation_id, str(utt.meta['lifestage'])]),
+			surprise_attr_name=output_field + '__other',
+			target_sample_size=sample_size,
+      context_sample_size=(lifestage_size//2) * sample_size,
+      n_samples=n_iters,
+      smooth=False
+		)
 		self.verbosity = verbosity
 		
 	def transform(self, corpus):
 		if self.verbosity > 0:
 			print('getting lifestages')
 		corpus = self.lifestage_transform.transform(corpus)
+		SpeakerConvoDiversityWrapper.add_utt_lifestages(corpus)
 		if self.verbosity > 0:
 			print('getting within diversity')
-		corpus = self.self_div.transform(corpus)
+		self.self_div.fit(corpus, text_func=lambda utt: [' '.join([u.text for u in utt.speaker.iter_utterances() 
+      if u.conversation_id != utt.conversation_id and SpeakerConvoDiversityWrapper.is_same_lifestage(corpus, utt, u)])]
+    )
+		corpus = self.self_div.transform(corpus, 'speaker')
 		if self.verbosity > 0:
 			print('getting across diversity')
-		corpus = self.other_div.transform(corpus)
-		if self.verbosity > 0:
-			print('getting relative diversity')
-		div_table = corpus.get_full_attribute_table([self.output_field + '__self', 
-													 self.output_field + '__other'])
-		div_table = div_table[div_table[self.output_field + '__self'].notnull() | div_table[self.output_field + '__other'].notnull()]
-		div_table[self.output_field + '__adj'] = div_table[self.output_field + '__other'] \
-			- div_table[self.output_field + '__self']
-		for idx, (_, row) in enumerate(div_table.iterrows()):
-			if (idx > 0) and (self.verbosity > 0) and (idx % self.verbosity == 0):
-				print(idx, '/', len(div_table))
-			if not np.isnan(row[self.output_field + '__adj']):
-				corpus.set_speaker_convo_info(row.speaker, row.convo_id, self.output_field + '__adj',
-                                              row[self.output_field + '__adj'])
+		self.other_div.fit(corpus, text_func=lambda utt: [' '.join([
+				u.text for u in speaker.iter_utterances() 
+				if u.conversation_id != utt.conversation_id and SpeakerConvoDiversityWrapper.is_same_lifestage(corpus, utt, u)
+			]) for speaker in corpus.iter_speakers() if speaker.id != utt.speaker.id])
+		corpus = self.other_div.transform(corpus, 'speaker')
+		# if self.verbosity > 0:
+		# 	print('getting relative diversity')
+		# div_table = corpus.get_full_attribute_table([self.output_field + '__self', 
+		# 											 self.output_field + '__other'])
+		# div_table = div_table[div_table[self.output_field + '__self'].notnull() | div_table[self.output_field + '__other'].notnull()]
+		# div_table[self.output_field + '__adj'] = div_table[self.output_field + '__other'] \
+		# 	- div_table[self.output_field + '__self']
+		# for idx, (_, row) in enumerate(div_table.iterrows()):
+		# 	if (idx > 0) and (self.verbosity > 0) and (idx % self.verbosity == 0):
+		# 		print(idx, '/', len(div_table))
+		# 	if not np.isnan(row[self.output_field + '__adj']):
+		# 		corpus.set_speaker_convo_info(row.speaker, row.convo_id, self.output_field + '__adj',
+    #                                           row[self.output_field + '__adj'])
 		return corpus
-		
+	
+	@staticmethod
+	def add_utt_lifestages(corpus):
+		for utt in corpus.iter_utterances():
+			utt.add_meta('lifestage', corpus.get_speaker_convo_info(utt.speaker.id, utt.conversation_id, key='lifestage'))
+
+	@staticmethod
+	def is_same_lifestage(corpus, utt1, utt2):
+		return corpus.get_speaker_convo_info(utt1.speaker.id, utt1.conversation_id, key='lifestage') \
+			== corpus.get_speaker_convo_info(utt2.speaker.id, utt2.conversation_id, key='lifestage')
