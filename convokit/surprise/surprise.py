@@ -21,7 +21,7 @@ def _cross_entropy(target, context, smooth=True):
   V = np.sum(context > 0) if smooth else 0
   k = 1 if smooth else 0
   if not smooth: context[context == 0] = 1
-  context_log_probs = -np.log(context + k / (N_context + V))
+  context_log_probs = -np.log((context + k) / (N_context + V))
   return np.dot(target / N_target, context_log_probs)
 
 def sample(tokens: List[Union[np.ndarray, List[str]]], sample_size: int, n_samples=50, p=None):
@@ -93,15 +93,15 @@ class Surprise(Transformer):
         the utterances that belong to its group.
     :param selector: determines which utterances in the corpus to train models for.
     """
-    model_groups = defaultdict(list)
+    self.model_groups = defaultdict(list)
     for utt in corpus.iter_utterances(selector=selector):
       key = self.model_key_selector(utt)
       if text_func:
-        if key not in model_groups:
-          model_groups[key] = text_func(utt)
+        if key not in self.model_groups:
+          self.model_groups[key] = text_func(utt)
       else:
-        model_groups[key].append(utt.text)
-    self.models = {key: self.fit_cv(text) for key, text in model_groups.items()}
+        self.model_groups[key].append(utt.text)
+    self.models = {key: self.fit_cv(text) for key, text in self.model_groups.items()}
     return self
 
   def fit_cv(self, text: List[str]):
@@ -111,7 +111,7 @@ class Surprise(Transformer):
     try:
       cv = CountVectorizer().set_params(**self.cv.get_params())
       cv.fit(text)
-      return cv, cv.transform(text)
+      return cv
     except ValueError:
       return None
 
@@ -154,7 +154,8 @@ class Surprise(Transformer):
       surprise_scores = {}
       for group_name in utt_groups:
         for model_key in group_models[group_name]:
-          model, context = self.models[model_key]
+          model = self.models[model_key]
+          context = self.model_groups[model_key]
           surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(model, utt_groups[group_name], context)
       corpus.add_meta(self.surprise_attr_name, surprise_scores)
     elif obj_type == 'utterance':
@@ -163,12 +164,14 @@ class Surprise(Transformer):
           group_name, models = group_and_models(utt)
           surprise_scores = {}
           for model_key in models:
-            model, context = self.models[model_key]
+            model = self.models[model_key]
+            context = self.model_groups[model_key]
             surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(self.models[model_key], [utt.text], context)
           utt.add_meta(self.surprise_attr_name, surprise_scores)
         else:
           group_name = self.model_key_selector(utt)
-          model, context = self.models[group_name]
+          model = self.models[group_name]
+          context = self.model_groups[group_name]
           utt.add_meta(self.surprise_attr_name, self.compute_surprise(model, [utt.text], context))
     else:
       for obj in corpus.iter_objs(obj_type, selector=selector):
@@ -187,7 +190,8 @@ class Surprise(Transformer):
           for model_key in group_models[group_name]:
             assert (model_key in self.models), 'invalid model key'
             if not self.models[model_key]: continue
-            model, context = self.models[model_key]
+            model = self.models[model_key]
+            context = self.model_groups[model_key]
             surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(model, utt_groups[group_name], context)
         obj.add_meta(self.surprise_attr_name, surprise_scores)
     return corpus
@@ -205,8 +209,9 @@ class Surprise(Transformer):
     :param context: the term document matrix for the context
     """
     target_tokens = np.array(model.build_analyzer()(' '.join(target)))
+    context_tokens = np.array(model.build_analyzer()(' '.join(context)))
     target_samples = self.sampling_fn([target_tokens], self.target_sample_size, self.n_samples)
-    context_samples = self.sampling_fn(model.inverse_transform(context), self.context_sample_size, self.n_samples)
+    context_samples = self.sampling_fn([context_tokens], self.context_sample_size, self.n_samples)
     if target_samples is None or context_samples is None:
       return np.nan
     sample_entropies = np.empty(self.n_samples)
