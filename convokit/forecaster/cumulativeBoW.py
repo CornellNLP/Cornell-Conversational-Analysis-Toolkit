@@ -34,8 +34,11 @@ class CumulativeBoW(ForecasterModel):
         if clf_model is None:
             print("Initializing default classification model (standard scaled logistic regression)")
             self.clf_model = Pipeline([("standardScaler", StandardScaler(with_mean=False)),
-                                   ("logreg", LogisticRegression(solver='liblinear'))])
+                                   ("logreg", LogisticRegression(solver='liblinear'))])  
+        else:
+            self.clf_model = clf_model
 
+            
     @staticmethod
     def _combine_contexts(id_to_context_others):
         """
