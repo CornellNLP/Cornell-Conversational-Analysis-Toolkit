@@ -6,7 +6,7 @@ setup(
     author_email="cristian@cs.cornell.edu",
     url="https://github.com/CornellNLP/Cornell-Conversational-Analysis-Toolkit",
     description="Cornell Conversational Analysis Toolkit",
-    version="2.4.4",
+    version="2.4.5",
     packages=["convokit",
                 "convokit.bag_of_words",
                 "convokit.classifier",
