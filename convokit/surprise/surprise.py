@@ -4,6 +4,7 @@ from convokit import Transformer
 from convokit.model import Corpus, CorpusComponent, Utterance
 from itertools import chain
 from sklearn.feature_extraction.text import CountVectorizer
+from tqdm import tqdm
 from typing import Callable, List, Tuple, Union
 
 def _cross_entropy(target, context, smooth=True):
@@ -34,10 +35,10 @@ def sample(tokens: List[Union[np.ndarray, List[str]]], sample_size: int, n_sampl
 
   :return: numpy array where each row is a sample of tokens
   """
-  tokens_list = [toks for toks in tokens if len(toks) >= sample_size]
-  if len(tokens_list) == 0: return None
+  tokens_list = np.array([toks for toks in tokens if len(toks) >= sample_size])
+  if tokens_list.shape[0] == 0: return None
   rng = np.random.default_rng()
-  sample_idxes = rng.integers(0, len(tokens_list), size=(n_samples))
+  sample_idxes = rng.integers(0, tokens_list.shape[0], size=(n_samples))
   return [rng.choice(tokens_list[i], sample_size) for i in sample_idxes]
 
 
@@ -59,13 +60,13 @@ class Surprise(Transformer):
   :param smooth: whether to use laplace smoothing when calculating surprise.
   """
   def __init__(self, model_key_selector: Callable[[Utterance], str],
-      cv=CountVectorizer(), 
+      cv=CountVectorizer(),
       surprise_attr_name="surprise",
       target_sample_size=100, context_sample_size=100, n_samples=50, 
       sampling_fn: Callable[[np.ndarray, int], np.ndarray]=sample, 
       smooth: bool=True):
-    self.model_key_selector = model_key_selector
     self.cv = cv
+    self.model_key_selector = model_key_selector
     self.surprise_attr_name = surprise_attr_name
     self.target_sample_size = target_sample_size
     self.context_sample_size = context_sample_size
@@ -101,19 +102,7 @@ class Surprise(Transformer):
           self.model_groups[key] = text_func(utt)
       else:
         self.model_groups[key].append(utt.text)
-    self.models = {key: self.fit_cv(text) for key, text in self.model_groups.items()}
     return self
-
-  def fit_cv(self, text: List[str]):
-    """
-    Helper function to fit a new model to some text.
-    """
-    try:
-      cv = CountVectorizer().set_params(**self.cv.get_params())
-      cv.fit(text)
-      return cv
-    except ValueError:
-      return None
 
   def transform(self, corpus: Corpus,
       obj_type: str,
@@ -142,61 +131,57 @@ class Surprise(Transformer):
     """
     if obj_type == 'corpus':
       utt_groups = defaultdict(list)
-      group_models = defaultdict(list)
+      group_models = defaultdict(set)
       for utt in corpus.iter_utterances():
         if group_and_models:
           group_name, models = group_and_models(utt)
         else:
           group_name = self.model_key_selector(utt)
-          models = [group_name]
+          models = {group_name}
         utt_groups[group_name].append(utt.text)
-        group_models[group_name] += models
+        group_models[group_name].update(models)
       surprise_scores = {}
-      for group_name in utt_groups:
+      for group_name in tqdm(utt_groups):
         for model_key in group_models[group_name]:
-          model = self.models[model_key]
           context = self.model_groups[model_key]
-          surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(model, utt_groups[group_name], context)
+          surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(utt_groups[group_name], context)
       corpus.add_meta(self.surprise_attr_name, surprise_scores)
     elif obj_type == 'utterance':
-      for utt in corpus.iter_utterances(selector=selector):
+      for utt in tqdm(corpus.iter_utterances(selector=selector)):
         if group_and_models:
           group_name, models = group_and_models(utt)
           surprise_scores = {}
           for model_key in models:
-            model = self.models[model_key]
             context = self.model_groups[model_key]
-            surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(self.models[model_key], [utt.text], context)
+            surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise([utt.text], context)
           utt.add_meta(self.surprise_attr_name, surprise_scores)
         else:
           group_name = self.model_key_selector(utt)
-          model = self.models[group_name]
           context = self.model_groups[group_name]
-          utt.add_meta(self.surprise_attr_name, self.compute_surprise(model, [utt.text], context))
+          utt.add_meta(self.surprise_attr_name, self.compute_surprise([utt.text], context))
     else:
-      for obj in corpus.iter_objs(obj_type, selector=selector):
+      for obj in tqdm(corpus.iter_objs(obj_type, selector=selector)):
         utt_groups = defaultdict(list)
-        group_models = defaultdict(list)
+        group_models = defaultdict(set)
         for utt in obj.iter_utterances():
           if group_and_models:
             group_name, models = group_and_models(utt)
           else:
             group_name = self.model_key_selector(utt)
-            models = [group_name]
+            models = {group_name}
           utt_groups[group_name].append(utt.text)
-          group_models[group_name] += models
+          group_models[group_name].update(models)
         surprise_scores = {}
         for group_name in utt_groups:
           for model_key in group_models[group_name]:
-            assert (model_key in self.models), 'invalid model key'
-            if not self.models[model_key]: continue
-            model = self.models[model_key]
+            assert (model_key in self.model_groups), 'invalid model key'
+            if not self.model_groups[model_key]: continue
             context = self.model_groups[model_key]
-            surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(model, utt_groups[group_name], context)
+            surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(utt_groups[group_name], context)
         obj.add_meta(self.surprise_attr_name, surprise_scores)
     return corpus
 
-  def compute_surprise(self, model: CountVectorizer, target: List[str], context):
+  def compute_surprise(self, target: List[str], context: List[str]):
     """
     Computes how surprising a target text is based on a model trained on a context. 
     Surprise scores are calculated using cross entropy. To mitigate length based 
@@ -208,10 +193,12 @@ class Surprise(Transformer):
     :param target: a list of tokens in the target
     :param context: the term document matrix for the context
     """
-    target_tokens = np.array(model.build_analyzer()(' '.join(target)))
-    context_tokens = np.array(model.build_analyzer()(' '.join(context)))
+    model = self.cv.fit(chain(context, target))
+    tokenize = model.build_analyzer()
+    target_tokens = np.array(tokenize(' '.join(target)))
+    context_tokens = [np.array(tokenize(text)) for text in context]
     target_samples = self.sampling_fn([target_tokens], self.target_sample_size, self.n_samples)
-    context_samples = self.sampling_fn([context_tokens], self.context_sample_size, self.n_samples)
+    context_samples = self.sampling_fn(context_tokens, self.context_sample_size, self.n_samples)
     if target_samples is None or context_samples is None:
       return np.nan
     sample_entropies = np.empty(self.n_samples)
