@@ -94,20 +94,26 @@ class Surprise(Transformer):
         the utterances that belong to its group.
     :param selector: determines which utterances in the corpus to train models for.
     """
+    tokenizer = self.cv.build_analyzer()
     self.model_groups = defaultdict(list)
-    for utt in corpus.iter_utterances(selector=selector):
+    for utt in tqdm(corpus.iter_utterances(selector=selector)):
       key = self.model_key_selector(utt)
       if text_func:
         if key not in self.model_groups:
           self.model_groups[key] = text_func(utt)
       else:
         self.model_groups[key].append(utt.text)
+    for key in tqdm(self.model_groups):
+      if not text_func:
+        self.model_groups[key] = [' '.join(self.model_groups[key])]
+      self.model_groups[key] = list(map(lambda x: tokenizer(x), self.model_groups[key]))
     return self
 
   def transform(self, corpus: Corpus,
       obj_type: str,
       group_and_models: Callable[[Utterance], Tuple[str, List[str]]]=None,
-      selector: Callable[[CorpusComponent], bool]=lambda _: True):
+      selector: Callable[[CorpusComponent], bool]=lambda _: True,
+      target_text_func: Callable[[Utterance], List[str]]=None):
     """
     Annotates `obj_type` components in a corpus with surprise scores. Should be 
     called after fit().
@@ -128,7 +134,10 @@ class Surprise(Transformer):
         be calculated for each group of utterances compared to the model in 
         `self.models` corresponding to the group.
     :param selector: function to select objects to annotate. if function returns true, object will be annotated.
+    :param target_text_func: optional function to define what the target text corresponding to an utterance should be. 
+        takes in an utterance and returns a list of 
     """
+    tokenizer = self.cv.build_analyzer()
     if obj_type == 'corpus':
       utt_groups = defaultdict(list)
       group_models = defaultdict(set)
@@ -138,13 +147,18 @@ class Surprise(Transformer):
         else:
           group_name = self.model_key_selector(utt)
           models = {group_name}
-        utt_groups[group_name].append(utt.text)
+        if target_text_func:
+          if group_name not in utt_groups:
+            utt_groups[group_name] = [target_text_func(utt)]
+        else:
+          utt_groups[group_name].append(utt.text)
         group_models[group_name].update(models)
       surprise_scores = {}
       for group_name in tqdm(utt_groups):
         for model_key in group_models[group_name]:
           context = self.model_groups[model_key]
-          surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(utt_groups[group_name], context)
+          target = target_text_func(utt) if target_text_func else ' '.join(list(chain(*utt_groups[group_name])))
+          surprise_scores[Surprise._format_attr_key(group_name, model_key)] = self._compute_surprise(tokenizer(target), context)
       corpus.add_meta(self.surprise_attr_name, surprise_scores)
     elif obj_type == 'utterance':
       for utt in tqdm(corpus.iter_utterances(selector=selector)):
@@ -153,12 +167,14 @@ class Surprise(Transformer):
           surprise_scores = {}
           for model_key in models:
             context = self.model_groups[model_key]
-            surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise([utt.text], context)
+            target = target_text_func(utt) if target_text_func else utt.text
+            surprise_scores[Surprise._format_attr_key(group_name, model_key)] = self._compute_surprise(tokenizer(target), context)
           utt.add_meta(self.surprise_attr_name, surprise_scores)
         else:
           group_name = self.model_key_selector(utt)
           context = self.model_groups[group_name]
-          utt.add_meta(self.surprise_attr_name, self.compute_surprise([utt.text], context))
+          target = target_text_func(utt) if target_text_func else utt.text
+          utt.add_meta(self.surprise_attr_name, self._compute_surprise(tokenizer(target), context))
     else:
       for obj in tqdm(corpus.iter_objs(obj_type, selector=selector)):
         utt_groups = defaultdict(list)
@@ -169,7 +185,11 @@ class Surprise(Transformer):
           else:
             group_name = self.model_key_selector(utt)
             models = {group_name}
-          utt_groups[group_name].append(utt.text)
+          if target_text_func:
+            if group_name not in utt_groups:
+              utt_groups[group_name] = [target_text_func(utt)]
+          else:
+            utt_groups[group_name].append(utt.text)
           group_models[group_name].update(models)
         surprise_scores = {}
         for group_name in utt_groups:
@@ -177,11 +197,12 @@ class Surprise(Transformer):
             assert (model_key in self.model_groups), 'invalid model key'
             if not self.model_groups[model_key]: continue
             context = self.model_groups[model_key]
-            surprise_scores[Surprise.format_attr_key(group_name, model_key)] = self.compute_surprise(utt_groups[group_name], context)
+            target = list(chain(*utt_groups[group_name]))
+            surprise_scores[Surprise._format_attr_key(group_name, model_key)] = self._compute_surprise(tokenizer(target), context)
         obj.add_meta(self.surprise_attr_name, surprise_scores)
     return corpus
 
-  def compute_surprise(self, target: List[str], context: List[str]):
+  def _compute_surprise(self, target: List[str], context: List[List[str]]):
     """
     Computes how surprising a target text is based on a model trained on a context. 
     Surprise scores are calculated using cross entropy. To mitigate length based 
@@ -194,9 +215,8 @@ class Surprise(Transformer):
     :param context: the term document matrix for the context
     """
     model = self.cv.fit(chain(context, target))
-    tokenize = model.build_analyzer()
-    target_tokens = np.array(tokenize(' '.join(target)))
-    context_tokens = [np.array(tokenize(text)) for text in context]
+    target_tokens = np.array(target)
+    context_tokens = [np.array(text) for text in context]
     target_samples = self.sampling_fn([target_tokens], self.target_sample_size, self.n_samples)
     context_samples = self.sampling_fn(context_tokens, self.context_sample_size, self.n_samples)
     if target_samples is None or context_samples is None:
@@ -209,6 +229,6 @@ class Surprise(Transformer):
     return np.nanmean(sample_entropies)
 
   @staticmethod
-  def format_attr_key(group_name, model_key):
-    return 'GROUP_{}__MODEL_{}'.format(group_name, model_key)
+  def _format_attr_key(group_name, model_key):
+    return f'GROUP_{group_name}__MODEL_{model_key}'
     
