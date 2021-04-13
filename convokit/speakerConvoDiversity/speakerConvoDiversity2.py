@@ -108,10 +108,10 @@ class SpeakerConvoDiversity(Transformer):
         self.speaker_cols, self.convo_cols
       )
 
-    surprise_transformer = self.init_surprise(lambda utt: self.get_model_key(utt, self.model_key_cols, input_table))
-    surprise_transformer.fit(corpus, text_func=lambda utt: self.get_text_func(utt, input_table))
-    surprise_transformer.transform(corpus, 'speaker', target_text_func=lambda utt: self.get_utt_row(utt, input_table).tokens)
-    self.set_output(corpus, input_table)
+    surprise_transformer = self._init_surprise(lambda utt: self._get_model_key(utt, self.model_key_cols, input_table))
+    surprise_transformer.fit(corpus, text_func=lambda utt: self._get_text_func(utt, input_table))
+    surprise_transformer.transform(corpus, 'speaker', target_text_func=lambda utt: self._get_utt_row(utt, input_table).tokens)
+    self._set_output(corpus, input_table)
     return corpus
 
 
@@ -127,7 +127,7 @@ class SpeakerConvoDiversity(Transformer):
     Returns the model key used by `Surprise` that corresponds to `utt` and `model_key_cols`. 
     Finds the row in `df` corresponding to `utt` and creates a model key using the values for the attributes in `model_key_cols` in that row.
     """
-    utt_row = self.get_utt_row(utt, df)
+    utt_row = self._get_utt_row(utt, df)
     return '.'.join([str(utt_row[col]) for col in model_key_cols])
   
 
@@ -138,15 +138,14 @@ class SpeakerConvoDiversity(Transformer):
     target_sample_size = self.aux_input['cmp_sample_size'] if 'cmp_sample_size' in self.aux_input else 200
     context_sample_size = self.aux_input['ref_sample_size']  if 'ref_sample_size' in self.aux_input else 1000
     n_samples = self.aux_input['n_iters'] if 'n_iters' in self.aux_input else 50
-    cv = CountVectorizer(preprocessor=lambda x: x, tokenizer=lambda x: x)
-    return Surprise(model_key_selector, cv=cv, surprise_attr_name=self.surprise_attr_name, target_sample_size=target_sample_size, context_sample_size=context_sample_size, n_samples=n_samples, smooth=False)
+    return Surprise(model_key_selector, tokenizer=lambda x: x, surprise_attr_name=self.surprise_attr_name, target_sample_size=target_sample_size, context_sample_size=context_sample_size, n_samples=n_samples, smooth=False)
 
 
   def _get_text_func(self, utt: Utterance, df: pd.DataFrame):
     """
     Returns the reference text that should be to calculate speaker convo diversity for the speaker-convo group that `utt` belongs to. 
     """
-    utt_row = self.get_utt_row(utt, df)
+    utt_row = self._get_utt_row(utt, df)
     ref_subset = df[self.ref_select_fn(df, self.aux_input)]
     ref_subset = ref_subset[self.select_fn(ref_subset, utt_row, self.aux_input)]
     if not self.groupby:
@@ -175,12 +174,14 @@ class SpeakerConvoDiversity(Transformer):
     Adds `self.output_field` to speaker convo info using scores returned by `Surprise` transformer.
     """
     entries = []
-    for speaker in tqdm(corpus.iter_speakers()):
+    for speaker in tqdm(corpus.iter_speakers(), desc='set output'):
       if self.surprise_attr_name in speaker.meta:
         scores = speaker.meta[self.surprise_attr_name]
         for key, score in scores.items():
+          if np.isnan(score):
+            continue
           model_key = key.split('__MODEL')[0].replace('GROUP_', '').split('.')
-          row = self.get_row(df, self.model_key_cols, model_key)
+          row = self._get_row(df, self.model_key_cols, model_key)
           corpus.set_speaker_convo_info(row['speaker'], row['convo_id'], self.output_field, score)
 
 
