@@ -224,5 +224,7 @@ class Surprise(Transformer):
 
   @staticmethod
   def _format_attr_key(group_name, model_key):
+    if group_name == model_key:
+        return model_key
     return f'GROUP_{group_name}__MODEL_{model_key}'
     

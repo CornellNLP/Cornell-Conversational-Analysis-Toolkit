@@ -94,6 +94,8 @@ class SpeakerConvoDiversity(Transformer):
     self.agg_tokens = SpeakerConvoAttrs('tokens',
                  agg_fn=_join_all_tokens,
                  recompute=recompute_tokens)
+    
+    self.model_key_map = {}
 
 
   def transform(self, corpus):
@@ -128,7 +130,9 @@ class SpeakerConvoDiversity(Transformer):
     Finds the row in `df` corresponding to `utt` and creates a model key using the values for the attributes in `model_key_cols` in that row.
     """
     utt_row = self._get_utt_row(utt, df)
-    return '.'.join([str(utt_row[col]) for col in model_key_cols])
+    key = '.'.join([str(utt_row[col]) for col in model_key_cols])
+    self.model_key_map[key] = (utt_row['speaker'], utt_row['convo_id'])
+    return key
   
 
   def _init_surprise(self, model_key_selector):
@@ -164,8 +168,6 @@ class SpeakerConvoDiversity(Transformer):
     mask = np.ones(df.shape[0], dtype=bool)
     for field, val in zip(fields, vals):
       mask &= (str_df[field] == val)
-    if df[mask].shape[0] == 0:
-      print(fields, vals)
     return df[mask].iloc[0]
 
 
@@ -180,9 +182,8 @@ class SpeakerConvoDiversity(Transformer):
         for key, score in scores.items():
           if np.isnan(score):
             continue
-          model_key = key.split('__MODEL')[0].replace('GROUP_', '').split('.')
-          row = self._get_row(df, self.model_key_cols, model_key)
-          corpus.set_speaker_convo_info(row['speaker'], row['convo_id'], self.output_field, score)
+          speaker, convo_id = self.model_key_map[key]
+          corpus.set_speaker_convo_info(speaker, convo_id, self.output_field, score)
 
 
 class SpeakerConvoDiversityWrapper(Transformer):
