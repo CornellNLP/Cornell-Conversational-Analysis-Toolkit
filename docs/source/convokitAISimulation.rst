@@ -32,6 +32,7 @@ Installation
        python3.12 -m venv .venv
        source .venv/bin/activate
 
+   (on Windows, create it with ``py -3.12 -m venv .venv`` and activate it with ``.venv\Scripts\activate``),
    or with conda::
 
        conda create -n convokitai python=3.12
@@ -54,10 +55,132 @@ Python client for the ConvoArena REST API (from Deliberate Lab).
 
 Running locally also requires:
 
-* `Docker <https://docs.docker.com/get-docker/>`_. Where Docker isn't available (e.g. Google Colab),
-  the backend runs with `udocker <https://github.com/indigo-dc/udocker>`_ instead, which is
-  downloaded automatically.
+* A container runtime to run the backend: `Docker <https://docs.docker.com/get-docker/>`_ or
+  `Podman <https://podman.io/docs/installation>`_. On Linux without either (e.g. Google Colab), the
+  backend runs with `udocker <https://github.com/indigo-dc/udocker>`_ instead, which is downloaded
+  automatically. See `Setting up your computer`_ for the steps on each operating system.
 * A `Gemini API key <https://ai.google.dev/gemini-api/docs/api-key>`_ for the agents' model calls.
+
+Setting up your computer
+------------------------
+
+This section is only needed to run simulations locally. Running on your own ConvoArena deployment
+needs no container runtime.
+
+``simulate`` picks a runtime automatically, using the first one that works:
+
+1. **Docker**, if ``docker info`` succeeds.
+2. **Podman**, if ``podman info`` succeeds.
+3. **udocker**, on Linux only.
+
+If none of them works, ``simulate`` raises a ``BackendContainerError`` explaining what to install.
+All three run the same backend image, which is built for both Intel/AMD (amd64) and ARM (arm64)
+processors, so Apple Silicon Macs and ARM Windows laptops work too.
+
+The image takes about 1.5 GB of disk space. The first run downloads it, and later runs reuse it.
+
+Windows
+^^^^^^^
+
+Docker and Podman both run containers in a small Linux virtual machine on top of
+`WSL 2 <https://learn.microsoft.com/en-us/windows/wsl/install>`_. Their installers set WSL 2 up if it
+is missing. This can require administrator rights, a restart, and virtualization enabled in the
+BIOS/UEFI settings (it usually is by default). udocker does not work on Windows. Use one of these
+options:
+
+**Option A: Docker Desktop**
+
+1. Install `Docker Desktop for Windows <https://docs.docker.com/desktop/setup/install/windows-install/>`_,
+   keeping the default **Use WSL 2** setting.
+2. Start Docker Desktop and wait until it reports that the engine is running.
+3. Check it in a new terminal (PowerShell or Anaconda Prompt)::
+
+       docker info
+
+   This should print information about the server, not an error such as
+   ``error during connect``.
+
+Docker Desktop must be running whenever you run a simulation. Docker Desktop requires a paid
+subscription for use in larger companies (see its license terms). Podman is a free alternative.
+
+**Option B: Podman**
+
+1. Install Podman for Windows from the `Podman releases page <https://github.com/containers/podman/releases>`_
+   (the ``podman-*-setup.exe`` installer), or install
+   `Podman Desktop <https://podman-desktop.io/docs/installation/windows-install>`_, which includes it.
+2. In a new terminal, create and start the Podman machine (the Linux VM). ``init`` is needed only once::
+
+       podman machine init
+       podman machine start
+
+3. Check it::
+
+       podman info
+
+After restarting your computer, run ``podman machine start`` again before running a simulation.
+
+**Option C: WSL 2 only**
+
+If you already use a Linux distribution under WSL 2 (e.g. Ubuntu), you can install Python and this
+package inside it and follow the `Linux`_ steps there instead.
+
+macOS
+^^^^^
+
+Use either:
+
+* **Docker Desktop:** install `Docker Desktop for Mac <https://docs.docker.com/desktop/setup/install/mac-install/>`_
+  (choose the Apple Silicon or Intel build to match your Mac), start it, and check that ``docker info``
+  succeeds. Other tools that provide a working ``docker`` command, such as
+  `OrbStack <https://orbstack.dev/>`_ or `Colima <https://github.com/abiosoft/colima>`_, work too.
+* **Podman:** install it with `Homebrew <https://brew.sh/>`_ (or the installer from
+  `podman.io <https://podman.io/docs/installation>`_), then create and start its machine::
+
+      brew install podman
+      podman machine init
+      podman machine start
+      podman info
+
+  After restarting your Mac, run ``podman machine start`` again.
+
+udocker does not work on macOS.
+
+Linux
+^^^^^
+
+Use any of:
+
+* **Docker Engine:** install it for your distribution
+  (`instructions <https://docs.docker.com/engine/install/>`_). ``simulate`` calls ``docker`` without
+  ``sudo``, so add yourself to the ``docker`` group, then log out and back in::
+
+      sudo usermod -aG docker $USER
+      docker info
+
+* **Podman:** install it from your distribution's packages, e.g.
+  ``sudo apt install podman`` or ``sudo dnf install podman``. Podman runs without a daemon or a
+  machine on Linux, so ``podman info`` should work right away.
+* **Neither:** nothing to install. udocker is downloaded the first time you run a simulation. Its
+  first start also unpacks the image, which takes several minutes, and the backend is slower under
+  udocker than under Docker or Podman.
+
+Google Colab
+^^^^^^^^^^^^
+
+Nothing to install. Colab has no Docker, so the backend runs under udocker automatically. Expect
+the first start in a new Colab session to take several minutes.
+
+Troubleshooting
+^^^^^^^^^^^^^^^
+
+* **"No container runtime is available"**: neither ``docker info`` nor ``podman info`` succeeded.
+  Start Docker Desktop or run ``podman machine start``, then try again.
+* **"Port(s) [...] already in use"**: a backend from an earlier run is still running, or another
+  program uses port 5001, 8085 or 9099. Stop the old backend with ``docker stop dl-backend`` (or
+  ``podman stop dl-backend``).
+* **The emulators time out while starting**: check the container's output with
+  ``docker logs dl-backend`` (or ``podman logs dl-backend``). Under udocker, the error message
+  includes the path of the log file.
 
 Quick start
 -----------

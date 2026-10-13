@@ -5,9 +5,10 @@ Deliberate Lab, https://github.com/PAIR-code/deliberate-lab), so that
 ``LocalBackend(..., reuse_running=True)`` from :mod:`local_backend` can attach
 to it without a local ConvoArena checkout.
 
-Docker is used when a Docker daemon is available (e.g. on a laptop).
-Otherwise the container runs under udocker, which needs neither a daemon nor
-root privileges (e.g. on Google Colab). udocker shares the host network, so
+Docker is used when a Docker daemon is available (e.g. on a laptop), and
+otherwise Podman, which runs the same image with the same commands. On Linux
+without either, the container runs under udocker, which needs neither a daemon
+nor root privileges (e.g. on Google Colab). udocker shares the host network, so
 the emulators are reachable on localhost exactly as with ``docker run -p``.
 
 Example::
@@ -78,16 +79,19 @@ class BackendContainer:
     backend can run per machine, since the emulator ports are fixed.
 
     :param image: image reference to run. Defaults to ``DEFAULT_IMAGE``.
-    :param runtime: ``"docker"`` or ``"udocker"``. Defaults to ``"docker"`` when a Docker
-        daemon is reachable, otherwise ``"udocker"``.
+    :param runtime: ``"docker"``, ``"podman"`` or ``"udocker"``. Defaults to the first of
+        these that works: Docker if a Docker daemon is reachable, then Podman if it is
+        installed (and, on Windows and macOS, its machine is running), then udocker on Linux.
     :param pull: whether to pull the image before running it. Set to False to use an image
         that is already present locally.
     :param startup_timeout: seconds to wait for the emulators to come up. The first udocker
         run also extracts the image, which is slow.
-    :param log_path: file to write the container's output to (udocker only; with Docker, use
-        ``docker logs dl-backend``). Defaults to ``dl-backend.log`` in the temp directory.
+    :param log_path: file to write the container's output to (udocker only; with Docker or
+        Podman, use ``docker logs dl-backend`` or ``podman logs dl-backend``). Defaults to
+        ``dl-backend.log`` in the temp directory.
     :param env: environment variables for the container, added to ``DEFAULT_ENV``.
-    :raises BackendContainerError: if ``runtime`` is not ``"docker"`` or ``"udocker"``.
+    :raises BackendContainerError: if ``runtime`` is not ``"docker"``, ``"podman"`` or
+        ``"udocker"``, or if no runtime is given and none is available.
     """
 
     def __init__(
@@ -101,9 +105,18 @@ class BackendContainer:
         env: Optional[dict[str, str]] = None,
     ) -> None:
         self.image = image
-        self.runtime = runtime or ("docker" if _docker_available() else "udocker")
-        if self.runtime not in ("docker", "udocker"):
+        self.runtime = runtime or _default_runtime()
+        if self.runtime not in ("docker", "podman", "udocker"):
             raise BackendContainerError(f"Unknown runtime: {self.runtime!r}")
+        # udocker relies on Linux-only features (proot, namespaces), so on
+        # Windows and macOS a Docker or Podman VM is needed instead.
+        if self.runtime == "udocker" and not sys.platform.startswith("linux"):
+            raise BackendContainerError(
+                "udocker only works on Linux. Install and start Docker Desktop "
+                "(https://www.docker.com/products/docker-desktop/) or Podman "
+                "(https://podman.io/docs/installation, then `podman machine init` and "
+                "`podman machine start`), and try again."
+            )
         self.pull = pull
         self.env = {**DEFAULT_ENV, **(env or {})}
         self.startup_timeout = startup_timeout
@@ -128,7 +141,7 @@ class BackendContainer:
             raise BackendContainerError(
                 f"Port(s) {busy} already in use; is a backend already running?"
             )
-        if self.runtime == "docker":
+        if self.runtime in ("docker", "podman"):
             self._start_docker()
         else:
             self._start_udocker()
@@ -145,8 +158,8 @@ class BackendContainer:
         if not self._started:
             return
         self._started = False
-        if self.runtime == "docker":
-            subprocess.run(["docker", "stop", _NAME], capture_output=True, check=False)
+        if self.runtime in ("docker", "podman"):
+            subprocess.run([self.runtime, "stop", _NAME], capture_output=True, check=False)
             return
         proc, self._proc = self._proc, None
         if proc is not None and proc.poll() is None:
@@ -168,16 +181,18 @@ class BackendContainer:
     # -- runtimes ---------------------------------------------------------
 
     def _start_docker(self) -> None:
+        # Podman's CLI matches Docker's for everything used here.
+        cli = self.runtime
         if self.pull:
-            _run(["docker", "pull", self.image])
+            _run([cli, "pull", self.image])
         ports = [arg for p in _PORTS for arg in ("-p", f"{p}:{p}")]
         env = [arg for k, v in self.env.items() for arg in ("-e", f"{k}={v}")]
-        _run(["docker", "run", "-d", "--rm", "--name", _NAME, *ports, *env, self.image])
+        _run([cli, "run", "-d", "--rm", "--name", _NAME, *ports, *env, self.image])
 
     def _start_udocker(self) -> None:
         udocker = _udocker_command() or _download_udocker()
         # Colab runs everything as root, which udocker refuses by default.
-        base = udocker + (["--allow-root"] if os.geteuid() == 0 else [])
+        base = udocker + (["--allow-root"] if _is_root() else [])
         _run(base + ["install"])  # one-time download of udocker's engines
         if self.pull:
             _run(base + ["pull", self.image])
@@ -217,8 +232,8 @@ class BackendContainer:
             time.sleep(1.0)
 
     def _log_hint(self) -> str:
-        if self.runtime == "docker":
-            return f"\nSee: docker logs {_NAME}"
+        if self.runtime in ("docker", "podman"):
+            return f"\nSee: {self.runtime} logs {_NAME}"
         try:
             tail = self.log_path.read_text("utf-8", "replace").splitlines()[-30:]
         except OSError:
@@ -226,10 +241,30 @@ class BackendContainer:
         return f"\nLog: {self.log_path}\n" + "\n".join(tail)
 
 
-def _docker_available() -> bool:
-    if shutil.which("docker") is None:
+def _is_root() -> bool:
+    # os.geteuid only exists on Unix.
+    return hasattr(os, "geteuid") and os.geteuid() == 0
+
+
+def _default_runtime() -> str:
+    for cli in ("docker", "podman"):
+        if _cli_available(cli):
+            return cli
+    if sys.platform.startswith("linux"):
+        return "udocker"
+    raise BackendContainerError(
+        "No container runtime is available. Install and start Docker Desktop "
+        "(https://www.docker.com/products/docker-desktop/), so that `docker info` succeeds, "
+        "or install Podman (https://podman.io/docs/installation) and run "
+        "`podman machine init` and `podman machine start`, so that `podman info` succeeds."
+    )
+
+
+def _cli_available(cli: str) -> bool:
+    """Return whether ``cli info`` succeeds, i.e. the daemon or Podman machine is running."""
+    if shutil.which(cli) is None:
         return False
-    return subprocess.run(["docker", "info"], capture_output=True).returncode == 0
+    return subprocess.run([cli, "info"], capture_output=True).returncode == 0
 
 
 def _udocker_command() -> Optional[list[str]]:
