@@ -1,4 +1,4 @@
-"""Convert ConvoArena experiment exports into a ``convokitai`` Corpus.
+"""Convert ConvoArena experiment exports into a ConvoKit Corpus.
 
 An experiment export is the JSON returned by ``deliberate_lab.Client.export_experiment``
 (or downloaded from the ConvoArena web UI). The conversion works as follows:
@@ -24,7 +24,7 @@ from __future__ import annotations
 import re
 from typing import Iterable
 
-from convokitai import Corpus, PrivateAssistant, Speaker, Support, Utterance
+from convokit import Corpus, PrivateAssistant, Speaker, Support, Utterance
 
 # what an assistant "says" when it decides not to intervene
 SILENT_SUPPORT_TEXT = "Nothing further to add at this point in the conversation."
@@ -56,7 +56,7 @@ def _timestamp_ms(timestamp) -> int | None:
 def _prompt_text(prompt) -> str:
     """Join the TEXT items of a prompt (a list of items, or a dict of lists) into one string.
 
-    Context items are dropped, since convokitai adds the transcript itself when generating."""
+    Context items are dropped, since ConvoKit adds the transcript itself when generating."""
     if isinstance(prompt, dict):
         prompt = [item for items in prompt.values() for item in items]
     return "".join(
@@ -67,7 +67,7 @@ def _prompt_text(prompt) -> str:
 def _generation_config(
     template: dict | None, stage_id: str, model_settings: dict | None = None
 ) -> dict:
-    """Build a convokitai generation config from a ConvoArena agent template.
+    """Build a ConvoKit generation config from a ConvoArena agent template.
 
     The full template is kept under ``"deliberate_lab"`` so the simulation can be recreated."""
     if not template:
@@ -260,7 +260,7 @@ def _add_export(
 
 def export_to_corpus(exports: dict | Iterable[dict], keep_silent_supports: bool = True) -> Corpus:
     """
-    Convert one or more ConvoArena experiment exports into a ``convokitai`` Corpus, with
+    Convert one or more ConvoArena experiment exports into a ConvoKit Corpus, with
     one Conversation per cohort.
 
     Each Conversation's meta has the experiment ID and name, the cohort name, and the chat

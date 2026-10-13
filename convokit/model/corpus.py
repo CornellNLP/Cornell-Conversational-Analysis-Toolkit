@@ -7,7 +7,18 @@ from tqdm import tqdm
 
 from convokit.convokitConfig import ConvoKitConfig
 from convokit.util import create_safe_id
+from .aiCorpusHelpers import (
+    extract_component_ai_fields,
+    extract_corpus_ai_fields,
+    is_ai_corpus_on_disk,
+    migrate_legacy_assistants_and_supports,
+    stash_ai_fields_in_meta,
+    unstash_ai_fields_from_meta,
+)
+from .aiUtil import as_dict, normalize_for_dump, split_ai_fields
 from .convoKitMatrix import ConvoKitMatrix
+from .privateAssistant import PrivateAssistant
+from .support import Support
 from .corpusUtil import *
 from .corpus_helpers import *
 from .backendMapper import BackendMapper
@@ -16,6 +27,12 @@ from .backendMapper import BackendMapper
 class Corpus:
     """
     Represents a dataset, which can be loaded from a folder or constructed from a list of utterances.
+
+    A Corpus may involve AI agents: Speakers can be AI (``is_ai``), and Conversations can have AI
+    private assistants that send private support messages to participants. These AI fields are
+    attributes of the corpus objects (``ai_meta``, ``is_ai``, ``has_ai``, ...); see
+    ``AI_FORMAT.md`` for the full description. On disk they are stored in the regular metadata,
+    and they are moved out of the metadata when the corpus is loaded.
 
     :param filename: Path to a folder containing a Corpus or to an utterances.jsonl / utterances.json file to load
     :param utterances: list of utterances to initialize Corpus from
@@ -40,10 +57,19 @@ class Corpus:
 
     :param backend: specify the backend type, either “mem” or “db”, default to “mem”.
     :param backend_mapper: (advanced usage only) if provided, use this as the BackendMapper instance instead of initializing a new one.
+    :param has_ai: True if there are AI speakers in the corpus. If neither given nor stored in a
+        loaded corpus, it is computed from whether any Speaker has ``is_ai`` set.
+    :param meta: initial corpus-level metadata, added to any metadata loaded from ``filename``.
+        Its ``"ai_meta"`` entry is merged into the ``ai_meta`` attribute and its ``"has_ai"``
+        entry sets ``has_ai`` (unless the ``has_ai`` argument is given), instead of being kept
+        in ``meta``.
 
     :ivar meta_index: index of Corpus metadata
     :ivar vectors: the vectors stored in the Corpus
     :ivar corpus_dirpath: path to the directory the corpus was loaded from
+    :ivar has_ai: True if there are AI speakers in the corpus
+    :ivar ai_meta: corpus-level AI metadata. Assigning a dict merges it into the existing
+        ``ai_meta``.
     """
 
     def __init__(
@@ -63,6 +89,8 @@ class Corpus:
         disable_type_check=True,
         backend: Optional[str] = None,
         backend_mapper: Optional[BackendMapper] = None,
+        has_ai: Optional[bool] = None,
+        meta: Optional[Dict] = None,
     ):
         self.config = ConvoKitConfig()
         self.corpus_dirpath = get_corpus_dirpath(filename)
@@ -209,6 +237,46 @@ class Corpus:
                 self.meta_index.enable_type_check()
                 self.update_speakers_data()
 
+        self._init_ai_fields(filename)
+        if meta:
+            meta, ai_fields = split_ai_fields(dict(meta), "corpus")
+            self.meta.update(meta)
+            if "ai_meta" in ai_fields:
+                self.ai_meta = ai_fields["ai_meta"]
+            if has_ai is None and "has_ai" in ai_fields:
+                has_ai = ai_fields["has_ai"]
+        if has_ai is not None:
+            self.has_ai = has_ai
+
+    def _init_ai_fields(self, filename: Optional[str] = None) -> None:
+        """
+        Move the AI fields stored in the metadata (the on-disk format) into the attributes of the
+        corpus and its components. Corpus-level assistants / supports stored by older versions of
+        the format are moved onto their conversations. Does nothing for a corpus without AI fields.
+        """
+        if not is_ai_corpus_on_disk(self, filename):
+            return
+        extract_component_ai_fields(self, legacy=True)
+        fields = extract_corpus_ai_fields(self, filename, legacy=True)
+        self.ai_meta = fields["ai_meta"]
+        if fields["has_ai"] is not None:
+            self.has_ai = fields["has_ai"]
+        migrate_legacy_assistants_and_supports(
+            self, fields["legacy_assistants"], fields["legacy_supports"]
+        )
+
+    @classmethod
+    def load(cls, filename: str, **kwargs) -> "Corpus":
+        """
+        Load a Corpus from a folder (or ``utterances.jsonl`` / ``utterances.json`` file).
+        Equivalent to ``Corpus(filename=filename, **kwargs)``.
+
+        :param filename: path to the corpus folder
+        :param kwargs: any other arguments accepted by the Corpus constructor
+        :return: the loaded Corpus
+        """
+        return cls(filename=filename, **kwargs)
+
     @classmethod
     def reconnect_to_db(cls, db_collection_prefix: str, db_host: Optional[str] = None):
         """
@@ -225,6 +293,8 @@ class Corpus:
         # through the constructor, the blank Corpus' BackendMapper is now connected
         # to the DB. Next use the DB contents to populate the corpus components.
         init_corpus_from_backend_manager(result)
+        result._load_ai_fields_from_backend()
+        result._init_ai_fields()
 
         return result
 
@@ -286,6 +356,16 @@ class Corpus:
         if not os.path.exists(dir_name):
             os.mkdir(dir_name)
 
+        # AI fields are written into the metadata for the duration of the dump
+        stashed = stash_ai_fields_in_meta(self)
+        try:
+            self._dump_to_dir(dir_name, exclude_vectors, force_version, fields_to_skip)
+        finally:
+            if stashed:
+                unstash_ai_fields_from_meta(self)
+
+    def _dump_to_dir(self, dir_name, exclude_vectors, force_version, fields_to_skip) -> None:
+        """Write the corpus files to ``dir_name`` (see :meth:`dump`)."""
         # dump speakers, conversations, utterances
         dump_corpus_component(
             self, dir_name, "speakers.json", "speaker", "speaker", exclude_vectors, fields_to_skip
@@ -656,6 +736,162 @@ class Corpus:
         assert obj_type in ["speaker", "utterance", "conversation"]
         return [obj.id for obj in self.iter_objs(obj_type, selector)]
 
+    ############################################################################
+    ## AI fields
+    ############################################################################
+
+    @property
+    def has_ai(self) -> bool:
+        """Whether the corpus has AI speakers (computed from the Speakers unless explicitly set)."""
+        has_ai = self.__dict__.get("_has_ai")
+        if has_ai is None:
+            return any(speaker.is_ai for speaker in getattr(self, "speakers", {}).values())
+        return has_ai
+
+    @has_ai.setter
+    def has_ai(self, value):
+        self._has_ai = bool(value)
+        self._persist_ai_fields()
+
+    @property
+    def ai_meta(self) -> Dict:
+        """The corpus-level AI metadata."""
+        if "_ai_meta" not in self.__dict__:
+            self._ai_meta = {}
+        return self._ai_meta
+
+    @ai_meta.setter
+    def ai_meta(self, value):
+        if isinstance(value, dict):
+            self._ai_meta = {**as_dict(self.__dict__.get("_ai_meta")), **value}
+        else:
+            self._ai_meta = {}
+        self._persist_ai_fields()
+
+    @property
+    def _ai_backend_key(self) -> str:
+        """Key of the entry in the backend's "meta" collection that holds the corpus AI fields."""
+        return f"ai_corpus_{self.id}"
+
+    def _persist_ai_fields(self) -> None:
+        """
+        With the db backend, write the corpus-level AI fields to the database, so that they can
+        be restored by :meth:`reconnect_to_db`. (Component AI fields are written by the
+        components themselves.)
+        """
+        if self.backend != "db" or self.__dict__.get("_ai_persist_suspended"):
+            return
+        key = self._ai_backend_key
+        self.backend_mapper.initialize_data_for_component("meta", key)
+        self.backend_mapper.update_data("meta", key, "has_ai", self.__dict__.get("_has_ai"))
+        self.backend_mapper.update_data(
+            "meta", key, "ai_meta", normalize_for_dump(self.__dict__.get("_ai_meta", {}))
+        )
+
+    def _load_ai_fields_from_backend(self) -> None:
+        """
+        Restore the AI fields written to the database by the db backend (see
+        :meth:`reconnect_to_db`).
+        """
+        self._ai_persist_suspended = True
+        try:
+            for obj_type, cls, objs in (
+                ("speaker", Speaker, getattr(self, "speakers", {})),
+                ("utterance", Utterance, getattr(self, "utterances", {})),
+                ("conversation", Conversation, getattr(self, "conversations", {})),
+            ):
+                values = self.backend_mapper.get_field_values(obj_type, list(cls.AI_FIELDS))
+                for oid, fields in values.items():
+                    if oid in objs:
+                        for name, value in fields.items():
+                            setattr(objs[oid], name, value)
+            key = self._ai_backend_key
+            if self.backend_mapper.has_data_for_component("meta", key):
+                data = self.backend_mapper.get_data("meta", key)
+                if data.get("has_ai") is not None:
+                    self.has_ai = data["has_ai"]
+                self.ai_meta = data.get("ai_meta") or {}
+        finally:
+            self._ai_persist_suspended = False
+
+    def _has_ai_fields(self) -> bool:
+        """Whether the corpus or any of its components has AI fields set."""
+        if self.has_ai or self.__dict__.get("_ai_meta"):
+            return True
+        if not hasattr(self, "utterances"):
+            # empty corpus
+            return False
+        return any(
+            obj.__dict__.get("_ai_meta")
+            for obj_type in ("speaker", "utterance", "conversation")
+            for obj in self.iter_objs(obj_type)
+        )
+
+    def iter_private_assistants(
+        self, selector: Callable[[PrivateAssistant], bool] = lambda assistant: True
+    ) -> Generator[PrivateAssistant, None, None]:
+        """
+        Get the PrivateAssistants of all Conversations in the Corpus, with an optional selector that
+        filters for PrivateAssistants that should be included.
+
+        :param selector: a (lambda) function that takes a PrivateAssistant and returns True or False
+            (i.e. include / exclude). By default, all PrivateAssistants are included.
+        :return: a generator of PrivateAssistants
+        """
+        for convo in self.iter_conversations():
+            for assistant in convo.private_assistants:
+                if selector(assistant):
+                    yield assistant
+
+    def get_private_assistant(self, assistant_id: str) -> PrivateAssistant:
+        """
+        Get the PrivateAssistant with the specified id, searching all Conversations in the Corpus.
+
+        :param assistant_id: id of the private assistant
+        :return: the PrivateAssistant
+        :raises KeyError: if there is no private assistant with that id in the Corpus
+        """
+        for assistant in self.iter_private_assistants(lambda a: a.id == assistant_id):
+            return assistant
+        raise KeyError(assistant_id)
+
+    def iter_supports(
+        self, selector: Callable[[Support], bool] = lambda support: True
+    ) -> Generator[Support, None, None]:
+        """
+        Get the Supports of all Conversations in the Corpus, with an optional selector that filters
+        for Supports that should be included.
+
+        :param selector: a (lambda) function that takes a Support and returns True or False
+            (i.e. include / exclude). By default, all Supports are included.
+        :return: a generator of Supports
+        """
+        for convo in self.iter_conversations():
+            for support in convo.supports:
+                if selector(support):
+                    yield support
+
+    def _inherit_ai_fields(self, *sources: "Corpus", conversations: bool = True) -> None:
+        """
+        Merge the corpus-level AI fields of the source corpora into this one (later sources take
+        precedence). If ``conversations`` is True, also copy the ``ai_meta`` of Conversations with
+        matching ids.
+        """
+        for source in sources:
+            self.ai_meta = source.ai_meta
+            if source.__dict__.get("_has_ai") is not None:
+                self.has_ai = self.has_ai or source.has_ai
+            if conversations:
+                for convo in self.iter_conversations():
+                    if source.has_conversation(convo.id):
+                        source_ai_meta = source.get_conversation(convo.id).__dict__.get("_ai_meta")
+                        if source_ai_meta:
+                            convo.ai_meta = dict(source_ai_meta)
+
+    ############################################################################
+    ## end AI fields
+    ############################################################################
+
     def filter_conversations_by(self, selector: Callable[[Conversation], bool]):
         """
         Mutate the corpus by filtering for a subset of Conversations within the Corpus.
@@ -679,7 +915,7 @@ class Corpus:
         self.reinitialize_index()
 
         # clear all backend entries corresponding to filtered-out components
-        meta_ids = [self.meta.backend_key]
+        meta_ids = [self.meta.backend_key, self._ai_backend_key]
         for utt in self.iter_utterances():
             meta_ids.append(utt.meta.backend_key)
         for convo in self.iter_conversations():
@@ -708,6 +944,7 @@ class Corpus:
         new_corpus = Corpus(utterances=utts)
         for convo in new_corpus.iter_conversations():
             convo.meta.update(source_corpus.get_conversation(convo.id).meta)
+        new_corpus._inherit_ai_fields(source_corpus)
 
         # original Corpus is invalidated and no longer usable; clear all data from
         # its now-orphaned BackendMapper to avoid having duplicates in memory
@@ -769,13 +1006,15 @@ class Corpus:
 
         if preserve_corpus_meta:
             new_corpus.meta.update(source_corpus.meta)
+            new_corpus._inherit_ai_fields(source_corpus, conversations=False)
 
         if preserve_convo_meta:
             for convo in new_corpus.iter_conversations():
-                convo.meta["original_convo_meta"] = source_corpus.get_conversation(
-                    original_utt_to_convo_id[convo.id]
-                ).meta.to_dict()
+                original_convo = source_corpus.get_conversation(original_utt_to_convo_id[convo.id])
+                convo.meta["original_convo_meta"] = original_convo.meta.to_dict()
                 convo.meta["original_convo_id"] = original_utt_to_convo_id[convo.id]
+                if original_convo.__dict__.get("_ai_meta"):
+                    convo.ai_meta = dict(original_convo.ai_meta)
         if verbose:
             missing_convo_roots = list(
                 set(new_convo_roots) - set(new_corpus.get_conversation_ids())
@@ -1088,6 +1327,14 @@ class Corpus:
                         )
                 curr_meta[key] = val
 
+        # Merge AI fields (secondary takes precedence, as for the metadata)
+        new_corpus._inherit_ai_fields(primary, secondary)
+        for speaker in secondary.iter_speakers():
+            merged_speaker = new_corpus.speakers.get(speaker.id)
+            if merged_speaker is not None and merged_speaker is not speaker:
+                merged_speaker.is_ai = merged_speaker.is_ai or speaker.is_ai
+                merged_speaker.ai_meta = speaker.ai_meta
+
         new_corpus.update_speakers_data()
         new_corpus.reinitialize_index()
 
@@ -1211,6 +1458,14 @@ class Corpus:
         print("Number of Speakers: {}".format(len(self.speakers)))
         print("Number of Utterances: {}".format(len(self.utterances)))
         print("Number of Conversations: {}".format(len(self.conversations)))
+        if self._has_ai_fields():
+            print("Number of AI Speakers: {}".format(sum(s.is_ai for s in self.iter_speakers())))
+            print(
+                "Number of PrivateAssistants: {}".format(
+                    sum(1 for _ in self.iter_private_assistants())
+                )
+            )
+            print("Number of Supports: {}".format(sum(1 for _ in self.iter_supports())))
 
     def delete_metadata(self, obj_type: str, attribute: str):
         """
@@ -1644,6 +1899,9 @@ class Corpus:
             corpus.update_metadata_from_df("speaker", speakers_df)
         if conversations_df is not None:
             corpus.update_metadata_from_df("conversation", conversations_df)
+
+        # AI fields given as metadata columns (e.g. meta.is_ai, meta.ai_meta) become attributes
+        corpus._init_ai_fields()
 
         return corpus
 

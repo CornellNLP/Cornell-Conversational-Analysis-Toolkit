@@ -136,8 +136,9 @@ ConvoKit AI extensions
 
 Corpora that involve AI agents (see :doc:`ConvoKit AI <convokitai>`) use the format above, with the
 fields below added to it. In memory they are attributes of each object; on disk they are stored in
-its ``meta`` (``meta["is_ai"]``, ``meta["ai_meta"]``, ...), so a ConvoKit AI corpus is also a valid
-ConvoKit corpus.
+its ``meta`` (``meta["is_ai"]``, ``meta["ai_meta"]``, ...), and ``Corpus`` moves them out of
+``meta`` into the attributes when it loads the corpus. Corpora without AI agents don't need any of
+these fields.
 
 Speaker
 ^^^^^^^

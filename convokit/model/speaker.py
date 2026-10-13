@@ -1,6 +1,7 @@
 from functools import total_ordering
 from typing import Dict, List, Optional
 
+from .aiUtil import as_dict, split_ai_fields
 from .corpusComponent import CorpusComponent
 from .corpusUtil import *
 
@@ -8,20 +9,33 @@ from .corpusUtil import *
 @total_ordering
 class Speaker(CorpusComponent):
     """
-    Represents a single speaker in a dataset.
+    Represents a single speaker in a dataset, which may be a human or an AI agent.
 
     :param id: id of the speaker.
     :type id: str
     :param utts: dictionary of utterances by the speaker, where key is utterance id
     :param convos: dictionary of conversations started by the speaker, where key is conversation id
     :param meta: arbitrary dictionary of attributes associated
-        with the speaker.
+        with the speaker. ``"is_ai"`` / ``"ai_meta"`` entries (as in a dumped corpus) are moved
+        out of ``meta`` into the corresponding attributes, unless those arguments are given.
     :type meta: dict
+    :param is_ai: whether this speaker is known to be an AI agent (default False)
+    :param ai_meta: AI metadata of the speaker (see ``AI_FORMAT.md``). Recognized keys:
+
+        - ``"config"``: generation config for this speaker's messages, used by :meth:`generate`
+          (see :mod:`convokit.model.aiGeneration`)
+        - ``"role"``: the speaker's role in the conversation, e.g. ``"participant"`` or
+          ``"public assistant"``
 
     :ivar id: id of the speaker.
     :ivar meta: A dictionary-like view object providing read-write access to
         speaker-level metadata.
+    :ivar is_ai: whether this speaker is known to be an AI agent
+    :ivar ai_meta: AI metadata of the speaker. Assigning a dict merges it into the existing
+        ``ai_meta``.
     """
+
+    AI_FIELDS = ("is_ai", "ai_meta")
 
     def __init__(
         self,
@@ -30,10 +44,17 @@ class Speaker(CorpusComponent):
         utts=None,
         convos=None,
         meta: Optional[Dict] = None,
+        is_ai: Optional[bool] = None,
+        ai_meta: Optional[Dict] = None,
     ):
+        meta, ai_fields = split_ai_fields(meta, "speaker")
         super().__init__(obj_type="speaker", owner=owner, id=id, meta=meta)
         self.utterances = utts if utts is not None else dict()
         self.conversations = convos if convos is not None else dict()
+        if is_ai is not None or "is_ai" in ai_fields:
+            self.is_ai = is_ai if is_ai is not None else ai_fields["is_ai"]
+        if ai_meta is not None or "ai_meta" in ai_fields:
+            self.ai_meta = ai_meta if ai_meta is not None else ai_fields["ai_meta"]
         # self._split_attribs = set()
         # self._update_uid()
 
@@ -52,6 +73,134 @@ class Speaker(CorpusComponent):
     #
     #     self._split_attribs = set(attribs)
     #     # self._update_uid()
+
+    ############################################################################
+    ## AI fields
+    ############################################################################
+
+    @property
+    def is_ai(self) -> bool:
+        """Whether this speaker is known to be an AI agent."""
+        return self.__dict__.get("_is_ai", False)
+
+    @is_ai.setter
+    def is_ai(self, value):
+        self._is_ai = bool(value)
+        self._persist_ai_field("is_ai")
+
+    @property
+    def ai_meta(self) -> Dict:
+        """The AI metadata of this speaker (a copy; assign to modify)."""
+        return as_dict(self.__dict__.get("_ai_meta"))
+
+    @ai_meta.setter
+    def ai_meta(self, value):
+        if isinstance(value, dict):
+            self._ai_meta = {**as_dict(self.__dict__.get("_ai_meta")), **value}
+        else:
+            self._ai_meta = {}
+        self._persist_ai_field("ai_meta")
+
+    def _apply_ai_fields(self, stored: Dict, legacy: bool = False) -> None:
+        """
+        Set the AI attributes from the AI fields stored in the metadata (the on-disk format).
+
+        :param stored: the speaker's metadata entries for the keys in ``AI_META_KEYS`` (and, if
+            ``legacy`` is True, ``LEGACY_AI_KEYS``) that it has
+        :param legacy: whether to also move a ``"role"`` from older versions of the format into
+            ``ai_meta["role"]``
+        """
+        if "is_ai" in stored:
+            self.is_ai = stored["is_ai"]
+        if "ai_meta" in stored:
+            self.ai_meta = as_dict(stored["ai_meta"])
+        if legacy and stored.get("role") is not None and "role" not in self.ai_meta:
+            self.ai_meta = {"role": stored["role"]}
+
+    def generate(
+        self,
+        conversation=None,
+        reply_to: Optional[str] = None,
+        append: bool = False,
+        client=None,
+        config_manager=None,
+        id: Optional[str] = None,
+        timestamp: Optional[int] = None,
+    ):
+        """
+        Generate an Utterance for this speaker with ``convokit.genai``, using the prompt in
+        ``ai_meta["config"]`` (see :mod:`convokit.model.aiGeneration` for the recognized config
+        keys). Requires ``is_ai`` to be True.
+
+        Example::
+
+            speaker = corpus.get_speaker("bot")
+            utt = speaker.generate(conversation, append=True)
+
+        :param conversation: if given, the conversation transcript (up to ``reply_to``) is included
+            in the prompt
+        :param reply_to: id of the utterance to reply to (defaults to the last utterance of
+            ``conversation``)
+        :param append: whether to add the generated utterance to ``conversation`` (and its Corpus)
+        :param client: a ``convokit.genai`` LLMClient to use instead of building one from the config
+        :param config_manager: GenAIConfigManager used to build the client (defaults to one reading
+            ``~/.convokit/config.yml``)
+        :param id: id of the generated utterance (random if not given)
+        :param timestamp: timestamp of the generated utterance (defaults to after the
+            conversation's last message)
+        :return: the generated Utterance (if ``append`` is True, the Utterance as stored in the
+            Corpus)
+        :raises ValueError: if the speaker is not an AI speaker, has no ``"prompt"`` in
+            ``ai_meta["config"]``, or if ``append`` is True and no ``conversation`` is given
+        """
+        from . import aiGeneration as generation
+        from .utterance import Utterance
+
+        config = self.ai_meta.get("config") or {}
+        if not self.is_ai:
+            raise ValueError("Speaker {!r} is not an AI speaker (is_ai is False)".format(self.id))
+        if not config.get("prompt"):
+            raise ValueError("Speaker {!r} has no prompt in ai_meta['config']".format(self.id))
+        if append and conversation is None:
+            raise ValueError("A conversation is required to append the generated utterance")
+
+        transcript = None
+        name = self.id
+        if conversation is not None:
+            name = conversation.alias.get(self.id, self.id)
+            if reply_to is None:
+                reply_to = generation.last_utterance_id(conversation)
+            if reply_to is not None:
+                transcript = conversation.get_transcript(until=conversation.get_utterance(reply_to))
+        prompt = generation.build_prompt(
+            config["prompt"],
+            transcript,
+            "Write the next message in the conversation as {}. "
+            "Respond with only the text of the message.".format(name),
+        )
+        text = generation.call_llm(
+            generation.get_client(config, client, config_manager), config, prompt
+        )
+
+        utterance = Utterance(
+            id=id or generation.new_id(),
+            speaker=self,
+            conversation_id=conversation.id if conversation is not None else None,
+            reply_to=reply_to,
+            timestamp=(
+                timestamp if timestamp is not None else generation.next_timestamp(conversation)
+            ),
+            text=text,
+            ai_meta={"config": dict(config)},
+        )
+        if append:
+            conversation.owner.add_utterances([utterance])
+            utterance = conversation.owner.get_utterance(utterance.id)
+        return utterance
+
+    ############################################################################
+    ## end AI fields
+    ############################################################################
 
     def _add_utterance(self, utt):
         self.utterances[utt.id] = utt
@@ -165,6 +314,10 @@ class Speaker(CorpusComponent):
             return self.__dict__["_name"] == other.__dict__["_name"]
 
     def __str__(self):
+        if self.is_ai or self.__dict__.get("_ai_meta"):
+            return "Speaker(id: {}, is_ai: {}, vectors: {}, meta: {}, ai_meta: {})".format(
+                repr(self.id), self.is_ai, self.vectors, self.meta, self.ai_meta
+            )
         return "Speaker(id: {}, vectors: {}, meta: {})".format(
             repr(self.id), self.vectors, self.meta
         )

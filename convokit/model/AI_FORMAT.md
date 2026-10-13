@@ -1,16 +1,21 @@
 # ConvoKit AI Data Format
 
-ConvoKit AI extends the [ConvoKit data format](https://convokit.cornell.edu/documentation/data_format.html)
-to describe conversations that involve AI agents. It adds:
+The ConvoKit data model ([data format](https://convokit.cornell.edu/documentation/data_format.html)) can
+describe conversations that involve AI agents, with these fields:
 
 - **AI speakers**: speakers marked with `is_ai`, together with the configuration that generates their messages.
 - **Private assistants** (`PrivateAssistant`): AI assistants that help one or more speakers privately, outside the
   conversation itself.
 - **Supports** (`Support`): the messages a private assistant sends to the speaker(s) it helps.
 
-Every ConvoKit AI corpus is also a valid ConvoKit corpus. On disk, the AI fields are stored inside the regular
-ConvoKit metadata (`meta["is_ai"]`, `meta["ai_meta"]`, ...), so `convokit.Corpus` can still load the corpus. When
-`convokitai.Corpus` loads it, those fields are moved out of `meta` and exposed as attributes.
+On disk, the AI fields are stored inside the regular ConvoKit metadata (`meta["is_ai"]`, `meta["ai_meta"]`, ...).
+When `convokit.Corpus` loads a corpus, those fields are moved out of `meta` and exposed as attributes of the
+Speakers, Utterances, Conversations and the Corpus. Corpora without AI agents don't have any of these fields, and
+their objects get the defaults (`is_ai == False`, empty `ai_meta`).
+
+With the `db` storage backend, the AI fields are also stored in the database (as fields of each component's entry,
+and, for the corpus, in an `ai_corpus_<corpus id>` entry of the meta collection), so `Corpus.reconnect_to_db`
+restores them.
 
 The full documentation, including the API reference, is at
 <https://convokit.cornell.edu/documentation/convokitai.html>.

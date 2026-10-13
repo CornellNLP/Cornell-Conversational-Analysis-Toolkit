@@ -102,7 +102,7 @@ class Support:
         """
         Get a plain-text transcript of the given Conversation, from its beginning up to and
         including this support. See :meth:`Conversation.get_transcript
-        <convokitai.Conversation.get_transcript>`.
+        <convokit.Conversation.get_transcript>`.
 
         :param conversation: the Conversation this support belongs to (Supports don't keep a
             reference to it)

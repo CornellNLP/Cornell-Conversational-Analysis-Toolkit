@@ -1,8 +1,8 @@
-"""Run a ConvoArena agent simulation and return it as a ``convokitai`` Corpus."""
+"""Run a ConvoArena agent simulation and return it as a ConvoKit Corpus."""
 
 from pathlib import Path
 
-from convokitai import Corpus
+from convokit import Corpus
 from dl_container import BackendContainer, FIRESTORE_PORT
 from local_backend import LocalBackend
 from create_simulation import (
@@ -24,7 +24,7 @@ def simulate(
     max_concurrent: int = 4,
     start_interval: float = 5.0,
 ) -> Corpus:
-    """Run a simulation and return its conversations as a ``convokitai`` Corpus.
+    """Run a simulation and return its conversations as a ConvoKit Corpus.
 
     By default the simulation runs on a local ConvoArena backend: the
     published backend container is started (see

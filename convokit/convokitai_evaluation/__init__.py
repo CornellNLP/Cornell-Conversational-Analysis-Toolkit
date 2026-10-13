@@ -1,6 +1,6 @@
 """
 ConvoKit AI evaluation: Transformers that evaluate AI-mediated conversations stored in the
-ConvoKit AI data format (see convokit/convokitai/FORMAT.md).
+ConvoKit AI data format (see convokit/model/AI_FORMAT.md).
 
 - ``CIG``: per-utterance conversational information gain, rated by an LLM;
 - ``ClaimTracker``: claim-level consensus between participants, and where their claims came from;

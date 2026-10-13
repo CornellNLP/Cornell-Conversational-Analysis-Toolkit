@@ -1,7 +1,7 @@
 """
 Helpers shared by the evaluation Transformers.
 
-They read the ConvoKit AI data format (see convokit/convokitai/FORMAT.md): the mediator is the
+They read the ConvoKit AI data format (see convokit/model/AI_FORMAT.md): the mediator is the
 speaker whose ``ai_meta["role"]`` is ``"public assistant"``, and ``conversation.alias`` maps
 speaker ids to the names used in the chat.
 """

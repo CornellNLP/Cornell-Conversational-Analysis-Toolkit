@@ -38,7 +38,7 @@ Installation
    Installing into an older Python fails with an error that the package
    ``requires a different Python``.
 
-Then, from the repository root, install it together with ConvoKit (which includes ``convokitai``)::
+Then, from the repository root, install it together with ConvoKit::
 
     python -m pip install -e . -e ./convokit/convokitai_evaluation
 
@@ -55,7 +55,7 @@ Gemma model.
 Input format
 ------------
 
-The transformers read corpora in the :doc:`ConvoKit AI format <convokitai>`:
+The transformers read the :doc:`AI fields <convokitai>` of the corpus:
 
 * **The mediator** is the speaker whose ``ai_meta["role"]`` is ``"public assistant"``. All other
   speakers are participants.

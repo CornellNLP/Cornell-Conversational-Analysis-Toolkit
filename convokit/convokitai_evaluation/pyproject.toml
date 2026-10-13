@@ -1,7 +1,7 @@
 # Requires Python 3.12+ (newer than core ConvoKit, which supports 3.10+). Use a Python 3.12+
 # environment before installing.
-# Install for local development (from the repository root), together with ConvoKit, which
-# includes the `convokitai` package:
+# Install for local development (from the repository root), together with ConvoKit, whose data
+# model includes the AI fields (AI speakers, private assistants, supports):
 #   python -m pip install -e . -e ./convokit/convokitai_evaluation
 # Install from GitHub:
 #   pip install "git+https://github.com/CornellNLP/ConvoKit.git@master#subdirectory=convokit/convokitai_evaluation"
@@ -12,7 +12,7 @@ version = "0.1.0"
 description = "Evaluation metrics for AI-mediated multi-party conversations: conversational information gain (CIG), claim-level consensus, and mediator redirection"
 requires-python = ">=3.12"  # stricter than convokit itself (>=3.10)
 dependencies = [
-    # ConvoKit 5.0.0 is the first release that includes the `convokitai` package
+    # ConvoKit 5.0.0 is the first release whose data model includes the AI fields
     "convokit>=5.0.0",
     "openai>=1.3.5",
     "sentence-transformers",

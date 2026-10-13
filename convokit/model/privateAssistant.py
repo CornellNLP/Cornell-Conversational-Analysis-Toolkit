@@ -19,7 +19,7 @@ class PrivateAssistant:
     :param config: configuration of the assistant, e.g.
         ``{"prompt": "...", "model": "gemini-2.5-flash", "temperature": 0.7}``.
         ``config["prompt"]`` is the prompt that generates a support message from this assistant
-        (required by :meth:`generate`; see :mod:`convokitai.generation` for the other keys).
+        (required by :meth:`generate`; see :mod:`convokit.model.aiGeneration` for the other keys).
     :param supports: the Supports (or their dict forms) produced by this assistant
     :param speakers: ids of the Speakers that can see this assistant's Supports
     :param conversation_id: id of the Conversation the assistant belongs to
@@ -110,7 +110,7 @@ class PrivateAssistant:
     ) -> Support:
         """
         Generate a Support from this assistant with ``convokit.genai``, using the prompt in
-        ``config["prompt"]`` (see :mod:`convokitai.generation` for the recognized config keys).
+        ``config["prompt"]`` (see :mod:`convokit.model.aiGeneration` for the recognized config keys).
 
         Example::
 
@@ -134,7 +134,7 @@ class PrivateAssistant:
         :raises ValueError: if ``config`` has no ``"prompt"``, or if ``append`` is True and no
             ``conversation`` is given
         """
-        from . import generation
+        from . import aiGeneration as generation
 
         config = self.config
         if not config.get("prompt"):
@@ -190,6 +190,9 @@ class PrivateAssistant:
                 stored.supports.append(support)
             if "supports" in conversation.ai_meta:
                 conversation.supports = conversation.supports + [support]
+            # the stored assistant may have been changed in place, which the db backend
+            # doesn't see
+            conversation._persist_ai_field("ai_meta")
         return support
 
     def __repr__(self):

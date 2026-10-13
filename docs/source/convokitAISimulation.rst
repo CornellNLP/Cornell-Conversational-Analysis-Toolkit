@@ -2,8 +2,8 @@ ConvoKit AI Simulation
 ======================
 
 ConvoKit AI Simulation runs conversations between AI agents on `ConvoArena <https://github.com/CornellNLP/ConvoArena>`, a platform for
-online conversation experiments with humans and AI agents built on, and returns them as a :doc:`ConvoKit AI <convokitai>`
-corpus. The conversations can include an AI mediator that speaks in the chat and private assistants
+online conversation experiments with humans and AI agents built on, and returns them as a ConvoKit
+corpus with :doc:`AI fields <convokitai>`. The conversations can include an AI mediator that speaks in the chat and private assistants
 that privately help individual participants.
 
 A simulation is described by a *simulation YAML* that lists the agents, mediators and assistants,
@@ -15,7 +15,7 @@ Simulations run either:
 
 * **locally** (the default): a ConvoArena backend runs on the Firebase emulators in a container
   on your machine, so no Firebase project is needed; or
-* **on your own ConvoArena deployment**, using an API key from its web interface. To set up your own ConvoArena deployement check out `<https://docs.google.com/document/d/1pRw3zydkPMAGVHDkWWwNOkJNDq0LVmfuSxHuntwp4yY/edit?tab=t.0>`
+* **on your own ConvoArena deployment**, using an API key from its web interface. To set up your own ConvoArena deployement check out `<https://cornellnlp.github.io/ConvoArena/developers/firebase-setup>`
 
 Example usage: `simulation demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/convokitai-simulation/simulation_demo.ipynb>`_.
 
@@ -41,7 +41,7 @@ Installation
    Installing into an older Python fails with an error that the package
    ``requires a different Python``.
 
-Then, from the repository root, install it together with ConvoKit (which includes ``convokitai``)::
+Then, from the repository root, install it together with ConvoKit::
 
     python -m pip install -e . -e ./convokit/convokitai-simulation
 
@@ -341,7 +341,7 @@ The corpus has one conversation per pairing and topic combination:
 * Utterances keep the model's stated reason for the message in ``ai_meta["explanation"]`` when the
   agent's structured output includes one.
 * Private assistants and their supports are stored as
-  :class:`~convokitai.private_assistant.PrivateAssistant` and :class:`~convokitai.support.Support`
+  :class:`~convokit.model.privateAssistant.PrivateAssistant` and :class:`~convokit.model.support.Support`
   objects. Each support keeps the participant's draft at the time.
 * ``convo.meta`` has the ``pairing_id``, whether the conversation ``completed`` before the timeout,
   the topic ``blocks`` shown, and the ConvoArena ``experiment_id``, ``experiment_name`` and

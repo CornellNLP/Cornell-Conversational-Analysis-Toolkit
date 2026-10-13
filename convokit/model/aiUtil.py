@@ -1,8 +1,8 @@
 """
-Shared helpers for the ConvoKit AI classes.
+Shared helpers for the AI fields of the ConvoKit data model (see AI_FORMAT.md).
 
-On disk, AI fields live inside the regular ConvoKit metadata so that a dumped
-ConvoKit AI corpus remains a valid ConvoKit corpus:
+On disk, AI fields live inside the regular ConvoKit metadata, so a corpus with AI fields is
+still laid out like any other ConvoKit corpus:
 
 - speaker meta: ``"is_ai"``, ``"ai_meta"`` (keys ``"config"``, ``"role"``)
 - utterance meta: ``"ai_meta"`` (keys ``"config"``, ``"supports"``)
@@ -25,9 +25,15 @@ AI_META_KEYS = {
 # corpus meta keys used by older versions of the format; migrated onto conversations on load
 LEGACY_CORPUS_KEYS = ("supports", "assistants")
 
-# AI-related keys (current and from older versions of the format) removed from regular metadata
-# on load
-LEGACY_AI_KEYS = ("ai_meta", "is_ai", "has_ai", "role", "sender_name", "agent_id")
+# metadata keys used for AI fields by older versions of the format, per object type; removed from
+# the regular metadata when a corpus with AI fields is loaded (a speaker's "role" is moved into
+# its ai_meta)
+LEGACY_AI_KEYS = {
+    "speaker": ("role", "sender_name", "agent_id"),
+    "utterance": ("sender_name", "agent_id"),
+    "conversation": ("sender_name", "agent_id"),
+    "corpus": ("sender_name", "agent_id"),
+}
 
 
 def strip_keys(meta: Optional[Dict], keys: Iterable[str]) -> Dict:
@@ -44,33 +50,24 @@ def strip_keys(meta: Optional[Dict], keys: Iterable[str]) -> Dict:
     return cleaned
 
 
-def strip_legacy_ai_fields(meta: Optional[Dict]) -> Dict:
-    """
-    Return a copy of ``meta`` without any of the keys in ``LEGACY_AI_KEYS``.
-
-    :param meta: metadata dict (or ``None``, treated as empty)
-    :return: a new dict without the AI-related keys
-    """
-    return strip_keys(meta, LEGACY_AI_KEYS)
-
-
-def split_ai_fields(
-    meta: Optional[Dict], obj_type: str, strip_legacy: bool = True
-) -> Tuple[Dict, Dict]:
+def split_ai_fields(meta: Optional[Dict], obj_type: str) -> Tuple[Dict, Dict]:
     """
     Split a metadata dict into regular metadata and AI fields for the given object type.
 
-    :param meta: metadata dict (or ``ConvoKitMeta``)
+    ``meta`` is returned as is (not copied) if it holds no AI fields, so this is cheap to call
+    for every component of a corpus without AI fields. Other mappings (e.g. ``ConvoKitMeta``)
+    are also returned as is.
+
+    :param meta: metadata dict (or None)
     :param obj_type: ``"speaker"``, ``"utterance"``, ``"conversation"``, or ``"corpus"``
-    :param strip_legacy: whether to also drop the keys in ``LEGACY_AI_KEYS`` from the regular
-        metadata
-    :return: tuple of the cleaned metadata and a dict of the AI fields that were present
+    :return: tuple of the metadata without AI fields and a dict of the AI fields that were present
     """
-    meta = dict(meta or {})
+    if not isinstance(meta, dict):
+        return meta, {}
+    keys = AI_META_KEYS[obj_type]
+    if not any(key in meta for key in keys):
+        return meta, {}
     ai_fields = {key: meta[key] for key in AI_META_KEYS[obj_type] if key in meta}
-    keys = set(AI_META_KEYS[obj_type])
-    if strip_legacy:
-        keys |= set(LEGACY_AI_KEYS)
     return strip_keys(meta, keys), ai_fields
 
 

@@ -3,7 +3,7 @@
 This is the lower-level API behind :func:`simulation.simulate`. :func:`create_simulation`
 runs the conversations on a backend that is already running (a local emulator suite via
 :class:`local_backend.LocalBackend`, or your own ConvoArena deployment via
-:class:`FirebaseBackend`) and returns them as a ``convokitai`` Corpus.
+:class:`FirebaseBackend`) and returns them as a ConvoKit Corpus.
 
 A simulation YAML looks like this::
 
@@ -64,7 +64,7 @@ import yaml
 from tqdm.auto import tqdm
 
 import deliberate_lab as dl
-from convokitai import Corpus
+from convokit import Corpus
 from export_to_corpus import export_to_corpus
 from local_backend import LocalBackend
 
@@ -978,7 +978,7 @@ def create_simulation(
         them up one after another.
     :param start_interval: minimum seconds between the starts of two conversations' setup.
         Raise it if conversations fail to start because of Gemini rate limits.
-    :return: a ``convokitai`` Corpus with one Conversation per pairing and block combination
+    :return: a ConvoKit Corpus with one Conversation per pairing and block combination
         that has chat messages. Each Conversation's meta has the pairing ID, experiment ID,
         blocks shown, and whether it completed; the corpus's
         ``ai_meta["simulation_config"]`` holds the parsed simulation YAML.
