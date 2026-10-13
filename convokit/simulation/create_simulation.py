@@ -1,8 +1,8 @@
 """Run the agent conversations described by a simulation YAML on a ConvoArena backend.
 
-This is the lower-level API behind :func:`simulation.simulate`. :func:`create_simulation`
+This is the lower-level API behind :func:`convokit.simulation.simulation.simulate`. :func:`create_simulation`
 runs the conversations on a backend that is already running (a local emulator suite via
-:class:`local_backend.LocalBackend`, or your own ConvoArena deployment via
+:class:`convokit.simulation.local_backend.LocalBackend`, or your own ConvoArena deployment via
 :class:`FirebaseBackend`) and returns them as a ConvoKit Corpus.
 
 A simulation YAML looks like this::
@@ -34,16 +34,16 @@ every cohort of their experiment.
 Requirements:
 
 - A Gemini API key for the agents. Without one, the agents are created but every model call
-  fails, so no messages are sent. :func:`simulation.simulate` stores the key in the local
+  fails, so no messages are sent. :func:`convokit.simulation.simulation.simulate` stores the key in the local
   backend for you; on your own deployment, save it in the web UI's Settings.
 - To start the emulators from source (as :func:`main` does), a ConvoArena checkout set
-  up as described in :mod:`local_backend`. :func:`simulation.simulate` uses the backend
+  up as described in :mod:`convokit.simulation.local_backend`. :func:`convokit.simulation.simulation.simulate` uses the backend
   container instead and needs no checkout.
 
 Running this module as a script runs a simulation on the emulators of a local ConvoArena
 checkout and prints the resulting transcripts (see :func:`main`)::
 
-    GEMINI_API_KEY=... python create_simulation.py /path/to/convoarena simulation.yaml
+    GEMINI_API_KEY=... python -m convokit.simulation.create_simulation /path/to/convoarena simulation.yaml
 """
 
 from __future__ import annotations
@@ -63,10 +63,10 @@ import requests
 import yaml
 from tqdm.auto import tqdm
 
-import deliberate_lab as dl
-from convokit import Corpus
-from export_to_corpus import export_to_corpus
-from local_backend import LocalBackend
+from convokit.model import Corpus
+from . import deliberate_lab as dl
+from .export_to_corpus import export_to_corpus
+from .local_backend import LocalBackend
 
 
 @dataclass
@@ -631,7 +631,7 @@ def _seed_gemini_api_key(backend: LocalBackend, gemini_api_key: str) -> None:
     """Store the Gemini API key in ``experimenterData/{email}`` in the Firestore emulator.
 
     This does what ConvoArena's ``scripts/seed-api-key.mjs`` does (which its
-    ``run_locally.sh`` calls, but :class:`local_backend.LocalBackend` does not). The backend
+    ``run_locally.sh`` calls, but :class:`convokit.simulation.local_backend.LocalBackend` does not). The backend
     reads the key from there when generating agent messages, and without it silently does
     nothing: there is no error and no chat message, so the agents never speak.
     """
@@ -963,12 +963,12 @@ def create_simulation(
 
     Example::
 
-        from create_simulation import FirebaseBackend, create_simulation
+        from convokit.simulation import FirebaseBackend, create_simulation
 
         backend = FirebaseBackend(project_id="my-project", api_key="dlb_live_...")
         corpus = create_simulation(backend, "simulation.yaml")
 
-    :param backend: the backend to run on: a :class:`local_backend.LocalBackend` inside its
+    :param backend: the backend to run on: a :class:`convokit.simulation.local_backend.LocalBackend` inside its
         ``with`` block, or a :class:`FirebaseBackend`
     :param sim_yaml: path to the simulation YAML, the YAML itself as a string, or the parsed dict
     :param wait_timeout: seconds to wait for the conversations to finish before keeping them as
@@ -1050,14 +1050,14 @@ def main(repo_root: str, sim_yaml: str, gemini_api_key: str | None = None) -> No
     """Run a simulation on emulators started from a ConvoArena checkout and print the results.
 
     Starts the emulators of the checkout at ``repo_root`` with
-    :class:`local_backend.LocalBackend` (printing progress, with the emulator log in the temp
+    :class:`convokit.simulation.local_backend.LocalBackend` (printing progress, with the emulator log in the temp
     directory), stores ``gemini_api_key`` in the backend, runs :func:`create_simulation`,
     prints the corpus's summary statistics and each conversation's transcript, and stops the
     emulators. This is what running the module as a script does, with the key taken from the
     ``GEMINI_API_KEY`` environment variable.
 
     :param repo_root: path to a ConvoArena checkout, set up as described in
-        :mod:`local_backend`
+        :mod:`convokit.simulation.local_backend`
     :param sim_yaml: path to the simulation YAML, or the YAML itself as a string
     :param gemini_api_key: Gemini API key for the agents. Without one, the agents send no
         messages.
@@ -1102,5 +1102,7 @@ def main(repo_root: str, sim_yaml: str, gemini_api_key: str | None = None) -> No
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        sys.exit("usage: python create_simulation.py /path/to/convoarena simulation.yaml")
+        sys.exit(
+            "usage: python -m convokit.simulation.create_simulation /path/to/convoarena simulation.yaml"
+        )
     main(sys.argv[1], sys.argv[2], os.environ.get("GEMINI_API_KEY"))

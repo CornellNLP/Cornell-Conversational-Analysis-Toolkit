@@ -1,5 +1,0 @@
-convokit>=5.0.0
-openai>=1.3.5
-sentence-transformers
-numpy
-pandas

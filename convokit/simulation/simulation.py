@@ -2,10 +2,10 @@
 
 from pathlib import Path
 
-from convokit import Corpus
-from dl_container import BackendContainer, FIRESTORE_PORT
-from local_backend import LocalBackend
-from create_simulation import (
+from convokit.model import Corpus
+from .dl_container import BackendContainer, FIRESTORE_PORT
+from .local_backend import LocalBackend
+from .create_simulation import (
     FirebaseBackend,
     _seed_gemini_api_key,
     create_simulation,
@@ -28,14 +28,14 @@ def simulate(
 
     By default the simulation runs on a local ConvoArena backend: the
     published backend container is started (see
-    :class:`dl_container.BackendContainer`), the Gemini key is stored in it, and
+    :class:`convokit.simulation.dl_container.BackendContainer`), the Gemini key is stored in it, and
     the container is stopped when the simulation finishes. To run on your own
     ConvoArena deployment instead, pass its Firebase ``project_id`` and a
     ``dl_api_key``, or a prebuilt ``backend``.
 
     Example::
 
-        from simulation import simulate
+        from convokit.simulation import simulate
 
         corpus = simulate(gemini_api_key="...", sim_yaml="simulation.yaml")
         corpus.print_summary_stats()
@@ -45,24 +45,24 @@ def simulate(
         Gemini key saved in its web UI (Settings) by the account that owns the
         ConvoArena API key.
     :param sim_yaml: the simulation YAML, as a file path, the YAML text, or the
-        parsed dict (see :mod:`create_simulation` for the format).
+        parsed dict (see :mod:`convokit.simulation.create_simulation` for the format).
     :param project_id: Firebase project ID of a deployed ConvoArena to run
         on instead of the local backend. Requires ``dl_api_key``; cannot be
         combined with ``backend``.
     :param dl_api_key: ConvoArena API key, created in the deployment's web
         UI under Settings -> API Keys. Used only with ``project_id``.
-    :param backend: a :class:`create_simulation.FirebaseBackend` to run on, as
+    :param backend: a :class:`convokit.simulation.create_simulation.FirebaseBackend` to run on, as
         an alternative to ``project_id`` and ``dl_api_key``.
     :param wait_timeout: seconds to wait for the conversations to finish before
         keeping them as they stand. Defaults to the YAML's ``max_time`` plus 5
         minutes.
     :param max_concurrent: how many conversations to set up at the same time
-        (see :func:`create_simulation.create_simulation`).
+        (see :func:`convokit.simulation.create_simulation.create_simulation`).
     :param start_interval: minimum seconds between the starts of two
         conversations' setup; raise it if Gemini rate limits keep
         conversations from starting.
     :return: a Corpus with one Conversation per pairing and block combination
-        (see :func:`create_simulation.create_simulation`).
+        (see :func:`convokit.simulation.create_simulation.create_simulation`).
     :raises ValueError: if ``sim_yaml`` is missing or invalid, or the arguments
         are inconsistent: both ``project_id`` and ``backend``, ``project_id``
         without ``dl_api_key``, ``gemini_api_key`` with a deployed backend, or

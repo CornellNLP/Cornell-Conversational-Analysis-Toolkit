@@ -36,6 +36,8 @@ _LAZY_MODULES = {
     "genai": ".genai",
     "convo_similarity": ".convo_similarity",
     "talktimesharing": ".talktimesharing",
+    "simulation": ".simulation",
+    "ai_evaluation": ".ai_evaluation",
 }
 
 # Cache for loaded modules

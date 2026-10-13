@@ -39,14 +39,17 @@ setup(
         "convokit.utterance_simulator",
         "convokit.genai",
         "convokit.convo_similarity",
+        "convokit.simulation",
+        "convokit.ai_evaluation",
+        "convokit.simulation.deliberate_lab",
     ],
-    # convokit/convokitai-simulation is intentionally left out (install it separately)
     package_data={
         "convokit": [
             "data/*.txt",
             "politeness_collections/politeness_local/lexicons/*.json",
             "politeness_collections/politeness_cscw_zh/lexicons/*.json",
             "convo_similarity/prompts/*.txt",
+            "ai_evaluation/prompts/*.txt",
         ]
     },
     install_requires=[
@@ -78,6 +81,11 @@ setup(
     extras_require={
         "craft": ["torch>=0.12"],
         "forecaster": ["torch>=0.12", "datasets"],
+        "simulation": [
+            "pydantic>=2.0",
+            "requests",
+            "udocker",
+        ],
         "genai": [
             "openai>=1.3.5",
             "google-genai",

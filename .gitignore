@@ -42,15 +42,6 @@ env/
 website/docs/build
 examples/forecaster/deferral_out
 
-# build artifacts of the ConvoKit AI packages
-/convokit/convokitai-simulation/*.egg-info
-/convokit/convokitai-simulation/build/
-/convokit/convokitai-simulation/**/node_modules/
-/convokit/convokitai-simulation/convokit_simulation/backend/functions/lib/
-/convokit/convokitai-simulation/convokit_simulation/backend/*.log
-# the simulation backend needs its JSON files (firebase.json, package.json, emulator data, ...)
-!/convokit/convokitai-simulation/**/*.json
-
-# sample corpus for the convokitai_evaluation examples
-!/convokit/convokitai_evaluation/examples/sample_corpus/*.json
-!/convokit/convokitai_evaluation/examples/sample_corpus/*.jsonl
+# sample corpus for the convokit.ai_evaluation examples
+!/convokit/ai_evaluation/examples/sample_corpus/*.json
+!/convokit/ai_evaluation/examples/sample_corpus/*.jsonl

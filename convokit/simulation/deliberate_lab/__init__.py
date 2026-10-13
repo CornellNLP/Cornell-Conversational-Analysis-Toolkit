@@ -11,7 +11,7 @@ Usage:
     data = client.export_experiment("experiment-id")
 """
 
-from deliberate_lab.client import Client, APIError
-from deliberate_lab.types import *  # noqa: F401, F403
+from .client import Client, APIError
+from .types import *  # noqa: F401, F403
 
 __all__ = ["Client", "APIError"]

@@ -64,7 +64,9 @@ class GeminiClient(LLMClient):
             http_options=HttpOptions(api_version="v1"),
         )
 
-    def generate(self, prompt, temperature=0.0, times_retried=0) -> LLMResponse:
+    def generate(
+        self, prompt, temperature=0.0, times_retried=0, json_mode=False, seed=None
+    ) -> LLMResponse:
         """Generate text using the Gemini model.
 
         Sends a prompt to the Gemini model and returns the generated response. The function includes
@@ -73,6 +75,8 @@ class GeminiClient(LLMClient):
         :param prompt: Input prompt for generation
         :param temperature: Sampling temperature for generation (default: 0.0)
         :param times_retried: Number of retry attempts made so far (for internal use)
+        :param json_mode: Whether to ask the model to reply with JSON only (default: False)
+        :param seed: Seed for best-effort deterministic sampling (default: None, not sent)
         :return: LLMResponse object containing the generated text and metadata
         :raises Exception: If retry attempts are exhausted
         """
@@ -83,14 +87,18 @@ class GeminiClient(LLMClient):
             response = self.client.models.generate_content(
                 model=self.model,
                 contents=prompt,
-                config=GenerateContentConfig(temperature=temperature),
+                config=GenerateContentConfig(
+                    temperature=temperature,
+                    response_mime_type="application/json" if json_mode else None,
+                    seed=seed,
+                ),
             )
         except Exception as e:
             if times_retried >= 3:
                 raise Exception("Retry failed after multiple attempts.") from e
             print(f"Gemini Exception: {e}. Retrying in {retry_after}s...")
             time.sleep(retry_after)
-            return self.generate(prompt, temperature, times_retried + 1)
+            return self.generate(prompt, temperature, times_retried + 1, json_mode, seed)
 
         elapsed = time.time() - start
         text = response.text

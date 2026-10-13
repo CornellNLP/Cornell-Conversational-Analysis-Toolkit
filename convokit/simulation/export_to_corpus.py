@@ -13,7 +13,7 @@ An experiment export is the JSON returned by ``deliberate_lab.Client.export_expe
 Example::
 
     import json
-    from export_to_corpus import export_to_corpus
+    from convokit.simulation import export_to_corpus
 
     with open("experiment-export.json") as f:
         corpus = export_to_corpus(json.load(f))
@@ -24,7 +24,7 @@ from __future__ import annotations
 import re
 from typing import Iterable
 
-from convokit import Corpus, PrivateAssistant, Speaker, Support, Utterance
+from convokit.model import Corpus, PrivateAssistant, Speaker, Support, Utterance
 
 # what an assistant "says" when it decides not to intervene
 SILENT_SUPPORT_TEXT = "Nothing further to add at this point in the conversation."

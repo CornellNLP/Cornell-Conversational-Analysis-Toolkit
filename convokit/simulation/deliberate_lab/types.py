@@ -4,7 +4,16 @@
 
 from __future__ import annotations
 
-from enum import StrEnum
+try:
+    from enum import StrEnum
+except ImportError:  # Python < 3.11 (added for ConvoKit, which supports Python 3.10)
+    from enum import Enum
+
+    class StrEnum(str, Enum):
+        def __str__(self) -> str:
+            return str(self.value)
+
+
 from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, RootModel

@@ -26,10 +26,6 @@ _DOCS_DIR = os.path.abspath(os.path.join(_HERE, ".."))
 _ROOT_DIR = os.path.abspath(os.path.join(_DOCS_DIR, ".."))
 
 sys.path.insert(0, _ROOT_DIR)
-# The ConvoKit AI companion packages are imported as top-level packages/modules
-# (``convokitai_evaluation`` and the simulation modules), which live in these folders.
-sys.path.insert(1, os.path.join(_ROOT_DIR, "convokit"))
-sys.path.insert(1, os.path.join(_ROOT_DIR, "convokit", "convokitai-simulation"))
 
 # -- General configuration ------------------------------------------------
 

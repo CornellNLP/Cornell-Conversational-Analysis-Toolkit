@@ -25,7 +25,7 @@ from convokit import Transformer
 from convokit.genai import GenAIConfigManager
 from convokit.model import Conversation, Corpus, Speaker, Utterance
 
-from .llm import GPT5Client
+from .llm import get_eval_llm_client
 from .util import (
     default_is_mediator,
     default_speaker_name,
@@ -72,11 +72,14 @@ class CIG(Transformer):
     Reference: CIG: Measuring Conversational Information Gain in Deliberative Dialogues with
     Semantic Memory Dynamics, https://aclanthology.org/2026.acl-long.2203/
 
-    :param llm_client: client with a ``generate_json(prompt)`` method; by default a
-        GPT5Client for ``model`` with ``reasoning_effort``
-    :param model: model name for the default client
-    :param config_manager: GenAIConfigManager for the default client
-    :param reasoning_effort: reasoning effort for the default client
+    :param llm_client: client with a ``generate_json(prompt)`` method; by default one for
+        ``model`` built with :func:`get_eval_llm_client <convokit.ai_evaluation.llm.get_eval_llm_client>`
+    :param model: model name for the default client: an OpenAI model (e.g. ``"gpt-5"``) or a
+        Gemini model (e.g. ``"gemini-2.5-flash"``)
+    :param provider: ``"gpt"`` or ``"gemini"`` for the default client; inferred from ``model``
+        if not given
+    :param config_manager: GenAIConfigManager holding the API key for the default client
+    :param reasoning_effort: OpenAI reasoning effort for the default client (not used for Gemini)
     :param custom_prompt: prompt template replacing ``prompts/cig_prompt.txt``; must contain the
         ``{topic}``, ``{context}``, ``{target}``, ``{start}``, ``{end}`` and ``{total}`` placeholders
     :param cig_attribute_name: name of the utterance metadata attribute to store the rating in
@@ -101,6 +104,7 @@ class CIG(Transformer):
         self,
         llm_client=None,
         model: str = "gpt-5",
+        provider: Optional[str] = None,
         config_manager: Optional[GenAIConfigManager] = None,
         reasoning_effort: str = "minimal",
         custom_prompt: Optional[str] = None,
@@ -112,8 +116,9 @@ class CIG(Transformer):
         verbosity: int = 10,
     ):
         self._load_prompt()
-        self.llm_client = llm_client or GPT5Client(
+        self.llm_client = llm_client or get_eval_llm_client(
             model,
+            provider=provider,
             config_manager=config_manager,
             reasoning_effort=reasoning_effort,
         )

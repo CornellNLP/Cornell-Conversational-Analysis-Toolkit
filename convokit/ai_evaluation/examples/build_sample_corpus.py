@@ -7,7 +7,7 @@ bundled copy and do not need to run it.
 The sample corpus contains the completed cohorts of one simulated ConvoArena experiment
 (one mediator and two simulated participants per cohort, one cohort per stance pair) for each
 of three mediators: a greeting baseline, a paraphrasing baseline, and a constructive mediator.
-The experiments are converted to a ConvoKit AI corpus with ``export_to_corpus`` from the ``convokitai-simulation`` package, and each conversation's
+The experiments are converted to a ConvoKit AI corpus with ``export_to_corpus`` from ``convokit.simulation``, and each conversation's
 metadata is extended with ``mediator`` (the mediator label), ``topic``, ``statement`` (the
 debate statement) and ``pre_survey`` (speaker id -> the reason each participant gave for their
 stance before the conversation).
@@ -16,9 +16,7 @@ Usage::
 
     python build_sample_corpus.py /path/to/simulation_results
 
-``export_to_corpus`` must be importable, e.g. by installing the simulation package
-(``pip install -e convokit/convokitai-simulation`` from the repository root) or by adding
-``convokit/convokitai-simulation`` to ``PYTHONPATH``.
+This needs ConvoKit's simulation dependencies (``pip install "convokit[simulation]"``).
 
 The ``simulation_results`` folder holds the output of the simulation runs. The script reads
 the sub-folders listed in ``SOURCES`` (``baseline_mediators/track 1/clean`` and
@@ -44,7 +42,7 @@ import sys
 if len(sys.argv) != 2:
     sys.exit("usage: python build_sample_corpus.py /path/to/simulation_results")
 
-from export_to_corpus import export_to_corpus
+from convokit.simulation import export_to_corpus
 
 SIM = sys.argv[1].rstrip("/")
 SOURCES = {  # mediator label -> (submission file, folder whose runs.json lists its experiments)

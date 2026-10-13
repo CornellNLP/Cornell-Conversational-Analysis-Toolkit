@@ -2,7 +2,7 @@
 
 The image runs the Firebase emulators for a ConvoArena backend (ConvoArena is built on
 Deliberate Lab, https://github.com/PAIR-code/deliberate-lab), so that
-``LocalBackend(..., reuse_running=True)`` from :mod:`local_backend` can attach
+``LocalBackend(..., reuse_running=True)`` from :mod:`convokit.simulation.local_backend` can attach
 to it without a local ConvoArena checkout.
 
 Docker is used when a Docker daemon is available (e.g. on a laptop), and
@@ -13,8 +13,7 @@ the emulators are reachable on localhost exactly as with ``docker run -p``.
 
 Example::
 
-    from dl_container import BackendContainer
-    from local_backend import LocalBackend
+    from convokit.simulation import BackendContainer, LocalBackend
 
     with BackendContainer():
         with LocalBackend(".", reuse_running=True) as backend:

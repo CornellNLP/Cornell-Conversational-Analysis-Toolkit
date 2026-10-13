@@ -17,41 +17,26 @@ Simulations run either:
   on your machine, so no Firebase project is needed; or
 * **on your own ConvoArena deployment**, using an API key from its web interface. To set up your own ConvoArena deployement check out `<https://cornellnlp.github.io/ConvoArena/developers/firebase-setup>`
 
-Example usage: `simulation demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/convokitai-simulation/simulation_demo.ipynb>`_.
+Example usage: `simulation demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/simulation/simulation_demo.ipynb>`_.
 
 Installation
 ------------
 
-.. important::
+ConvoKit AI Simulation is part of ConvoKit, in the ``convokit.simulation`` package. Install ConvoKit
+with its simulation dependencies::
 
-   ConvoKit AI Simulation requires **Python 3.12 or above**. This is newer than core ConvoKit, which
-   supports Python 3.10 and above, so an environment that works for ConvoKit may be too old for
-   this package. Check your version with ``python --version``, and if it is below 3.12, create a new
-   environment first, for example::
+    pip install "convokit[simulation]"
 
-       python3.12 -m venv .venv
-       source .venv/bin/activate
+or, from the repository root::
 
-   (on Windows, create it with ``py -3.12 -m venv .venv`` and activate it with ``.venv\Scripts\activate``),
-   or with conda::
+    python -m pip install -e ".[simulation]"
 
-       conda create -n convokitai python=3.12
-       conda activate convokitai
+Then import it from ``convokit.simulation``::
 
-   Installing into an older Python fails with an error that the package
-   ``requires a different Python``.
+    from convokit.simulation import simulate
 
-Then, from the repository root, install it together with ConvoKit::
-
-    python -m pip install -e . -e ./convokit/convokitai-simulation
-
-or from GitHub::
-
-    pip install "git+https://github.com/CornellNLP/ConvoKit.git@master#subdirectory=convokit/convokitai-simulation"
-
-The modules are installed as top-level modules (``simulation``, ``create_simulation``,
-``export_to_corpus``, ``local_backend``, ``dl_container``), along with ``deliberate_lab``, the
-Python client for the ConvoArena REST API (from Deliberate Lab).
+The package also includes ``convokit.simulation.deliberate_lab``, the Python client for the
+ConvoArena REST API (from Deliberate Lab).
 
 Running locally also requires:
 
@@ -189,7 +174,7 @@ Run a simulation locally:
 
 .. code-block:: python
 
-    from simulation import simulate
+    from convokit.simulation import simulate
 
     corpus = simulate(gemini_api_key="...", sim_yaml="simulation.yaml")
     corpus.print_summary_stats()
@@ -213,7 +198,7 @@ For a deployment whose Cloud Functions run outside ``us-central1``, build the ba
 
 .. code-block:: python
 
-    from create_simulation import FirebaseBackend, create_simulation
+    from convokit.simulation import FirebaseBackend, create_simulation
 
     backend = FirebaseBackend(project_id="my-convoarena", api_key="dlb_live_...", region="europe-west1")
     corpus = create_simulation(backend, "simulation.yaml")
@@ -261,7 +246,7 @@ For example, a mediator and two agents discussing one topic:
       assistants:
         tone-checker: ...
 
-See the `simulation demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/convokitai-simulation/simulation_demo.ipynb>`_
+See the `simulation demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/simulation/simulation_demo.ipynb>`_
 for a complete example with a mediator and a private assistant.
 
 Top-level fields
@@ -357,23 +342,23 @@ API reference
 Running simulations
 ^^^^^^^^^^^^^^^^^^^
 
-.. automodule:: simulation
+.. automodule:: convokit.simulation.simulation
     :members:
 
-.. automodule:: create_simulation
+.. automodule:: convokit.simulation.create_simulation
     :members: create_simulation, FirebaseBackend, load_simulation_config
 
 Converting ConvoArena exports
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. automodule:: export_to_corpus
+.. automodule:: convokit.simulation.export_to_corpus
     :members:
 
 Local backend
 ^^^^^^^^^^^^^
 
-.. automodule:: dl_container
+.. automodule:: convokit.simulation.dl_container
     :members: BackendContainer, BackendContainerError
 
-.. automodule:: local_backend
+.. automodule:: convokit.simulation.local_backend
     :members: LocalBackend, LocalBackendError

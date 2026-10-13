@@ -5,7 +5,7 @@
 of Node and Java processes, as an explicitly scoped service, and mints an API key so that the
 ``deliberate_lab`` Python client (from Deliberate Lab) can talk to it. It can also attach to emulators
 that are already running, such as those in the container started by
-:class:`dl_container.BackendContainer`.
+:class:`convokit.simulation.dl_container.BackendContainer`.
 
 ``LocalBackend`` must be used as a context manager. By design, there is no
 autostart in ``__init__``, no ``__del__`` hook and no ``weakref.finalize``:
@@ -16,7 +16,7 @@ script that dies without unwinding.
 
 Example::
 
-    from local_backend import LocalBackend
+    from convokit.simulation import LocalBackend
 
     with LocalBackend("~/src/convoarena") as backend:
         client = backend.client()
@@ -24,7 +24,7 @@ Example::
         result = client.create_experiment(name="Smoke test")
 
 Requirements for starting the emulators (not for attaching to running ones):
-Python 3.12+, Node with ``npx``, a ConvoArena checkout installed with
+Python 3.10+, Node with ``npx``, a ConvoArena checkout installed with
 ``npm ci`` and built with ``npm run build:utils && npm run build:functions``,
 and Java for the Firestore and Auth emulators. This module only uses the
 standard library; the ``deliberate_lab`` client is imported lazily by
@@ -226,14 +226,8 @@ class LocalBackend:
             ``deliberate_lab`` package is not installed.
         """
         self._require_entered()
-        try:
-            import deliberate_lab as dl
-        except ImportError as exc:  # pragma: no cover
-            raise LocalBackendError(
-                "deliberate_lab is not installed. Try: pip install "
-                "'git+https://github.com/PAIR-code/deliberate-lab.git"
-                "#subdirectory=scripts'"
-            ) from exc
+        from . import deliberate_lab as dl
+
         return dl.Client(base_url=self.base_url, api_key=self.api_key)
 
     # -- context management -----------------------------------------------

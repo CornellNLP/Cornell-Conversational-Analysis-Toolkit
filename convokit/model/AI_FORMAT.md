@@ -73,7 +73,7 @@ Other model outputs, such as a mediator's stated reason for a message (`explanat
 | Field     | Type   | Description                                                                                          |
 | --------- | ------ | ---------------------------------------------------------------------------------------------------- |
 | `has_ai`  | `bool` | Whether any speaker in the corpus is AI. Computed from the speakers if not given.                     |
-| `ai_meta` | `dict` | Free-form corpus-level ConvoKit AI metadata. For example, `convokitai-simulation` stores the simulation configuration under `simulation_config`. |
+| `ai_meta` | `dict` | Free-form corpus-level ConvoKit AI metadata. For example, `convokit.simulation` stores the simulation configuration under `simulation_config`. |
 
 ## PrivateAssistant
 

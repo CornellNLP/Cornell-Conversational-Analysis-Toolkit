@@ -1,7 +1,7 @@
 ConvoKit AI Evaluation
 ======================
 
-ConvoKit AI Evaluation (the ``convokitai_evaluation`` package) provides transformers that evaluate
+ConvoKit AI Evaluation (the ``convokit.ai_evaluation`` package) provides transformers that evaluate
 mediated multi-party conversations, such as discussions moderated by an AI facilitator:
 
 * **CIG** (conversational information gain): an LLM rates each utterance from 1 to 4 for how much it
@@ -13,42 +13,30 @@ mediated multi-party conversations, such as discussions moderated by an AI facil
   participant reply that followed, using :doc:`Redirection <redirectionAndUtteranceLikelihood>`.
 
 Example usage:
-`CIG demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/convokitai_evaluation/examples/cig_demo.ipynb>`_,
-`ClaimTracker demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/convokitai_evaluation/examples/claims_demo.ipynb>`_,
-`MediatorRedirection demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/convokitai_evaluation/examples/redirection_demo.ipynb>`_.
+`CIG demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/ai_evaluation/examples/cig_demo.ipynb>`_,
+`ClaimTracker demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/ai_evaluation/examples/claims_demo.ipynb>`_,
+`MediatorRedirection demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/ai_evaluation/examples/redirection_demo.ipynb>`_.
 
 Installation
 ------------
 
-.. important::
+ConvoKit AI Evaluation is part of ConvoKit. CIG and ClaimTracker need ConvoKit's GenAI
+dependencies::
 
-   ConvoKit AI Evaluation requires **Python 3.12 or above**. This is newer than core ConvoKit, which
-   supports Python 3.10 and above, so an environment that works for ConvoKit may be too old for
-   this package. Check your version with ``python --version``, and if it is below 3.12, create a new
-   environment first, for example::
+    pip install "convokit[genai]"
 
-       python3.12 -m venv .venv
-       source .venv/bin/activate
+Then import the transformers from ``convokit.ai_evaluation``::
 
-   or with conda::
+    from convokit.ai_evaluation import CIG, ClaimTracker, MediatorRedirection
 
-       conda create -n convokitai python=3.12
-       conda activate convokitai
-
-   Installing into an older Python fails with an error that the package
-   ``requires a different Python``.
-
-Then, from the repository root, install it together with ConvoKit::
-
-    python -m pip install -e . -e ./convokit/convokitai_evaluation
-
-or from GitHub::
-
-    pip install "git+https://github.com/CornellNLP/ConvoKit.git@master#subdirectory=convokit/convokitai_evaluation"
-
-CIG and ClaimTracker call OpenAI models through :doc:`convokit.genai <genai>`, so they need an
-OpenAI API key (``GPT_API_KEY``, or set with ``GenAIConfigManager``). ClaimTracker also downloads a
-sentence embedding model and an NLI model from Hugging Face on first use. MediatorRedirection needs
+CIG and ClaimTracker call an OpenAI or a Gemini model through :doc:`convokit.genai <genai>`, chosen
+by the ``model`` argument: ``gpt-*`` models (the default, ``gpt-5`` for CIG and ``gpt-5-mini`` for
+ClaimTracker) need an OpenAI API key, and ``gemini-*`` models need a Gemini API key. Set the key with
+the ``GPT_API_KEY`` / ``GEMINI_API_KEY`` environment variable or with ``GenAIConfigManager``
+(``config_manager.set_api_key("gemini", "...")``); Gemini can also run through Vertex AI (see
+:doc:`GenAI <genai>`). Scores from different models are not directly comparable: the prompts were
+written and checked with GPT-5 models, so use one model throughout a study. ClaimTracker also
+downloads a sentence embedding model and an NLI model from Hugging Face on first use. MediatorRedirection needs
 ConvoKit's optional LLM dependencies (``pip install convokit[llm]``) and a Hugging Face token for the
 Gemma model.
 
@@ -74,7 +62,7 @@ For example, to treat both AI and human facilitators as mediators:
 
 .. code-block:: python
 
-    from convokitai_evaluation import CIG
+    from convokit.ai_evaluation import CIG
 
     cig = CIG(
         model="gpt-5",
@@ -84,32 +72,42 @@ For example, to treat both AI and human facilitators as mediators:
     cig.transform(corpus)
     cig.summarize(corpus)  # mean CIG per conversation, mediator vs participants
 
+To use Gemini instead, pass a Gemini model name (the provider is inferred from it, or can be given
+with ``provider="gemini"``):
+
+.. code-block:: python
+
+    from convokit.ai_evaluation import CIG, ClaimTracker
+
+    cig = CIG(model="gemini-2.5-flash")
+    tracker = ClaimTracker(model="gemini-2.5-flash")
+
 CIG
 ---
 
-.. automodule:: convokitai_evaluation.cig
+.. automodule:: convokit.ai_evaluation.cig
     :members:
 
 ClaimTracker
 ------------
 
-.. automodule:: convokitai_evaluation.claims
+.. automodule:: convokit.ai_evaluation.claims
     :members:
 
 MediatorRedirection
 -------------------
 
-.. automodule:: convokitai_evaluation.redirection
+.. automodule:: convokit.ai_evaluation.redirection
     :members:
 
 LLM client
 ----------
 
-.. automodule:: convokitai_evaluation.llm
+.. automodule:: convokit.ai_evaluation.llm
     :members:
 
 Defaults for reading the ConvoKit AI format
 -------------------------------------------
 
-.. automodule:: convokitai_evaluation.util
+.. automodule:: convokit.ai_evaluation.util
     :members:
