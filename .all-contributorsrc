@@ -381,6 +381,18 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "windfall2718",
+      "name": "Juhyun Sung",
+      "avatar_url": "https://avatars.githubusercontent.com/u/139516058?v=4",
+      "profile": "https://github.com/windfall2718",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
