@@ -381,6 +381,18 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "Mandy-Luo",
+      "name": "Mandy-Luo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/219302665?v=4",
+      "profile": "https://github.com/Mandy-Luo",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
