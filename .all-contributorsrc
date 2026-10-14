@@ -381,6 +381,18 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "christinab2314",
+      "name": "christinab2314",
+      "avatar_url": "https://avatars.githubusercontent.com/u/110360250?v=4",
+      "profile": "https://github.com/christinab2314",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
