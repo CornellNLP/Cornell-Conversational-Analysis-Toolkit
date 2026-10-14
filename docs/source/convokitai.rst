@@ -30,12 +30,6 @@ The AI fields are part of ConvoKit (version 5.0.0 and later), so installing Conv
 
     pip install convokit
 
-.. note::
-
-    Earlier development versions shipped these classes in a separate ``convokitai`` package,
-    which has been removed. Replace imports such as ``from convokitai import Corpus`` with
-    ``from convokit import Corpus``.
-
 Quick start
 -----------
 
