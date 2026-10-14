@@ -562,6 +562,40 @@ This dataset contains approximately 1,300 conversations collected between emotio
 
    </div>
 
+Habermas Machine Dataset
+------------------------
+
+.. raw:: html
+
+   <div class="dataset-card" data-tags="AI mediator, online, synchronous, persuasion, medium size, medium conversations, group, collaboration, speaker info, outcome labels">
+
+A dataset of deliberations where human participants interact with an AI mediator to reach a consensus.
+
+* **Download name:** ``habermas-machine-corpus``
+* **Tags:** AI mediator, online, synchronous, persuasion, medium size, medium conversations, group, collaboration, speaker info, outcome labels
+* `Documentation <https://convokit.cornell.edu/documentation/habermas.html>`_
+
+.. raw:: html
+
+   </div>
+
+MathDial Dataset
+----------------
+
+.. raw:: html
+
+   <div class="dataset-card" data-tags="AI participant, human-AI, education, online, synchronous, student errors">
+
+A dataset of tutoring dialogues where expert human teachers tutor an AI "student" through math word problems.
+
+* **Download name:** ``mathdial-corpus``
+* **Tags:** AI participant, human-AI, education, online, synchronous, student errors
+* `Documentation <https://convokit.cornell.edu/documentation/mathdial.html>`_
+
+.. raw:: html
+
+   </div>
+
 Custom Datasets
 ---------------
 

@@ -1,0 +1,6 @@
+Metadata-Version: 2.4
+Name: convokitai
+Version: 0.1.0
+Summary: ConvoKit's data model extended with AI speakers, private assistants, and support messages
+Requires-Python: >=3.12
+Requires-Dist: convokit>=4.1

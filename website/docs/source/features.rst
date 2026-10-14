@@ -34,6 +34,24 @@ Vectorizes corpus objects (utterances, speakers, or conversations) using bag-of-
 
    </div>
 
+
+ClaimTracker
+------------
+
+.. raw:: html
+
+   <div class="feature-card" data-tags="measurement, feature extraction, LLM, conversation, speaker, utterance, pattern, comparison">
+
+Tracks the claims of every speaker in each conversation and measures the consensus the participants reach before and after a mediated conversation.
+
+* **Transformer:** `ClaimTracker <https://convokit.cornell.edu/documentation/ai_evaluation.html#convokit.ai_evaluation.ClaimTracker>`_
+* **Tags:** measurement, feature extraction, LLM, conversation, speaker, utterance, pattern, comparison
+
+.. raw:: html
+
+   </div>
+
+
 Classifier
 ----------
 
@@ -52,6 +70,7 @@ Trains and applies a classifier on corpus object metadata features. Uses an skle
 
    </div>
 
+
 Column Normalized Tf-Idf
 ------------------------
 
@@ -67,6 +86,7 @@ A modified Tf-Idf transformer that normalizes by columns (term-wise) rather than
 .. raw:: html
 
    </div>
+
 
 Community Embedder
 ------------------
@@ -85,8 +105,9 @@ Embeds community-level hypergraph statistics from HyperConvo into a low-dimensio
 
    </div>
 
+
 Conversation Dynamics Similarity (ConDynS)
--------------------------------------------
+------------------------------------------
 
 .. raw:: html
 
@@ -102,8 +123,26 @@ Measures the similarity between two conversations with respect to their conversa
 
    </div>
 
+
+Conversational Information Gain (CIG)
+-------------------------------------
+
+.. raw:: html
+
+   <div class="feature-card" data-tags="measurement, feature extraction, LLM, utterance, conversation, conversation-flow, representation">
+
+Rates every utterance in a conversation for conversational information gain (CIG) using an LLM, indicating how much it added to what the group already knew.
+
+* **Transformer:** `CIG <https://convokit.cornell.edu/documentation/ai_evaluation.html#convokit.ai_evaluation.CIG>`_
+* **Tags:** measurement, feature extraction, LLM, utterance, conversation, conversation-flow, representation
+
+.. raw:: html
+
+   </div>
+
+
 Expected Conversational Context Framework
-------------------------------------------
+-----------------------------------------
 
 .. raw:: html
 
@@ -125,6 +164,7 @@ Derives representations of utterances and terms based on their expected conversa
 
    </div>
 
+
 Fighting Words
 --------------
 
@@ -142,6 +182,7 @@ Identifies the n-gram features that most distinguish two groups of corpus object
 .. raw:: html
 
    </div>
+
 
 Forecaster
 ----------
@@ -162,8 +203,9 @@ A framework for forecasting future conversation outcomes as they develop in real
 
    </div>
 
+
 Hypergraph Conversation Representation
----------------------------------------
+--------------------------------------
 
 .. raw:: html
 
@@ -180,6 +222,7 @@ Extracts structural features of conversations through a hypergraph model, comput
 .. raw:: html
 
    </div>
+
 
 Linguistic Coordination
 -----------------------
@@ -200,6 +243,7 @@ Measures the propensity of a speaker to echo the function words used by another 
 
    </div>
 
+
 Linguistic Diversity
 --------------------
 
@@ -219,8 +263,9 @@ Computes the linguistic divergence between a speaker's language in each conversa
 
    </div>
 
+
 LLM Prompt Transformer
------------------------
+----------------------
 
 .. raw:: html
 
@@ -237,21 +282,23 @@ Applies custom LLM prompts to corpus objects at any level — utterances, conver
 
    </div>
 
-Pairer
-------
+
+MediatorRedirection
+-------------------
 
 .. raw:: html
 
-   <div class="feature-card" data-tags="pre-processing, prediction, statistical, utterance, conversation, speaker, representation, pattern">
+   <div class="feature-card" data-tags="measurement, feature extraction, structural, modeling, LLM, utterance, exchange, conversation-flow, turning-points">
 
-Annotates corpus objects with pairing information needed for paired prediction analyses. Controls for conversational context by pairing objects from the same conversation, enabling comparisons that isolate the variable of interest.
+Scores each mediator turn by how much it redirected the participant reply that followed it, using a language model.
 
-* **Transformer:** `Pairer <https://convokit.cornell.edu/documentation/pairer.html>`_
-* **Tags:** pre-processing, prediction, statistical, utterance, conversation, speaker, representation, pattern
+* **Transformer:** `MediatorRedirection <https://convokit.cornell.edu/documentation/ai_evaluation.html#convokit.ai_evaluation.MediatorRedirection>`_
+* **Tags:** measurement, feature extraction, structural, modeling, LLM, utterance, exchange, conversation-flow, turning-points
 
 .. raw:: html
 
    </div>
+
 
 Paired Prediction
 -----------------
@@ -272,6 +319,24 @@ A quasi-experimental prediction method that controls for confounding priors by c
 
    </div>
 
+
+Pairer
+------
+
+.. raw:: html
+
+   <div class="feature-card" data-tags="pre-processing, prediction, statistical, utterance, conversation, speaker, representation, pattern">
+
+Annotates corpus objects with pairing information needed for paired prediction analyses. Controls for conversational context by pairing objects from the same conversation, enabling comparisons that isolate the variable of interest.
+
+* **Transformer:** `Pairer <https://convokit.cornell.edu/documentation/pairer.html>`_
+* **Tags:** pre-processing, prediction, statistical, utterance, conversation, speaker, representation, pattern
+
+.. raw:: html
+
+   </div>
+
+
 Phrasing Motifs
 ---------------
 
@@ -291,8 +356,9 @@ Extracts arc-based phrasing patterns from dependency-parsed utterances by abstra
 
    </div>
 
+
 Pivotal Moment Measure
------------------------
+----------------------
 
 .. raw:: html
 
@@ -308,6 +374,7 @@ Identifies pivotal moments in a conversation where simulated alternative respons
 .. raw:: html
 
    </div>
+
 
 Politeness Strategies
 ---------------------
@@ -327,6 +394,7 @@ Detects lexical and parse-based politeness and impoliteness strategies in uttera
 .. raw:: html
 
    </div>
+
 
 Prompt Types
 ------------
@@ -350,6 +418,7 @@ Infers latent types of conversational prompts based on how they are phrased, usi
 
    </div>
 
+
 Ranker
 ------
 
@@ -368,8 +437,9 @@ Sorts and annotates corpus objects with rankings based on a user-defined scoring
 
    </div>
 
+
 Redirection and Utterance Likelihood
--------------------------------------
+------------------------------------
 
 .. raw:: html
 
@@ -387,8 +457,28 @@ Measures the extent to which an utterance redirects conversational flow away fro
 
    </div>
 
+
+Simulation
+----------
+
+.. raw:: html
+
+   <div class="feature-card" data-tags="simulation, LLM, corpus, conversation, conversation-flow, modeling">
+
+Provides tools to run AI agent conversations on ConvoArena and get them back as a ConvoKit Corpus.
+
+* **Tool:** `Simulation <https://convokit.cornell.edu/documentation/simulation.html>`_
+* **Tags:** simulation, LLM, corpus, conversation, conversation-flow, modeling
+
+**Example:** `Simulation Demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/simulation/simulation_demo.ipynb>`_
+
+.. raw:: html
+
+   </div>
+
+
 Summary of Conversation Dynamics (SCD)
----------------------------------------
+--------------------------------------
 
 .. raw:: html
 
@@ -406,8 +496,9 @@ Generates structured natural-language summaries of conversational dynamics using
 
    </div>
 
+
 Talk-Time Sharing Dynamics
----------------------------
+--------------------------
 
 .. raw:: html
 
@@ -424,6 +515,7 @@ Analyzes how talk-time is distributed and evolves between speakers throughout a 
 
    </div>
 
+
 TextCleaner
 -----------
 
@@ -439,6 +531,7 @@ Cleans utterance text by fixing unicode errors, lowercasing, removing line break
 .. raw:: html
 
    </div>
+
 
 TextParser
 ----------
@@ -458,6 +551,7 @@ Dependency-parses each utterance in a corpus using SpaCy. This parsing step is a
 
    </div>
 
+
 TextProcessor (base class)
 --------------------------
 
@@ -476,6 +570,7 @@ Abstract base class for text processing transformers in ConvoKit. Provides a sha
 
    </div>
 
+
 TextToArcs
 ----------
 
@@ -491,6 +586,7 @@ Converts dependency parse output into arc-based representations, where each sent
 .. raw:: html
 
    </div>
+
 
 Thread Embedder
 ---------------
@@ -508,6 +604,7 @@ Embeds thread-level hypergraph statistics from HyperConvo into a low-dimensional
 .. raw:: html
 
    </div>
+
 
 Vector Classifier
 -----------------
