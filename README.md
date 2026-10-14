@@ -1,6 +1,6 @@
 # [ConvoKit](http://convokit.cornell.edu/)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-37-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-38-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![pypi](https://img.shields.io/pypi/v/convokit.svg)](https://pypi.org/pypi/convokit/)
@@ -292,6 +292,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/jeeyonkang"><img src="https://avatars.githubusercontent.com/u/135584717?v=4?s=100" width="100px;" alt="Jeeyon Kang"/><br /><sub><b>Jeeyon Kang</b></sub></a><br /><a href="#data-jeeyonkang" title="Data">🔣</a> <a href="#example-jeeyonkang" title="Examples">💡</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://kakeith.github.io/"><img src="https://avatars.githubusercontent.com/u/18640437?v=4?s=100" width="100px;" alt="Katherine A. Keith"/><br /><sub><b>Katherine A. Keith</b></sub></a><br /><a href="https://github.com/CornellNLP/ConvoKit/issues?q=author%3Akakeith" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Mandy-Luo"><img src="https://avatars.githubusercontent.com/u/219302665?v=4?s=100" width="100px;" alt="Mandy-Luo"/><br /><sub><b>Mandy-Luo</b></sub></a><br /><a href="https://github.com/CornellNLP/ConvoKit/commits?author=Mandy-Luo" title="Code">💻</a> <a href="https://github.com/CornellNLP/ConvoKit/commits?author=Mandy-Luo" title="Documentation">📖</a> <a href="#example-Mandy-Luo" title="Examples">💡</a> <a href="#ideas-Mandy-Luo" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
   </tbody>
 </table>
