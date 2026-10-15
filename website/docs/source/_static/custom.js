@@ -51,7 +51,8 @@ const TAG_TYPES = {
     'Topics': 'topics',
     'Language': 'language',
     'Format': 'format',
-    'Dynamics': 'dynamics'
+    'Dynamics': 'dynamics',
+    'AI Speaker': 'ai-speaker'
 };
 
 // Tag type definitions for feature page
@@ -224,7 +225,15 @@ function initializeSearch(searchInputId, cardSelector, context) {
             return 'dynamics';
         }
 
+
+        // AI Speaker tags
+        if (tagLower.includes('ai participant') || tagLower.includes('ai mediator') ||
+            tagLower.includes('ai assistant')) {
+            return 'ai-speaker';
+        }
+
         // Default to topics if unknown
+
         return 'topics';
     }
 

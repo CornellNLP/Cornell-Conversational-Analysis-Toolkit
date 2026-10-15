@@ -1,0 +1,16 @@
+pyproject.toml
+./__init__.py
+./aiUtil.py
+./conversation.py
+./corpus.py
+./corpus_helpers.py
+./generation.py
+./private_assistant.py
+./speaker.py
+./support.py
+./utterance.py
+convokitai.egg-info/PKG-INFO
+convokitai.egg-info/SOURCES.txt
+convokitai.egg-info/dependency_links.txt
+convokitai.egg-info/requires.txt
+convokitai.egg-info/top_level.txt

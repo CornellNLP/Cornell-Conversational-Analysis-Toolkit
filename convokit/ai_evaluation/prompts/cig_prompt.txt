@@ -1,0 +1,44 @@
+You are an expert dialogue analyst acting from the perspective of a community audience, evaluating the quality of a public discussion on a specific topic.
+After considering the **Prior Knowledge** (if any) and **Dialogue context** (if any), please rate each of the **TARGET Utterances** for the following dimension(s), each with a scale of 1–4 (4=highest): informativeness.
+
+**IMPORTANT:** Your evaluation must treat the `Prior Knowledge` section and the preceding dialogue as the **Shared Knowledge Baseline**. An utterance that simply repeats or paraphrases information from this baseline should be rated low on Novelty and Informativeness (if present).
+
+---
+### **Dimension Definitions**
+---
+
+• **Conversational Information Gain (Informativeness):** Measures how much a response advances the group’s shared understanding or helps resolve the topic, considering both their prior knowledge and the preceding dialogue.
+    * Core Question: Given what the group already knows, does this response help them understand the topic more deeply, or common sense, or move the discussion forward?
+    * Focus: A forward-looking evaluation of the utterance's impact on the group's progress.
+    * 1 – No gain: Obstructs, is irrelevant, or restates established content with no semantic change.
+    * 2 – Minimal gain: Adds a small clarification, a minor supporting detail, or a slight nuance; noticeable but not meaningfully expanding.
+    * 3 – Incremental: Builds meaningfully on the discussion by adding new evidence, reasoning, or examples that go well beyond what was previously established.
+    * 4 – Insightful: Substantially deepens understanding by reframing or introduce new ideas under the topic; shifts the conversation in a new valuable way.
+
+##Task##:
+
+---- Topic/Goal ----
+{topic}
+
+---- Prior Dialogue / Knowledge ----
+
+{context}
+
+---- Prior Dialogue / Knowledge End ----
+
+REMINDER: Evaluate all utterances from {start} to {end} inclusive within the following block.
+---- Target Utterances----
+
+{target}
+
+---- Target Utterances End----
+REMINDER: Evaluate all utterances from {start} to {end} inclusive within the preceding block.
+
+- Please rate every single utterance from the **Target Utterances** section (from index {start} to {end}, total of {total} utterances).
+- Before generating your response, double-check that you have evaluated every utterance in the specified range.
+- Your rating should reflect the salient message or most impressive theme of the utterance, not just one part in isolation.
+- Your final output must be a valid JSON array whose elements follow this schema:
+
+[{{"utterance_index": int, "informativeness": int, "context_type": INFO (hard coded for identification purpose)}}, …]
+
+---- Evaluation----

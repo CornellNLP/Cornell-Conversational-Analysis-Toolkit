@@ -6,7 +6,7 @@ setup(
     author_email="cristian@cs.cornell.edu",
     url="https://github.com/CornellNLP/ConvoKit",
     description="ConvoKit",
-    version="4.1.2",
+    version="5.0.0",
     packages=[
         "convokit",
         "convokit.bag_of_words",
@@ -39,6 +39,9 @@ setup(
         "convokit.utterance_simulator",
         "convokit.genai",
         "convokit.convo_similarity",
+        "convokit.simulation",
+        "convokit.ai_evaluation",
+        "convokit.simulation.deliberate_lab",
     ],
     package_data={
         "convokit": [
@@ -46,6 +49,7 @@ setup(
             "politeness_collections/politeness_local/lexicons/*.json",
             "politeness_collections/politeness_cscw_zh/lexicons/*.json",
             "convo_similarity/prompts/*.txt",
+            "ai_evaluation/prompts/*.txt",
         ]
     },
     install_requires=[
@@ -77,6 +81,11 @@ setup(
     extras_require={
         "craft": ["torch>=0.12"],
         "forecaster": ["torch>=0.12", "datasets"],
+        "simulation": [
+            "pydantic>=2.0",
+            "requests",
+            "udocker",
+        ],
         "genai": [
             "openai>=1.3.5",
             "google-genai",

@@ -22,3 +22,4 @@ These are the transformers related to generating some analysis of the Corpus.
    Redirection <redirectionAndUtteranceLikelihood.rst>
    UtteranceLikelihood <redirectionAndUtteranceLikelihood.rst>
    TalkTimeSharingDynamics <talktimesharing.rst>
+   ConvoKit AI Evaluation <convokitAIEvaluation.rst>

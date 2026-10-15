@@ -1,8 +1,10 @@
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 from convokit.util import warn
+from .aiUtil import split_ai_fields
 from .corpusComponent import CorpusComponent
 from .speaker import Speaker
+from .support import Support
 
 
 class Utterance(CorpusComponent):
@@ -15,6 +17,14 @@ class Utterance(CorpusComponent):
     :param timestamp: timestamp of the utterance. Can be any
         comparable type.
     :param text: text of the utterance.
+    :param ai_meta: additional outputs from the speaker's LLM call for this message (empty if there
+        are none or the speaker is not an AI; see ``AI_FORMAT.md``). Recognized keys:
+
+        - ``"config"``: the generation config used to generate the message
+        - ``"supports"``: list of Supports attached to this utterance
+
+        An ``"ai_meta"`` entry in ``meta`` (as in a dumped corpus) is moved into this attribute,
+        unless this argument is given.
 
     :ivar id: the unique id of the utterance.
     :ivar speaker: the speaker giving the utterance.
@@ -24,7 +34,12 @@ class Utterance(CorpusComponent):
     :ivar text: text of the utterance.
     :ivar meta: A dictionary-like view object providing read-write access to
         utterance-level metadata.
+    :ivar ai_meta: AI metadata of the utterance. Unlike the other classes, assigning replaces the
+        existing ``ai_meta`` instead of merging into it.
+    :ivar supports: the Supports attached to this utterance
     """
+
+    AI_FIELDS = ("ai_meta",)
 
     def __init__(
         self,
@@ -36,6 +51,7 @@ class Utterance(CorpusComponent):
         timestamp: Optional[int] = None,
         text: str = "",
         meta: Optional[Dict] = None,
+        ai_meta: Optional[Dict] = None,
     ):
         # check arguments that have alternate naming due to backwards compatibility
         if speaker is None:
@@ -61,8 +77,11 @@ class Utterance(CorpusComponent):
             "timestamp": timestamp,
             "text": text,
         }
+        meta, ai_fields = split_ai_fields(meta, "utterance")
         super().__init__(obj_type="utterance", owner=owner, id=id, initial_data=props, meta=meta)
         self.speaker_ = speaker
+        if ai_meta is not None or "ai_meta" in ai_fields:
+            self.ai_meta = ai_meta if ai_meta is not None else ai_fields["ai_meta"]
 
     ############################################################################
     ## directly-accessible class properties (roughly equivalent to keys in the
@@ -110,9 +129,58 @@ class Utterance(CorpusComponent):
 
     text = property(_get_text, _set_text)
 
+    @property
+    def ai_meta(self) -> Dict:
+        """The AI metadata of this utterance."""
+        if "_ai_meta" not in self.__dict__:
+            self._ai_meta = {}
+        return self._ai_meta
+
+    @ai_meta.setter
+    def ai_meta(self, value):
+        value = dict(value or {})
+        if "supports" in value:
+            value["supports"] = Support.normalize_list(value["supports"])
+        self._ai_meta = value
+        self._persist_ai_field("ai_meta")
+
+    @property
+    def supports(self) -> List[Support]:
+        """The Supports attached to this utterance (a new list; assign to modify)."""
+        return Support.normalize_list(self.__dict__.get("_ai_meta", {}).get("supports", []))
+
+    @supports.setter
+    def supports(self, value):
+        self.ai_meta = {**self.ai_meta, "supports": value}
+
     ############################################################################
     ## end properties
     ############################################################################
+
+    def _apply_ai_fields(self, stored: Dict, legacy: bool = False) -> None:
+        """
+        Set the AI attributes from the AI fields stored in the metadata (the on-disk format).
+
+        :param stored: the utterance's metadata entries for the AI keys that it has
+        :param legacy: unused; accepted for consistency with Speaker
+        """
+        if "ai_meta" in stored:
+            self.ai_meta = stored["ai_meta"]
+
+    def get_transcript(self, supports: bool = False) -> str:
+        """
+        Get a plain-text transcript of this utterance's Conversation, from its beginning up to and
+        including this utterance. See :meth:`Conversation.get_transcript
+        <convokit.Conversation.get_transcript>`.
+
+        :param supports: whether to include Supports (Supports replying to this utterance come after
+            it, so they are not included)
+        :return: the transcript as a single string
+        :raises ValueError: if the utterance is not part of a Corpus
+        """
+        if self.owner is None:
+            raise ValueError("Utterance {!r} is not part of a Corpus".format(self.id))
+        return self.get_conversation().get_transcript(supports=supports, until=self)
 
     def get_conversation(self):
         """

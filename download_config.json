@@ -43,7 +43,10 @@
         "news-interview": 0,
         "emotional-support": 0,
         "decisionpolicy-demo": 0,
-        "human-benchmark": 0
+        "human-benchmark": 0,
+        "habermas-machine-corpus": 0,
+        "mathdial-corpus": 0,
+        "llm-facilitation-corpus": 0
     },
     "DatasetURLs": {
         "chromium-corpus": "http://zissou.infosci.cornell.edu/convokit/datasets/chromium-corpus/chromium-corpus.zip",
@@ -119,7 +122,10 @@
         "news-interview": "https://zissou.infosci.cornell.edu/convokit/datasets/news-interview/news-interview.zip",
         "emotional-support": "https://zissou.infosci.cornell.edu/convokit/datasets/emotional-support/emotional-support.zip",
         "decisionpolicy-demo": "https://zissou.infosci.cornell.edu/convokit/datasets/decisionpolicy-demo/decisionpolicy-demo.zip",
-        "human-benchmark": "https://zissou.infosci.cornell.edu/convokit/datasets/human-benchmark/human-benchmark.zip"
+        "human-benchmark": "https://zissou.infosci.cornell.edu/convokit/datasets/human-benchmark/human-benchmark.zip",
+        "habermas-machine-corpus": "https://zissou.infosci.cornell.edu/convokit/datasets/habermas-machine-corpus/habermas-machine-corpus.zip",
+        "mathdial-corpus": "https://zissou.infosci.cornell.edu/convokit/datasets/mathdial-corpus/mathdial-corpus.zip",
+        "llm-facilitation-corpus": "https://zissou.infosci.cornell.edu/convokit/datasets/llm-facilitation-corpus/llm-facilitation-corpus.zip"
     },
     "ModelURLS": {
         "craft-wiki-pretrained": [

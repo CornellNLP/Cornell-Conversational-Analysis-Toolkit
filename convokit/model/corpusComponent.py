@@ -1,10 +1,16 @@
 from typing import List, Optional
 
 from convokit.util import warn
+from .aiUtil import normalize_for_dump
 from .convoKitMeta import ConvoKitMeta
 
 
 class CorpusComponent:
+    # AI fields of this component type (see AI_FORMAT.md). They are kept as attributes
+    # ("_" + name); with the db backend, each assignment is also written to the component's
+    # entry in the database, so that the fields can be restored by Corpus.reconnect_to_db.
+    AI_FIELDS = ()
+
     def __init__(
         self,
         obj_type: str,
@@ -65,8 +71,25 @@ class CorpusComponent:
             else:
                 del self._temp_backend
             self._meta = self.init_meta(meta_vals)
+            for name in self.AI_FIELDS:
+                self._persist_ai_field(name)
 
     owner = property(get_owner, set_owner)
+
+    def _persist_ai_field(self, name: str) -> None:
+        """
+        Write the AI field ``name`` to the owner's database, if the owner uses the db backend
+        and the field is set. With the mem backend the attribute is the only copy, so nothing
+        needs to be written.
+        """
+        owner = self._owner
+        if owner is None or getattr(owner, "backend", None) != "db":
+            return
+        if getattr(owner, "_ai_persist_suspended", False) or "_" + name not in self.__dict__:
+            return
+        owner.backend_mapper.update_data(
+            self.obj_type, self.id, name, normalize_for_dump(self.__dict__["_" + name])
+        )
 
     def init_meta(self, meta, overwrite=False):
         if self._owner is None:

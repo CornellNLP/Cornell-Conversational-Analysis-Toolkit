@@ -23,6 +23,7 @@ def setup_test_environment():
 
     test_subdirs = [
         "general",
+        "general.ai_fields",
         "general.binary_data",
         "general.fill_missing_convo_ids",
         "general.from_pandas",

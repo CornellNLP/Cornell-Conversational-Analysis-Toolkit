@@ -35,6 +35,14 @@ Contents
 
 .. toctree::
    :maxdepth: 2
+   :caption: ConvoKit AI
+
+   ConvoKit AI data model <convokitai.rst>
+   Simulation <convokitAISimulation.rst>
+   Evaluation <convokitAIEvaluation.rst>
+
+.. toctree::
+   :maxdepth: 2
    :caption: Datasets and Examples
 
    Datasets <datasets.rst>

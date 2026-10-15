@@ -4,6 +4,8 @@ from .convoKitMatrix import ConvoKitMatrix
 from .corpus import Corpus
 from .corpusComponent import CorpusComponent
 from .corpus_helpers import *
+from .privateAssistant import PrivateAssistant
 from .speaker import Speaker
+from .support import Support
 from .utterance import Utterance
 from .utteranceNode import UtteranceNode

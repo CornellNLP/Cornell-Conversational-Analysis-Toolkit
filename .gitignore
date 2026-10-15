@@ -41,3 +41,7 @@ venv-triadmotif/
 env/
 website/docs/build
 examples/forecaster/deferral_out
+
+# sample corpus for the convokit.ai_evaluation examples
+!/convokit/ai_evaluation/examples/sample_corpus/*.json
+!/convokit/ai_evaluation/examples/sample_corpus/*.jsonl

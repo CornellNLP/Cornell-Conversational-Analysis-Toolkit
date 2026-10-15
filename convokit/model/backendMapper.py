@@ -109,6 +109,14 @@ class BackendMapper(metaclass=ABCMeta):
         """
         return NotImplemented
 
+    @abstractmethod
+    def get_field_values(self, component_type: str, fields: List[str]):
+        """
+        Retrieve the given fields of every component of type component_type that has at least
+        one of them, as a dict of component id -> {field: value} (only the fields present).
+        """
+        return NotImplemented
+
     def get_collection(self, component_type: str):
         if component_type not in self.data:
             raise ValueError(
@@ -207,6 +215,14 @@ class MemMapper(BackendMapper):
             del collection[component_id]
         else:
             del collection[component_id][property_name]
+
+    def get_field_values(self, component_type: str, fields: List[str]):
+        values = {}
+        for component_id, data in self.get_collection(component_type).items():
+            present = {field: data[field] for field in fields if field in data}
+            if present:
+                values[component_id] = present
+        return values
 
     def clear_all_data(self):
         for key in self.data:
@@ -317,6 +333,13 @@ class DBMapper(BackendMapper):
         else:
             # delete only the specified property
             collection.update_one({"_id": component_id}, {"$unset": {property_name: ""}})
+
+    def get_field_values(self, component_type: str, fields: List[str]):
+        query = {"$or": [{field: {"$exists": True}} for field in fields]}
+        return {
+            doc.pop("_id"): doc
+            for doc in self.get_collection(component_type).find(query, projection=list(fields))
+        }
 
     def clear_all_data(self):
         for key in self.data:

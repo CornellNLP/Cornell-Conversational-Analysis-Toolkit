@@ -1,7 +1,7 @@
 Data Format
 ===========
 
-ConvoKit expects and saves each corpus with the following basic structure, which mirrors closely with the intuitions behind the design of Corpus (see :doc:`architecture`). 
+ConvoKit expects and saves each corpus with the following basic structure, which mirrors closely with the intuitions behind the design of Corpus (see :doc:`architecture`).
 
 ::
 
@@ -24,9 +24,9 @@ This corpus can be loaded with:
 
 Note that the end speakers do not need to manually create these files. ConvoKit provides the functionality to dump a Corpus object to save it with the required format:
 
-At a high level, a custom dataset can be converted to a list of utterances (custom_utterance_list), and saved with ConvoKit format for reuse by: 
+At a high level, a custom dataset can be converted to a list of utterances (custom_utterance_list), and saved with ConvoKit format for reuse by:
 
->>> corpus = Corpus(utterances = custom_utterance_list) 
+>>> corpus = Corpus(utterances = custom_utterance_list)
 >>> corpus.dump("custom_dataset", base_path="./") # dump to local directory
 
 A more detailed example of how the `Cornell Movie--Dialogs Corpus <https://www.cs.cornell.edu/~cristian/Chameleons_in_imagined_conversations.html>`_. may be converted from its original release form to ConvoKit format can be found `here <https://github.com/CornellNLP/ConvoKit/tree/master/examples/converting_movie_corpus.ipynb>`_.
@@ -74,12 +74,12 @@ An example speaker-metadata pair is shown below, again, drawn from the Supreme C
 ::
 
 
-conversation.json 
+conversation.json
 ^^^^^^^^^^^^^^^^^
 
-Similarly, conversation.json also keeps a dictionary where keys are conversation index, and values are conversational-level metadata (i.e., additional information that stay invariant throughout the conversation). 
+Similarly, conversation.json also keeps a dictionary where keys are conversation index, and values are conversational-level metadata (i.e., additional information that stay invariant throughout the conversation).
 
-An example conversation index-metadata pair is shown below, adapted from the conversations gone awry corpus: 
+An example conversation index-metadata pair is shown below, adapted from the conversations gone awry corpus:
 
 ::
 
@@ -87,15 +87,15 @@ An example conversation index-metadata pair is shown below, adapted from the con
 
 ::
 
-Provision of conversational-level metadata is optional. In case no information is provided, the file could simply contain an empty dictionary.  
+Provision of conversational-level metadata is optional. In case no information is provided, the file could simply contain an empty dictionary.
 
 
 corpus.json
 ^^^^^^^^^^^
 
-Metadata of the corpus is saved in corpus.json, as a dictionary where keys are names of the metadata, and values are the actual content of such metadata. 
+Metadata of the corpus is saved in corpus.json, as a dictionary where keys are names of the metadata, and values are the actual content of such metadata.
 
-The contents of the corpus.json file for the Reddit corpus (small) is as follows: 
+The contents of the corpus.json file for the Reddit corpus (small) is as follows:
 
 ::
 
@@ -104,12 +104,12 @@ The contents of the corpus.json file for the Reddit corpus (small) is as follows
 ::
 
 
-index.json 
+index.json
 ^^^^^^^^^^
 
 To allow speakers the option of previewing available information in the corpus without loading it entirely, ConvoKit requires an index.json file that contains information about all available metadata and their expected types.
 
-There are five mandatory fields: 
+There are five mandatory fields:
 
 * utterances-index: information of utterance-level metadata
 * speakers-index: information of speaker-level metadata
@@ -117,15 +117,199 @@ There are five mandatory fields:
 * overall-index: information of corpus-level metadata
 * version: version number of the corpus
 
-As an example, the corpus-level metadata for the Reddit corpus (small) is shown below: 
+As an example, the corpus-level metadata for the Reddit corpus (small) is shown below:
 
 ::
 
 "overall-index": {"subreddit": "<class 'str'>", "num_posts": "<class 'int'>", "num_comments": "<class 'int'>", "num_speakers": "<class 'int'>"}
 
-:: 
- 
+::
+
 
 While not necessary, speakers experienced with handling json files can choose to convert their custom datasets directly based on the expected data format specifications.
 
 
+.. _convokitai-data-format:
+
+ConvoKit AI extensions
+----------------------
+
+Corpora that involve AI agents (see :doc:`ConvoKit AI <convokitai>`) use the format above, with the
+fields below added to it. In memory they are attributes of each object; on disk they are stored in
+its ``meta`` (``meta["is_ai"]``, ``meta["ai_meta"]``, ...), and ``Corpus`` moves them out of
+``meta`` into the attributes when it loads the corpus. Corpora without AI agents don't need any of
+these fields.
+
+Speaker
+^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 15 65
+
+   * - Field
+     - Type
+     - Description
+   * - ``is_ai``
+     - ``bool``
+     - Whether the speaker is known to be an AI agent.
+   * - ``ai_meta["config"]``
+     - ``dict``
+     - The `generation config`_ that produces this speaker's messages (used by ``Speaker.generate``).
+   * - ``ai_meta["role"]``
+     - ``str``
+     - The speaker's role in the conversation, e.g. ``"participant"`` or ``"public assistant"``
+       (a mediator who speaks in the conversation).
+
+Utterance
+^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 15 65
+
+   * - Field
+     - Type
+     - Description
+   * - ``ai_meta["config"]``
+     - ``dict``
+     - The generation config used to produce this message. Empty for human utterances.
+   * - ``ai_meta["supports"]``
+     - ``list[Support]``
+     - The supports sent in reply to this utterance (also available as ``Utterance.supports``).
+
+Other outputs of the model call can be stored in ``ai_meta`` as well, for example a mediator's
+stated reason for its message under ``"explanation"``.
+
+Conversation
+^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 20 55
+
+   * - Field
+     - Type
+     - Description
+   * - ``ai_meta["alias"]``
+     - ``dict[str, str]``
+     - The name each speaker goes by in the conversation (e.g. ``"Bear"``), keyed by speaker ID.
+       Also available as ``Conversation.alias``.
+   * - ``ai_meta["private_assistants"]``
+     - ``list[PrivateAssistant]``
+     - The private assistants in this conversation (``Conversation.private_assistants``).
+   * - ``ai_meta["supports"]``
+     - ``list[Support]``
+     - Optional. Supports stored at the conversation level. ``Conversation.supports`` returns these
+       together with the supports of the private assistants and of the utterances.
+
+Corpus
+^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 15 65
+
+   * - Field
+     - Type
+     - Description
+   * - ``has_ai``
+     - ``bool``
+     - Whether any speaker in the corpus is AI. Computed from the speakers if not given.
+   * - ``ai_meta``
+     - ``dict``
+     - Free-form corpus-level metadata. For example, ConvoKit AI Simulation stores the simulation
+       configuration under ``"simulation_config"``.
+
+PrivateAssistant
+^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 15 65
+
+   * - Field
+     - Type
+     - Description
+   * - ``id``
+     - ``str``
+     - Unique ID of the private assistant.
+   * - ``config``
+     - ``dict``
+     - The `generation config`_ that produces its supports (used by ``PrivateAssistant.generate``).
+   * - ``supports``
+     - ``list[Support]``
+     - The supports this assistant sent.
+   * - ``speakers``
+     - ``list[str]``
+     - IDs of the speakers who can see this assistant's supports.
+   * - ``conversation_id``
+     - ``str``
+     - ID of the conversation the assistant belongs to.
+
+Support
+^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 15 60
+
+   * - Field
+     - Type
+     - Description
+   * - ``id``
+     - ``str``
+     - Unique ID of the support.
+   * - ``text``
+     - ``str``
+     - The message the assistant sent.
+   * - ``reply_to``
+     - ``str``
+     - ID of the utterance the assisted speaker was replying to.
+   * - ``draft``
+     - ``str``
+     - What the assisted speaker had drafted so far (``""`` if nothing).
+   * - ``private_assistant_id``
+     - ``str``
+     - ID of the private assistant that sent the support.
+   * - ``timestamp``
+     - ``int`` or ``str``
+     - When the support was sent.
+
+.. _convokitai-generation-config:
+
+Generation config
+^^^^^^^^^^^^^^^^^
+
+AI speakers and private assistants that can generate new messages carry a generation config:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 15 65
+
+   * - Key
+     - Type
+     - Description
+   * - ``prompt``
+     - ``str``
+     - The prompt that produces a message (required).
+   * - ``model``
+     - ``str``
+     - The model name, e.g. ``"gemini-2.5-flash"`` or ``"gpt-4o-mini"``.
+   * - ``provider``
+     - ``str``
+     - Optional. The ``convokit.genai`` provider: ``"gemini"``, ``"gpt"`` or ``"local"``. Inferred
+       from ``model`` if missing.
+   * - ``temperature``
+     - ``float``
+     - Optional. Sampling temperature.
+
+For example:
+
+.. code-block:: python
+
+    {
+        "prompt": "You help Goose phrase their replies politely.",
+        "model": "gemini-2.5-flash",
+        "temperature": 0.7,
+    }
