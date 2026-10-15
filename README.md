@@ -298,6 +298,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/caiyangcy/"><img src="https://avatars.githubusercontent.com/u/43690350?v=4?s=100" width="100px;" alt="Cai Yang"/><br /><sub><b>Cai Yang</b></sub></a><br /><a href="https://github.com/CornellNLP/ConvoKit/commits?author=caiyangcy" title="Code">💻</a> <a href="https://github.com/CornellNLP/ConvoKit/commits?author=caiyangcy" title="Documentation">📖</a> <a href="#example-caiyangcy" title="Examples">💡</a> <a href="#ideas-caiyangcy" title="Ideas, Planning, & Feedback">🤔</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ClaireOka"><img src="https://avatars.githubusercontent.com/u/134355428?v=4?s=100" width="100px;" alt="ClaireOka"/><br /><sub><b>ClaireOka</b></sub></a><br /><a href="https://github.com/CornellNLP/ConvoKit/commits?author=ClaireOka" title="Code">💻</a> <a href="https://github.com/CornellNLP/ConvoKit/commits?author=ClaireOka" title="Documentation">📖</a> <a href="#example-ClaireOka" title="Examples">💡</a> <a href="#ideas-ClaireOka" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Mandy-Luo"><img src="https://avatars.githubusercontent.com/u/219302665?v=4?s=100" width="100px;" alt="Mandy-Luo"/><br /><sub><b>Mandy-Luo</b></sub></a><br /><a href="https://github.com/CornellNLP/ConvoKit/commits?author=Mandy-Luo" title="Code">💻</a> <a href="https://github.com/CornellNLP/ConvoKit/commits?author=Mandy-Luo" title="Documentation">📖</a> <a href="#example-Mandy-Luo" title="Examples">💡</a> <a href="#ideas-Mandy-Luo" title="Ideas, Planning, & Feedback">🤔</a></td>
+    </tr>
+    
   </tbody>
 </table>
 
