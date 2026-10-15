@@ -300,6 +300,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Mandy-Luo"><img src="https://avatars.githubusercontent.com/u/219302665?v=4?s=100" width="100px;" alt="Mandy-Luo"/><br /><sub><b>Mandy-Luo</b></sub></a><br /><a href="https://github.com/CornellNLP/ConvoKit/commits?author=Mandy-Luo" title="Code">💻</a> <a href="https://github.com/CornellNLP/ConvoKit/commits?author=Mandy-Luo" title="Documentation">📖</a> <a href="#example-Mandy-Luo" title="Examples">💡</a> <a href="#ideas-Mandy-Luo" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/marceloslo"><img src="https://avatars.githubusercontent.com/u/57831311?v=4?s=100" width="100px;" alt="Marcelo Sartori Locatelli"/><br /><sub><b>Marcelo Sartori Locatelli</b></sub></a><br /><a href="https://github.com/CornellNLP/ConvoKit/commits?author=marceloslo" title="Code">💻</a> <a href="https://github.com/CornellNLP/ConvoKit/commits?author=marceloslo" title="Documentation">📖</a> <a href="#example-marceloslo" title="Examples">💡</a> <a href="#ideas-marceloslo" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
     
   </tbody>
