@@ -393,6 +393,54 @@
         "example",
         "ideas"
       ]
+    },
+    {
+      "login": "christinab2314",
+      "name": "christinab2314",
+      "avatar_url": "https://avatars.githubusercontent.com/u/110360250?v=4",
+      "profile": "https://github.com/christinab2314",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "ideas"
+      ]
+    },
+    {
+      "login": "soaphia14",
+      "name": "Sophia Liu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/75860082?v=4",
+      "profile": "https://github.com/soaphia14",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "ideas"
+      ]
+    },
+    {
+      "login": "caiyangcy",
+      "name": "Cai Yang",
+      "avatar_url": "https://avatars.githubusercontent.com/u/43690350?v=4",
+      "profile": "https://www.linkedin.com/in/caiyangcy/",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "ideas"
+      ]
+    },
+    {
+      "login": "ClaireOka",
+      "name": "ClaireOka",
+      "avatar_url": "https://avatars.githubusercontent.com/u/134355428?v=4",
+      "profile": "https://github.com/ClaireOka",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
