@@ -393,6 +393,18 @@
         "example",
         "ideas"
       ]
+    },
+    {
+      "login": "ClaireOka",
+      "name": "ClaireOka",
+      "avatar_url": "https://avatars.githubusercontent.com/u/134355428?v=4",
+      "profile": "https://github.com/ClaireOka",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
