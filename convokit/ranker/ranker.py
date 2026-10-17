@@ -48,7 +48,9 @@ class Ranker(Transformer):
             .set_index("id")
             .sort_values(self.score_attribute_name, ascending=False)
         )
-        df[self.rank_attribute_name] = [idx + 1 for idx, _ in enumerate(df.index)]
+        df[self.rank_attribute_name] = (
+            df[self.score_attribute_name].rank(ascending=False, method="min").astype(int)
+        )
 
         for obj in corpus.iter_objs(obj_type=self.obj_type):
             if obj.id in df.index:
@@ -72,7 +74,9 @@ class Ranker(Transformer):
             .set_index("id")
             .sort_values(self.score_attribute_name, ascending=False)
         )
-        df[self.rank_attribute_name] = [idx + 1 for idx, _ in enumerate(df.index)]
+        df[self.rank_attribute_name] = (
+            df[self.score_attribute_name].rank(ascending=False, method="min").astype(int)
+        )
         for obj in objs:
             obj.add_meta(self.score_attribute_name, df.loc[obj.id][self.score_attribute_name])
             obj.add_meta(self.rank_attribute_name, df.loc[obj.id][self.rank_attribute_name])
