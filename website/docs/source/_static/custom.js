@@ -52,7 +52,7 @@ const TAG_TYPES = {
     'Language': 'language',
     'Format': 'format',
     'Dynamics': 'dynamics',
-    'AI Speaker': 'ai-speaker'
+    'AI Interventions': 'ai-interventions'
 };
 
 // Tag type definitions for feature page
@@ -181,7 +181,7 @@ function initializeSearch(searchInputId, cardSelector, context) {
         // Source tags
         if (tagLower.includes('reddit') || tagLower.includes('wikipedia') ||
             tagLower.includes('twitter/x') || tagLower.includes('institutional') ||
-            tagLower.includes('media') || tagLower.includes('stack exchange')) {
+            (tagLower.includes('media') && !tagLower.includes('ai mediator')) || tagLower.includes('stack exchange')) {
             return 'source';
         }
 
@@ -229,7 +229,7 @@ function initializeSearch(searchInputId, cardSelector, context) {
         // AI Speaker tags
         if (tagLower.includes('ai participant') || tagLower.includes('ai mediator') ||
             tagLower.includes('ai assistant')) {
-            return 'ai-speaker';
+            return 'ai-interventions';
         }
 
         // Default to topics if unknown
