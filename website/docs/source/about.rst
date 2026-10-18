@@ -87,4 +87,4 @@ If you use the code or datasets distributed with ConvoKit please acknowledge the
 Funding
 -------
 
-*ConvoKit is funded in part by the U.S. National Science Foundation under Grant No. IIS-1750615 (CAREER). Any opinions, findings, and conclusions in this work are those of the author(s) and do not necessarily reflect the views of Cornell University or the National Science Foundation.*
+*ConvoKit is funded in part by the U.S. National Science Foundation under Grant No. IIS-1750615 (CAREER) and by the Laude Institute Moonshots // One project. Any opinions, findings, and conclusions in this work are those of the author(s) and do not necessarily reflect the views of Cornell University, Laude Institute, or the National Science Foundation.*
