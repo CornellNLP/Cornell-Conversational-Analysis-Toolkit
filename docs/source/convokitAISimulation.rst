@@ -1,14 +1,13 @@
 ConvoKit AI Simulation
 ======================
 
-ConvoKit AI Simulation runs conversations between AI agents on `ConvoArena <https://github.com/CornellNLP/ConvoArena>`, a platform for
+ConvoKit AI Simulation runs conversations between AI agents on `ConvoArena <https://github.com/CornellNLP/ConvoArena>`_, a platform for
 online conversation experiments with humans and AI agents built on, and returns them as a ConvoKit
 corpus with :doc:`AI fields <convokitai>`. The conversations can include an AI mediator that speaks in the chat and private assistants
 that privately help individual participants.
 
 A simulation is described by a *simulation YAML* that lists the agents, mediators and assistants,
-the topics, and who talks to whom. Each pairing of agents and each topic runs as its own Deliberate
-Lab experiment. The package adds the agents to the chat, waits for the conversations to finish, and
+the topics, and who talks to whom. This *YAML* is generated from the `TrAuSt <https://traust.infosci.cornell.edu/>`_ team's `Simulation Factory <https://github.com/CornellNLP/simulation-factory>`_. To make your own *simulation YAML* check out this `page <https://traust.infosci.cornell.edu/simulation-factory/login>`_. Each pairing of agents and each topic runs as its own ConvoArena conversation. The package adds the agents to the chat, waits for the conversations to finish, and
 converts the experiment exports into a corpus.
 
 Simulations run either:
