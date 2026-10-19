@@ -1,21 +1,20 @@
 ConvoKit AI Simulation
 ======================
 
-ConvoKit AI Simulation runs conversations between AI agents on `ConvoArena <https://github.com/CornellNLP/ConvoArena>`, a platform for
+ConvoKit AI Simulation runs conversations between AI agents on `ConvoArena <https://github.com/CornellNLP/ConvoArena>`_, a platform for
 online conversation experiments with humans and AI agents built on, and returns them as a ConvoKit
 corpus with :doc:`AI fields <convokitai>`. The conversations can include an AI mediator that speaks in the chat and private assistants
 that privately help individual participants.
 
-A simulation is described by a *simulation YAML* that lists the agents, mediators and assistants,
-the topics, and who talks to whom. Each pairing of agents and each topic runs as its own Deliberate
-Lab experiment. The package adds the agents to the chat, waits for the conversations to finish, and
-converts the experiment exports into a corpus.
+A simulation is described by a simulation YAML that defines the conversational scenario: the nature and topic of the discussion, and how agents, mediators and assistants behave. This YAML can be customized and tested using the `Simulation Factory <https://traust.infosci.cornell.edu/simulation-factory/login>`_.
+See the `simulation demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/simulation/simulation_demo.ipynb>`_
+for a complete example with a mediator and a private assistant.
 
 Simulations run either:
 
 * **locally** (the default): a ConvoArena backend runs on the Firebase emulators in a container
   on your machine, so no Firebase project is needed; or
-* **on your own ConvoArena deployment**, using an API key from its web interface. To set up your own ConvoArena deployement check out `<https://cornellnlp.github.io/ConvoArena/developers/firebase-setup>`
+* **on your own ConvoArena deployment**, using an API key from its web interface. To set up your own ConvoArena deployment, check out the `Firebase setup guide <https://cornellnlp.github.io/ConvoArena/developers/firebase-setup>`_
 
 Example usage: `simulation demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/simulation/simulation_demo.ipynb>`_.
 
@@ -202,52 +201,6 @@ For a deployment whose Cloud Functions run outside ``us-central1``, build the ba
 
     backend = FirebaseBackend(project_id="my-convoarena", api_key="dlb_live_...", region="europe-west1")
     corpus = create_simulation(backend, "simulation.yaml")
-
-The simulation YAML
--------------------
-
-``sim_yaml`` can be a path to a YAML file, the YAML text itself, or an already-parsed ``dict``.
-For example, a mediator and two agents discussing one topic:
-
-.. code-block:: yaml
-
-    description: Two people discuss a question with the help of a mediator.
-    blocks:
-      - name: Debate topic
-        descriptions:
-          - Should cities ban cars from their downtown areas?
-    max_utterance: 10
-    max_time: 3
-    pairings:
-      - id: mediated-debate
-        members:
-          - participant: mediator:mediator
-          - participant: skeptic
-            assistant: tone-checker
-          - participant: enthusiast
-    definitions:
-      agents:
-        skeptic:
-          content:
-            persona: {id: skeptic, name: Skeptic, avatar: "🦉", character: cautious retiree}
-            model: {apiType: GEMINI, modelName: gemini-3-flash-preview}
-            chatSettings:
-              promptMap:
-                message:
-                  order: 1
-                  prompt:
-                    - {type: TEXT, text: "You are a "}
-                    - {type: CHARACTER_CONTEXT}
-                    - {type: TEXT, text: " discussing: {topic_statement}"}
-                    - {type: CONTEXT, context: current}
-        enthusiast: ...
-      mediators:
-        mediator: ...
-      assistants:
-        tone-checker: ...
-
-See the `simulation demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/simulation/simulation_demo.ipynb>`_
-for a complete example with a mediator and a private assistant.
 
 Top-level fields
 ^^^^^^^^^^^^^^^^
