@@ -129,7 +129,7 @@ todo_include_todos = False
 html_theme = "sphinx_rtd_theme"
 
 # Add theme path explicitly
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+# html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # html_context = {"css_files": ["_static/overrides.css"]}
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -385,4 +385,7 @@ autodoc_mock_imports = [
     "google",
     "google.genai",
     "google.genai.types",
+    "trl",
+    "peft",
+    "accelerate",
 ]

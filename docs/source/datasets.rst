@@ -38,3 +38,5 @@ Datasets
    NewsInterview Corpus <interview.rst>
    Emotional Support Corpus <support.rst>
    Unintended Offense Corpus <unintended_offense.rst>
+   Habermas Machine Dataset <habermas.rst>
+   MathDial Dataset <mathdial.rst>
