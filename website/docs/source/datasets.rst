@@ -584,12 +584,12 @@ MathDial Dataset
 
 .. raw:: html
 
-   <div class="dataset-card" data-tags="AI participant, human-AI, education, online, synchronous, student errors">
+   <div class="dataset-card" data-tags="AI participant, education, online, synchronous, student errors">
 
 A dataset of tutoring dialogues where expert human teachers tutor an AI "student" through math word problems.
 
 * **Download name:** ``mathdial-corpus``
-* **Tags:** AI participant, human-AI, education, online, synchronous, student errors
+* **Tags:** AI participant, education, online, synchronous, student errors
 * `Documentation <https://convokit.cornell.edu/documentation/mathdial.html>`_
 
 .. raw:: html

@@ -44,7 +44,7 @@ ClaimTracker
 
 Tracks the claims of every speaker in each conversation and measures the consensus the participants reach before and after a mediated conversation.
 
-* **Transformer:** `ClaimTracker <https://convokit.cornell.edu/documentation/ai_evaluation.html#convokit.ai_evaluation.ClaimTracker>`_
+* **Transformer:** `ClaimTracker <https://convokit.cornell.edu/documentation/convokitAIEvaluation.html#convokit.ai_evaluation.ClaimTracker>`_
 * **Tags:** measurement, feature extraction, LLM, conversation, speaker, utterance, pattern, comparison
 
 .. raw:: html
@@ -133,7 +133,7 @@ Conversational Information Gain (CIG)
 
 Rates every utterance in a conversation for conversational information gain (CIG) using an LLM, indicating how much it added to what the group already knew.
 
-* **Transformer:** `CIG <https://convokit.cornell.edu/documentation/ai_evaluation.html#convokit.ai_evaluation.CIG>`_
+* **Transformer:** `CIG <https://convokit.cornell.edu/documentation/convokitAIEvaluation.html#convokit.ai_evaluation.CIG>`_
 * **Tags:** measurement, feature extraction, LLM, utterance, conversation, conversation-flow, representation
 
 .. raw:: html
@@ -292,7 +292,7 @@ MediatorRedirection
 
 Scores each mediator turn by how much it redirected the participant reply that followed it, using a language model.
 
-* **Transformer:** `MediatorRedirection <https://convokit.cornell.edu/documentation/ai_evaluation.html#convokit.ai_evaluation.MediatorRedirection>`_
+* **Transformer:** `MediatorRedirection <https://convokit.cornell.edu/documentation/convokitAIEvaluation.html#convokit.ai_evaluation.MediatorRedirection>`_
 * **Tags:** measurement, feature extraction, structural, modeling, LLM, utterance, exchange, conversation-flow, turning-points
 
 .. raw:: html
@@ -467,7 +467,7 @@ Simulation
 
 Provides tools to run AI agent conversations on ConvoArena and get them back as a ConvoKit Corpus.
 
-* **Tool:** `Simulation <https://convokit.cornell.edu/documentation/simulation.html>`_
+* **Tool:** `Simulation <https://convokit.cornell.edu/documentation/convokitAISimulation.html>`_
 * **Tags:** simulation, LLM, corpus, conversation, conversation-flow, modeling
 
 **Example:** `Simulation Demo <https://github.com/CornellNLP/ConvoKit/blob/master/convokit/simulation/simulation_demo.ipynb>`_
